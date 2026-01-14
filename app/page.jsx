@@ -1,7 +1,15 @@
+
+
 export default function Home() {
   return (
     <>
-     Hamro Menchhayayem
+      <div>
+<header>
+</header>
+        <main>
+        Hamro Menchhayayem
+        </main>
+        </div>
     </>
   );
 }

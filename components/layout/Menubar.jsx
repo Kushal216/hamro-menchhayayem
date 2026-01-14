@@ -1,33 +1,48 @@
 'use client';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import React from 'react';
 
 const Menubar = () => {
+  const pathname = usePathname();
+
+  const links = [
+    { href: '/', label: 'गृहपृष्ठ' },
+    { href: '/tourism', label: 'पर्यटकिय स्थलहरु' },
+    { href: '/culture', label: 'सांस्कृितिक पहिचान' },
+    { href: '/schools', label: 'विद्यालयहरु' },
+    { href: '/municipality', label: 'पालिका विवरण' },
+    { href: '/about', label: 'हाम्रो बारेमा' },
+    { href: '/contact', label: 'सम्पर्क' },
+  ];
+
   return (
-    <aside>
-      <nav>
-        <ul>
-          <li>
-            <Link href="/">गृहपृष्ठ</Link>
-          </li>
-          <li>
-            <Link href="/tourism">पर्यटकिय स्थलहरु</Link>
-          </li>
-          <li>
-            <Link href="/culture">सांस्कृितिक पहिचान</Link>
-          </li>
-          <li>
-            <Link href="/schools">विद्यालयहरु</Link>
-          </li>
-          <li>
-            <Link href="/municipality">पालिका विवरण</Link>
-          </li>
-          <li>
-            <Link href="/about">हाम्रो बारेमा</Link>
-          </li>
-          <li>
-            <Link href="/contact">सम्पर्क</Link>
-          </li>
+    <aside className="w-fit">
+      <nav className="bg-[#D9D9D9] border border-[#00000000] box-border">
+        <ul className="flex-row bg-[#D9D9D9] h-screen w-fit">
+          {links.map((link) => {
+            const isActive = pathname === link.href;
+
+            return (
+              <li
+                key={link.href}
+                className={
+                  (isActive ? 'bg-[#C4C4C4]' : '') + ' flex-1 px-3 my-2 py-1'
+                }
+              >
+                <Link
+                  href={link.href}
+                  className={
+                    isActive
+                      ? 'font-bold box-border border-l-5 pl-2 border-[#FF3B00]'
+                      : 'pl-3'
+                  }
+                >
+                  {link.label}
+                </Link>
+              </li>
+            );
+          })}
         </ul>
       </nav>
     </aside>
