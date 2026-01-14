@@ -17,8 +17,8 @@ const Menubar = () => {
   ];
 
   return (
-    <aside className="min-w-fit text-xl">
-      <nav className="bg-[#D9D9D9] border border-[#00000000] box-border">
+    <>
+      <nav className="bg-[#D9D9D9] border border-[#00000000] box-border min-w-fit text-xl h-full">
         <ul className="flex-row bg-[#D9D9D9]">
           {links.map((link) => {
             const isActive = pathname === link.href;
@@ -45,7 +45,7 @@ const Menubar = () => {
           })}
         </ul>
       </nav>
-    </aside>
+    </>
   );
 };
 
