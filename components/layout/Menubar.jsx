@@ -17,9 +17,9 @@ const Menubar = () => {
   ];
 
   return (
-    <aside className="w-fit">
+    <aside className="min-w-fit">
       <nav className="bg-[#D9D9D9] border border-[#00000000] box-border">
-        <ul className="flex-row bg-[#D9D9D9] h-screen w-fit">
+        <ul className="flex-row bg-[#D9D9D9]">
           {links.map((link) => {
             const isActive = pathname === link.href;
 
