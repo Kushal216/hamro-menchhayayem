@@ -1,9 +1,12 @@
-import Image from "next/image";
-
-export default function Home() {
+import Menubar from '@/components/layout/Menubar';
+import Navbar from '@/components/layout/Navbar';
+import Footer from '@/components/layout/Footer';
+export default function HomePage() {
   return (
     <>
-     Hamro Menchhayayem
+      <Navbar />
+      <Menubar />
+      <Footer />
     </>
   );
 }
