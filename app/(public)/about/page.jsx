@@ -1,6 +1,6 @@
 "use client";
 import Image from "next/image";
-import down from "@/public/images/down-arrow.png";
+import Titlebar from "@/components/ui/Titlebar";
 import link from "@/public/images/link.png";
 import kdpp from "@/public/images/kd-pp.jpeg";
 import sbpp from "@/public/images/sb-pp.jpeg";
@@ -22,39 +22,15 @@ export default function HomePage() {
 
   return (
     <>
-      <main className="flex-4/5 p-4">
-        <div className="bg-[#010BB2] text-2xl font-bold pl-2 p-1 text-white flex ">
-          परीचय
-          <div className="ml-auto pr-3">
-            <Image
-              src={down}
-              alt="down arrow"
-              className="rounded-full"
-              width={30}
-              height={20}
-              priority
-            />
-          </div>
-        </div>
-        <div className="pt-3 pb-3">
+      <div className="flex-4/5 p-4">
+        <Titlebar title="परीचय" />
+        <div className="py-1 pb-3">
           {isAll ? fullText : shortText}
           <button onClick={() => setIsAll(!isAll)}>
             {isAll ? "See Less" : "See More"}
           </button>
         </div>
-        <div className="bg-[#010BB2] text-2xl font-bold pl-2 p-1 text-white flex ">
-          निर्माता
-          <div className="ml-auto pr-3">
-            <Image
-              src={down}
-              alt="down arrow"
-              className="rounded-full"
-              width={30}
-              height={20}
-              priority
-            />
-          </div>
-        </div>
+        <Titlebar title="निर्माता" />
 
         <div className="flex justify-center gap-15">
           <div className=" mt-3 p-2 w-80 h-128 rounded-2xl shadow-[0_4px_6px_-2px_rgba(0,0,0,0.3)] ">
@@ -155,7 +131,7 @@ export default function HomePage() {
             </div>
           </div>
         </div>
-      </main>
+      </div>
     </>
   );
 }
