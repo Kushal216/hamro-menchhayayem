@@ -19,24 +19,26 @@ export const metadata = {
 };
 
 export default function RootLayout({ children }) {
-  return (
-      <div
-        className={`${geistSans.variable} ${geistMono.variable} antialiased flex flex-col h-screen`}
-      >
-        <header>
-          <Navbar />
-        </header>
+  return (<div>
+    { children }
+    </div>
+      // <div
+      //   className={`${geistSans.variable} ${geistMono.variable} antialiased flex flex-col h-screen`}
+      // >
+      //   <header>
+      //     <Navbar />
+      //   </header>
 
-        <div className="body flex-1 flex">
-          <aside className="flex-1/5 ">
-            <Menubar />
-          </aside>
-          <main className="flex-4/5 ">{children}</main>
-        </div>
+      //   <div className="body flex-1 flex">
+      //     <aside className="flex-1/5 ">
+      //       <Menubar />
+      //     </aside>
+      //     <main className="flex-4/5 ">{children}</main>
+      //   </div>
 
-        <footer>
-          <Footer />
-        </footer>
-      </div>
+      //   <footer>
+      //     <Footer />
+      //   </footer>
+      // </div>
   );
 }
