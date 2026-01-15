@@ -1,9 +1,8 @@
 "use client";
 import Image from "next/image";
-import down from "@/public/images/down-arrow.png";
 import photo from "@/public/images/image.png";
 import { FaPhoneAlt, FaEnvelope, FaFacebook } from "react-icons/fa";
-
+import Titlebar from "@/components/ui/Titlebar";
 import { useState } from "react";
 
 export default function HomePage() {
@@ -17,40 +16,15 @@ export default function HomePage() {
     <>
       <div className="flex-4/5 p-4">
         <div>
-          <div className="bg-[#010BB2] text-2xl font-bold pl-2 p-1 text-white flex ">
-            परीचय
-            <div className="ml-auto pr-3">
-              <Image
-                src={down}
-                alt="down arrow"
-                className="rounded-full "
-                w
-                idth={30}
-                height={20}
-                priority
-              />
-            </div>
-          </div>
-          <div className="pt-3 pb-3">
+          <Titlebar title="परीचय"/>
+          <div className="py-1 pb-3">
             {isAll ? fullText : shortText}
             <button onClick={() => setIsAll(!isAll)}>
               {isAll ? "See Less" : "See More"}
             </button>
           </div>
-          <div className="bg-[#010BB2] text-2xl font-bold pl-2 p-1 text-white flex ">
-            HISTORY
-            <div className="ml-auto pr-3">
-              <Image
-                src={down}
-                alt="down arrow"
-                className="rounded-full"
-                w
-                idth={30}
-                height={20}
-                priority
-              />
-            </div>
-          </div>
+
+          <Titlebar title=" HISTORY" />
           <div className="pt-3 pb-3">
             {isAll ? fullText : shortText}
             <button onClick={() => setIsAll(!isAll)}>
@@ -58,19 +32,7 @@ export default function HomePage() {
             </button>
           </div>
         </div>
-        <div className="bg-[#010BB2] text-2xl font-bold pl-2 p-1 text-white flex ">
-          REPRESENTATIVES
-          <div className="ml-auto pr-3">
-            <Image
-              src={down}
-              alt="down arrow"
-              className="rounded-full"
-              width={30}
-              height={20}
-              priority
-            />
-          </div>
-        </div>
+        <Titlebar title="REPRESENTATIVES"/>
 
         <div className="flex justify-center gap-15">
           <div className=" mt-3 p-2 w-75 h-100 rounded-2xl  shadow-[0_4px_6px_-2px_rgba(0,0,0,0.3)] ">

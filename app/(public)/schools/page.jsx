@@ -1,6 +1,6 @@
 "usse client";
 import Image from "next/image";
-import down from "@/public/images/down-arrow.png";
+import Titlebar from "@/components/ui/Titlebar";
 import { FaHeart } from "react-icons/fa";
 import { BiSolidCommentDots } from "react-icons/bi";
 import { FaLocationDot } from "react-icons/fa6";
@@ -17,19 +17,7 @@ export default function culture() {
   return (
     <>
       <div className="flex-4/5 p-4">
-        <div className="bg-[#010BB2] text-2xl font-bold pl-2 p-1 rounded text-white flex ">
-          MORAHANG
-          <div className="ml-auto pr-3">
-            <Image
-              src={down}
-              alt="down arrow"
-              className="rounded-full"
-              width={30}
-              height={20}
-              priority
-            />
-          </div>
-        </div>
+        <Titlebar title="Morahang" />
 
         <div className=" m-5 rounded-2xl p-2 shadow-[0_4px_6px_-2px_rgba(0,0,0,0.3)] bg-white w-200 h-130 relative">
           <div className="text-2xl font-bold border-l-8 border-[#010BB2] pl-2 mb-3 ">
