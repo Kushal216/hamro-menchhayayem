@@ -28,11 +28,7 @@ export default function RootLayout({ children }) {
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased h-screen`}
       >
-        {/* {children} */}
-
-        <div
-          className={`flex flex-col h-screen`}
-        >
+        <div className={`flex flex-col`}>
           <header>
             <Navbar />
           </header>
@@ -41,6 +37,7 @@ export default function RootLayout({ children }) {
             <aside className="flex-1/5 ">
               <Menubar />
             </aside>
+
             <main className="flex-4/5 ">{children}</main>
           </div>
 
@@ -48,10 +45,6 @@ export default function RootLayout({ children }) {
             <Footer />
           </footer>
         </div>
-
-        {/* <footer>
-          <Footer />
-        </footer> */}
       </body>
     </html>
   );
