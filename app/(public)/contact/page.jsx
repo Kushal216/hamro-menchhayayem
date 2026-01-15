@@ -1,28 +1,25 @@
-import Titlebar from "@/components/ui/Titlebar";
-import TableLayout from "@/components/ui/TableLayout";
+import Titlebar from '@/components/ui/Titlebar';
+import TableLayout from '@/components/ui/TableLayout';
 
 export default function ContactsPage() {
   const contacts = [
     {
-      id: 1,
-      institute: "Menchhayayem Hospital",
-      contact_person: "Kushal",
-      contact_no: "9812345678",
-      email: "abc@gmail.com",
+      institute: 'Menchhayayem Hospital',
+      contact_person: 'Kushal',
+      contact_no: '9812345678',
+      email: 'abc@gmail.com',
     },
     {
-      id: 2,
-      institute: "Myanglung Hospital",
-      contact_person: "sunil",
-      contact_no: "9812345678",
-      email: "abc@gmail.com",
+      institute: 'Myanglung Hospital',
+      contact_person: 'sunil',
+      contact_no: '9812345678',
+      email: 'abc@gmail.com',
     },
     {
-      id: 3,
-      institute: "Shreejung Hospital",
-      contact_person: "Chitra Kumar Wiba",
-      contact_no: "9812345678",
-      email: "abc@gmail.com",
+      institute: 'Shreejung Hospital',
+      contact_person: 'Chitra Kumar Wiba',
+      contact_no: '9812345678',
+      email: 'abc@gmail.com',
     },
   ];
 
@@ -33,14 +30,14 @@ export default function ContactsPage() {
         <div className="pt-2">
           <TableLayout
             headers={[
-              "Institute Name",
-              "Contact Person",
-              "Phone Number",
-              "Email",
+              'Institute Name',
+              'Contact Person',
+              'Phone Number',
+              'Email',
             ]}
           >
-            {contacts.map((contact) => (
-              <tr key={contacts.id} className="hover:bg-gray-200">
+            {contacts.map((contact, index) => (
+              <tr key={index} className="hover:bg-gray-200">
                 <td className="px-4 py-3 border-b border-gray-100">
                   {contact.institute}
                 </td>
