@@ -68,7 +68,7 @@ export default function HomePage() {
 
             <div className="flex text-2xl font-bold justify-center">
               कुशल ढकाल
-              <a href="https://kushaldhakal216.com.np/">
+              <a href="https://kushaldhakal216.com.np/" target="_blank">
                 <Image
                   src={link}
                   alt="down arrow"
@@ -78,7 +78,10 @@ export default function HomePage() {
                 />
               </a>
             </div>
-            <div className="text-[#303030]  flex justify-center pr-9">
+            <div
+              className="text-[#303030]  flex justify-center pr-9"
+              target="_blank"
+            >
               वेबसाइट निर्माता
             </div>
             <div className="flex mt-2 gap-4 justify-center ">
@@ -86,12 +89,22 @@ export default function HomePage() {
                 <FaPhoneAlt size={20} className="text-[#018378]" />
               </a>
               <a href="mailto:kushaldhakal216@gmail.com">
-                <FaEnvelope size={20} className="text-[#018378]" />
+                <FaEnvelope
+                  size={20}
+                  className="text-[#018378]"
+                  target="_blank"
+                />
               </a>
-              <a href="https://www.linkedin.com/in/kushal-dhakal ">
+              <a
+                href="https://www.linkedin.com/in/kushal-dhakal "
+                target="_blank"
+              >
                 <FaLinkedinIn size={20} className="text-[#018378]" />
               </a>
-              <a href="https://www.instagram.com/kushal.dhakall?igsh=MTY0aHU2d28xNzR1NA==">
+              <a
+                href="https://www.instagram.com/kushal.dhakall?igsh=MTY0aHU2d28xNzR1NA=="
+                target="_blank"
+              >
                 <FaInstagram size={20} className="text-[#018378]" />
               </a>
             </div>
@@ -107,7 +120,7 @@ export default function HomePage() {
 
             <div className="flex text-2xl font-bold justify-center">
               सुनिल भट्टराई
-              <a href="https://sunil-bhattarai.com.np/">
+              <a href="https://sunil-bhattarai.com.np/" target="_blank">
                 <Image
                   src={link}
                   alt="down arrow"
@@ -121,16 +134,22 @@ export default function HomePage() {
               वेबसाइट निर्माता
             </div>
             <div className="flex mt-2 gap-4 justify-center ">
-              <a href="tel:+9779866325865">
+              <a href="tel:+9779866325865" target="_blank">
                 <FaPhoneAlt size={20} className="text-[#018378]" />
               </a>
               <a href="mailto:sunil9866325865@gmail.com">
                 <FaEnvelope size={20} className="text-[#018378]" />
               </a>
-              <a href="https://www.linkedin.com/in/sunil-bhattaraii/ ">
+              <a
+                href="https://www.linkedin.com/in/sunil-bhattaraii/ "
+                target="_blank"
+              >
                 <FaLinkedinIn size={20} className="text-[#018378]" />
               </a>
-              <a href="https://www.instagram.com/sunil._.bhattarai_?igsh=c2s0dDl3bHB6dm52">
+              <a
+                href="https://www.instagram.com/sunil._.bhattarai_?igsh=c2s0dDl3bHB6dm52"
+                target="_blank"
+              >
                 <FaInstagram size={20} className="text-[#018378]" />
               </a>
             </div>
