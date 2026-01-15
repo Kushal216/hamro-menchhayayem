@@ -1,5 +1,5 @@
-
 "use client";
+import Link from "next/link";
 import Image from "next/image";
 import logo from "@/public/images/logo.png";
 
@@ -10,16 +10,21 @@ function Navbar() {
   return (
     <div className="bg-[#018378] p-3">
       <div className="flex items-center space-x-4">
-        <Image
-          src={logo}
-          alt="Menchhayayem Logo"
-          width={60}
-          height={60}
-          className="rounded-full"
-          priority
-        />
-
-        <div className="text-3xl font-bold text-white">हाम्रो मेन्छ्यायेम</div>
+        <Link href="/">
+          <Image
+            src={logo}
+            alt="Menchhayayem Logo"
+            width={60}
+            height={60}
+            className="rounded-full"
+            priority
+          />
+        </Link>
+        <Link href="/">
+          <div className="text-3xl font-bold text-white">
+            हाम्रो मेन्छ्यायेम
+          </div>
+        </Link>
 
         <div className="flex-1"></div>
 
@@ -37,4 +42,3 @@ function Navbar() {
 }
 
 export default Navbar;
-
