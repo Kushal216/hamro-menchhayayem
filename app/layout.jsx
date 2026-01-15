@@ -34,7 +34,7 @@ export default function RootLayout({ children }) {
           </header>
 
           <div className="body flex-1 flex">
-            <aside className="flex-1/5 ">
+            <aside className="flex-1/5 hidden md:block">
               <Menubar />
             </aside>
 

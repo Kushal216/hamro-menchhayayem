@@ -17,11 +17,6 @@ const places = [
     subtitle: 'Menchhayayem -5, Morahang',
     imageUrl: '/images/image.png',
   },
-  {
-    title: 'Gaukhuri mavi',
-    subtitle: 'Menchhayayem -5, Morahang',
-    imageUrl: '/images/image.png',
-  },
 ];
 
 const ImportantPlacesSection = () => {
