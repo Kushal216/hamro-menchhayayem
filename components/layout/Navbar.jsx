@@ -3,10 +3,11 @@ import Link from 'next/link';
 import Image from 'next/image';
 import logo from '@/public/images/logo.png';
 import MobileMenuButton from './MobileMenuButton';
+import getMiti from '@/utils/nepaliDate.js';
 
 function Navbar({ isMenuOpen, showMenu, closeMenu, toggleMenu }) {
-  const nepaliDate = 'पौष ३०, २०८२';
-  const weekday = 'बुधबार';
+  const nepaliDate = getMiti().getString();
+  const weekday = getMiti().baar;
 
   return (
     <div className="">
@@ -50,7 +51,7 @@ function Navbar({ isMenuOpen, showMenu, closeMenu, toggleMenu }) {
             <div>{weekday}</div>
           </div>
 
-          <div className="bg-white text-sm shadow my-auto rounded-md font-bold w-fit h-fit p-1"          >
+          <div className="bg-white text-sm shadow my-auto rounded-md font-bold w-fit h-fit p-1">
             en
           </div>
         </div>
