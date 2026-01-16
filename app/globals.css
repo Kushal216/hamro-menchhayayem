@@ -3,3 +3,8 @@
 body {
     @apply bg-[#FAFAFF];
 }
+
+/* ...existing code... */
+.scrollbar-hidden::-webkit-scrollbar { width: 0; height: 0; }
+.scrollbar-hidden { -ms-overflow-style: none; scrollbar-width: none; }
+/* ...existing code... */
