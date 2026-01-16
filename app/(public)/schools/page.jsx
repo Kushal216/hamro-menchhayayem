@@ -16,8 +16,7 @@ export default function TourismPage() {
             phone={item.phone}
             location={item.location}
           />
-        ))}
-        ;
+        ))} 
       </div>
     </>
   );

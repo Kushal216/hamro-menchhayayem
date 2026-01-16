@@ -1,16 +1,8 @@
 "use client";
-import Image from "next/image";
-import Titlebar from "@/components/ui/Titlebar";
-import link from "@/public/images/link.png";
-import kdpp from "@/public/images/kd-pp.jpeg";
-import sbpp from "@/public/images/sb-pp.jpeg";
-import {
-  FaPhoneAlt,
-  FaEnvelope,
-  FaLinkedinIn,
-  FaInstagram,
-} from "react-icons/fa";
 
+import Titlebar from "@/components/ui/Titlebar";
+import OurCard from "@/components/ui/OurCard";
+import data from "@/app/Data/OurTeam";
 import { useState } from "react";
 
 export default function HomePage() {
@@ -24,112 +16,31 @@ export default function HomePage() {
     <>
       <div className="flex-4/5 p-4">
         <Titlebar title="परीचय" />
-        <div className="py-1 pb-3">
+        <div className="py-1 pl-2 pb-3 text-xl">
           {isAll ? fullText : shortText}
-          <button onClick={() => setIsAll(!isAll)}>
+          <button
+            onClick={() => setIsAll(!isAll)}
+            className="text-[#2eade7] underline pl-2"
+          >
             {isAll ? "See Less" : "See More"}
           </button>
         </div>
         <Titlebar title="निर्माता" />
 
         <div className="flex justify-center gap-15">
-          <div className=" mt-3 p-2 w-80 h-128 rounded-2xl shadow-[0_4px_6px_-2px_rgba(0,0,0,0.3)] ">
-            <Image
-              src={kdpp}
-              alt="down arrow"
-              className="rounded-3xl p-1"
-              width={320}
-              priority
+          {data.map((item, index) => (
+            <OurCard
+              key={index}
+              image={item.image}
+              name={item.name}
+              position={item.position}
+              website={item.website}
+              phone={item.phone}
+              email={item.email}
+              linkedin={item.linkedin}
+              instagram={item.instagram}
             />
-
-            <div className="flex text-2xl font-bold justify-center">
-              कुशल ढकाल
-              <a href="https://kushaldhakal216.com.np/" target="_blank">
-                <Image
-                  src={link}
-                  alt="down arrow"
-                  className="rounded-full ml-2.5"
-                  width={25}
-                  priority
-                />
-              </a>
-            </div>
-            <div
-              className="text-[#303030]  flex justify-center pr-9"
-              target="_blank"
-            >
-              वेबसाइट निर्माता
-            </div>
-            <div className="flex mt-2 gap-4 justify-center ">
-              <a href="tel:+9779865090216">
-                <FaPhoneAlt size={20} className="text-[#018378]" />
-              </a>
-              <a href="mailto:kushaldhakal216@gmail.com">
-                <FaEnvelope
-                  size={20}
-                  className="text-[#018378]"
-                  target="_blank"
-                />
-              </a>
-              <a
-                href="https://www.linkedin.com/in/kushal-dhakal "
-                target="_blank"
-              >
-                <FaLinkedinIn size={20} className="text-[#018378]" />
-              </a>
-              <a
-                href="https://www.instagram.com/kushal.dhakall?igsh=MTY0aHU2d28xNzR1NA=="
-                target="_blank"
-              >
-                <FaInstagram size={20} className="text-[#018378]" />
-              </a>
-            </div>
-          </div>
-          <div className=" mt-3 p-2 w-80 h-128 rounded-2xl shadow-[0_4px_6px_-2px_rgba(0,0,0,0.3)] ">
-            <Image
-              src={sbpp}
-              alt="down arrow"
-              className="rounded-3xl p-1"
-              width={320}
-              priority
-            />
-
-            <div className="flex text-2xl font-bold justify-center">
-              सुनिल भट्टराई
-              <a href="https://sunil-bhattarai.com.np/" target="_blank">
-                <Image
-                  src={link}
-                  alt="down arrow"
-                  className="rounded-full ml-2.5"
-                  width={25}
-                  priority
-                />
-              </a>
-            </div>
-            <div className="text-[#303030]  flex justify-center pr-9">
-              वेबसाइट निर्माता
-            </div>
-            <div className="flex mt-2 gap-4 justify-center ">
-              <a href="tel:+9779866325865" target="_blank">
-                <FaPhoneAlt size={20} className="text-[#018378]" />
-              </a>
-              <a href="mailto:sunil9866325865@gmail.com">
-                <FaEnvelope size={20} className="text-[#018378]" />
-              </a>
-              <a
-                href="https://www.linkedin.com/in/sunil-bhattaraii/ "
-                target="_blank"
-              >
-                <FaLinkedinIn size={20} className="text-[#018378]" />
-              </a>
-              <a
-                href="https://www.instagram.com/sunil._.bhattarai_?igsh=c2s0dDl3bHB6dm52"
-                target="_blank"
-              >
-                <FaInstagram size={20} className="text-[#018378]" />
-              </a>
-            </div>
-          </div>
+          ))}
         </div>
       </div>
     </>

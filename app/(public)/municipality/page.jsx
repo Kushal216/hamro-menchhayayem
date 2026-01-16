@@ -1,41 +1,29 @@
-"use client";
 import Image from "next/image";
 import photo from "@/public/images/image.png";
 import { FaPhoneAlt, FaEnvelope, FaFacebook } from "react-icons/fa";
 import Titlebar from "@/components/ui/Titlebar";
-import { useState } from "react";
+import Paragraph from "@/components/sections/Paragraph";
 
 export default function HomePage() {
-  const [isAll, setIsAll] = useState(false);
-  const fullText =
-    "Lorem ipsum dolor sit amet consectetur adipisicing elit. In ipsum reiciendis nisi cupiditate   voluptas corporis, praesentium suscipit iste. Facilis optio illum doloremque aperiam autem debitis quaerat, enim numquam earum recusandae!Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ducimus quam, neque cum quaerat laboriosam in omnis doloribus, quidem illum laborum placeat dolor non recusandae, cupiditate aperiam quasi. Sit, maxime nisi! Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dolor eligendi nostrum, excepturi at dignissimos repudiandae aliquam veritatis non molestiae dolorem totam! Obcaecati saepe eligendi beatae aut. Doloribus minima doloremque dolore. Lorem ipsum, dolor sit amet consectetur adipisicing elit. Fuga, totam magni asperiores error ipsa iste. Doloribus est commodi non, quod temporibus illum in quae ullam cum. Quaerat accusamus beatae aspernatur.Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias ex delectus incidunt quibusdam tenetur! Quidem quisquam doloribus doloremque corrupti, quod suscipit! Dignissimos obcaecati veritatis rerum eligendi beatae nostrum harum fuga. Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatum minima id quis hic quaerat! Pariatur laborum iure, molestiae ducimus nam, reprehenderit debitis quasi inventore porro, culpa dignissimos tempore quaerat recusandae.";
+  const introduction =
+    "मेन्छयायेम गाउँपालिका, कोशी प्रदेश स्थित तेह्रथुम जिल्लाको उत्तर पूर्वी गाउँपालिका हो । यो गाउँपालिकाको क्षेत्रफल ७०.०९ वर्ग कि. मि. मा फैलिएको छ । दुर्गम तर मनोरम धरातलीय बनोट, उच्च भू–भाग, खोला नाला र समथल बेसी र लालीगुराँसको घना जंगलले यस गाउँपालिकाको पर्यटकीय आकर्षण उत्तिकै बढेको पाइन्छ । यो गाउँपालिका इतिहासमा पनि प्रसिद्ध रहेको किम्बदन्तीको भनाइ छ । प्राचीन समयमा तेनाहाङ राजाको दरबार, प्रसिद्ध धार्मिक स्थल गौखुरी धाम, मेन्छयायेम डाँडालगायत ऐतिहासिक तथा धार्मिक स्थलले यस गाउँपालिकाको परिचयलाई थप फराकिलो बनाएको छ । राज्यको पुनर्संरचनाअनुसार स्थानीय तहको नाम स्थानीय पहिचान, सांस्कृतिक, भाषिक र जातीय सभ्यताका आधारमा नामाकरण गरिएको छ । जसअनुसार यस गाउँपालिकाको नामाकरण लिम्बू धर्म, संस्कृतिका आधारमा नामाकरण गरिएको छ । किम्बदन्तीका अनुसार मेन्छयायेमलाई तीन किसिमले परिभाषित गरिएको छ । तीन किसिमकै परिभाषा मेन्छयायेम डाँडामा आधारित छ । ‘मेन्छया’ र ‘येप’ को अपभ्रंस भएर ‘मेन्छयायेम’ रहन गएको भन्ने किम्बदन्तीको भनाइ छ । मेन्छयायेम डाँडा तेह्रथुम, संखुवासभा र ताप्लेजुङ, तीन जिल्लाको संगम स्थलमा अवस्थित छ । धार्मिक तथा सांस्कृतिक महत्व बोकेको यही डाँडाको अर्थका आधारमा यहाँको चली आएका धर्मरसंस्कृति र रीतिरिवाज अनुसार मेन्छयायेम रहन गएको हो ।";
 
-  const shortText = fullText.slice(0, 300) + "...";
+  const history =
+    "मेन्छयायेम गाउँपालिका, कोशी प्रदेश स्थित तेह्रथुम जिल्लाको उत्तर पूर्वी गाउँपालिका हो । यो गाउँपालिकाको क्षेत्रफल ७०.०९ वर्ग कि. मि. मा फैलिएको छ । दुर्गम तर मनोरम धरातलीय बनोट, उच्च भू–भाग, खोला नाला र समथल बेसी र लालीगुराँसको घना जंगलले यस गाउँपालिकाको पर्यटकीय आकर्षण उत्तिकै बढेको पाइन्छ । यो गाउँपालिका इतिहासमा पनि प्रसिद्ध रहेको किम्बदन्तीको भनाइ छ । प्राचीन समयमा तेनाहाङ राजाको दरबार, प्रसिद्ध धार्मिक स्थल गौखुरी धाम, मेन्छयायेम डाँडालगायत ऐतिहासिक तथा धार्मिक स्थलले यस गाउँपालिकाको परिचयलाई थप फराकिलो बनाएको छ । राज्यको पुनर्संरचनाअनुसार स्थानीय तहको नाम स्थानीय पहिचान, सांस्कृतिक, भाषिक र जातीय सभ्यताका आधारमा नामाकरण गरिएको छ । जसअनुसार यस गाउँपालिकाको नामाकरण लिम्बू धर्म, संस्कृतिका आधारमा नामाकरण गरिएको छ । किम्बदन्तीका अनुसार मेन्छयायेमलाई तीन किसिमले परिभाषित गरिएको छ । तीन किसिमकै परिभाषा मेन्छयायेम डाँडामा आधारित छ । ‘मेन्छया’ र ‘येप’ को अपभ्रंस भएर ‘मेन्छयायेम’ रहन गएको भन्ने किम्बदन्तीको भनाइ छ । मेन्छयायेम डाँडा तेह्रथुम, संखुवासभा र ताप्लेजुङ, तीन जिल्लाको संगम स्थलमा अवस्थित छ । धार्मिक तथा सांस्कृतिक महत्व बोकेको यही डाँडाको अर्थका आधारमा यहाँको चली आएका धर्मरसंस्कृति र रीतिरिवाज अनुसार मेन्छयायेम रहन गएको हो ।";
 
   return (
     <>
-      <div className="flex-4/5 p-4">
+      <div className="flex-4/5 ">
         <div>
-          <Titlebar title="परीचय"/>
-          <div className="py-1 pb-3">
-            {isAll ? fullText : shortText}
-            <button onClick={() => setIsAll(!isAll)}>
-              {isAll ? "See Less" : "See More"}
-            </button>
-          </div>
-
-          <Titlebar title=" HISTORY" />
-          <div className="pt-3 pb-3">
-            {isAll ? fullText : shortText}
-            <button onClick={() => setIsAll(!isAll)}>
-              {isAll ? "See Less" : "See More"}
-            </button>
-          </div>
+          <Titlebar title="परीचय" />
+          <Paragraph text={introduction} />
+          <Titlebar title="HISTORY" />
+          <Paragraph text={history} />
         </div>
-        <Titlebar title="REPRESENTATIVES"/>
+        <Titlebar title="REPRESENTATIVES" />
 
         <div className="flex justify-center gap-15">
-          <div className=" mt-3 p-2 w-75 h-100 rounded-2xl  shadow-[0_4px_6px_-2px_rgba(0,0,0,0.3)] ">
+          <div className=" mt-3 p-2 w-75 h-100 rounded-2xl  shadow-lg ">
             <Image
               src={photo}
               alt="down arrow"
