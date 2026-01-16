@@ -17,16 +17,11 @@ const places = [
     subtitle: 'Menchhayayem -5, Morahang',
     imageUrl: '/images/image.png',
   },
-  {
-    title: 'Gaukhuri mavi',
-    subtitle: 'Menchhayayem -5, Morahang',
-    imageUrl: '/images/image.png',
-  },
 ];
 
 const ImportantPlacesSection = () => {
   return (
-    <div className="flex w-full justify-around px-2 gap-3 mb-5">
+    <div className="flex flex-wrap justify-around px-2 gap-3 mb-5">
       {places.map((item, index) => (
         <SectionCard key={index} item={item} />
       ))}

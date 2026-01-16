@@ -1,9 +1,7 @@
 import { Geist, Geist_Mono } from 'next/font/google';
 import './globals.css';
-import Menubar from '@/components/layout/Menubar';
 import Footer from '@/components/layout/Footer';
-import Navbar from '@/components/layout/Navbar';
-
+import NavigationComponents from '@/components/layout/NavigationComponents';
 const geistSans = Geist({
   variable: '--font-geist-sans',
   subsets: ['latin'],
@@ -23,35 +21,21 @@ export const metadata = {
 };
 
 export default function RootLayout({ children }) {
+
   return (
     <html lang="en">
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased h-screen`}
       >
-        {/* {children} */}
+        <div className={`grid grid-cols-5`}>
+          <NavigationComponents />
 
-        <div
-          className={`flex flex-col h-screen`}
-        >
-          <header>
-            <Navbar />
-          </header>
+          <main className="col-span-5 md:col-span-4 ">{children}</main>
 
-          <div className="body flex-1 flex">
-            <aside className="flex-1/5 ">
-              <Menubar />
-            </aside>
-            <main className="flex-4/5 ">{children}</main>
-          </div>
-
-          <footer>
+          <footer className="col-span-5">
             <Footer />
           </footer>
         </div>
-
-        {/* <footer>
-          <Footer />
-        </footer> */}
       </body>
     </html>
   );
