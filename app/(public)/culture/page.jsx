@@ -1,46 +1,14 @@
 "usse client";
-import Image from "next/image";
-import Titlebar from "@/components/ui/Titlebar";
-import { FaHeart } from "react-icons/fa";
-import { BiSolidCommentDots } from "react-icons/bi";
-
+import CultureCard from "@/components/ui/CultureCard";
 import pic from "@/public/images/image.png";
 
 export default function TourismPage() {
   const title = "SHREE GAUKHARI DHAM";
   const text =
-    " Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellat amet saepe sequi ab! Veniam cumque eaque necessitatibus ea consequuntur ad eius commodi corrupti missimos quis. Qui earum enim";
+    " Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellat amet saepe sequi ab! Veniam cumque eaque necessitatibus ea consequuntur ad eius commodi corrupti missimos quis. Qui earum enim Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellat amet saepe sequi ab! Veniam cumque eaque necessitatibus ea consequuntur ad eius commodi corrupti missimos quis. Qui earum enim aperiam repellat.Lorem ipsum dolor sit amet consectetur adipisicing elit. In ipsum reiciendis nisi cupiditate   voluptas corporis, praesentium suscipit iste. Facilis optio illum doloremque aperiam autem debitis quaerat, enim numquam earum recusandae!Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ducimus quam, neque cum quaerat laboriosam in omnis doloribus, quidem illum laborum placeat dolor non recusandae, cupiditate aperiam quasi. Sit, maxime nisi! Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dolor eligendi nostrum, excepturi at dignissimos repudiandae aliquam veritatis non molestiae dolorem totam! Obcaecati saepe eligendi beatae aut. Doloribus minima doloremque dolore. Lorem ipsum, dolor sit amet consectetur adipisicing elit. Fuga, totam magni asperiores error ipsa iste. Doloribus est commodi non, quod temporibus illum in quae ullam cum. Quaerat accusamus beatae aspernatur.Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias ex delectus incidunt quibusdam tenetur! Quidem quisquam doloribus doloremque corrupti, quod suscipit! Dignissimos obcaecati veritatis rerum eligendi beatae nostrum harum fuga. Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatum minima id quis hic quaerat! Pariatur laborum iure, molestiae ducimus nam, reprehenderit debitis quasi inventore porro, culpa dignissimos tempore quaerat recusandae.Lorem ipsum dolor sit amet consectetur adipisicing elit. In ipsum reiciendis nisi cupiditate   voluptas corporis, praesentium suscipit iste. Facilis optio illum doloremque aperiam autem debitis quaerat, enim numquam earum recusandae!Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ducimus quam, neque cum quaerat laboriosam in omnis doloribus, quidem illum laborum placeat dolor non recusandae, cupiditate aperiam quasi. Sit, maxime nisi! Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dolor eligendi nostrum, excepturi at dignissimos repudiandae aliquam veritatis non molestiae dolorem totam! Obcaecati saepe eligendi beatae aut. Doloribus minima doloremque dolore. Lorem ipsum, dolor sit amet consectetur adipisicing elit. Fuga, totam magni asperiores error ipsa iste. Doloribus est commodi non, quod temporibus illum in quae ullam cum. Quaerat accusamus beatae aspernatur.Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias ex delectus incidunt quibusdam tenetur! Quidem quisquam doloribus doloremque corrupti, quod suscipit! Dignissimos obcaecati veritatis rerum eligendi beatae nostrum harum fuga. Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatum minima id quis hic quaerat! Pariatur laborum iure, molestiae ducimus nam, reprehenderit debitis quasi inventore porro, culpa dignissimos tempore quaerat recusandae.Lorem ipsum dolor sit amet consectetur adipisicing elit. In ipsum reiciendis nisi cupiditate   voluptas corporis, praesentium suscipit iste. Facilis optio illum doloremque aperiam autem debitis quaerat, enim numquam earum recusandae!Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ducimus quam, neque cum quaerat laboriosam in omnis doloribus, quidem illum laborum placeat dolor non recusandae, cupiditate aperiam quasi. Sit, maxime nisi! Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dolor eligendi nostrum, excepturi at dignissimos repudiandae aliquam veritatis non molestiae dolorem totam! Obcaecati saepe eligendi beatae aut. Doloribus minima doloremque dolore. Lorem ipsum, dolor sit amet consectetur adipisicing elit. Fuga, totam magni asperiores error ipsa iste. Doloribus est commodi non, quod temporibus illum in quae ullam cum. Quaerat accusamus beatae aspernatur.Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias ex delectus incidunt quibusdam tenetur! Quidem quisquam doloribus doloremque corrupti, quod suscipit! Dignissimos obcaecati veritatis rerum eligendi beatae nostrum harum fuga. Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatum minima id quis hic quaerat! Pariatur laborum iure, molestiae ducimus nam, reprehenderit debitis quasi inventore porro, culpa dignissimos tempore quaerat recusandae.";
   return (
     <>
-      <div className="flex-4/5 p-4">
-        <Titlebar title="परीचय" />
-
-        <div className=" m-5 rounded-2xl p-2 shadow-[0_4px_6px_-2px_rgba(0,0,0,0.3)] bg-white w-100 h-130 relative">
-          <div className="text-2xl font-bold border-l-8 border-[#010BB2] pl-2 mb-3 ">
-            {title}
-          </div>
-          <div className="flex">
-            <Image
-              src={pic}
-              alt="Tourism Place"
-              className="rounded-2xl  aspect-3/2 "
-              width={1000}
-            />
-          </div>
-          <div className="mt-2 pl-1">
-            <div className="text-xl pb-5 leading-[1.1]">{text}</div>
-            <div className="w-full flex gap-5 mt-3 absolute bottom-2 items-center">
-              <button className="border p-2 px-3 w-full  rounded-2xl font-bold bg-black text-white">
-                Read More
-              </button>
-              <div className="ml-auto mt-2 pr-10 flex gap-5 justify-center ">
-                <BiSolidCommentDots size={35} color="#00AAFF" />
-                <FaHeart size={35} color="#FF0000" />
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+      <CultureCard image={pic} title={title} description={text} />
     </>
   );
 }
