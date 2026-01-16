@@ -1,9 +1,7 @@
-'use client';
 import Link from 'next/link';
 import Image from 'next/image';
 import logo from '@/public/images/logo.png';
-import { CgClose } from 'react-icons/cg';
-import { TiThMenu } from 'react-icons/ti';
+import MobileMenuButton from './MobileMenuButton';
 
 function Navbar() {
   const nepaliDate = 'पौष ३०, २०८२';
@@ -13,7 +11,7 @@ function Navbar() {
     <div className="bg-[#018378] p-3">
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-2">
-          <TiThMenu color="white" size={24} className="md:hidden" />
+          <MobileMenuButton/>
           <Link
             href="/"
             className="relative flex justify-between items-center gap-2"
