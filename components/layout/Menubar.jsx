@@ -3,7 +3,7 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import React from 'react';
 
-const Menubar = () => {
+const Menubar = ({ closeMenu }) => {
   const pathname = usePathname();
 
   const links = [
@@ -27,8 +27,11 @@ const Menubar = () => {
               <li
                 key={link.href}
                 className={
-                  (isActive ? 'bg-[#C4C4C4]' : '') + ' flex-1 px-3 my-2 py-1'
+                  'active:font-bold active:box-border active:border-l-5 active:pl-2 active:border-[#FF3B00] ' +
+                  (isActive ? 'bg-[#C4C4C4]' : '') +
+                  ' flex-1 px-3 my-2 py-1'
                 }
+                onClick={closeMenu}
               >
                 <Link
                   href={link.href}

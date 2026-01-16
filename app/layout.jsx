@@ -21,21 +21,19 @@ export const metadata = {
 };
 
 export default function RootLayout({ children }) {
-
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased h-screen`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <div className={`grid grid-cols-5`}>
+        <div className={`grid grid-cols-5 ,min-h-screen`}>
           <NavigationComponents />
 
-          <main className="col-span-5 md:col-span-4 ">{children}</main>
-
-          <footer className="col-span-5">
-            <Footer />
-          </footer>
+          <main className="col-span-5 md:col-span-4 max-h-screen overflow-auto ">{children}</main>
         </div>
+        <footer className="w-full">
+          <Footer />
+        </footer>
       </body>
     </html>
   );
