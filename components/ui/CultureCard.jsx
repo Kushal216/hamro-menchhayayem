@@ -11,7 +11,6 @@ export default function CultureCard({ title, description, image }) {
   return (
     <div className="p-3 sm:p-5 md:p-8 mx-auto">
       <div className="bg-white rounded-2xl shadow-lg overflow-hidden max-w-full sm:max-w-md md:max-w-lg mx-auto">
-    
         <h2 className="font-bold text-lg sm:text-xl md:text-2xl border-l-8 border-[#010BB2] pl-3 m-4">
           {title}
         </h2>
@@ -23,20 +22,16 @@ export default function CultureCard({ title, description, image }) {
               alt={title}
               fill
               className="rounded-2xl object-cover"
-              sizes="(max-width: 640px) 100vw,
-                     (max-width: 1024px) 80vw,
-                     450px"
+              sizes="(max-width: 640px) 100vw, (max-width: 1024px) 80vw, 450px"
             />
           </div>
         </div>
 
-        
         <div className="px-4 pb-4 sm:px-5 sm:pb-5">
           <p className="text-sm sm:text-base md:text-lg leading-relaxed mt-3">
             {isAll ? description : shortDescription}
           </p>
 
-         
           <div className="flex sm:flex-row items-center justify-between gap-4 mt-5">
             <button className=" w-full sm:w-full bg-black text-white font-bold rounded-2xl px-5 py-2 hover:bg-gray-800 transition">
               Read More
