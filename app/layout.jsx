@@ -7,9 +7,12 @@ const geistSans = Geist({
   subsets: ['latin'],
 });
 
-const geistMono = Geist_Mono({
-  variable: '--font-geist-mono',
-  subsets: ['latin'],
+import { Noto_Sans_Devanagari } from 'next/font/google';
+
+const notoDevanagari = Noto_Sans_Devanagari({
+  subsets: ['devanagari', 'latin'],
+  weight: ['400', '500', '600', '700'],
+  variable: '--font-devanagari',
 });
 
 export const metadata = {
@@ -24,7 +27,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en" className="scrollbar-hidden">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${notoDevanagari.variable} font-devanagari antialiased`}
       >
         <div className={`grid grid-cols-5 min-h-screen`}>
           <NavigationComponents />
