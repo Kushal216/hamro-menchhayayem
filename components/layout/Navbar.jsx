@@ -1,40 +1,57 @@
-"use client";
-import Link from "next/link";
-import Image from "next/image";
-import logo from "@/public/images/logo.png";
+'use client';
+import Link from 'next/link';
+import Image from 'next/image';
+import logo from '@/public/images/logo.png';
+import { CgClose } from 'react-icons/cg';
+import { TiThMenu } from 'react-icons/ti';
 
 function Navbar() {
-  const nepaliDate = "पौष ३०, २०८२";
-  const weekday = "बुधबार";
+  const nepaliDate = 'पौष ३०, २०८२';
+  const weekday = 'बुधबार';
 
   return (
     <div className="bg-[#018378] p-3">
-      <div className="flex items-center space-x-4">
-        <Link href="/">
-          <Image
-            src={logo}
-            alt="Menchhayayem Logo"
-            width={60}
-            height={60}
-            className="rounded-full"
-            priority
-          />
-        </Link>
-        <Link href="/">
-          <div className="text-3xl font-bold text-white">
-            हाम्रो मेन्छ्यायेम
-          </div>
-        </Link>
+      <div className="flex items-center justify-between">
+        <div className="flex items-center gap-2">
+          <TiThMenu color="white" size={24} className="md:hidden" />
+          <Link
+            href="/"
+            className="relative flex justify-between items-center gap-2"
+          >
+            <div className="relative w-fit h-fit aspect-square">
+              <Image
+                src={logo}
+                alt="Menchhayayem Logo"
+                width={44}
+                className="rounded-full object-contain"
+                sizes="64px"
+                priority
+              />
+            </div>
+          </Link>
 
-        <div className="flex-1"></div>
-
-        <div className="text-white text-xl text-right">
-          <div className="font-bold">{nepaliDate}</div>
-          <div>{weekday}</div>
+          <Link
+            href="/"
+            className="relative flex justify-between items-center gap-2"
+          >
+            <div className="text-xl md:text-3xl font-bold text-white">
+              हाम्रो मेन्छ्यायेम
+            </div>
+          </Link>
         </div>
 
-        <div className="bg-white shadow rounded-full font-bold w-12 h-8 flex items-center justify-center ml-4">
-          EN
+        <div className="flex gap-3 justify-between">
+          <div className="text-white text-sm md:text-xl text-right">
+            <div className="font-bold">{nepaliDate}</div>
+            <div>{weekday}</div>
+          </div>
+
+          <div
+            className="bg-white text-sm shadow my-auto rounded-md
+        font-bold w-fit h-fit p-1"
+          >
+            en
+          </div>
         </div>
       </div>
     </div>
