@@ -5,7 +5,7 @@ import { BiSolidCommentDots } from "react-icons/bi";
 
 export default function TourismCard({ image, title, description }) {
   const isAll = false;
-  const shortDescription = (description || "").slice(0, 600) + " ...";
+  const shortDescription = (description || "").slice(0, 300) + " ...";
 
   return (
     <div className="w-full mx-auto p-4">
