@@ -1,32 +1,17 @@
-"use client"
-import React, { useState } from 'react'
-import { TiThMenu } from 'react-icons/ti'
+'use client';
+import { TiThMenu } from 'react-icons/ti';
 import { CgClose } from 'react-icons/cg';
 
-const MobileMenuButton = () => {
-  const [menuToggle, toggleMenu] = useState(false);
-
+const MobileMenuButton = ({ isOpen, showMenu, closeMenu, toggleMenu }) => {
   return (
-    <div>
-      {!menuToggle ? (
-        <TiThMenu
-          color="white"
-          size={24}
-          className="md:hidden"
-          onClick={handleMenuToggle}
-        />
+    <div onClick={toggleMenu} className='md:hidden'>
+      {!isOpen ? (
+        <TiThMenu color="white" size={24} />
       ) : (
-        <CgClose
-          color="white"
-          size={24}
-          className="md:hidden"
-          onClick={handleMenuToggle}
-         />
+        <CgClose color="white" size={24} />
       )}
     </div>
   );
+};
 
-  function handleMenuToggle(){toggleMenu(!menuToggle)}
-}
-
-export default MobileMenuButton
+export default MobileMenuButton;

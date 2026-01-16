@@ -1,17 +1,23 @@
+"use client"
 import Link from 'next/link';
 import Image from 'next/image';
 import logo from '@/public/images/logo.png';
 import MobileMenuButton from './MobileMenuButton';
 
-function Navbar() {
+function Navbar({ isMenuOpen, showMenu, closeMenu, toggleMenu }) {
   const nepaliDate = 'पौष ३०, २०८२';
   const weekday = 'बुधबार';
 
   return (
-    <div className="bg-[#018378] p-3">
-      <div className="flex items-center justify-between">
+    <div className="">
+      <div className=" bg-[#018378] p-3 flex items-center justify-between h-17">
         <div className="flex items-center gap-2">
-          <MobileMenuButton/>
+          <MobileMenuButton
+            isOpen={isMenuOpen}
+            showMenu={showMenu}
+            closeMenu={closeMenu}
+            toggleMenu={toggleMenu}
+          />
           <Link
             href="/"
             className="relative flex justify-between items-center gap-2"
@@ -44,10 +50,7 @@ function Navbar() {
             <div>{weekday}</div>
           </div>
 
-          <div
-            className="bg-white text-sm shadow my-auto rounded-md
-        font-bold w-fit h-fit p-1"
-          >
+          <div className="bg-white text-sm shadow my-auto rounded-md font-bold w-fit h-fit p-1"          >
             en
           </div>
         </div>
