@@ -12,6 +12,7 @@ const cultureSchema = new mongoose.Schema(
     description: {
       type: String,
       trim: true,
+      default: "No description provided."
     },
     gallery: [
       {
@@ -30,6 +31,7 @@ const cultureSchema = new mongoose.Schema(
     category: {
       type: String,
       trim: true,
+      default: "Uncategorized"
     },
     likesCount: {
       type: Number,
