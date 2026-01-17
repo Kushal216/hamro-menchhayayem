@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-import { connectMongoDB } from "@lib/db";
+import { connectMongoDB } from "@lib/db.js";
 
 const tourismSchema = new mongoose.Schema({
     title: {
@@ -11,7 +11,7 @@ const tourismSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
-    galary: [
+    gallery: [
         {
             type: mongoose.Schema.Types.ObjectId,
             ref: "image",
