@@ -11,7 +11,7 @@ function Navbar({ isMenuOpen, showMenu, closeMenu, toggleMenu }) {
 
   return (
     <div className="">
-      <div className=" bg-[#018378] p-3 flex items-center justify-between h-17">
+      <div className=" bg-[#018378] p-5 flex items-center justify-between h-17">
         <div className="flex items-center gap-2">
           <Link
             href="/"
@@ -39,15 +39,15 @@ function Navbar({ isMenuOpen, showMenu, closeMenu, toggleMenu }) {
           </Link>
         </div>
 
-        <div className="flex gap-3 items-center justify-between">
+        <div className="flex gap-5 items-center justify-between">
           <div className="text-white text-sm md:text-xl text-right">
             <div className="font-bold">{nepaliDate}</div>
             <div>{weekday}</div>
           </div>
 
-          {/* <div className="bg-[#ebebeb] text-sm shadow my-auto rounded-md font-bold w-fit h-fit p-1">
+          <div className="bg-white text-sm shadow my-auto rounded-md font-bold w-fit h-fit p-1 hidden md:block">
             en
-          </div> */}
+          </div>
           <MobileMenuButton
             isOpen={isMenuOpen}
             showMenu={showMenu}

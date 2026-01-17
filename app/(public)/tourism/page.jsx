@@ -1,5 +1,5 @@
-import TourismCard from "@/components/ui/TourismCard";
-import data from "@/app/Data/data";
+import TourismCard from '@/components/ui/TourismCard';
+import data from '@/app/Data/data';
 
 export default function TourismPage() {
   return (
@@ -12,7 +12,6 @@ export default function TourismPage() {
           description={item.description}
         />
       ))}
-      ;
     </div>
   );
 }
