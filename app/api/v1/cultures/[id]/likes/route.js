@@ -1,56 +1,95 @@
+import Culture from '@/models/culture.js';
+import { NextResponse } from 'next/server';
+
 /**
  * @swagger
- * /api/cultures/{id}/likes:
- *   get:
- *     summary: Get likes for a culture
+ * /api/v1/cultures/{id}/likes:
+ *   post:
+ *     summary: like the culture
  *     tags:
  *       - cultures
- *     parameters:
- *       - in: path
- *         name: id
- *         required: true
- *         schema:
- *           type: string
- *         description: Culture ID
+ *     description: Returns a list of cultures
  *     responses:
  *       200:
- *         description: Success - returns likes for the culture
- *   post:
- *     summary: Add a like to a culture
- *     tags:
- *       - cultures
- *     parameters:
- *       - in: path
- *         name: id
- *         required: true
- *         schema:
- *           type: string
- *         description: Culture ID
- *     requestBody:
- *       description: Optional payload to attribute the like
- *       required: false
- *       content:
- *         application/json:
- *           schema:
- *             type: object
- *     responses:
- *       201:
- *         description: Like added successfully
+ *         description: Success
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 type: object
+ *                 properties:
+ *                   id:
+ *                     type: number
+ *                   name:
+ *                     type: string
  */
-export async function GET(request, { params }) {
-  const { id } = params;
+export async function POST(request, { params }) {
+  const { id } = await params;
 
-  return Response.json({
-    message: 'GET likes for culture',
-    cultureId: id,
-  });
+  try {
+    const updated = await Culture.findByIdAndUpdate(
+      id,
+      { $inc: { likesCount: 1 } },
+      { new: true, runValidators: true }
+    );
+
+    if (!updated) {
+      return NextResponse.json({ error: 'Not found' }, { status: 404 });
+    }
+
+    return NextResponse.json({
+      message: `${updated.title} has ${updated.likesCount} likes.`,
+      data: updated,
+    });
+  } catch (err) {
+        return NextResponse.json({ error: err.message }, { status: 500 });
+  }
 }
 
-export async function POST(request, { params }) {
-  const { id } = params;
 
-  return Response.json({
-    message: 'ADD like to culture',
-    cultureId: id,
-  });
+/**
+ * @swagger
+ * /api/v1/cultures/{id}/likes:
+ *   post:
+ *     summary: unlike the culture
+ *     tags:
+ *       - cultures
+ *     description: Returns a list of cultures
+ *     responses:
+ *       200:
+ *         description: Success
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 type: object
+ *                 properties:
+ *                   id:
+ *                     type: number
+ *                   name:
+ *                     type: string
+ */
+export async function DELETE(request, { params }) {
+  const { id } = await params;
+
+  try {
+    const updated = await Culture.findByIdAndUpdate(
+      id,
+      { $inc: { likesCount: -1 } },
+      { new: true, runValidators: true }
+    );
+
+    if (!updated) {
+      return NextResponse.json({ error: 'Not found' }, { status: 404 });
+    }
+
+    return NextResponse.json({
+      message: `${updated.title} has ${updated.likesCount} likes.`,
+      data: updated,
+    });
+  } catch (err) {
+        return NextResponse.json({ error: err.message }, { status: 500 });
+  }
 }

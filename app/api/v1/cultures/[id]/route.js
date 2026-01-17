@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server';
 import Culture from '@/models/culture';
+
 /**
  * @swagger
  * /api/cultures/{id}:
