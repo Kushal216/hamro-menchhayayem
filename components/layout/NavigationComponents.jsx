@@ -18,10 +18,10 @@ const NavigationComponents = () => {
         />
       </header>
       {
-        <aside
+        <aside onClick={closeMenu}
           className={
             (isMenuOpen ? '' : 'hidden ') +
-            'col-span-5  md:col-span-1 z-10 md:block  fixed md:static pt-17 md:pt-0 h-screen'
+            'col-span-5  md:col-span-1 z-10 md:block  fixed right-0 md:static pt-17 md:pt-0 h-screen w-screen bg-[#00000060]'
           }
         >
           <Menubar closeMenu={closeMenu} />

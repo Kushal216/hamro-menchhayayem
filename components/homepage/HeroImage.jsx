@@ -6,9 +6,9 @@ import { RiArrowLeftWideFill, RiArrowRightWideFill } from 'react-icons/ri';
 const HeroImage = () => {
   const heroPhotos = [
     { src: '/images/image.png', title: 'हाम्रो मेन्छ्यायेम बजार' },
-    { src: '/images/logo.png', title: 'हाम्रो मेन्छ्यायेम बजार 1' },
-    { src: '/images/sb-pp.jpeg', title: 'हाम्रो मेन्छ्यायेम बजार 2' },
-    { src: '/images/kd-pp.jpeg', title: 'हाम्रो मेन्छ्यायेम बजार 3' },
+    { src: '/images/logo.png', title: 'हाम्रो मेन्छ्यायेम बजार' },
+    { src: '/images/sb-pp.jpeg', title: 'सुनिल भट्टराई' },
+    { src: '/images/kd-pp.jpeg', title: 'कुशल ढकाल' },
   ];
 
   const [heroIndex, setHeroIndex] = useState(0);
@@ -24,7 +24,7 @@ const HeroImage = () => {
 
   const photo = heroPhotos[heroIndex];
   return (
-    <div className="relative w-fill h-[55vh] select-none">
+    <div className="relative w-full aspect-4/3 md:h-[55vh] select-none">
       <Image
         src={photo.src}
         alt="hamro  menchhayayem"
@@ -37,18 +37,20 @@ const HeroImage = () => {
           className="larrow  p-1 pl-0 rounded-r-sm hover:bg-[#FFFFFF50] "
           onClick={showPreviousImage}
         >
-          <RiArrowLeftWideFill size={48} />
+          <RiArrowLeftWideFill className="h-full text-2xl md:text-[48px]" />
         </div>
         <div
-          className="larrow p-1 pr-0 rounded-l-sm hover:bg-[#FFFFFF50]"
+          className="larrow p-1 pr-0 rounded-l-sm h-10 hover:bg-[#FFFFFF50]"
           onClick={showNextImage}
         >
-          <RiArrowRightWideFill size={48} />
+          <RiArrowRightWideFill className="h-full text-2xl md:text-[48px]" />
         </div>
       </div>
 
-      <div className="gradient h-40 pt-10 bg-linear-to-t from-[#00000090] to-[#00000000]  absolute bottom-0 w-full text-center text-white">
-        <div className="text  text-5xl font-bold ">{photo.title}</div>
+      <div className="gradient h-30 md:h-40 pt-10 bg-linear-to-t from-[#00000090] to-[#00000000]  absolute bottom-0 w-full text-center text-white">
+        <div className="text text-3xl  md:text-5xl font-bold ">
+          {photo.title}
+        </div>
 
         <div className="text-6xl leading-0">
           {heroPhotos.map((_, index) => (

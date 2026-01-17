@@ -1,12 +1,12 @@
 'use client';
-import { TiThMenu } from 'react-icons/ti';
 import { CgClose } from 'react-icons/cg';
+import { HiDotsVertical } from 'react-icons/hi';
 
 const MobileMenuButton = ({ isOpen, showMenu, closeMenu, toggleMenu }) => {
   return (
-    <div onClick={toggleMenu} className='md:hidden'>
+    <div onClick={toggleMenu} className="md:hidden">
       {!isOpen ? (
-        <TiThMenu color="white" size={24} />
+        <HiDotsVertical color="white" size={24} />
       ) : (
         <CgClose color="white" size={24} />
       )}
