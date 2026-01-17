@@ -1,6 +1,6 @@
 // app/api/users/route.js
 import { NextResponse } from 'next/server';
-import culture from '@/models/culture';
+import Culture from '@/models/culture';
 
 /**
  * @swagger
@@ -27,6 +27,8 @@ import culture from '@/models/culture';
  */
 
 export async function GET(request) {
+
+
   return NextResponse.json({
     message: 'GET list of cultures',
   });
@@ -58,7 +60,8 @@ export async function GET(request) {
 export async function POST(request) {
   const body = await request.json();
 
-  const newCulture = await culture.create({
+  try{
+  const newCulture = await Culture.create({
     title: body.title,
     description: body.description,
     gallery: body.gallery,
@@ -66,6 +69,13 @@ export async function POST(request) {
     coverImage: body.coverImage,
     category: body.category,
   });
+}catch(err){
+  console.log(`ERROR: in creating culture:\n${err}`);
+  return NextResponse.json({
+    message: `DB error in performing the create culture action. `,
+    err: err
+  });
+}
 
   return NextResponse.json({
     message: `Added ${body.title} to the database. `,
