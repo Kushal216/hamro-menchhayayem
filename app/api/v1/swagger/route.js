@@ -9,7 +9,7 @@ const swaggerSpec = swaggerJSDoc({
       version: '1.0.0',
     },
   },
-  apis: ['./app/api/**/route.js'],
+  apis: ['./app/api/v1/**/route.js'],
 });
 
 export async function GET() {
