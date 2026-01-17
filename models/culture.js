@@ -1,17 +1,17 @@
 import mongoose from "mongoose";
 
-import { connectMongoDB } from "@lib/db";
+import { connectMongoDB } from "@/lib/db.js";
 
 const cultureSchema = new mongoose.Schema({
     title: {
         type: String,
         required: true,
     },
-    discription: {
+    description: {
         type: String,
         required: true,
     },
-    galary: [
+    gallery: [
         {
             type: mongoose.Schema.Types.ObjectId,
             ref: "image",
