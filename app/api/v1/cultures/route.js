@@ -27,10 +27,13 @@ import Culture from '@/models/culture';
  */
 
 export async function GET(request) {
+  //check if request is coming from samesite
 
+  const cultures = await Culture.find({})
 
   return NextResponse.json({
     message: 'GET list of cultures',
+    data: cultures,
   });
 }
 
@@ -60,24 +63,27 @@ export async function GET(request) {
 export async function POST(request) {
   const body = await request.json();
 
-  try{
-  const newCulture = await Culture.create({
-    title: body.title,
-    description: body.description,
-    gallery: body.gallery,
-    video: body.video,
-    coverImage: body.coverImage,
-    category: body.category,
-  });
-}catch(err){
-  console.log(`ERROR: in creating culture:\n${err}`);
-  return NextResponse.json({
-    message: `DB error in performing the create culture action. `,
-    err: err
-  });
-}
+  //check authentication
+  //validate data using middleware
+
+  try {
+    const newCulture = await Culture.create({
+      title: body.title,
+      description: body.description,
+      gallery: body.gallery,
+      video: body.video,
+      coverImage: body.coverImage,
+      category: body.category,
+    });
+  } catch (err) {
+    console.log(`ERROR: in creating culture:\n${err}`);
+    return NextResponse.json({
+      message: `DB error in performing the create culture action. `,
+      err: err,
+    });
+  }
 
   return NextResponse.json({
     message: `Added ${body.title} to the database. `,
-  });
+  }, {status: 201});
 }
