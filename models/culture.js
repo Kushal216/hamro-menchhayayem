@@ -1,34 +1,44 @@
-import mongoose from "mongoose";
+import mongoose from 'mongoose';
 
-import { connectMongoDB } from "@/lib/db.js";
+import { connectMongoDB } from '@/lib/db.js';
 
-const cultureSchema = new mongoose.Schema({
+const cultureSchema = new mongoose.Schema(
+  {
     title: {
-        type: String,
-        required: true,
+      type: String,
+      required: true,
+      trim: true,
     },
     description: {
-        type: String,
+      type: String,
+      trim: true,
     },
     gallery: [
-        {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: "image",
-        }
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'image',
+      },
     ],
     video: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "video",
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'video',
     },
-    coverImage:
-    {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "image",
+    coverImage: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'image',
     },
     category: {
-        type: String,
+      type: String,
+      trim: true,
     },
+    likesCount: {
+      type: Number,
+      default: 0,
+      min: 0,
+    },
+  },
+  { timestamps: true }
+);
 
-}, { timestamps: true });
-
-export default mongoose.models.Culture || (await connectMongoDB(), mongoose.model("Culture", cultureSchema));
+export default mongoose.models.Culture ||
+  (await connectMongoDB(), mongoose.model('Culture', cultureSchema));
