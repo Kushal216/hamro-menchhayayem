@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import Places from '@/models/tourism.js';
+import Places from '@/models/places.js';
 
 /**
  * @swagger
