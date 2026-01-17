@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import Places from '@/models/tourism.js';
+import Places from '@/models/places.js';
 
 /**
  * @swagger
@@ -73,7 +73,7 @@ export async function POST(req) {
             coverImage: body.coverImage,
             category: body.category,
             subCategory: body.subCategory,
-            location:body.location,
+            location: body.location,
         });
 
         id = newPlace._id;

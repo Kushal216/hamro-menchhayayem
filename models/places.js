@@ -1,16 +1,16 @@
 import mongoose from 'mongoose';
 import { connectMongoDB } from '@/lib/db.js';
 
-const tourismSchema = new mongoose.Schema(
-  {
+import { connectMongoDB } from "@/lib/db.js";
+
+const placesSchema = new mongoose.Schema({
     title: {
       type: String,
       required: true,
     },
     description: {
-      type: String,
-      trim: true,
-      default: 'No description provided.',
+        type: String,
+        required: true,
     },
     gallery: [
       {
@@ -47,5 +47,4 @@ const tourismSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-export default mongoose.models.Tourism ||
-  (await connectMongoDB(), mongoose.model('Tourism', tourismSchema));
+export default mongoose.models.Places || (await connectMongoDB(), mongoose.model("Places", placesSchema));
