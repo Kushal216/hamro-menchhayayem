@@ -1,5 +1,4 @@
 import mongoose from 'mongoose';
-
 import { connectMongoDB } from '@/lib/db.js';
 
 const cultureSchema = new mongoose.Schema(

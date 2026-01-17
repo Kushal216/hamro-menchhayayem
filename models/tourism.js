@@ -1,5 +1,5 @@
 import mongoose from 'mongoose';
-import { connectMongoDB } from '@lib/db.js';
+import { connectMongoDB } from '@/lib/db.js';
 
 const tourismSchema = new mongoose.Schema(
   {
