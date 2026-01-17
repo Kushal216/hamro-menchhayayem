@@ -5,7 +5,7 @@ const swaggerSpec = swaggerJSDoc({
   definition: {
     openapi: '3.0.0',
     info: {
-      title: 'Hamro-menchhayayem API',
+      title: 'Hamro-menchhayayem API ',
       version: '1.0.0',
     },
   },

@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-
+import Culture from '@/models/culture';
 /**
  * @swagger
  * /api/cultures/{id}:
@@ -24,11 +24,18 @@ import { NextResponse } from 'next/server';
  *                     type: string
  */
 export async function GET(request, { params }) {
-  const { id } = params;
-  return Response.json({
-    message: 'GET culture by ID',
-    id: id,
-  });
+  const { id } = await params;
+  try {
+    const culture = await Culture.findById(id);
+
+    if (!culture) {
+      return NextResponse.json({ error: 'Not found' }, { status: 404 });
+    }
+
+    return NextResponse.json({ data: culture });
+  } catch (err) {
+    return NextResponse.json({ error: err.message }, { status: 500 });
+  }
 }
 
 /**
@@ -55,7 +62,9 @@ export async function GET(request, { params }) {
  *                     type: string
  */
 export async function PUT(request, { params }) {
-  const { id } = params;
+  const { id } = await params;
+
+  console.log(`id: ${id}`);
 
   return Response.json({
     message: 'UPDATE culture',
@@ -87,10 +96,34 @@ export async function PUT(request, { params }) {
  *                     type: string
  */
 export async function DELETE(request, { params }) {
-  const { id } = params;
+  //validate user
 
-  return Response.json({
-    message: 'DELETE culture',
-    id: id,
-  });
+  const { id } = await params;
+
+  try {
+    const culture = await Culture.findByIdAndDelete(id);
+
+    if (culture) {
+      return Response.json({
+        message: `deleted ${culture.title}`,
+        data: culture,
+      });
+    } else {
+      return Response.json(
+        {
+          message: "The culture with the given id doesn't exist.",
+          id: id,
+        },
+        { status: 404 }
+      );
+    }
+  } catch (err) {
+    return Response.json(
+      {
+        message: 'Some error occurred in the database',
+        error: err,
+      },
+      { status: 500 }
+    );
+  }
 }
