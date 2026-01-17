@@ -1,45 +1,53 @@
-import mongoose from "mongoose";
+import mongoose from 'mongoose';
 
-import { connectMongoDB } from "@lib/db";
+import { connectMongoDB } from '@lib/db';
 
-const schoolSchema = new mongoose.Schema({
+const schoolSchema = new mongoose.Schema(
+  {
     title: {
-        type: String,
-        required: true,
-        trim:true,
+      type: String,
+      required: true,
+      trim: true,
     },
     description: {
-        type: String,
-        trim: true,
-        default: "No description is provided."
+      type: String,
+      trim: true,
+      default: 'No description is provided.',
     },
     gallery: [
-        {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: "image",
-        }
-    ],
-    coverImage:
-    {
+      {
         type: mongoose.Schema.Types.ObjectId,
-        ref: "image",
+        ref: 'image',
+      },
+    ],
+    coverImage: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'image',
     },
     location: {
-        type: String,
-        required: true,
+      type: String,
+      required: true,
     },
     video: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "video",
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'video',
     },
     category: {
-        type: String,
-        default: "Uncategorized"
+      type: String,
+      default: 'Uncategorized',
     },
     phoneNo: {
-        type: String,
-        trim: true
+      type: String,
+      trim: true,
     },
-}, { timestamps: true });
+    likesCount: {
+      type: Number,
+      default: 0,
+      min: 0,
+    },
+  },
+  { timestamps: true }
+);
 
-export default mongoose.models.School || (await connectMongoDB(), mongoose.model("School", schoolSchema));
+export default mongoose.models.School ||
+  (await connectMongoDB(), mongoose.model('School', schoolSchema));

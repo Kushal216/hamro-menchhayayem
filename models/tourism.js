@@ -24,7 +24,7 @@ const tourismSchema = new mongoose.Schema(
     },
     location: {
       type: String,
-      default:"Menchhayayem rural municipality"
+      default: 'Menchhayayem rural municipality',
     },
     video: {
       type: mongoose.Schema.Types.ObjectId,
@@ -37,6 +37,11 @@ const tourismSchema = new mongoose.Schema(
     subCategory: {
       type: String,
       required: true,
+    },
+    likesCount: {
+      type: Number,
+      default: 0,
+      min: 0,
     },
   },
   { timestamps: true }
