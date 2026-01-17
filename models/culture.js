@@ -9,7 +9,6 @@ const cultureSchema = new mongoose.Schema({
     },
     description: {
         type: String,
-        required: true,
     },
     gallery: [
         {
@@ -26,10 +25,8 @@ const cultureSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: "image",
     },
-
     category: {
         type: String,
-        required: true,
     },
 
 }, { timestamps: true });

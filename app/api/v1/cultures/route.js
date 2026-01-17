@@ -1,4 +1,3 @@
-// app/api/users/route.js
 import { NextResponse } from 'next/server';
 import Culture from '@/models/culture';
 
@@ -26,10 +25,10 @@ import Culture from '@/models/culture';
  *                     type: string
  */
 
-export async function GET(request) {
+export async function GET(req) {
   //check if request is coming from samesite
 
-  const cultures = await Culture.find({})
+  const cultures = await Culture.find({});
 
   return NextResponse.json({
     message: 'GET list of cultures',
@@ -60,12 +59,12 @@ export async function GET(request) {
  *                   name:
  *                     type: string
  */
-export async function POST(request) {
-  const body = await request.json();
+export async function POST(req) {
+  const body = await req.json();
 
   //check authentication
   //validate data using middleware
-
+  let id = null;
   try {
     const newCulture = await Culture.create({
       title: body.title,
@@ -75,6 +74,8 @@ export async function POST(request) {
       coverImage: body.coverImage,
       category: body.category,
     });
+
+    id = newCulture._id;
   } catch (err) {
     console.log(`ERROR: in creating culture:\n${err}`);
     return NextResponse.json({
@@ -83,7 +84,10 @@ export async function POST(request) {
     });
   }
 
-  return NextResponse.json({
-    message: `Added ${body.title} to the database. `,
-  }, {status: 201});
+  return NextResponse.json(
+    {
+      message: `Added ${body.title} to the database with id: ${id}. `,
+    },
+    { status: 201 }
+  );
 }
