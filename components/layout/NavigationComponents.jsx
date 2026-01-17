@@ -21,7 +21,7 @@ const NavigationComponents = () => {
         <aside
           className={
             (isMenuOpen ? '' : 'hidden ') +
-            'col-span-5  md:col-span-1 z-10 md:block  fixed md:static pt-17 md:pt-0 h-screen'
+            'col-span-5  md:col-span-1 z-10 md:block  fixed right-0 md:static pt-17 md:pt-0 h-fit md:h-screen shadow-xl bg-white md:bg-[#cacaca] rounded-b-xl'
           }
         >
           <Menubar closeMenu={closeMenu} />

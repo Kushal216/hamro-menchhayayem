@@ -1,4 +1,4 @@
-"use client"
+'use client';
 import Link from 'next/link';
 import Image from 'next/image';
 import logo from '@/public/images/logo.png';
@@ -13,12 +13,6 @@ function Navbar({ isMenuOpen, showMenu, closeMenu, toggleMenu }) {
     <div className="">
       <div className=" bg-[#018378] p-3 flex items-center justify-between h-17">
         <div className="flex items-center gap-2">
-          <MobileMenuButton
-            isOpen={isMenuOpen}
-            showMenu={showMenu}
-            closeMenu={closeMenu}
-            toggleMenu={toggleMenu}
-          />
           <Link
             href="/"
             className="relative flex justify-between items-center gap-2"
@@ -45,15 +39,21 @@ function Navbar({ isMenuOpen, showMenu, closeMenu, toggleMenu }) {
           </Link>
         </div>
 
-        <div className="flex gap-3 justify-between">
+        <div className="flex gap-3 items-center justify-between">
           <div className="text-white text-sm md:text-xl text-right">
             <div className="font-bold">{nepaliDate}</div>
             <div>{weekday}</div>
           </div>
 
-          <div className="bg-white text-sm shadow my-auto rounded-md font-bold w-fit h-fit p-1">
+          {/* <div className="bg-[#ebebeb] text-sm shadow my-auto rounded-md font-bold w-fit h-fit p-1">
             en
-          </div>
+          </div> */}
+          <MobileMenuButton
+            isOpen={isMenuOpen}
+            showMenu={showMenu}
+            closeMenu={closeMenu}
+            toggleMenu={toggleMenu}
+          />
         </div>
       </div>
     </div>

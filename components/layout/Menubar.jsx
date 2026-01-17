@@ -18,8 +18,8 @@ const Menubar = ({ closeMenu }) => {
 
   return (
     <>
-      <nav className="bg-[#D9D9D9] border border-[#00000000] box-border min-w-fit text-xl h-full">
-        <ul className="flex-row bg-[#D9D9D9]">
+      <nav className="border border-[#00000000] box-border min-w-fit text-xl">
+        <ul className="flex-row">
           {links.map((link) => {
             const isActive = pathname === link.href;
 
@@ -27,8 +27,8 @@ const Menubar = ({ closeMenu }) => {
               <li
                 key={link.href}
                 className={
-                  'active:font-bold active:box-border active:border-l-5 active:pl-2 active:border-[#FF3B00] ' +
-                  (isActive ? 'bg-[#C4C4C4]' : '') +
+                  'hover:bg-[#dadada] active:font-bold active:box-border active:border-l-5 active:pl-2 active:border-[#FF3B00] ' +
+                  (isActive ? 'bg-[#eaeaea] md:bg-[#b3b3b3] ' : '') +
                   ' flex-1 px-3 my-2 py-1'
                 }
                 onClick={closeMenu}
