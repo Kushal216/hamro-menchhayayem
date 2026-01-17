@@ -1,5 +1,4 @@
 import mongoose from 'mongoose';
-
 import { connectMongoDB } from '@/lib/db.js';
 
 const cultureSchema = new mongoose.Schema(
@@ -12,6 +11,7 @@ const cultureSchema = new mongoose.Schema(
     description: {
       type: String,
       trim: true,
+      default: "No description provided."
     },
     gallery: [
       {
@@ -30,6 +30,7 @@ const cultureSchema = new mongoose.Schema(
     category: {
       type: String,
       trim: true,
+      default: "Uncategorized"
     },
     likesCount: {
       type: Number,

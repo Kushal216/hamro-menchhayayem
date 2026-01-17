@@ -1,6 +1,5 @@
 import mongoose from "mongoose";
-
-import { connectMongoDB } from "@/lib/db";
+import { connectMongoDB } from "@/lib/db.js";
 
 const videoSchema = new mongoose.Schema({
 
@@ -14,16 +13,14 @@ const videoSchema = new mongoose.Schema({
         required: true
     },
     start: {
-        type: String,
-        required: true
+        type: Number,
+        default:0
     },
     end: {
-        type: String,
-        required: true
+        type: Number,
     },
     category: {
         type: String,
-        required: true,
     },
 
 }, { timestamps: true });

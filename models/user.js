@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-import { connectMongoDB } from "@/lib/db";
+import { connectMongoDB } from "@/lib/db.js";
 
 const userSchema = new mongoose.Schema(
     {
@@ -40,6 +40,7 @@ const userSchema = new mongoose.Schema(
         password: {
             type: String,
             required: true,
+            select:false
         },
     },
     { timestamps: true }

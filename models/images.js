@@ -1,13 +1,8 @@
 import mongoose from 'mongoose';
-
-import { connectMongoDB } from '@/lib/db';
+import { connectMongoDB } from '@/lib/db.js';
 
 const imageSchema = new mongoose.Schema(
   {
-    _id: {
-      type: Number,
-      required: true,
-    },
     title: {
       type: String,
       required: true,
@@ -19,10 +14,10 @@ const imageSchema = new mongoose.Schema(
     category: {
       type: String,
       required: true,
+      trim:true
     },
   },
   { timestamps: true }
 );
 
-export default mongoose.models.Image ||
-  (await connectMongoDB(), mongoose.model('Image', imageSchema));
+export default mongoose.models.Image ||  (await connectMongoDB(), mongoose.model('Image', imageSchema));
