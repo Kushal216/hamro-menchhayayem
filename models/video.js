@@ -14,16 +14,14 @@ const videoSchema = new mongoose.Schema({
         required: true
     },
     start: {
-        type: String,
-        required: true
+        type: Number,
+        default:0
     },
     end: {
-        type: String,
-        required: true
+        type: Number,
     },
     category: {
         type: String,
-        required: true,
     },
 
 }, { timestamps: true });

@@ -6,12 +6,14 @@ const schoolSchema = new mongoose.Schema({
     title: {
         type: String,
         required: true,
+        trim:true,
     },
-    discription: {
+    description: {
         type: String,
-        required: true,
+        trim: true,
+        default: "No description is provided."
     },
-    galary: [
+    gallery: [
         {
             type: mongoose.Schema.Types.ObjectId,
             ref: "image",
@@ -32,15 +34,12 @@ const schoolSchema = new mongoose.Schema({
     },
     category: {
         type: String,
-        required: true,
+        default: "Uncategorized"
     },
     phoneNo: {
         type: String,
-        required: true,
+        trim: true
     },
-
-
-
 }, { timestamps: true });
 
 export default mongoose.models.School || (await connectMongoDB(), mongoose.model("School", schoolSchema));
