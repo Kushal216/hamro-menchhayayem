@@ -61,15 +61,90 @@ export async function GET(request, { params }) {
  *                   name:
  *                     type: string
  */
-export async function PUT(request, { params }) {
+export async function PATCH(req, { params }) {
+  const { id } = await params;
+  const body = await req.json();
+
+  try {
+    const updated = await Culture.findByIdAndUpdate(
+      id,
+      { $set: body }, // only update provided fields
+      { new: true, runValidators: true }
+    );
+
+    if (!updated) {
+      return NextResponse.json({ error: 'Not found' }, { status: 404 });
+    }
+
+    return NextResponse.json({
+      message: `Updated culture ${updated.title}`,
+      data: updated,
+    });
+  } catch (err) {
+    return NextResponse.json({ error: err.message }, { status: 500 });
+  }
+}
+
+/**
+ * @swagger
+ * /api/cultures/{id}:
+ *   put:
+ *     summary: replace item with given id
+ *     tags:
+ *       - cultures
+ *     description: Returns a list of cultures
+ *     responses:
+ *       200:
+ *         description: Success
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 type: object
+ *                 properties:
+ *                   id:
+ *                     type: number
+ *                   name:
+ *                     type: string
+ */
+export async function PUT(req, { params }) {
+  //check if authorized
+  //validate data
+
+  const body = await req.json()
   const { id } = await params;
 
-  console.log(`id: ${id}`);
+  try {
+    const culture = await Culture.findById(id);
 
-  return Response.json({
-    message: 'UPDATE culture',
-    id: id,
-  });
+    if (!culture) {
+      return NextResponse.json(
+        { error: "The culture id doesn't exist." },
+        { status: 404 }
+      );
+    }
+
+    const dbResponse = await Culture.replaceOne(
+      { _id: id },
+      {
+        title: body.title,
+        description: body.description,
+        gallery: body.gallery,
+        video: body.video,
+        coverImage: body.coverImage,
+        category: body.category,
+      }
+    );
+
+    return NextResponse.json({
+      message: `replaced culture ${body.title} with ${body.title}`,
+      id: id,
+      data: dbResponse
+    });
+  } catch (err) {
+    return NextResponse.json({ error: err.message }, { status: 500 });
+  }
 }
 
 /**
@@ -95,7 +170,7 @@ export async function PUT(request, { params }) {
  *                   name:
  *                     type: string
  */
-export async function DELETE(request, { params }) {
+export async function DELETE(req, { params }) {
   //validate user
 
   const { id } = await params;
