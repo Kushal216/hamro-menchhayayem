@@ -18,7 +18,7 @@ const Menubar = ({ closeMenu }) => {
 
   return (
     <>
-      <nav className="border border-[#00000000] box-border min-w-fit text-xl">
+      <nav className="border border-[#00000000] box-border min-w-fit text-xl shadow-xl bg-white md:bg-[#cacaca] rounded-b-xl w-fit fixed right-0">
         <ul className="flex-row">
           {links.map((link) => {
             const isActive = pathname === link.href;
