@@ -13,23 +13,19 @@ const schoolSchema = new mongoose.Schema(
       trim: true,
       default: 'No description is provided.',
     },
-    gallery: [
-      {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'image',
-      },
-    ],
+    gallery: {
+      type: [String],
+      default: [],
+    },
     coverImage: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: 'image',
+      type: String,
     },
     location: {
       type: String,
       required: true,
     },
     video: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: 'video',
+      type: String,
     },
     category: {
       type: String,

@@ -11,23 +11,19 @@ const placesSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  gallery: [
-    {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: 'image',
-    },
-  ],
+  gallery: {
+    type: [String],
+    default: [],
+  },
   coverImage: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'image',
+    type: String,
   },
   location: {
     type: String,
     default: 'Menchhayayem rural municipality',
   },
   video: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'video',
+    type: String,
   },
   category: {
     type: String,

@@ -13,19 +13,17 @@ const cultureSchema = new mongoose.Schema(
       trim: true,
       default: "No description provided."
     },
-    gallery: [
-      {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'image',
-      },
-    ],
+    gallery: {
+      type: [String],
+      default: [],
+    },
+
     video: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: 'video',
+      type: String,
     },
     coverImage: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: 'image',
+      type: String,
+
     },
     category: {
       type: String,
