@@ -20,7 +20,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "d
 /**
  * @swagger
  * /api/v1/auth:
- *   get:
+ *   post:
  *     summary: validate authentication
  *     tags:
  *       - places
@@ -86,7 +86,6 @@ function POST(req) {
             break;
           }
 
-          //retur jwt
           token = _jsonwebtoken["default"].sign({
             userId: user._id,
             email: user.email

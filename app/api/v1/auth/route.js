@@ -7,7 +7,7 @@ import { cookies } from 'next/headers';
 /**
  * @swagger
  * /api/v1/auth:
- *   get:
+ *   post:
  *     summary: validate authentication
  *     tags:
  *       - places
@@ -42,8 +42,6 @@ export async function POST(req) {
     const matches = await bcrypt.compare(password, user.password);
 
     if (matches) {
-      //retur jwt
-
       const token = jwt.sign(
         {
           userId: user._id,
