@@ -72,5 +72,11 @@ export async function POST(req) {
       { message: 'Invalid Credentials' },
       { status: 401 }
     );
-  } catch (err) {}
+  } catch (err) {
+    console.log(`ERROR: in creating culture:\n${err}`);
+    return NextResponse.json({
+      message: `DB error in performing the create culture action. `,
+      err: err,
+    });
+  }
 }

@@ -114,8 +114,13 @@ function POST(req) {
         case 21:
           _context.prev = 21;
           _context.t0 = _context["catch"](5);
+          console.log("ERROR: in creating culture:\n".concat(_context.t0));
+          return _context.abrupt("return", _server.NextResponse.json({
+            message: "DB error in performing the create culture action. ",
+            err: _context.t0
+          }));
 
-        case 23:
+        case 25:
         case "end":
           return _context.stop();
       }
