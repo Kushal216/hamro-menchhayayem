@@ -1,3 +1,6 @@
+import { NextResponse } from 'next/server';
+import School from '@/models/school.js';
+
 /**
  * @swagger
  * /api/schools/{id}:
@@ -51,17 +54,23 @@
  *       200:
  *         description: School deleted successfully
  */
-export async function GET(request, { params }) {
-  const { id } = params;
+export async function GET(request, res) {
+  const { id } = await res.params;
+  try {
+    const school = await School.findById(id);
 
-  return Response.json({
-    message: 'GET school by ID',
-    id: id,
-  });
+    if (!school) {
+      return NextResponse.json({ error: 'Not found' }, { status: 404 });
+    }
+
+    return NextResponse.json({ data: school });
+  } catch (err) {
+    return NextResponse.json({ error: err.message }, { status: 500 });
+  }
 }
-
 export async function PUT(request, { params }) {
   const { id } = params;
+
 
   return Response.json({
     message: 'UPDATE school',

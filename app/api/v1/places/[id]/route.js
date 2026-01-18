@@ -19,8 +19,8 @@ import Places from "@/models/places";
  *         description: Success - returns place data
  */
 
-export async function GET(req, { params }) {
-  const { id } = await params;
+export async function GET(req, res) {
+  const { id } = await res.params;
   try {
     const place = await Places.findById(id);
 
@@ -35,8 +35,8 @@ export async function GET(req, { params }) {
 }
 
 
-export async function PATCH(req, { params }) {
-  const { id } = await params;
+export async function PATCH(req, res) {
+  const { id } = await res.params;
   const body = await req.json();
   try {
     const updated = await Places.findByIdAndUpdate(
@@ -61,12 +61,12 @@ export async function PATCH(req, { params }) {
 }
 
 
-export async function PUT(req, { params }) {
+export async function PUT(req, res) {
   //check if authorized
   //validate data
 
   const body = await req.json()
-  const { id } = await params;
+  const { id } = await res.params;
 
   try {
     const place = await Places.findById(id);
@@ -144,10 +144,10 @@ export async function PUT(req, { params }) {
 *       200:
 *         description: Place deleted successfully
 */
-export async function DELETE(req, { params }) {
+export async function DELETE(req, res) {
   //validate user
 
-  const { id } = await params;
+  const { id } = await res.params;
 
   try {
     const place = await Places.findByIdAndDelete(id);
