@@ -8,23 +8,6 @@ const userSchema = new mongoose.Schema(
       required: true,
       trim: true,
     },
-    photo: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: 'image',
-    },
-    contact: {
-      phone: {
-        type: String,
-      },
-      website: {
-        type: String,
-      },
-      social: {
-        facebook: String,
-        instagram: String,
-        linkedin: String,
-      },
-    },
     role: {
       type: String,
       default: 'contributer',

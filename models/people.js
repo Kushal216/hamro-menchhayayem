@@ -9,22 +9,26 @@ const peopleSchema = new mongoose.Schema(
       trim: true,
     },
     photo: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: 'image',
+      type: String,
     },
     contact: {
+       phone: {
+        type: String,
+      },
+      website: {
+        type: String,
+      },
+      social: {
+        facebook: String,
+        instagram: String,
+        linkedin: String,
+      },
       email: {
         type: String,
         required: true,
         unique: true,
         trim: true,
         match: /.+\@.+\..+/,
-      },
-      phone: {
-        type: String,
-      },
-      social: {
-        facebook: String,
       },
     },
     position: {
