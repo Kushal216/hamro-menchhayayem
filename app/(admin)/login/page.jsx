@@ -1,30 +1,32 @@
 "use client";
 import data from "@/app/Data/OurTeam";
-import { Router, useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 
 export default function LoginPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-    const [message, setMessage] = useState("");
-    const router = useRouter();
+  const [message, setMessage] = useState("");
+  const router = useRouter();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    try {
+      const res = await fetch("/api/v1/auth", {
+        method: "POST",
+        headers: { "content-Type": "application/json" },
+        body: JSON.stringify({ email, password }),
+      });
 
-    if (!email || !password) {
-      setMessage("Please fill in all fields");
-      return;
-    }
+      const data = await res.json();
 
-    const user = data.find(
-      (item) => item.email === email && item.password === password,
-    );
-    if (user) {
-      setMessage("Login Successful!");
-      router.push("/admin");
-    } else {
-      setMessage("Invalid email or password");
+      if (!res.ok) {
+        console.log("Error:", data.error);
+      } else {
+        console.log("Success:", data.message, data.user);
+      }
+    } catch (err) {
+      console.error("Fetch error:", err);
     }
   };
 
