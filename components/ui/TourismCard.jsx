@@ -1,6 +1,7 @@
 "use client";
 import Image from "next/image";
-import { FaMapMarkerAlt, FaHeart } from "react-icons/fa";
+import { FaMapMarkerAlt } from "react-icons/fa";
+import Like from "@/components/sections/Like";
 import { BiSolidCommentDots } from "react-icons/bi";
 
 export default function TourismCard({ image, title, description }) {
@@ -50,10 +51,7 @@ export default function TourismCard({ image, title, description }) {
                   size={33}
                   className="text-[#00AAFF] text-lg cursor-pointer hover:scale-110 transition"
                 />
-                <FaHeart
-                  size={33}
-                  className="text-[#FF0000] text-lg cursor-pointer hover:scale-110 transition"
-                />
+                <Like totalLikes={10} />
               </div>
             </div>
           </div>

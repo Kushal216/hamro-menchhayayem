@@ -2,7 +2,7 @@
 import React from "react";
 import Image from "next/image";
 import { BiSolidCommentDots } from "react-icons/bi";
-import { FaHeart } from "react-icons/fa6";
+import Like from "@/components/sections/Like";
 
 export default function CultureCard({ title, description, image }) {
   const isAll = false;
@@ -39,7 +39,7 @@ export default function CultureCard({ title, description, image }) {
 
             <div className="flex gap-5">
               <BiSolidCommentDots size={26} className="text-sky-500" />
-              <FaHeart size={26} className="text-red-500" />
+              <Like totalLikes={10} />
             </div>
           </div>
         </div>

@@ -13,13 +13,13 @@ function Like(LikeCount) {
     setCount(count - 1);
   }
   return (
-    <div>
+    <div className="flex gap-1 text-lg cursor-pointer hover:scale-110 transition">
       {like ? (
         <FaHeart size={30} onClick={handleUnlike} color="red" />
       ) : (
         <FaRegHeart size={30} onClick={handleLike} />
       )}
-      {count}
+      <div className="text-xl">{count}</div>
     </div>
   );
 }

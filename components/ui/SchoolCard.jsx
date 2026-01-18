@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { FaHeart } from "react-icons/fa";
+import Like from "@/components/sections/Like";
 import { BiSolidCommentDots } from "react-icons/bi";
 import { FaLocationDot } from "react-icons/fa6";
 import { IoCall } from "react-icons/io5";
@@ -54,7 +54,7 @@ export default function SchoolCard({
                 <IoCall size={35} color="#018378" />
               </a>
               <BiSolidCommentDots size={35} color="#00AAFF" />
-              <FaHeart size={35} color="#FF0000" />
+              <Like totalLikes={10} />
             </div>
           </div>
         </div>
