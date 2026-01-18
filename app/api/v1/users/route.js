@@ -1,5 +1,5 @@
-import { NextResponse } from "next/server";
-import User from "@/models/user";
+import { NextResponse } from 'next/server';
+import User from '@/models/user';
 /**
  * @swagger
  * /api/v1/users:
@@ -23,6 +23,14 @@ import User from "@/models/user";
  *                   name:
  *                     type: string
  */
-export async function GET(req){
+export async function GET(req) {
+  const users = await User.find({});
 
+  return NextResponse.json({ message: 'users fetched', data: users });
+}
+
+export async function POST(req){
+//get body email and pw
+//encrypt pw bcrypt
+//add content of body 
 }

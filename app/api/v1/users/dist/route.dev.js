@@ -4,6 +4,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.GET = GET;
+exports.POST = POST;
 
 var _server = require("next/server");
 
@@ -35,12 +36,36 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "d
  *                     type: string
  */
 function GET(req) {
+  var users;
   return regeneratorRuntime.async(function GET$(_context) {
     while (1) {
       switch (_context.prev = _context.next) {
         case 0:
+          _context.next = 2;
+          return regeneratorRuntime.awrap(_user["default"].find({}));
+
+        case 2:
+          users = _context.sent;
+          return _context.abrupt("return", _server.NextResponse.json({
+            message: 'users fetched',
+            data: users
+          }));
+
+        case 4:
         case "end":
           return _context.stop();
+      }
+    }
+  });
+}
+
+function POST(req) {
+  return regeneratorRuntime.async(function POST$(_context2) {
+    while (1) {
+      switch (_context2.prev = _context2.next) {
+        case 0:
+        case "end":
+          return _context2.stop();
       }
     }
   });
