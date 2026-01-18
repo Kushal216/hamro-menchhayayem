@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server';
 import User from '@/models/user';
+import bcrypt from 'bcryptjs';
 /**
  * @swagger
  * /api/v1/users:
@@ -29,8 +30,21 @@ export async function GET(req) {
   return NextResponse.json({ message: 'users fetched', data: users });
 }
 
-export async function POST(req){
-//get body email and pw
-//encrypt pw bcrypt
-//add content of body 
+export async function POST(req) {
+  const { email, password } = await req.json();
+  const saltValue = 10;
+  try {
+    const hashedPassword = await bcrypt.hash(password, saltValue);
+    await User.create({
+      email,
+      password: hashedPassword,
+    })
+    return NextResponse.jsonm({
+      message: "created User"
+    }, {
+      status: 201
+    })
+  } catch {
+    return NextResponse.json({ ERROR: "failed to create the user" }, { status: 401 })
+  }
 }
