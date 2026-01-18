@@ -12,7 +12,7 @@ export default function LoginPage() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await fetch("/api/login", {
+      const res = await fetch("/api/v1/auth", {
         method: "POST",
         headers: { "content-Type": "application/json" },
         body: JSON.stringify({ email, password }),
@@ -28,21 +28,6 @@ export default function LoginPage() {
     } catch (err) {
       console.error("Fetch error:", err);
     }
-
-    // if (!email || !password) {
-    //   setMessage("Please fill in all fields");
-    //   return;
-    // }
-
-    // const user = data.find(
-    //   (item) => item.email === email && item.password === password,
-    // );
-    // if (user) {
-    //   setMessage("Login Successful!");
-    //   router.push("/admin");
-    // } else {
-    //   setMessage("Invalid email or password");
-    // }
   };
 
   return (
