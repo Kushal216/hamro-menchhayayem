@@ -4,7 +4,7 @@ import React from 'react';
 import ReactMarkdown from 'react-markdown';
 import { BsPlayBtnFill } from 'react-icons/bs';
 
-const page = (content) => {
+export default function ItemDetails(content) {
   const content1 = `## नेपालको एक विद्यालय
 
 **नेपालको एक आदर्श विद्यालय** शान्त र स्वच्छ वातावरणमा अवस्थित छ। यहाँ **अनुशासित विद्यार्थी**, *मेहनती तथा अनुभवी शिक्षक* र **सहयोगी अभिभावक**को सक्रिय सहभागिता देखिन्छ।
@@ -46,8 +46,6 @@ const page = (content) => {
     </>
   );
 };
-
-export default page;
 
 function CoverImage() {
   return (
