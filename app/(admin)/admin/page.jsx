@@ -1,7 +1,9 @@
+import Adminpage from "@/components/Admin/Adminpage";
+
 export default function AdminPage() {
-    return (
-        <div>
-            <h1>Admin Dashboard</h1>
-        </div>
-    );
+  return (
+    <div>
+      <Adminpage />
+    </div>
+  );
 }
