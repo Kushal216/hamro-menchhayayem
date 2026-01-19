@@ -5,8 +5,13 @@ import ReactMarkdown from 'react-markdown';
 import { BsPlayBtnFill } from 'react-icons/bs';
 import BackButton from './BackButton';
 
-export default function ItemDetails(content) {
+export default function ItemDetails(path) {
+
   const content1 = "पर्खनुहोस ..."
+
+  // const paths = usePathname().replace(/\/$/, '').split('/');
+  // const id = paths[2];
+
 
   return (
     <>
