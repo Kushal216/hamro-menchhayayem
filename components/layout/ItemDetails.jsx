@@ -3,6 +3,7 @@ import Image from 'next/image';
 import React from 'react';
 import ReactMarkdown from 'react-markdown';
 import { BsPlayBtnFill } from 'react-icons/bs';
+import BackButton from './BackButton';
 
 export default function ItemDetails(content) {
   const content1 = `## नेपालको एक विद्यालय
@@ -34,6 +35,7 @@ export default function ItemDetails(content) {
   return (
     <>
       <div className="w-full px-2 relative mt-2 select-none">
+        <BackButton />
         <CoverImage />
 
         <div className="mt-2">
@@ -45,7 +47,7 @@ export default function ItemDetails(content) {
       </div>
     </>
   );
-};
+}
 
 function CoverImage() {
   return (
