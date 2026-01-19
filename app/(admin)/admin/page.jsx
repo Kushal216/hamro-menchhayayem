@@ -1,20 +1,19 @@
 "use client";
 
-import Place from "@/components/Admin/AddPlace";
-import Culture from "@/components/Admin/AddCulture";
-import School from "@/components/Admin/AddSchool";
-import People from "@/components/Admin/AddPeople";
-import User from "@/components/Admin/AddUser";
-import { useState } from "react";
+// import Place from "@/components/Admin/AddPlace";
+// import Culture from "@/components/Admin/AddCulture";
+// import School from "@/components/Admin/AddSchool";
+// import People from "@/components/Admin/AddPeople";
+// import User from "@/components/Admin/AddUser";
+// import { useState } from "react";
+import Adminpage from "@/components/Admin/Adminpage";
 
 export default function AdminPage() {
-  const name = "Kushal";
-  const [activeComponent, setActiveComponent] = useState("Place");
-
   return (
     <div className="min-h-screen bg-gray-100 p-6 ">
-      <h1 className="text-3xl font-bold mb-6">Hello, {name}</h1>
+      <Adminpage />
 
+      {/* 
       <div className="flex gap-4 mb-6 flex-wrap">
         <button
           className={`px-4 py-2 rounded font-medium transition ${
@@ -78,7 +77,7 @@ export default function AdminPage() {
         {activeComponent === "School" && <School />}
         {activeComponent === "People" && <People />}
         {activeComponent === "User" && <User />}
-      </div>
+      </div> */}
     </div>
   );
 }
