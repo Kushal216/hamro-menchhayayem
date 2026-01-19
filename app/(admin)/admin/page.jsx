@@ -15,7 +15,7 @@ export default async function AdminPage() {
 
   return (<>
     {tokenPayload && <div>
-      <button onClick={logout} className="bg-red-600 text-white font-bold float-right p-1 px-8 m-2 rounded-xl">Logout</button>
+      <button onClick={logout} className="bg-red-600 text-white font-bold float-right p-1 px-8 m-2 rounded-xl cursor-pointer">Logout</button>
       <Adminpage username={tokenPayload.name} />
     </div>}
   </>
