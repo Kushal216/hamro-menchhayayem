@@ -19,7 +19,7 @@ export default function SchoolForm({ onSubmit }) {
   const [phoneNo, setPhoneNo] = useState("");
   const [likesCount, setLikesCount] = useState(0);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const data = {
       title,
@@ -30,10 +30,33 @@ export default function SchoolForm({ onSubmit }) {
       video,
       category: category || "Uncategorized",
       phoneNo,
-      likesCount: likesCount >= 0 ? likesCount : 0,
+      likesCount: 0,
     };
-    if (onSubmit) onSubmit(data);
-    else console.log(data);
+    try {
+      const res = await fetch("api/v1/schools", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
+      });
+      if (!res.ok) {
+        const text = await res.text();
+        console.error("Server Returned:", text);
+        throw new Error(`Request Failed: ${res.status}`);
+      }
+      const result = await res.json();
+      console.log("Saved successfully:", result);
+
+      setTitle("");
+      setDescription("");
+      setGallery([]);
+      setCoverImage("");
+      setVideo("");
+      setCategory("");
+      setPhoneNo("");
+    } catch (err) {
+      console.error(err);
+      alert(err.message);
+    }
   };
 
   return (
@@ -173,7 +196,7 @@ export default function SchoolForm({ onSubmit }) {
           type="submit"
           className="bg-blue-600 text-white px-4 py-2 rounded"
         >
-          Submit
+          Add School
         </button>
       </form>
     </>

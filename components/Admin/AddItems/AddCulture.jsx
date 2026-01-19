@@ -16,7 +16,7 @@ export default function CultureForm({ onSubmit }) {
   const [video, setVideo] = useState("");
   const [category, setCategory] = useState("");
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const data = {
       title,
@@ -27,8 +27,31 @@ export default function CultureForm({ onSubmit }) {
       category: category,
       likesCount: 0,
     };
-    if (onSubmit) onSubmit(data);
-    else console.log(data);
+
+    try {
+      const res = await fetch("api/v1/cultures", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
+      });
+      if (!res.ok) {
+        const text = await res.text();
+        console.error("Server Returned:", text);
+        throw new Error(`Request Failed: ${res.status}`);
+      }
+      const result = await res.json();
+      console.log("Saved successfully:", result);
+
+      setTitle("");
+      setDescription("");
+      setGallery([]);
+      setCoverImage("");
+      setVideo("");
+      setCategory("");
+    } catch (err) {
+      console.error(err);
+      alert(err.message);
+    }
   };
 
   return (
@@ -135,7 +158,7 @@ export default function CultureForm({ onSubmit }) {
           type="submit"
           className="bg-blue-600 text-white px-4 py-2 rounded"
         >
-          Submit
+          Add Culture
         </button>
       </form>
     </>

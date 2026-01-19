@@ -13,7 +13,7 @@ export default function PeopleForm({ onSubmit }) {
   const [email, setEmail] = useState("");
   const [position, setPosition] = useState("");
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async(e) => {
     e.preventDefault();
     const data = {
       name,
@@ -31,8 +31,33 @@ export default function PeopleForm({ onSubmit }) {
       position,
     };
 
-    if (onSubmit) onSubmit(data);
-    else console.log(data);
+    try {
+      const res = await fetch("api/v1/people", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
+      });
+      if (!res.ok) {
+        const text = await res.text();
+        console.error("Server Returned:", text);
+        throw new Error(`Request Failed: ${res.status}`);
+      }
+      const result = await res.json();
+      console.log("Saved successfully:", result);
+
+      setName("");
+      setPhoto("");
+      setEmail([]);
+      setFacebook("");
+      setInstagram("");
+      setLinkedin("");
+      setPhone("");
+      setWebsite("");
+      setPosition("");
+    } catch (err) {
+      console.error(err);
+      alert(err.message);
+    }
   };
 
   return (

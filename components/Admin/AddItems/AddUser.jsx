@@ -8,12 +8,32 @@ export default function UserForm({ onSubmit }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const data = { name, role, email, password };
 
-    if (onSubmit) onSubmit(data);
-    else console.log(data);
+    try {
+      const res = await fetch("api/v1/users", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
+      });
+      if (!res.ok) {
+        const text = await res.text();
+        console.error("Server Returned:", text);
+        throw new Error(`Request Failed: ${res.status}`);
+      }
+      const result = await res.json();
+      console.log("Saved successfully:", result);
+
+      setName("");
+      setEmail("");
+      setPassword([]);
+      setRole("");
+    } catch (err) {
+      console.error(err);
+      alert(err.message);
+    }
   };
 
   return (
