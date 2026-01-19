@@ -7,7 +7,7 @@ import { usePathname } from 'next/navigation';
 const Routes = {
   schools: 'विद्यलयाहरु',
   cultures: 'संस्कृतीहरु',
-  places: 'ठाऊहरु',
+  places: 'स्थानहरु',
 };
 
 const BackButton = ({ gallery }) => {
