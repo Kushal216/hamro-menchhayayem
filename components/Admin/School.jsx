@@ -1,4 +1,5 @@
 "use client";
+
 import { useState } from "react";
 import dynamic from "next/dynamic";
 import "simplemde/dist/simplemde.min.css";
@@ -7,28 +8,29 @@ const SimpleMDE = dynamic(() => import("react-simplemde-editor"), {
   ssr: false,
 });
 
-export default function PlaceForm({ onSubmit }) {
+export default function SchoolForm({ onSubmit }) {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [gallery, setGallery] = useState([]);
   const [coverImage, setCoverImage] = useState("");
-  const [location, setLocation] = useState("Menchhayayem rural municipality");
+  const [location, setLocation] = useState("");
   const [video, setVideo] = useState("");
-  const [category, setCategory] = useState("");
-  const [subCategory, setSubCategory] = useState("");
+  const [category, setCategory] = useState("Uncategorized");
+  const [phoneNo, setPhoneNo] = useState("");
+  const [likesCount, setLikesCount] = useState(0);
 
   const handleSubmit = (e) => {
     e.preventDefault();
     const data = {
       title,
-      description,
+      description: description || "No description is provided.",
       gallery,
       coverImage,
       location,
       video,
-      category,
-      subCategory,
-      likesCount: 0,
+      category: category || "Uncategorized",
+      phoneNo,
+      likesCount: likesCount >= 0 ? likesCount : 0,
     };
     if (onSubmit) onSubmit(data);
     else console.log(data);
@@ -37,16 +39,16 @@ export default function PlaceForm({ onSubmit }) {
   return (
     <>
       <div className="text-3xl font-bold text-blue-600 justify-center flex">
-        ADD Places{" "}
+        ADD School
       </div>
-      <form onSubmit={handleSubmit} className="space-y-4 p-4 ">
+      <form onSubmit={handleSubmit} className="space-y-4 p-4">
         <div>
           <label>Title:</label>
           <input
             type="text"
             value={title}
             onChange={(e) => setTitle(e.target.value)}
-            placeholder="Enter title"
+            placeholder="Enter school title"
             className="border w-full p-2 rounded"
             required
           />
@@ -82,17 +84,15 @@ export default function PlaceForm({ onSubmit }) {
               />
               <button
                 type="button"
-                onClick={() => {
-                  const newGallery = gallery.filter((_, i) => i !== index);
-                  setGallery(newGallery);
-                }}
+                onClick={() =>
+                  setGallery(gallery.filter((_, i) => i !== index))
+                }
                 className="bg-red-500 text-white px-2 rounded"
               >
                 Remove
               </button>
             </div>
           ))}
-
           <button
             type="button"
             onClick={() => setGallery([...gallery, ""])}
@@ -121,6 +121,7 @@ export default function PlaceForm({ onSubmit }) {
             onChange={(e) => setLocation(e.target.value)}
             placeholder="Enter location"
             className="border w-full p-2 rounded"
+            required
           />
         </div>
 
@@ -143,19 +144,28 @@ export default function PlaceForm({ onSubmit }) {
             onChange={(e) => setCategory(e.target.value)}
             placeholder="Enter category"
             className="border w-full p-2 rounded"
-            required
           />
         </div>
 
         <div>
-          <label>Subcategory:</label>
+          <label>Phone Number:</label>
           <input
             type="text"
-            value={subCategory}
-            onChange={(e) => setSubCategory(e.target.value)}
-            placeholder="Enter subcategory"
+            value={phoneNo}
+            onChange={(e) => setPhoneNo(e.target.value)}
+            placeholder="Enter phone number"
             className="border w-full p-2 rounded"
-            required
+          />
+        </div>
+
+        <div>
+          <label>Likes Count:</label>
+          <input
+            type="number"
+            value={likesCount}
+            onChange={(e) => setLikesCount(Number(e.target.value))}
+            min={0}
+            className="border w-full p-2 rounded"
           />
         </div>
 

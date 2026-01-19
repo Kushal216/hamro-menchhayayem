@@ -1,4 +1,5 @@
 "use client";
+
 import { useState } from "react";
 import dynamic from "next/dynamic";
 import "simplemde/dist/simplemde.min.css";
@@ -7,27 +8,23 @@ const SimpleMDE = dynamic(() => import("react-simplemde-editor"), {
   ssr: false,
 });
 
-export default function PlaceForm({ onSubmit }) {
+export default function CultureForm({ onSubmit }) {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [gallery, setGallery] = useState([]);
   const [coverImage, setCoverImage] = useState("");
-  const [location, setLocation] = useState("Menchhayayem rural municipality");
   const [video, setVideo] = useState("");
   const [category, setCategory] = useState("");
-  const [subCategory, setSubCategory] = useState("");
 
   const handleSubmit = (e) => {
     e.preventDefault();
     const data = {
       title,
-      description,
+      description: description,
       gallery,
       coverImage,
-      location,
       video,
-      category,
-      subCategory,
+      category: category,
       likesCount: 0,
     };
     if (onSubmit) onSubmit(data);
@@ -37,9 +34,9 @@ export default function PlaceForm({ onSubmit }) {
   return (
     <>
       <div className="text-3xl font-bold text-blue-600 justify-center flex">
-        ADD Places{" "}
+        ADD Culture
       </div>
-      <form onSubmit={handleSubmit} className="space-y-4 p-4 ">
+      <form onSubmit={handleSubmit} className="space-y-4 p-4">
         <div>
           <label>Title:</label>
           <input
@@ -82,10 +79,9 @@ export default function PlaceForm({ onSubmit }) {
               />
               <button
                 type="button"
-                onClick={() => {
-                  const newGallery = gallery.filter((_, i) => i !== index);
-                  setGallery(newGallery);
-                }}
+                onClick={() =>
+                  setGallery(gallery.filter((_, i) => i !== index))
+                }
                 className="bg-red-500 text-white px-2 rounded"
               >
                 Remove
@@ -114,17 +110,6 @@ export default function PlaceForm({ onSubmit }) {
         </div>
 
         <div>
-          <label>Location:</label>
-          <input
-            type="text"
-            value={location}
-            onChange={(e) => setLocation(e.target.value)}
-            placeholder="Enter location"
-            className="border w-full p-2 rounded"
-          />
-        </div>
-
-        <div>
           <label>Video URL:</label>
           <input
             type="text"
@@ -143,19 +128,6 @@ export default function PlaceForm({ onSubmit }) {
             onChange={(e) => setCategory(e.target.value)}
             placeholder="Enter category"
             className="border w-full p-2 rounded"
-            required
-          />
-        </div>
-
-        <div>
-          <label>Subcategory:</label>
-          <input
-            type="text"
-            value={subCategory}
-            onChange={(e) => setSubCategory(e.target.value)}
-            placeholder="Enter subcategory"
-            className="border w-full p-2 rounded"
-            required
           />
         </div>
 
