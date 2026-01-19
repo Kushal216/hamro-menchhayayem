@@ -1,10 +1,11 @@
-
 import React from 'react';
 import GalleryPage from '@/components/layout/GalleryPage';
 
-export default function Gallery (item) {
+export default function Gallery ({ params}) {
+    const { id } = React.use(params);
+
   return (
-      <GalleryPage item={item}/>
+      <GalleryPage id={id} route="cultures"/>
   );
 }
 
