@@ -14,8 +14,6 @@ export default function SchoolCard({
   phone,
   location,
 }) {
-  // const isAll = false;
-  // const shortDescription = (description || "").slice(0, 200) + " ...";
   return (
     <div className="flex justify-center p-4 m-2 mb-3 shadow-lg rounded-2xl w-fit mx-auto">
       <div className="w-full max-w-md sm:max-w-lg md:max-w-xl">
@@ -43,7 +41,6 @@ export default function SchoolCard({
         <div className="mt-2 pl-1">
           <div className="text-lg sm:text-xl pb-5 leading-[1.2]">
            <ShortText text={description} limit={200} />
-            {/* {isAll ? description : shortDescription} */}
           </div>
 
           <div className="flex sm:flex-row gap-3 sm:gap-0 sm:items-center ">

@@ -3,11 +3,8 @@ import Image from "next/image";
 import { FaMapMarkerAlt } from "react-icons/fa";
 import Like from "@/components/sections/Like";
 import { BiSolidCommentDots } from "react-icons/bi";
-
+import ShortText from "../sections/ShortText";
 export default function TourismCard({ image, title, description }) {
-  const isAll = false;
-  const shortDescription = (description || "").slice(0, 300) + " ...";
-
   return (
     <div className="w-full mx-auto p-4">
       <div className="bg-white rounded-2xl shadow-[0_4px_6px_-2px_rgba(0,0,0,0.3)] overflow-hidden">
@@ -29,7 +26,7 @@ export default function TourismCard({ image, title, description }) {
             </h2>
 
             <p className="mt-2 text-sm sm:text-base md:text-lg text-gray-700 leading-relaxed">
-              {isAll ? description : shortDescription}
+              <ShortText text={description} limit={300} />
             </p>
 
             <div className="mt-auto pt-3 flex items-center justify-between font-bold">

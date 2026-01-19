@@ -3,10 +3,9 @@ import React from "react";
 import Image from "next/image";
 import { BiSolidCommentDots } from "react-icons/bi";
 import Like from "@/components/sections/Like";
+import ShortText from "../sections/ShortText";
 
 export default function CultureCard({ title, description, image }) {
-  const isAll = false;
-  const shortDescription = (description || "").slice(0, 200) + " ...";
 
   return (
     <div className="p-3 sm:p-5 md:p-8 mx-auto">
@@ -29,7 +28,7 @@ export default function CultureCard({ title, description, image }) {
 
         <div className="px-4 pb-4 sm:px-5 sm:pb-5">
           <p className="text-sm sm:text-base md:text-lg leading-relaxed mt-3">
-            {isAll ? description : shortDescription}
+             <ShortText text={description} limit={200} />
           </p>
 
           <div className="flex sm:flex-row items-center justify-between gap-4 mt-5">
