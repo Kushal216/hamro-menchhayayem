@@ -17,7 +17,7 @@ export default function PlaceForm({ onSubmit }) {
   const [category, setCategory] = useState("");
   const [subCategory, setSubCategory] = useState("");
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const data = {
       title,
@@ -30,8 +30,33 @@ export default function PlaceForm({ onSubmit }) {
       subCategory,
       likesCount: 0,
     };
-    if (onSubmit) onSubmit(data);
-    else console.log(data);
+
+    try {
+      const res = await fetch("/api/v1/places", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
+      });
+      if (!res.ok) {
+        const text = await res.text();
+        console.error("Server returned:", text);
+        throw new Error(`Request failed: ${res.status}`);
+      }
+      const result = await res.json();
+      console.log("Saved successfully:", result);
+
+      setTitle("");
+      setDescription("");
+      setGallery([]);
+      setCoverImage("");
+      setLocation("Menchhayayem rural municipality");
+      setVideo("");
+      setCategory("");
+      setSubCategory("");
+    } catch (err) {
+      console.error(err);
+      alert(err.message);
+    }
   };
 
   return (
@@ -163,7 +188,7 @@ export default function PlaceForm({ onSubmit }) {
           type="submit"
           className="bg-blue-600 text-white px-4 py-2 rounded"
         >
-          Submit
+          Add Place
         </button>
       </form>
     </>
