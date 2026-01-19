@@ -2,6 +2,7 @@ import HomeHeading from '@/components/homepage/HomeHeading';
 import Image from 'next/image';
 import React from 'react';
 import BackButton from './BackButton';
+import { fetchItem } from '@/lib/fetchItem';
 
 let images = [
   '/images/image.png',
@@ -15,27 +16,32 @@ let images = [
 
 let cover = '/images/image.png';
 let i = 0;
-const GalleryPage = (item) => {
+const GalleryPage = async ({ route, id }) => {
+  const res = await fetchItem(route, id);
+  const culture = res.data;
+  const gallery = culture.gallery;
+
   return (
     <>
-      <BackButton gallery/>
+      <BackButton gallery />
 
-      <div className="grid justify-center md:grid-cols-3 lg:grid-cols-4 m-2 gap-2">
-        <Image
-          src={cover}
-          width={500}
-          height={300}
-          className="object-cover m-1 col-span-3 md:col-span-2 row-span-2 basis-125"
-          alt="image"
-        />
+      <div className="flex flex-wrap m-2 gap-2">
+        <div key={i} className="aspect-square w-40 relative col-span-1">
+          <Image
+            src={cover}
+            fill
+            className="object-cover rounded"
+            alt="image"
+          />
+        </div>
 
         {images.map((url) => (
-          <div key={i} className="aspect-square w-40 relative col-span-1">
+          <div key={i} className="aspect-square w-40 relative">
             <Image
               key={i++}
               src={url}
               fill
-              className="object-cover"
+              className="object-cover rounded"
               alt="image"
             />
           </div>

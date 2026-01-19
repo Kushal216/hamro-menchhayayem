@@ -1,10 +1,8 @@
-import HomeHeading from '@/components/homepage/HomeHeading';
-import Image from 'next/image';
 import React from 'react';
 import ReactMarkdown from 'react-markdown';
-import { BsPlayBtnFill } from 'react-icons/bs';
 import BackButton from './BackButton';
 import { fetchItem } from '@/lib/fetchItem';
+import CoverImage from './CoverImage';
 
 export default async function ItemDetails({ route, id }) {
   let content = 'पर्खनुहोस ...';
@@ -16,7 +14,7 @@ export default async function ItemDetails({ route, id }) {
     <>
       <div className="w-full px-2 relative mt-2 select-none">
         <BackButton />
-        <CoverImage title={culture.title} id={id} />
+        <CoverImage title={culture.title} id={id} route={`/${route}/${id}`} />
 
         <div className="mt-2">
           <div className="font-bold text-3xl text-black border-b-4 border-red-500 w-fill inline-block px-2 pr-4">
@@ -29,30 +27,6 @@ export default async function ItemDetails({ route, id }) {
   );
 }
 
-function CoverImage({ title, id }) {
-  return (
-    <>
-      <div className="aspect-video w-full md:w-[75%] md:float-right  relative mr-2">
-        <div className="absolute z-2 top-0 left-0 ">
-          <HomeHeading title={title} color={'white'} fixed />
-        </div>
-
-        <BsPlayBtnFill className="absolute z-2 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-white text-xl opacity-90" />
-
-        <Image
-          src={'/images/image.png'}
-          fill
-          sizes="(max-width: 768px) 100vw, 50vw"
-          alt="image of something"
-          className="object-cover rounded-lg"
-        />
-        <div className="absolute bottom-0 z-2 w-full text-center bg-[#00000040] pt-0.5 md:pt-1 text-white text-sm rounded-b-lg hover:underline hover:backdrop-blur-[1px]">
-          आरु तस्बिर हेर्नुहोस &gt;&gt;
-        </div>
-      </div>
-    </>
-  );
-}
 
 function MarkdownViewer({ content }) {
   return (
