@@ -7,8 +7,8 @@ import People from "@/components/Admin/AddItems/AddPeople";
 import User from "@/components/Admin/AddItems/AddUser";
 import { useState } from "react";
 
-export default function AdminLandingPage() {
-  const name = "Kushal";
+export default function AdminLandingPage({username}) {
+  const name = (username)?username:"User";
   const [active, setActive] = useState(null);
 
   // Config for each section
