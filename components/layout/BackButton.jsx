@@ -5,18 +5,20 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
 const Routes = {
-schools: "विद्यलयाहरु",
-cultures:'संस्कृतीहरु',
-places:'ठाऊहरु'
-}
+  schools: 'विद्यलयाहरु',
+  cultures: 'संस्कृतीहरु',
+  places: 'स्थानहरु',
+};
 
-const BackButton = () => {
-  const path = usePathname();
-  let paths = path.split('/');
-  console.log(paths)
+const BackButton = ({ gallery }) => {
+  const paths = usePathname().split('/');
   return (
-    <Link href={'/'+paths[1]}>
-      <HomeHeading title={Routes[paths[1]]} color={'black'} back />
+    <Link href={`/${paths[1]}${gallery ? `/${paths[2]}` : ''}`}>
+      <HomeHeading
+        title={gallery ? 'फर्कनुहोस' : Routes[paths[1]]}
+        color={'black'}
+        back
+      />
     </Link>
   );
 };

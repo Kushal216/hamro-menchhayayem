@@ -8,8 +8,8 @@ const Menubar = ({ closeMenu }) => {
 
   const links = [
     { href: '/', label: 'गृहपृष्ठ' },
-    { href: '/tourism', label: 'पर्यटकिय स्थलहरु' },
-    { href: '/culture', label: 'सांस्कृितिक पहिचान' },
+    { href: '/places', label: 'पर्यटकिय स्थलहरु' },
+    { href: '/cultures', label: 'सांस्कृितिक पहिचान' },
     { href: '/schools', label: 'विद्यालयहरु' },
     { href: '/municipality', label: 'पालिका विवरण' },
     { href: '/about', label: 'हाम्रो बारेमा' },

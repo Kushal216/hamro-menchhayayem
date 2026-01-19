@@ -1,6 +1,7 @@
 import HomeHeading from '@/components/homepage/HomeHeading';
 import Image from 'next/image';
 import React from 'react';
+import BackButton from './BackButton';
 
 let images = [
   '/images/image.png',
@@ -17,7 +18,7 @@ let i = 0;
 const GalleryPage = (item) => {
   return (
     <>
-      <HomeHeading title="गौखुरी" back />
+      <BackButton gallery/>
 
       <div className="grid justify-center md:grid-cols-3 lg:grid-cols-4 m-2 gap-2">
         <Image
