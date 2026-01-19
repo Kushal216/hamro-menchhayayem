@@ -1,12 +1,12 @@
-"use client";
-import React from "react";
-import Image from "next/image";
-import { BiSolidCommentDots } from "react-icons/bi";
-import Like from "@/components/sections/Like";
-import ShortText from "../sections/ShortText";
+'use client';
+import React from 'react';
+import Image from 'next/image';
+import { BiSolidCommentDots } from 'react-icons/bi';
+import Like from '@/components/sections/Like';
+import ShortText from '../sections/ShortText';
+import Link from 'next/link';
 
-export default function CultureCard({ title, description, image }) {
-
+export default function CultureCard({ title, description, image, id }) {
   return (
     <div className="p-3 sm:p-5 md:p-8 mx-auto">
       <div className="bg-white rounded-2xl shadow-lg overflow-hidden max-w-full sm:max-w-md md:max-w-lg mx-auto">
@@ -28,13 +28,15 @@ export default function CultureCard({ title, description, image }) {
 
         <div className="px-4 pb-4 sm:px-5 sm:pb-5">
           <p className="text-sm sm:text-base md:text-lg leading-relaxed mt-3">
-             <ShortText text={description} limit={200} />
+            <ShortText text={description} limit={200} />
           </p>
 
           <div className="flex sm:flex-row items-center justify-between gap-4 mt-5">
-            <button className=" w-full sm:w-full bg-black text-white font-bold rounded-2xl px-5 py-2 hover:bg-gray-800 transition">
-              Read More
-            </button>
+            <Link href={`/cultures/${id}`} className='w-full'>
+              <button className=" w-full sm:w-full bg-black text-white font-bold rounded-2xl px-5 py-2 hover:bg-gray-800 transition cursor-pointer">
+                Read More
+              </button>
+            </Link>
 
             <div className="flex gap-5">
               <BiSolidCommentDots size={26} className="text-sky-500" />

@@ -13,8 +13,9 @@ export default async function CulturesPage() {
       <div className="flex flex-wrap">
         {data.map((item, index) => (
           <CultureCard
-            key={index}
-            image={item.image}
+            key={item._id}
+            id={item._id}
+            image={item.coverImage}
             title={item.title}
             description={item.description}
           />
