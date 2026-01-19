@@ -11,10 +11,6 @@ const NavigationComponents = () => {
   const route = paths[1];
   const menuNeeded = !(route == 'admin' || route == 'login' || paths.length > 2);
 
-  console.log(`paths : ${paths}`);
-  console.log(`route : ${route}`);
-  console.log(`menu needed : ${menuNeeded}`);
-
   return (
     <>
       <header className="col-span-5 sticky top-0 z-100">
