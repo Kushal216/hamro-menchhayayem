@@ -5,13 +5,11 @@ import fetchData from '@/lib/fetchItem';
 import React from 'react';
 
 const page = () => {
-  const res = fetchData('cultures');
-
   return (
     <>
       <div>
-      <ToggleForm title="Add a culture" route={'cultures'}/>
-        <ManageData route="cultures" />
+      <ToggleForm title="Add a literature" route="literature"/>
+        <ManageData route="literature" />
       </div>
     </>
   );
