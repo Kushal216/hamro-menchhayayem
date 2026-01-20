@@ -1,14 +1,16 @@
 "use client";
-
 import { useState } from "react";
 import dynamic from "next/dynamic";
+import Image from "next/image";
 import "simplemde/dist/simplemde.min.css";
+import { useMemo } from "react";
+import { uploadImage } from "@/utils/uploadImage";
 
 const SimpleMDE = dynamic(() => import("react-simplemde-editor"), {
   ssr: false,
 });
 
-export default function SchoolForm({ onSubmit }) {
+export default function SchoolForm({ toggleAdd }) {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [gallery, setGallery] = useState([]);
@@ -18,6 +20,39 @@ export default function SchoolForm({ onSubmit }) {
   const [category, setCategory] = useState("Uncategorized");
   const [phoneNo, setPhoneNo] = useState("");
   const [likesCount, setLikesCount] = useState(0);
+
+  const options = useMemo(
+    () => ({
+      minHeight: "300px",
+      status: ["lines", "words", "cursor"],
+      placeholder: "Write your content here...",
+      spellChecker: false,
+    }),
+    [],
+  );
+  const handleCoverUpload = async (file) => {
+    setUploading(true);
+    const { url } = await uploadImage(file);
+    setCoverImage(url);
+    setUploading(false);
+  };
+
+  const handleGalleryUpload = async (files) => {
+    setUploading(true);
+    const urls = [];
+
+    for (const file of files) {
+      const { url } = await uploadImage(file);
+      urls.push(url);
+    }
+
+    setGallery((prev) => [...prev, ...urls]);
+    setUploading(false);
+  };
+
+  const removeGalleryImage = (index) => {
+    setGallery(gallery.filter((_, i) => i !== index));
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -43,8 +78,6 @@ export default function SchoolForm({ onSubmit }) {
         console.error("Server Returned:", text);
         throw new Error(`Request Failed: ${res.status}`);
       }
-      const result = await res.json();
-      console.log("Saved successfully:", result);
 
       setTitle("");
       setDescription("");
@@ -53,6 +86,7 @@ export default function SchoolForm({ onSubmit }) {
       setVideo("");
       setCategory("");
       setPhoneNo("");
+      alert("School added successfully");
     } catch (err) {
       console.error(err);
       alert(err.message);
@@ -81,12 +115,8 @@ export default function SchoolForm({ onSubmit }) {
           <label>Description:</label>
           <SimpleMDE
             value={description}
-            // onChange={setDescription}
-            options={{
-              placeholder: "Write description...",
-              minHeight: "150px",
-              status: false,
-            }}
+            onChange={setDescription}
+            options={options}
           />
         </div>
 
@@ -125,15 +155,28 @@ export default function SchoolForm({ onSubmit }) {
           </button>
         </div>
 
-        <div>
-          <label>Cover Image URL:</label>
+        <div className="mb-6">
+          <label className="font-semibold text-gray-700 block mb-2">
+            Cover Image
+          </label>
+
           <input
-            type="text"
-            value={coverImage}
-            onChange={(e) => setCoverImage(e.target.value)}
-            placeholder="Enter cover image URL"
-            className="border w-full p-2 rounded"
+            type="file"
+            accept="image/*"
+            onChange={(e) => handleCoverUpload(e.target.files[0])}
+            className="border border-gray-300 rounded-md p-2 w-full text-gray-600 cursor-pointer focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-blue-400 transition"
           />
+
+          {coverImage && (
+            <div className="mt-4 w-48 h-48 relative rounded-lg overflow-hidden shadow-md border border-gray-200 group">
+              <Image
+                src={coverImage}
+                alt="Cover"
+                fill
+                className="object-cover transition-transform duration-300 group-hover:scale-105"
+              />
+            </div>
+          )}
         </div>
 
         <div>
@@ -181,23 +224,21 @@ export default function SchoolForm({ onSubmit }) {
           />
         </div>
 
-        <div>
-          <label>Likes Count:</label>
-          <input
-            type="number"
-            value={likesCount}
-            onChange={(e) => setLikesCount(Number(e.target.value))}
-            min={0}
-            className="border w-full p-2 rounded"
-          />
+        <div className="flex gap-10 justify-center">
+          <button
+            type="submit"
+            disabled={uploading}
+            className="cursor-pointer font-bold bg-blue-600 text-white px-5 py-2 rounded-xl"
+          >
+            {uploading ? "Uploading..." : "Add School"}
+          </button>
+          <button
+            onClick={toggleAdd}
+            className="cursor-pointer font-bold bg-red-500 text-white px-5 py-2 rounded-xl"
+          >
+            Close Form
+          </button>
         </div>
-
-        <button
-          type="submit"
-          className="bg-blue-600 text-white px-4 py-2 rounded"
-        >
-          Add School
-        </button>
       </form>
     </>
   );
