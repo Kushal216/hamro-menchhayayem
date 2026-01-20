@@ -81,7 +81,7 @@ export default function PlaceForm({ onSubmit }) {
           <label>Description:</label>
           <SimpleMDE
             value={description}
-            onChange={setDescription}
+            // onChange={setDescription}
             options={{
               placeholder: "Write description...",
               minHeight: "150px",
