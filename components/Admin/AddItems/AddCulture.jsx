@@ -4,6 +4,7 @@ import { useState } from "react";
 import dynamic from "next/dynamic";
 import Image from "next/image";
 import "simplemde/dist/simplemde.min.css";
+import { useMemo } from 'react';
 
 const SimpleMDE = dynamic(() => import("react-simplemde-editor"), {
   ssr: false,
@@ -34,6 +35,15 @@ export default function CultureForm() {
   const [video, setVideo] = useState("");
   const [category, setCategory] = useState("");
   const [uploading, setUploading] = useState(false);
+
+  const options = useMemo(
+    () => ({
+      minHeight: '160px',
+      status: false,
+    }),
+    []
+  );
+
 
   /* ---------- handlers ---------- */
   const handleCoverUpload = async (file) => {
@@ -120,7 +130,7 @@ export default function CultureForm() {
         <SimpleMDE
           value={description}
           onChange={setDescription}
-          options={{ minHeight: "160px", status: false }}
+          options={options}
         />
 
         {/* Cover Image */}
