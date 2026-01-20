@@ -42,8 +42,10 @@ export async function POST(req) {
     const matches = await bcrypt.compare(password, user.password);
 
     if (matches) {
+      console.log('user ', user);
       const token = jwt.sign(
         {
+          name: user.name,
           userId: user._id,
           email: user.email,
         },
@@ -53,7 +55,9 @@ export async function POST(req) {
         }
       );
 
-      cookies().set('token', token, {
+      const cookie = await cookies();
+
+      cookie.set('token', token, {
         httpOnly: true,
         secure: process.env.NODE_ENV === 'production',
         sameSite: 'strict',
@@ -71,10 +75,13 @@ export async function POST(req) {
       { status: 401 }
     );
   } catch (err) {
-    console.log(`ERROR: in creating culture:\n${err}`);
-    return NextResponse.json({
-      message: `DB error in performing the create culture action. `,
-      err: err,
-    });
+    console.log(`ERROR: in authenticating user:\n${err}`);
+    return NextResponse.json(
+      {
+        message: `DB error in performing the action. `,
+        err: err,
+      },
+      { status: 500 }
+    );
   }
 }

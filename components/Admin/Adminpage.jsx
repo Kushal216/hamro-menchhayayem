@@ -6,38 +6,49 @@ import School from "@/components/Admin/AddItems/AddSchool";
 import People from "@/components/Admin/AddItems/AddPeople";
 import User from "@/components/Admin/AddItems/AddUser";
 import Literature from "@/components/Admin/AddItems/AddLiterature";
-import { useState } from "react";
+import { useEffect, useState } from 'react';
+import toast from 'react-hot-toast';
+import { redirect, useSearchParams } from 'next/navigation';
 
-export default function AdminLandingPage() {
-  const name = "Kushal";
+export default function AdminLandingPage({ username }) {
+  const name = username ? username : 'User';
   const [active, setActive] = useState(null);
+
+  const searchParams = useSearchParams();
+
+  useEffect(() => {
+    if (searchParams.get('login') === 'success') {
+      toast.success('You are already logged in!');
+      redirect('/admin');
+    }
+  }, [searchParams]);
 
   // Config for each section
   const sections = {
     Place: {
       component: Place,
-      title: "Manage Places",
-      addLabel: "Add Place",
+      title: 'Manage Places',
+      addLabel: 'Add Place',
     },
     Culture: {
       component: Culture,
-      title: "Manage Cultures",
-      addLabel: "Add Culture",
+      title: 'Manage Cultures',
+      addLabel: 'Add Culture',
     },
     School: {
       component: School,
-      title: "Manage Schools",
-      addLabel: "Add School",
+      title: 'Manage Schools',
+      addLabel: 'Add School',
     },
     People: {
       component: People,
-      title: "Manage People",
-      addLabel: "Add Person",
+      title: 'Manage People',
+      addLabel: 'Add Person',
     },
     User: {
       component: User,
-      title: "Manage Users",
-      addLabel: "Add User",
+      title: 'Manage Users',
+      addLabel: 'Add User',
     },
     Literature: {
       component: Literature,

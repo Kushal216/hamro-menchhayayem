@@ -1,14 +1,8 @@
-import { Geist, Geist_Mono } from 'next/font/google';
 import './globals.css';
 import RootLayoutBody from '@/components/layout/RootLayoutBody';
 import Footer from '@/components/layout/Footer';
-
-const geistSans = Geist({
-  variable: '--font-geist-sans',
-  subsets: ['latin'],
-});
-
 import { Noto_Sans_Devanagari } from 'next/font/google';
+import ToasterContainer from '@/components/ToasterContainer';
 
 const notoDevanagari = Noto_Sans_Devanagari({
   subsets: ['devanagari', 'latin'],
@@ -31,7 +25,7 @@ export default function RootLayout({ children }) {
         className={`${notoDevanagari.variable} font-devanagari antialiased`}
       >
         <RootLayoutBody>{children}</RootLayoutBody>
-
+        <ToasterContainer />
         <footer className="w-full">
           <Footer />
         </footer>
