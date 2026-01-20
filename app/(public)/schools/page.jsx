@@ -17,7 +17,6 @@ export default function SchoolPage() {
             location={item.location}
           />
         ))}
-        ))}
       </div>
     </>
   );
