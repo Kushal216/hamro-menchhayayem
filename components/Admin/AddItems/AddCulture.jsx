@@ -114,7 +114,6 @@ export default function CultureForm({ toggleAdd }) {
           value={description}
           onChange={setDescription}
           options={options}
-          className='b'
         />
         {/* Cover Image */}
         <div className="mb-6">
