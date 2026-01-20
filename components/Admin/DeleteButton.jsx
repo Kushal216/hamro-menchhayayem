@@ -11,16 +11,29 @@ function DeleteButton({ data }) {
     <div>
       {data.map((item, index) => {
         return (
-          <div key={index}>
+          <div
+            key={index}
+            className="flex border p-2 rounded my-2 justify-center"
+          >
             <div>{item.title}</div>
-            <button
-              onClick={() => {
-                handledelete("cultures", item._id);
-              }}
-              className="px-3 py-1.5 text-sm bg-red-500 text-white rounded"
-            >
-              Delete
-            </button>
+            <div className="ml-auto">
+              <button
+                // onClick={() => {
+                //   handleUpdate(route, item._id);
+                // }}
+                className=" cursor-pointer px-3 py-1.5 text-sm bg-blue-500 text-white rounded-xl"
+              >
+                Update
+              </button>
+              <button
+                onClick={() => {
+                  handledelete(route, item._id);
+                }}
+                className=" cursor-pointer px-3 py-1.5 text-sm bg-red-500 text-white rounded-xl ml-3"
+              >
+                Delete
+              </button>
+            </div>
           </div>
         );
       })}
