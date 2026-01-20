@@ -5,11 +5,15 @@ import Menubar from './Menubar';
 import { useState } from 'react';
 import { usePathname } from 'next/navigation';
 
-const NavigationComponents = () => {
+const NavigationComponents = ({ children }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const paths = usePathname().replace(/\/$/, '').split('/');
   const route = paths[1];
-  const menuNeeded = !(route == 'admin' || route == 'login' || paths.length > 2);
+  const menuNeeded = !(
+    route == 'admin' ||
+    route == 'login' ||
+    paths.length > 2
+  );
 
   return (
     <>
@@ -21,17 +25,25 @@ const NavigationComponents = () => {
           closeMenu={closeMenu}
         />
       </header>
-      {menuNeeded && (
-        <aside
-          onClick={closeMenu}
-          className={
-            (isMenuOpen ? '' : 'hidden ') +
-            'lg:col-span-1 z-3 lg:block  fixed right-0 lg:static pt-17 lg:pt-0 h-screen md:w-full lg:w-full bg-[#00000060]'
-          }
+
+      <div className=" col-span-5 flex">
+        {menuNeeded && (
+          <aside
+            onClick={closeMenu}
+            className={
+              (isMenuOpen ? '' : 'hidden ') +
+              'w-screen md:w-fit z-3 lg:block  fixed right-0 lg:static lg:pt-0 h-screen bg-[#00000060]'
+            }
+          >
+            <Menubar closeMenu={closeMenu} />
+          </aside>
+        )}
+        <main
+          className={`w-full h-screen overflow-auto scrollbar-hidden ${!menuNeeded ? '' : 'lg:col-span-4'}`}
         >
-          <Menubar closeMenu={closeMenu} />
-        </aside>
-      )}
+          {children}
+        </main>
+      </div>
     </>
   );
 

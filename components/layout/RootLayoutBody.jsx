@@ -14,13 +14,7 @@ const RootLayoutBody = ({ children }) => {
 
   return (
     <div className={`grid grid-cols-5 min-h-screen`}>
-      <NavigationComponents />
-
-      <main
-        className={`col-span-5  h-screen overflow-auto scrollbar-hidden ${!menuNeeded ? '' : 'lg:col-span-4'}`}
-      >
-        {children}
-      </main>
+      <NavigationComponents >{children}</NavigationComponents>
     </div>
   );
 };

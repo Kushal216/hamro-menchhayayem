@@ -24,7 +24,7 @@ const HeroImage = () => {
 
   const photo = heroPhotos[heroIndex];
   return (
-    <div className="relative w-full aspect-video select-none">
+    <div className="relative w-full aspect-video xl:aspect-5/2 select-none">
 
       <Image
         src={photo.src}

@@ -18,8 +18,8 @@ const Menubar = ({ closeMenu }) => {
 
   return (
     <>
-      <nav className="border border-[#00000000] box-border min-w-fit text-xl shadow-xl bg-white lg:bg-[#cacaca] rounded-b-xl lg:w-full fixed lg:static lg:h-screen right-0">
-        <ul className="flex-row">
+      <nav className="border border-[#00000000] box-border min-w-fit text-xl shadow-xl bg-white lg:bg-[#cacaca] rounded-b-xl lg:w-fit fixed lg:static lg:h-screen right-0">
+        <ul className="flex flex-col">
           {links.map((link) => {
             const isActive = pathname === link.href;
 
@@ -27,7 +27,7 @@ const Menubar = ({ closeMenu }) => {
               <li
                 key={link.href}
                 className={
-                  'hover:bg-[#dadada] active:font-bold active:box-border active:border-l-5 active:pl-2 active:border-[#FF3B00] ' +
+                  'whitespace-nowrap inline-block w-full hover:bg-[#dadada] active:font-bold active:box-border active:border-l-5 active:pl-2 active:border-[#FF3B00] ' +
                   (isActive ? 'bg-[#eaeaea] md:bg-[#b3b3b3] ' : '') +
                   ' flex-1 px-3 my-2 py-1'
                 }
@@ -37,8 +37,8 @@ const Menubar = ({ closeMenu }) => {
                   href={link.href}
                   className={
                     isActive
-                      ? 'font-bold box-border border-l-5 pl-2 border-[#FF3B00]'
-                      : 'pl-3'
+                      ? 'inline-block font-bold box-border border-l-5 pl-2 border-[#FF3B00]'
+                      : 'inline-block pl-3'
                   }
                 >
                   {link.label}

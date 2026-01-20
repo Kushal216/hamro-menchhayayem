@@ -129,8 +129,6 @@ export default function CultureForm() {
         {/* Description */}
         <SimpleMDE
           value={description}
-          // onChange={setDescription}
-          options={{ minHeight: "160px", status: false }}
           onChange={setDescription}
           options={options}
         />
