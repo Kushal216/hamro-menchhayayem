@@ -32,7 +32,7 @@ const NavigationComponents = ({ children }) => {
             onClick={closeMenu}
             className={
               (isMenuOpen ? '' : 'hidden ') +
-              'w-screen md:w-fit z-3 lg:block  fixed right-0 lg:static lg:pt-0 h-screen bg-[#00000060]'
+              'w-screen md:w-fit xl:w-100 z-3 lg:block  fixed right-0 lg:static lg:pt-0 h-screen bg-[#00000060]'
             }
           >
             <Menubar closeMenu={closeMenu} />

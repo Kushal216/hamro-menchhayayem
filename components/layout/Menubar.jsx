@@ -19,7 +19,7 @@ const Menubar = ({ closeMenu }) => {
 
   return (
     <>
-      <nav className="border border-[#00000000] box-border min-w-fit text-xl shadow-xl bg-white lg:bg-[#cacaca] rounded-b-xl lg:w-fit fixed lg:static lg:h-screen right-0">
+      <nav className="border border-[#00000000] box-border min-w-fit text-xl shadow-xl bg-white lg:bg-[#cacaca] rounded-b-xl lg:w-fit xl:w-full fixed lg:static lg:h-screen right-0">
         <ul className="flex flex-col">
           {links.map((link) => {
             const isActive = pathname === link.href;
