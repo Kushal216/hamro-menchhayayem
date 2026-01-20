@@ -27,7 +27,7 @@ const places = [
 
 const ImportantPlacesSection = () => {
   return (
-    <div className="flex flex-wrap justify-between px-2 gap-3 mb-5 min-w-full w-fit">
+    <div className="grid grid-cols-3 justify-between px-2 gap-3 mb-5 min-w-full w-fit">
       {places.map((item, index) => (
         <SectionCard key={index} item={item} />
       ))}
