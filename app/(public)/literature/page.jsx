@@ -1,11 +1,11 @@
-import CultureCard from '@/components/ui/';
-import Titlebar from '@/components/ui/Titlebar';
-import fetchData from '@/lib/fetchItem';
+import CultureCard from "@/components/ui/LiteratureCard";
+import Titlebar from "@/components/ui/Titlebar";
+import fetchData from "@/lib/fetchItem";
 
-export default async function CulturesPage() {
-  const res = await fetchData('cultures');
-  const {message, data}= res;
-  console.log(message)
+export default async function LiteraturePage() {
+  const res = await fetchData("literature");
+  const { message, data } = res;
+  console.log(message);
 
   return (
     <>
@@ -15,9 +15,10 @@ export default async function CulturesPage() {
           <CultureCard
             key={item._id}
             id={item._id}
-            image={item.coverImage}
             title={item.title}
             description={item.description}
+            image={item.coverImage}
+            author={item.author}
           />
         ))}
         ;
