@@ -29,4 +29,4 @@ const literatureSchema = new mongoose.Schema({
   { timestamps: true }
 );
 
-export default mongoose.models.Places || (await connectMongoDB(), mongoose.model("Places", literatureSchema));
+export default mongoose.models.Literature || (await connectMongoDB(), mongoose.model("Literature", literatureSchema));
