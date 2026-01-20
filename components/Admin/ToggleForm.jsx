@@ -1,17 +1,51 @@
 'use client';
 import { useState } from 'react';
 import CultureForm from './AddItems/AddCulture';
+import LiteratureForm from './AddItems/AddLiterature';
+import UserForm from './AddItems/AddUser';
+import SchoolForm from './AddItems/AddSchool';
+import PlaceForm from './AddItems/AddPlace';
+import PeopleForm from './AddItems/AddPeople';
+import toast from 'react-hot-toast';
 
-export default function ToggleForm({ title }) {
+export default function ToggleForm({ title, route }) {
   const [showAdd, setShowAdd] = useState(false);
 
   const toggleAdd = ({ title }) => {
     setShowAdd((prev) => !prev);
   };
 
+  let form = <>hello</>;
+
+  switch (route) {
+    case 'cultures':
+      form = <CultureForm />;
+      break;
+    case 'literature':
+      form = <LiteratureForm />;
+      break;
+    case 'places':
+      form = <PlaceForm />;
+      break;
+    case 'schools':
+      form = <SchoolForm />;
+      break;
+    case 'people':
+      form = <PeopleForm />;
+      break;
+    case 'users':
+      form = <UserForm />;
+      break;
+
+    default:
+      toast.error('Invalid route prop Passed.');
+      form = <>Something went wrong !!</>;
+      break;
+  }
+
   return (
     <>
-      {!showAdd && (
+      {!showAdd ? (
         <>
           <div
             onClick={toggleAdd}
@@ -23,8 +57,16 @@ export default function ToggleForm({ title }) {
             </div>
           </div>
         </>
-      ) }
-      {showAdd && <CultureForm toggleAdd={toggleAdd} />}
+      ) : (
+        <button
+          onClick={toggleAdd}
+          className="cursor-pointer font-bold bg-red-500 text-white px-5 py-2 rounded-xl float-right m-2"
+        >
+          X
+        </button>
+      )}
+
+      {showAdd && form}
       <div className="text-xl font-bold">Manage Data</div>
     </>
   );

@@ -5,9 +5,8 @@ import React from "react";
 const page = () => {
   return (
     <>
-      <div className="flex justify-center"></div>
       <div>
-        <ToggleForm title="Add a Culture" />
+      <ToggleForm title="Add a culture" route={'cultures'}/>
         <ManageData route="cultures" />
       </div>
     </>
