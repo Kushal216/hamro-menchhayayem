@@ -1,31 +1,32 @@
-'use client';
-import { useRouter } from 'next/navigation';
-import React, { useState } from 'react';
+"use client";
+import { useRouter } from "next/navigation";
+import React, { useState } from "react";
 
 export default function LoginPage() {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [message, setMessage] = useState('');
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [message, setMessage] = useState("");
   const router = useRouter();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await fetch('/api/v1/auth', {
-        method: 'POST',
-        headers: { 'content-Type': 'application/json' },
+      const res = await fetch("/api/v1/auth", {
+        method: "POST",
+        headers: { "content-Type": "application/json" },
         body: JSON.stringify({ email, password }),
       });
 
+      router.push("/admin");
       const data = await res.json();
 
       if (!res.ok) {
-        console.log('Error:', data.error);
+        console.log("Error:", data.error);
       } else {
-        console.log('Success:', data.message, data.user);
+        console.log("Success:", data.message, data.user);
       }
     } catch (err) {
-      console.error('Fetch error:', err);
+      console.error("Fetch error:", err);
     }
   };
 

@@ -54,7 +54,7 @@ export async function GET(req) {
  *                     type: string
  */
 export async function POST(req) {
-  const { name, email, password } = await req.json();
+  const { name, email, password, role } = await req.json();
   const saltValue = 10;
   try {
     const hashedPassword = await bcrypt.hash(password, saltValue);
@@ -62,12 +62,13 @@ export async function POST(req) {
       name,
       email,
       password: hashedPassword,
+      role,
     });
 
     return NextResponse.json(
       {
         message: `created User ${user.main}.`,
-        user:user,
+        user: user,
       },
       {
         status: 201,
