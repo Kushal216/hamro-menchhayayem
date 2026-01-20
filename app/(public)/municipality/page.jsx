@@ -3,6 +3,7 @@ import photo from "@/public/images/image.png";
 import { FaPhoneAlt, FaEnvelope, FaFacebook } from "react-icons/fa";
 import Titlebar from "@/components/ui/Titlebar";
 import Paragraph from "@/components/sections/Paragraph";
+import RouteTitle from '@/components/layout/RouteTitle';
 
 export default function HomePage() {
   const introduction =
@@ -13,6 +14,7 @@ export default function HomePage() {
 
   return (
     <>
+<RouteTitle title={'पालिका विवरण'} />
       <div className="flex-4/5 ">
         <div>
           <Titlebar title="परीचय" />

@@ -1,6 +1,6 @@
-import TourismCard from "@/components/ui/TourismCard";
-import Titlebar from "@/components/ui/Titlebar";
-import fetchData from "@/lib/fetchItem";
+import TourismCard from '@/components/ui/TourismCard';
+import RouteTitle from '@/components/layout/RouteTitle';
+import fetchData from '@/lib/fetchItem';
 
 async function TourismPage() {
   const res = await fetchData("places");
@@ -8,7 +8,7 @@ async function TourismPage() {
   console.log(message);
   return (
     <>
-      <Titlebar title="पर्यटकिय स्थलहरु" />
+      <RouteTitle title={'हाम्रा पर्यटकिय स्थलहरु'} />
       <div className="flex flex-wrap">
         {data.map((item, index) => (
           <TourismCard

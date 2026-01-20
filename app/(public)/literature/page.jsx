@@ -1,6 +1,7 @@
 import CultureCard from "@/components/ui/LiteratureCard";
 import Titlebar from "@/components/ui/Titlebar";
 import fetchData from "@/lib/fetchItem";
+import RouteTitle from '@/components/layout/RouteTitle';
 
 export default async function LiteraturePage() {
   const res = await fetchData("literature");
@@ -9,7 +10,7 @@ export default async function LiteraturePage() {
 
   return (
     <>
-      <Titlebar title="rai" />
+<RouteTitle title={'साहित्यीक सृजनाहरु'} />
       <div className="flex flex-wrap">
         {data.map((item, index) => (
           <CultureCard

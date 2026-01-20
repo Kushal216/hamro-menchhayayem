@@ -1,11 +1,11 @@
 import SchoolCard from "@/components/ui/SchoolCard";
 import data from "@/app/Data/data";
-import Titlebar from "@/components/ui/Titlebar";
+import RouteTitle from '@/components/layout/RouteTitle';
 
 export default function SchoolPage() {
   return (
     <>
-      <Titlebar title="विद्यालयहरु" />
+      <RouteTitle title={'हाम्रा शिक्षण संस।थाहरु'} />
       <div className="md:grid md:grid-cols-2 flex flex-wrap ">
         {data.map((item, index) => (
           <SchoolCard
