@@ -46,9 +46,9 @@ export default async function AdminPage() {
       });
 
     return (
-      <>
+      <div className=''>
         {tokenPayload && (
-          <div className="">
+          <div className="mt-4">
             {/* <Adminpage username={tokenPayload.name}  role={tokenPayload.role} /> */}
 
             <div className="flex flex-col gap-2">
@@ -73,7 +73,7 @@ export default async function AdminPage() {
             </button>
           </div>
         )}
-      </>
+      </div>
     );
   } else {
     return (

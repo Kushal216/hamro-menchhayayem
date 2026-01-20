@@ -1,3 +1,4 @@
+import AdminBackButton from '@/components/Admin/AdminBackButton';
 import HomeHeading from '@/components/homepage/HomeHeading';
 import { Geist, Geist_Mono } from 'next/font/google';
 
@@ -25,10 +26,8 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <div>
-      <Link href={'/admin'}>
-        <HomeHeading back title={'admin'} />
-      </Link>
+    <div className="md:w-[50%] mx-auto">
+      <AdminBackButton />
       {children}
     </div>
   );

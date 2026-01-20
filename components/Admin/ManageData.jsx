@@ -16,7 +16,7 @@ const ManageData = async ({ route }) => {
             className="flex border p-2 rounded my-2 justify-center"
           >
             <div>
-              {route == 'users' ? `${item.name} - (${item.role}) ` : item.title}
+              {route == 'users' || route == 'people' ? `${item.name} - (${route == 'people'?`${item.position}`:`${item.role}`}) ` : item.title}
             </div>
             <div className="ml-auto">
               <button
