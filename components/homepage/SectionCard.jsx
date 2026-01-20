@@ -8,23 +8,23 @@ const SectionCard = ({ item }) => {
   return (
     <Link
       href={item.route ? item.route : '/'}
-      className="relative w-[90%] h-28 md:h-full col-span-3 md:col-span-1  md:aspect-4/3 inline-block md:w-full lg:w-fill xl:w-100 rounded-2xl overflow-clip shadow-lg hover:shadow-[#00000060] hover:scale-101 hover:-translate-y-0.5 select-none cursor-pointer mx-auto md:mb-8"
+      className="relative w-[90%] aspect-10/3 md:h-full xl:aspect-video xl:h-fit col-span-3 md:col-span-1  md:aspect-4/3 inline-block md:w-full  rounded-2xl overflow-clip shadow-lg hover:shadow-[#00000060] hover:scale-101 hover:-translate-y-0.5 select-none cursor-pointer mx-auto md:mb-8"
     >
       <div className="absolute h-full w-full bg-linear-to-t from-[#00000099] to-[#00000040] backdrop-blur-[2px] z-2">
         <div className="flex md:flex-col h-full gap-4 md:gap-1 items-center justify-center px-2">
-          <div className="w-10 md:w-12 lg:w-17 aspect-square relative mb-2 ml-2 md:ml-0">
+          <div className="w-10 md:w-12 lg:w-17 xl:w-20 aspect-square relative mb-2 xl:mb-8 ml-2 md:ml-0">
             <Image
               src={item.iconUrl}
               alt={`${item.title} icon`}
               fill
-              className={`object-contain ${scale && 'scale-144'}`}
+              className={`object-contain ${scale && 'scale-144 group-hover:scale-150 group-hover:-translate-y-0.5'}`}
             />
           </div>
           <div className="md:text-center">
-            <div className="font-bold text-white w-full text-xl md:text-2xl my-1">
+            <div className="font-bold text-white w-full text-xl md:text-2xl xl:text-3xl my-1">
               {item.title}
             </div>
-            <div className="text-white w-full xl:text-lg leading-6">
+            <div className="text-white w-full xl:text-xl leading-6">
               {item.subtitle}
             </div>
           </div>

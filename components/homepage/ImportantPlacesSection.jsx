@@ -17,13 +17,6 @@ const places = [
     route: "/places",
   },
   {
-    title: "हाम्रा विद्यालयहरु",
-    subtitle: "हाम्रो मेन्छ्यायेमका रमणीय स्थानहरु भ्रमण गर्नुहोस ।",
-    imageUrl: "/images/image.png",
-    route: "/schools",
-    iconUrl: "/section-icons/schools.png",
-  },
-  {
     title: "लेखहरु",
     subtitle: "हाम्रो मेन्छ्यायेमका लेखकहरुले लेख्नु भएका लेखहरु पढ्नुहोस ।",
     imageUrl: "/images/image.png",
