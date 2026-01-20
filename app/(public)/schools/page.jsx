@@ -2,7 +2,7 @@ import SchoolCard from "@/components/ui/SchoolCard";
 import data from "@/app/Data/data";
 import RouteTitle from '@/components/layout/RouteTitle';
 
-export default function TourismPage() {
+export default function SchoolPage() {
   return (
     <>
       <RouteTitle title={'हाम्रा शिक्षण संस।थाहरु'} />
@@ -16,6 +16,7 @@ export default function TourismPage() {
             phone={item.phone}
             location={item.location}
           />
+        ))}
         ))}
       </div>
     </>

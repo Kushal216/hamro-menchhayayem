@@ -2,7 +2,10 @@ import TourismCard from '@/components/ui/TourismCard';
 import data from '@/app/Data/data';
 import RouteTitle from '@/components/layout/RouteTitle';
 
-export default function TourismPage() {
+async function TourismPage() {
+  const res = await fetchData("places");
+  const { message, data } = res;
+  console.log(message);
   return (
     <>
       <RouteTitle title={'हाम्रा पर्यटकिय स्थलहरु'} />
@@ -19,3 +22,4 @@ export default function TourismPage() {
     </>
   );
 }
+export default TourismPage;
