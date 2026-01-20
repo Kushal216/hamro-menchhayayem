@@ -1,5 +1,6 @@
 import Titlebar from '@/components/ui/Titlebar';
 import TableLayout from '@/components/ui/TableLayout';
+import RouteTitle from '@/components/layout/RouteTitle';
 
 export default function ContactsPage() {
   const contacts = [
@@ -25,8 +26,9 @@ export default function ContactsPage() {
 
   return (
     <>
+    <RouteTitle title={'हाम्रो सम्पर्क विवरण'} />
       <div className="flex-4/5 p-4">
-        <Titlebar title="HOSPITAL" />
+        <Titlebar title="अस्पताल" />
         <div className="pt-2">
           <TableLayout
             headers={[
@@ -54,8 +56,8 @@ export default function ContactsPage() {
             ))}
           </TableLayout>
         </div>
-        <Titlebar title="PALIAK" />
-        <Titlebar title="SCHOOLS" />
+        <Titlebar title="पालिका" />
+        <Titlebar title="विद्यालय" />
       </div>
     </>
   );

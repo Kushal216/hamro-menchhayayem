@@ -1,15 +1,15 @@
+import RouteTitle from '@/components/layout/RouteTitle';
 import CultureCard from '@/components/ui/CultureCard';
-import Titlebar from '@/components/ui/Titlebar';
 import fetchData from '@/lib/fetchItem';
 
 export default async function CulturesPage() {
   const res = await fetchData('cultures');
-  const {message, data}= res;
-  console.log(message)
+  const { message, data } = res;
+  console.log(message);
 
   return (
     <>
-      <Titlebar title="rai" />
+      <RouteTitle title={'हाम्रा संस्कृितीक पहिचानहरु'} />
       <div className="flex flex-wrap">
         {data.map((item, index) => (
           <CultureCard
