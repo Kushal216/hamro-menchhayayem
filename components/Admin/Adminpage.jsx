@@ -1,10 +1,11 @@
 "use client";
-import ManageItem from "@/components/Admin/ManageItem"; // the reusable component
+import ManageItem from "@/components/Admin/ManageItem";
 import Place from "@/components/Admin/AddItems/AddPlace";
 import Culture from "@/components/Admin/AddItems/AddCulture";
 import School from "@/components/Admin/AddItems/AddSchool";
 import People from "@/components/Admin/AddItems/AddPeople";
 import User from "@/components/Admin/AddItems/AddUser";
+import Literature from "@/components/Admin/AddItems/AddLiterature";
 import { useState } from "react";
 
 export default function AdminLandingPage() {
@@ -38,6 +39,11 @@ export default function AdminLandingPage() {
       title: "Manage Users",
       addLabel: "Add User",
     },
+    Literature: {
+      component: Literature,
+      title: "Manage Literature",
+      addLabel: "Add Literature",
+    },
   };
 
   const handleUpdate = () => {
@@ -68,7 +74,6 @@ export default function AdminLandingPage() {
         ))}
       </div>
 
-      {/* ManageItem display */}
       <div className="bg-white p-6 rounded-xl shadow">
         {active ? (
           <ManageItem
