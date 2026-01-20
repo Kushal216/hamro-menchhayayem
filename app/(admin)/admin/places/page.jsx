@@ -7,7 +7,7 @@ const page = () => {
     <>
       <div className="flex justify-center"></div>
       <div>
-        <ToggleForm title="Add a Place" />
+        <ToggleForm title="Add a Place" route="places" />
         <ManageData route="places" />
       </div>
     </>
