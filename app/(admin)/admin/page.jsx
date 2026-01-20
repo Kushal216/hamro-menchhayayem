@@ -38,16 +38,17 @@ export default async function AdminPage() {
     const tokenPayload = validateJWT(token);
     console.log(tokenPayload);
 
+    if (tokenPayload.role == 'admin')
+      sections.push({
+        title: 'Manage Users',
+        addLabel: 'Add users',
+        route: 'users',
+      });
+
     return (
       <>
         {tokenPayload && (
           <div className="">
-            <button
-              onClick={logout}
-              className="bg-red-600 text-white font-bold float-right p-1 px-8 m-2 rounded-xl cursor-pointer"
-            >
-              Logout
-            </button>
             {/* <Adminpage username={tokenPayload.name}  role={tokenPayload.role} /> */}
 
             <div className="flex flex-col gap-2">
@@ -64,6 +65,12 @@ export default async function AdminPage() {
                 </Link>
               ))}
             </div>
+            <button
+              onClick={logout}
+              className="bg-red-600 text-white text-xl font-bold p-2 px-8 m-2 rounded-xl cursor-pointer"
+            >
+              Logout
+            </button>
           </div>
         )}
       </>

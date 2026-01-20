@@ -1,12 +1,13 @@
+import HomeHeading from '@/components/homepage/HomeHeading';
 import { Geist, Geist_Mono } from 'next/font/google';
-import Footer from '@/components/layout/Footer';
-import NavigationComponents from '@/components/layout/NavigationComponents';
+
 const geistSans = Geist({
   variable: '--font-geist-sans',
   subsets: ['latin'],
 });
 
 import { Noto_Sans_Devanagari } from 'next/font/google';
+import Link from 'next/link';
 
 const notoDevanagari = Noto_Sans_Devanagari({
   subsets: ['devanagari', 'latin'],
@@ -24,8 +25,11 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-     <div className=''>
+    <div>
+      <Link href={'/admin'}>
+        <HomeHeading back title={'admin'} />
+      </Link>
       {children}
-     </div>
+    </div>
   );
 }
