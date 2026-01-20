@@ -1,4 +1,3 @@
-
 import { logout } from '@/lib/logout';
 import validateJWT from '@/lib/middlewares/validataJWT';
 import { cookies } from 'next/headers';
@@ -39,7 +38,7 @@ export default async function AdminPage() {
     const tokenPayload = validateJWT(token);
     console.log(tokenPayload);
 
-    if (tokenPayload.role == 'admin')
+    if (sections.length == 5 && tokenPayload.role == 'admin')
       sections.push({
         title: 'Manage Users',
         addLabel: 'Add users',
