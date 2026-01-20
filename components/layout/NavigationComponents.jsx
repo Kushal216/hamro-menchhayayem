@@ -26,7 +26,7 @@ const NavigationComponents = () => {
           onClick={closeMenu}
           className={
             (isMenuOpen ? '' : 'hidden ') +
-            'lg:col-span-1 z-3 lg:block  fixed right-0 lg:static pt-17 lg:pt-0 h-screen md:w-full lg:w-screen bg-[#00000060]'
+            'lg:col-span-1 z-3 lg:block  fixed right-0 lg:static pt-17 lg:pt-0 h-screen md:w-full lg:w-full bg-[#00000060]'
           }
         >
           <Menubar closeMenu={closeMenu} />
