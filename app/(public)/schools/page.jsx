@@ -1,8 +1,10 @@
 import SchoolCard from "@/components/ui/SchoolCard";
-import data from "@/app/Data/data";
 import RouteTitle from '@/components/layout/RouteTitle';
+import fetchData from "@/lib/fetchItem";
 
-export default function SchoolPage() {
+export default async function SchoolPage() {
+    const res = await fetchData('schools');
+    const { message, data } = res;
   return (
     <>
       <RouteTitle title={'हाम्रा शिक्षण संस।थाहरु'} />
@@ -12,6 +14,7 @@ export default function SchoolPage() {
             key={index}
             image={item.image}
             title={item.title}
+            id={item._id}
             description={item.description}
             phone={item.phone}
             location={item.location}

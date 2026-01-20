@@ -1,10 +1,12 @@
-"use client";
-import Image from "next/image";
-import { FaMapMarkerAlt } from "react-icons/fa";
-import Like from "@/components/sections/Like";
-import { BiSolidCommentDots } from "react-icons/bi";
-import ShortText from "../sections/ShortText";
-export default function TourismCard({ image, title, description }) {
+'use client';
+import Image from 'next/image';
+import { FaMapMarkerAlt } from 'react-icons/fa';
+import Like from '@/components/sections/Like';
+import { BiSolidCommentDots } from 'react-icons/bi';
+import ShortText from '../sections/ShortText';
+import Link from 'next/link';
+
+export default function TourismCard({ image, title, description, id }) {
   return (
     <div className="w-full mx-auto p-4">
       <div className="bg-white rounded-2xl shadow-[0_4px_6px_-2px_rgba(0,0,0,0.3)] overflow-hidden">
@@ -30,9 +32,11 @@ export default function TourismCard({ image, title, description }) {
             </p>
 
             <div className="mt-auto pt-3 flex items-center justify-between font-bold">
-              <button className="px-4 py-2 rounded-xl bg-black text-white text-sm sm:text-base hover:bg-gray-800 transition">
-                Read More
-              </button>
+              <Link href={`/places/${id}`} className=" w-full">
+                <button className=" px-4 py-2 cursor-pointer rounded-xl bg-black text-white text-sm sm:text-base hover:bg-gray-800 transition">
+                  Read More
+                </button>
+              </Link>
 
               <div className="flex items-center gap-5">
                 <a

@@ -14,6 +14,7 @@ async function TourismPage() {
           <TourismCard
             key={index}
             image={item.image}
+            id={item._id}
             title={item.title}
             description={item.description}
           />
