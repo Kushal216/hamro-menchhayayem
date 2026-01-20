@@ -4,7 +4,7 @@ import SectionCard from "./SectionCard";
 const places = [
   {
     title: "हाम्रा संस्कृती",
-    subtitle: "हाम्रो मेन्छ्यायेमका रमणीय स्थानहरु भ्रमण गर्नुहोस",
+    subtitle: "हाम्रो मेन्छ्यायेमका रमणीय स्थानहरु भ्रमण गर्नुहोस ।",
     imageUrl: "/images/image.png",
     route: "/cultures",
     iconUrl: "/section-icons/cultures.png",
@@ -25,7 +25,7 @@ const places = [
   },
   {
     title: "लेखहरु",
-    subtitle: "हाम्रो मेन्छ्यायेमका लेखकहरुले लेख्नु भएका लेखहरु पढ्नुहोस् ।",
+    subtitle: "हाम्रो मेन्छ्यायेमका लेखकहरुले लेख्नु भएका लेखहरु पढ्नुहोस ।",
     imageUrl: "/images/image.png",
     route: "/literature",
     iconUrl: "/section-icons/schools.png",
