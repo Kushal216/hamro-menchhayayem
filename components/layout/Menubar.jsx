@@ -11,6 +11,7 @@ const Menubar = ({ closeMenu }) => {
     { href: '/places', label: 'पर्यटकिय स्थलहरु' },
     { href: '/cultures', label: 'सांस्कृितिक पहिचान' },
     { href: '/schools', label: 'विद्यालयहरु' },
+    { href: '/literature', label: 'साहित्य' },
     { href: '/municipality', label: 'पालिका विवरण' },
     { href: '/about', label: 'हाम्रो बारेमा' },
     { href: '/contact', label: 'सम्पर्क' },
