@@ -2,7 +2,7 @@ export async function uploadImage(file) {
     const formData = new FormData();
     formData.append("image", file);
 
-    const res = await fetch("/api/v1/supload", {
+    const res = await fetch("/api/v1/upload", {
         method: "POST",
         body: formData,
     });

@@ -1,7 +1,7 @@
-"use client";
-import { useState } from "react";
+'use client';
+import { useState } from 'react';
 
-export default function ToggleAdd({ AddComponent, addLabel = "Add" }) {
+export default function ToggleAdd({ AddComponent, addLabel = 'Add' }) {
   const [showAdd, setShowAdd] = useState(false);
 
   const toggleAdd = () => {
@@ -16,7 +16,7 @@ export default function ToggleAdd({ AddComponent, addLabel = "Add" }) {
           className="cursor-pointer bg-white p-6 rounded-xl shadow hover:shadow-lg transition"
         >
           <p className="text-gray-500">
-            {showAdd ? `Close ${addLabel}` : addLabel}
+            {showAdd ? `Close form` : 'Add Items'}
           </p>
         </div>
       </div>

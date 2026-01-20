@@ -1,17 +1,21 @@
+import CultureForm from '@/components/Admin/AddItems/AddCulture';
 import ManageData from '@/components/Admin/ManageData';
+import ToggleForm from '@/components/Admin/ToggleForm';
 import fetchData from '@/lib/fetchItem';
 import React from 'react';
 
 const page = () => {
-const res = fetchData('cultures')
+  const res = fetchData('cultures');
 
   return (
     <>
-    <button>Add Items</button>
-    <div>
-      <div>Data(delete/update):</div>
-      <ManageData route="cultures"/>
+    <div className='flex justify-center'>
     </div>
+      <div>
+        {/* <div className='text-xl font-bold'>Manage Data</div> */}
+      <ToggleForm title="Add a culture"/>
+        <ManageData route="cultures" />
+      </div>
     </>
   );
 };

@@ -19,7 +19,8 @@ const ManageData = async ({ route }) => {
             <div className="ml-auto">
               <button
                 // onClick={() => {
-                //   handleUpdate(route, item._id);
+                // handleUpdate(route, item._id);
+                //   window.
                 // }}
                 className=" cursor-pointer px-3 py-1.5 text-sm bg-blue-500 text-white rounded-xl"
               >
