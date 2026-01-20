@@ -1,10 +1,8 @@
-import ItemDetails from '@/components/layout/ItemDetails'
-import React from 'react'
+import React from "react";
+import ItemDetails from "@/components/layout/ItemDetails";
 
-const page = (item) => {
-  return (
-    <ItemDetails item={item}/>
-  )
+export default function Page({ params }) {
+  const { id } = React.use(params);
+
+  return <ItemDetails route="places" id={id} />;
 }
-
-export default page

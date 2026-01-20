@@ -2,10 +2,10 @@ import SchoolCard from "@/components/ui/SchoolCard";
 import data from "@/app/Data/data";
 import Titlebar from "@/components/ui/Titlebar";
 
-export default function TourismPage() {
+export default function SchoolPage() {
   return (
     <>
-      <Titlebar title="Morahang" />
+      <Titlebar title="विद्यालयहरु" />
       <div className="md:grid md:grid-cols-2 flex flex-wrap ">
         {data.map((item, index) => (
           <SchoolCard
@@ -16,7 +16,7 @@ export default function TourismPage() {
             phone={item.phone}
             location={item.location}
           />
-        ))} 
+        ))}
       </div>
     </>
   );

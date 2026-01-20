@@ -1,17 +1,25 @@
-import TourismCard from '@/components/ui/TourismCard';
-import data from '@/app/Data/data';
+import TourismCard from "@/components/ui/TourismCard";
+import Titlebar from "@/components/ui/Titlebar";
+import fetchData from "@/lib/fetchItem";
 
-export default function TourismPage() {
+async function TourismPage() {
+  const res = await fetchData("places");
+  const { message, data } = res;
+  console.log(message);
   return (
-    <div className="flex flex-wrap">
-      {data.map((item, index) => (
-        <TourismCard
-          key={index}
-          image={item.image}
-          title={item.title}
-          description={item.description}
-        />
-      ))}
-    </div>
+    <>
+      <Titlebar title="पर्यटकिय स्थलहरु" />
+      <div className="flex flex-wrap">
+        {data.map((item, index) => (
+          <TourismCard
+            key={index}
+            image={item.image}
+            title={item.title}
+            description={item.description}
+          />
+        ))}
+      </div>
+    </>
   );
 }
+export default TourismPage;

@@ -9,7 +9,7 @@ export default async function CulturesPage() {
 
   return (
     <>
-      <Titlebar title="rai" />
+      <Titlebar title="सांस्कृितिक पहिचान" />
       <div className="flex flex-wrap">
         {data.map((item, index) => (
           <CultureCard
@@ -19,7 +19,7 @@ export default async function CulturesPage() {
             title={item.title}
             description={item.description}
           />
-        ))}
+        ))} 
         ;
       </div>
     </>
