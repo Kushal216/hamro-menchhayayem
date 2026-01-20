@@ -5,27 +5,11 @@ import dynamic from "next/dynamic";
 import Image from "next/image";
 import "simplemde/dist/simplemde.min.css";
 import { useMemo } from 'react';
+import { uploadImage } from "@/utils/uploadImage";
 
 const SimpleMDE = dynamic(() => import("react-simplemde-editor"), {
   ssr: false,
 });
-
-/* ---------- reusable upload function ---------- */
-async function uploadImage(file) {
-  const formData = new FormData();
-  formData.append("image", file);
-
-  const res = await fetch("/api/v1/upload", {
-    method: "POST",
-    body: formData,
-  });
-
-  if (!res.ok) {
-    throw new Error("Image upload failed");
-  }
-
-  return await res.json(); // { url, public_id }
-}
 
 export default function CultureForm() {
   const [title, setTitle] = useState("");
