@@ -1,6 +1,6 @@
 import TourismCard from '@/components/ui/TourismCard';
-import data from '@/app/Data/data';
 import RouteTitle from '@/components/layout/RouteTitle';
+import fetchData from '@/lib/fetchItem';
 
 async function TourismPage() {
   const res = await fetchData("places");
