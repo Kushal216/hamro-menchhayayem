@@ -10,7 +10,7 @@ export default async function CulturesPage() {
   return (
     <>
       <RouteTitle title={'हाम्रा संस्कृितीक पहिचानहरु'} />
-      <div className="flex flex-wrap">
+      <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4">
         {data.map((item, index) => (
           <CultureCard
             key={item._id}
@@ -18,9 +18,9 @@ export default async function CulturesPage() {
             image={item.coverImage}
             title={item.title}
             description={item.description}
+            likes={item.likesCount}
           />
         ))}
-        ;
       </div>
     </>
   );
