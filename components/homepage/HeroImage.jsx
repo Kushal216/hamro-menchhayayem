@@ -25,6 +25,7 @@ const HeroImage = () => {
   const photo = heroPhotos[heroIndex];
   return (
     <div className="relative w-full aspect-4/3 md:h-[55vh] select-none">
+
       <Image
         src={photo.src}
         alt="hamro  menchhayayem"
@@ -34,13 +35,13 @@ const HeroImage = () => {
 
       <div className="arrows absolute text-white flex justify-between w-full font-bold top-[35%]">
         <div
-          className="larrow  p-1 pl-0 rounded-r-sm hover:bg-[#FFFFFF50] "
+          className="p-1 pl-0 rounded-r-sm h-10 md:h-fit hover:bg-[#FFFFFF50] "
           onClick={showPreviousImage}
         >
           <RiArrowLeftWideFill className="h-full text-2xl md:text-[48px]" />
         </div>
         <div
-          className="larrow p-1 pr-0 rounded-l-sm h-10 hover:bg-[#FFFFFF50]"
+          className="p-1 pr-0 rounded-l-sm h-10 md:h-fit hover:bg-[#FFFFFF50]"
           onClick={showNextImage}
         >
           <RiArrowRightWideFill className="h-full text-2xl md:text-[48px]" />
