@@ -4,28 +4,14 @@ import { useState } from "react";
 import dynamic from "next/dynamic";
 import Image from "next/image";
 import "simplemde/dist/simplemde.min.css";
+import { useMemo } from "react";
+import { uploadImage } from "@/utils/uploadImage";
 
 const SimpleMDE = dynamic(() => import("react-simplemde-editor"), {
   ssr: false,
 });
 
-async function uploadImage(file) {
-  const formData = new FormData();
-  formData.append("image", file);
-
-  const res = await fetch("/api/v1/upload", {
-    method: "POST",
-    body: formData,
-  });
-
-  if (!res.ok) {
-    throw new Error("Image upload failed");
-  }
-
-  return await res.json();
-}
-
-export default function LiteratureForm() {
+export default function LiteratureForm(toggleAdd) {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [coverImage, setCoverImage] = useState("");
@@ -33,6 +19,16 @@ export default function LiteratureForm() {
   const [category, setCategory] = useState("");
   const [author, setAuthor] = useState("");
   const [uploading, setUploading] = useState(false);
+
+  const options = useMemo(
+    () => ({
+      minHeight: "300px",
+      status: ["lines", "words", "cursor"],
+      placeholder: "Write your content here...",
+      spellChecker: false,
+    }),
+    [],
+  );
 
   const handleCoverUpload = async (file) => {
     if (!file) return;
@@ -107,8 +103,8 @@ export default function LiteratureForm() {
 
         <SimpleMDE
           value={description}
-          // onChange={setDescription}
-          options={{ minHeight: "100px", status: false }}
+          onChange={setDescription}
+          options={options}
         />
 
         <div>
@@ -148,13 +144,21 @@ export default function LiteratureForm() {
           className="border w-full p-2 rounded"
         />
 
-        <button
-          type="submit"
-          disabled={uploading}
-          className="bg-blue-600 text-white px-6 py-2 rounded"
-        >
-          {uploading ? "Uploading..." : "Add Literature"}
-        </button>
+        <div className="flex gap-10 justify-center">
+          <button
+            type="submit"
+            disabled={uploading}
+            className="cursor-pointer font-bold bg-blue-600 text-white px-5 py-2 rounded-xl"
+          >
+            {uploading ? "Uploading..." : "Add Literature"}
+          </button>
+          <button
+            onClick={toggleAdd}
+            className="cursor-pointer font-bold bg-red-500 text-white px-5 py-2 rounded-xl"
+          >
+            Close Form
+          </button>
+        </div>
       </form>
     </>
   );

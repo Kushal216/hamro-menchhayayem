@@ -11,9 +11,10 @@ export default function UserForm({ onSubmit }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const data = { name, role, email, password };
+    console.log(data)
 
     try {
-      const res = await fetch("api/v1/users", {
+      const res = await fetch("/api/v1/users", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(data),
@@ -28,7 +29,7 @@ export default function UserForm({ onSubmit }) {
 
       setName("");
       setEmail("");
-      setPassword([]);
+      setPassword("");
       setRole("");
     } catch (err) {
       console.error(err);
