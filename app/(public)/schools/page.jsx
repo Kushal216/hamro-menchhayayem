@@ -4,10 +4,10 @@ import fetchData from "@/lib/fetchItem";
 
 export default async function SchoolPage() {
     const res = await fetchData('schools');
-    const { message, data } = res;
+    const { data } = res;
   return (
     <>
-      <RouteTitle title={'हाम्रा शिक्षण संस।थाहरु'} />
+      <RouteTitle title={'हाम्रा शिक्षण संस्थाहरु'} />
       <div className="md:grid md:grid-cols-2 flex flex-wrap ">
         {data.map((item, index) => (
           <SchoolCard

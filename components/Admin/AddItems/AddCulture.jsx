@@ -1,49 +1,33 @@
-"use client";
-
-import { useState } from "react";
-import dynamic from "next/dynamic";
-import Image from "next/image";
-import "simplemde/dist/simplemde.min.css";
+'use client';
+import { useState } from 'react';
+import dynamic from 'next/dynamic';
+import Image from 'next/image';
+import 'simplemde/dist/simplemde.min.css';
 import { useMemo } from 'react';
+import { uploadImage } from '@/utils/uploadImage';
 
-const SimpleMDE = dynamic(() => import("react-simplemde-editor"), {
+const SimpleMDE = dynamic(() => import('react-simplemde-editor'), {
   ssr: false,
 });
 
-/* ---------- reusable upload function ---------- */
-async function uploadImage(file) {
-  const formData = new FormData();
-  formData.append("image", file);
-
-  const res = await fetch("/api/v1/upload", {
-    method: "POST",
-    body: formData,
-  });
-
-  if (!res.ok) {
-    throw new Error("Image upload failed");
-  }
-
-  return await res.json(); // { url, public_id }
-}
-
-export default function CultureForm() {
-  const [title, setTitle] = useState("");
-  const [description, setDescription] = useState("");
-  const [coverImage, setCoverImage] = useState("");
+export default function CultureForm({ toggleAdd }) {
+  const [title, setTitle] = useState('');
+  const [description, setDescription] = useState('');
+  const [coverImage, setCoverImage] = useState('');
   const [gallery, setGallery] = useState([]);
-  const [video, setVideo] = useState("");
-  const [category, setCategory] = useState("");
+  const [video, setVideo] = useState('');
+  const [category, setCategory] = useState('');
   const [uploading, setUploading] = useState(false);
 
   const options = useMemo(
     () => ({
-      minHeight: '160px',
-      status: false,
+      minHeight: '300px',
+      status: ['lines', 'words', 'cursor'],
+      placeholder: 'Write your content here...',
+      spellChecker: false,
     }),
     []
   );
-
 
   /* ---------- handlers ---------- */
   const handleCoverUpload = async (file) => {
@@ -84,9 +68,9 @@ export default function CultureForm() {
     };
 
     try {
-      const res = await fetch("/api/v1/cultures", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
+      const res = await fetch('/api/v1/cultures', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(data),
       });
 
@@ -96,13 +80,13 @@ export default function CultureForm() {
       }
 
       // reset form
-      setTitle("");
-      setDescription("");
-      setCoverImage("");
+      setTitle('');
+      setDescription('');
+      setCoverImage('');
       setGallery([]);
-      setVideo("");
-      setCategory("");
-      alert("Culture added successfully");
+      setVideo('');
+      setCategory('');
+      alert('Culture added successfully');
     } catch (err) {
       alert(err.message);
     }
@@ -111,8 +95,8 @@ export default function CultureForm() {
   /* ---------- UI ---------- */
   return (
     <>
-      <h1 className="text-3xl font-bold text-blue-600 text-center mb-4">
-        ADD Culture
+      <h1 className="text-2xl font-bold text-black text-center mb-4">
+        Add Details
       </h1>
 
       <form onSubmit={handleSubmit} className="space-y-5 p-4">
@@ -125,14 +109,13 @@ export default function CultureForm() {
           className="border w-full p-2 rounded"
           required
         />
-
         {/* Description */}
         <SimpleMDE
           value={description}
           onChange={setDescription}
           options={options}
+          className='b'
         />
-
         {/* Cover Image */}
         <div className="mb-6">
           <label className="font-semibold text-gray-700 block mb-2">
@@ -157,7 +140,6 @@ export default function CultureForm() {
             </div>
           )}
         </div>
-
         {/* Gallery */}
         <div className="mb-6">
           <label className="font-semibold text-gray-700 block mb-2">
@@ -195,7 +177,6 @@ export default function CultureForm() {
             ))}
           </div>
         </div>
-
         {/* Video */}
         <input
           type="text"
@@ -204,7 +185,6 @@ export default function CultureForm() {
           onChange={(e) => setVideo(e.target.value)}
           className="border w-full p-2 rounded"
         />
-
         {/* Category */}
         <input
           type="text"
@@ -213,15 +193,23 @@ export default function CultureForm() {
           onChange={(e) => setCategory(e.target.value)}
           className="border w-full p-2 rounded"
         />
-
         {/* Submit */}
-        <button
-          type="submit"
-          disabled={uploading}
-          className="bg-blue-600 text-white px-5 py-2 rounded"
-        >
-          {uploading ? "Uploading..." : "Add Culture"}
-        </button>
+
+        <div className="flex gap-10 justify-center">
+          <button
+            type="submit"
+            disabled={uploading}
+            className="cursor-pointer font-bold bg-blue-600 text-white px-5 py-2 rounded-xl"
+          >
+            {uploading ? 'Uploading...' : 'Add Culture'}
+          </button>
+          <button
+            onClick={toggleAdd}
+            className="cursor-pointer font-bold bg-red-500 text-white px-5 py-2 rounded-xl"
+          >
+            Close Form
+          </button>
+        </div>
       </form>
     </>
   );
