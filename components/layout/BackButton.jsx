@@ -8,6 +8,7 @@ const Routes = {
   schools: 'विद्यलयाहरु',
   cultures: 'संस्कृतीहरु',
   places: 'स्थानहरु',
+  literature: 'साहित्यहरु',
 };
 
 const BackButton = ({ gallery }) => {

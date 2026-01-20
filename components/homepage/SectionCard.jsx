@@ -20,7 +20,7 @@ const SectionCard = ({ item }) => {
               className={`object-contain ${scale && 'scale-144 group-hover:scale-150 group-hover:-translate-y-0.5'}`}
             />
           </div>
-          <div className="md:text-center">
+          <div className="md:text-center flex-1 md:flex-none">
             <div className="font-bold text-white w-full text-xl md:text-2xl xl:text-3xl my-1">
               {item.title}
             </div>
