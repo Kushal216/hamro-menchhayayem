@@ -17,7 +17,7 @@ const RootLayoutBody = ({ children }) => {
       <NavigationComponents />
 
       <main
-        className={`col-span-5  h-screen overflow-auto scrollbar-hidden ${!menuNeeded ? '' : 'md:col-span-4'}`}
+        className={`col-span-5  h-screen overflow-auto scrollbar-hidden ${!menuNeeded ? '' : 'lg:col-span-4'}`}
       >
         {children}
       </main>

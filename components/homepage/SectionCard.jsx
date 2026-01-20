@@ -24,11 +24,11 @@ const SectionCard = ({ item }) => {
   return (
     <Link
       href={item.route ? item.route : '/'}
-      className="relative h-25 md:h-50 w-[90%] md:w-80 lg:w-90 xl:w-100 rounded-2xl overflow-clip shadow-lg hover:shadow-[#00000060] hover:scale-101 hover:-translate-y-0.5 select-none cursor-pointer mx-auto"
+      className="relative h-25 md:h-55 w-[90%] md:w-80 lg:w-90 xl:w-100 rounded-2xl overflow-clip shadow-lg hover:shadow-[#00000060] hover:scale-101 hover:-translate-y-0.5 select-none cursor-pointer mx-auto mb-8"
     >
       <div className="absolute h-full w-full bg-linear-to-t from-[#00000099] to-[#00000040] backdrop-blur-[2px] z-2">
         <div className="flex md:flex-col h-full gap-4 md:gap-1 items-center justify-center px-2">
-          <div className="w-15 md:w-20 aspect-square relative mb-2 ml-2 md:ml-0">
+          <div className="w-15 md:w-17 lg:w-20 aspect-square relative mb-2 ml-2 md:ml-0">
             <Image
               src={item.iconUrl}
               alt={`${item.title} icon`}
