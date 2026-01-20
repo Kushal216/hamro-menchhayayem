@@ -31,6 +31,7 @@ export default function LiteratureForm() {
   const [coverImage, setCoverImage] = useState("");
   const [video, setVideo] = useState("");
   const [category, setCategory] = useState("");
+  const [author, setAuthor] = useState("");
   const [uploading, setUploading] = useState(false);
 
   const handleCoverUpload = async (file) => {
@@ -50,6 +51,7 @@ export default function LiteratureForm() {
       coverImage,
       video,
       category,
+      author,
       likesCount: 0,
     };
 
@@ -69,9 +71,10 @@ export default function LiteratureForm() {
       setDescription("");
       setCoverImage("");
       setVideo("");
+      setAuthor("");
       setCategory("");
 
-      alert("Literature added successfully 📚");
+      alert("Literature added successfully");
     } catch (err) {
       alert(err.message);
     }
@@ -93,10 +96,19 @@ export default function LiteratureForm() {
           required
         />
 
+        <input
+          type="text"
+          placeholder="Author name"
+          value={author}
+          onChange={(e) => setTitle(e.target.value)}
+          className="border w-full p-2 rounded"
+          required
+        />
+
         <SimpleMDE
           value={description}
-          onChange={setDescription}
-          options={{ minHeight: "180px", status: false }}
+          // onChange={setDescription}
+          options={{ minHeight: "100px", status: false }}
         />
 
         <div>
