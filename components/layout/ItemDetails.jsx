@@ -14,19 +14,20 @@ export default async function ItemDetails({ route, id }) {
     <>
       <div className="w-full px-2 relative mt-2 select-none">
         <BackButton />
-        <CoverImage title={culture.title} id={id} route={`/${route}/${id}`} />
+        <div className="">
+          <CoverImage title={culture.title} id={id} route={`/${route}/${id}`} />
 
-        <div className="mt-2">
-          <div className="font-bold text-3xl text-black border-b-4 border-red-500 w-fill inline-block px-2 pr-4">
-            परिचय
+          <div className="mt-2">
+            <div className="font-bold text-xl  lg:text-3xl text-black border-b-2 lg:border-b-4 border-red-500 w-fill inline-block px-2 mb-2">
+              परिचय
+            </div>
+            <MarkdownViewer content={content} />
           </div>
-          <MarkdownViewer content={content} />
         </div>
       </div>
     </>
   );
 }
-
 
 function MarkdownViewer({ content }) {
   return (
