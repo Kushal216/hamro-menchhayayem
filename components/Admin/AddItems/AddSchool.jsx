@@ -19,7 +19,7 @@ export default function SchoolForm({ toggleAdd }) {
   const [video, setVideo] = useState("");
   const [category, setCategory] = useState("Uncategorized");
   const [phoneNo, setPhoneNo] = useState("");
-  const [likesCount, setLikesCount] = useState(0);
+  const [uploading, setUploading] = useState(false); 
 
   const options = useMemo(
     () => ({
