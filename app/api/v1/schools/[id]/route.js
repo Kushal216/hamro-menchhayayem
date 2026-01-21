@@ -76,7 +76,7 @@ export async function PUT(request, res) {
   const body = await request.json();
   try {
     const school = await School.findById(id);
-    if (!culture) {
+    if (!school) {
       return NextResponse.json({ error: "Not Found" }, { status: 404 });
     }
     const dbResponse = await School.replaceOne(
