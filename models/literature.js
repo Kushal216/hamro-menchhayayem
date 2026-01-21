@@ -12,11 +12,10 @@ const literatureSchema = new mongoose.Schema({
     required: true,
   },
   author: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "people",
+    type: String,
     required: true,
   },
-  coverImage: {
+  authorImage: {
     type: String,
   },
   video: {
