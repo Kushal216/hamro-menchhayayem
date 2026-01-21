@@ -1,3 +1,4 @@
+'use client'
 import React from 'react';
 
 const Input = ({
@@ -6,6 +7,7 @@ const Input = ({
   setValue,
   placeholder = 'Enter the value',
   type = 'text',
+  required,
 }) => {
   return (
     <>
@@ -25,6 +27,7 @@ const Input = ({
           setValue={setValue}
           placeholder={placeholder}
           type={type}
+          required={required}
         />
       )}
     </>
@@ -33,10 +36,11 @@ const Input = ({
 
 export default Input;
 
-function Box({ value, setValue, placeholder, type }) {
+function Box({ value, setValue, placeholder, type, required }) {
   return (
     <>
       <input
+        required={required}
         type={type}
         value={value}
         onChange={(e) => setValue(e.target.value)}

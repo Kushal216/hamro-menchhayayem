@@ -6,6 +6,7 @@ import { uploadImage } from '@/utils/uploadImage';
 import MarkDownEditor from './MarkDownEditor';
 import ImageInput from '@/components/ImageInput';
 import Input from '../Input';
+import toast from 'react-hot-toast';
 
 export default function CultureForm({ toggleAdd }) {
   const [title, setTitle] = useState('');
@@ -36,15 +37,18 @@ export default function CultureForm({ toggleAdd }) {
     };
 
     try {
+      setUploading(true);
       const res = await fetch('/api/v1/cultures', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(data),
       });
+      setUploading(false);
 
       if (!res.ok) {
-        const text = await res.text();
-        throw new Error(text);
+        const { message } = await res.json();
+        toast.error(message);
+        throw new Error(message);
       }
 
       // reset form
@@ -52,11 +56,10 @@ export default function CultureForm({ toggleAdd }) {
       setDescription('');
       setCoverImage('');
       setGallery([]);
-      setVideo('');
-      setCategory('');
-      alert('Culture added successfully');
+      setCaste('');
+      toast.success(`${title} added successfully`);
     } catch (err) {
-      alert(err.message);
+      toast.error(err.message);
     }
   };
 
@@ -74,6 +77,7 @@ export default function CultureForm({ toggleAdd }) {
           placeholder="Enter title"
           value={title}
           setValue={setTitle}
+          required
         />
         {/* Description */}
         <label>Description:</label>
@@ -88,6 +92,7 @@ export default function CultureForm({ toggleAdd }) {
             value={coverImage}
             setValue={setCoverImage}
             setUploading={setUploading}
+            required
           />
         </label>
         <label>

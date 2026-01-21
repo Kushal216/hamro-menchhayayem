@@ -1,8 +1,6 @@
 'use client';
 import { useState } from 'react';
-import Image from 'next/image';
 import 'simplemde/dist/simplemde.min.css';
-import { uploadImage } from '@/utils/uploadImage';
 import MarkDownEditor from './MarkDownEditor';
 import toast from 'react-hot-toast';
 import Input from '../Input';
@@ -23,57 +21,41 @@ export default function SchoolForm({ toggleAdd }) {
   const [videoStart, setVideoStart] = useState('');
   const [videoEnd, setVideoEnd] = useState('');
 
-  const handleCoverUpload = async (file) => {
-    setUploading(true);
-    const { url } = await uploadImage(file);
-    setCoverImage(url);
-    setUploading(false);
-  };
-
-  const handleGalleryUpload = async (files) => {
-    setUploading(true);
-    const urls = [];
-
-    for (const file of files) {
-      const { url } = await uploadImage(file);
-      urls.push(url);
-    }
-
-    setGallery((prev) => [...prev, ...urls]);
-    setUploading(false);
-  };
-
-  const removeGalleryImage = (index) => {
-    setGallery(gallery.filter((_, i) => i !== index));
-  };
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     const data = {
       title,
-      description: description || 'No description is provided.',
+      description: description,
       gallery,
-      coverImage,
       location,
-      video,
-      category: category || 'Uncategorized',
+      video: {
+        id: videoId,
+        start: videoStart,
+        end: videoEnd,
+      },
+      category,
       phoneNo,
+      coverImage,
       likesCount: 0,
     };
     try {
-      const res = await fetch('api/v1/schools', {
+      setUploading(true);
+
+      const res = await fetch('/api/v1/schools', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(data),
       });
-      if (!res.ok) {
-        const text = await res.text();
-        console.error('Server Returned:', text);
-        throw new Error(`Request Failed: ${res.status}`);
-      }
+      setUploading(false);
 
+      if (!res.ok) {
+        const { message } = await res.json();
+        toast.error(message);
+        throw new Error(message);
+      }
+      const result = await res.json();
       console.log('Saved successfully:', result);
-      toast.success(`${title} added successfully.`);
+      toast.success(result.message);
 
       setTitle('');
       setDescription('');

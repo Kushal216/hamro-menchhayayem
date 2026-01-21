@@ -80,8 +80,11 @@ export async function POST(req) {
     );
   } catch (err) {
     return NextResponse.json(
-      { ERROR: 'failed to create the person', details: err },
-      { status: 500 }
+      {
+        message: `Error: ${err.message}. `,
+        err: err,
+      },
+      { status: 400 }
     );
   }
 }

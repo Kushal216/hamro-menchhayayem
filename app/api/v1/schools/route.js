@@ -25,14 +25,13 @@ import Schools from '@/models/school.js';
  *                     type: string
  */
 export async function GET(req) {
-    const schools = await Schools.find({});
+  const schools = await Schools.find({});
 
-    return Response.json({
-        message: 'GET all lists school',
-        data: schools,
-    });
+  return Response.json({
+    message: 'GET all lists school',
+    data: schools,
+  });
 }
-
 
 /**
  * @swagger
@@ -58,33 +57,37 @@ export async function GET(req) {
  *                     type: string
  */
 export async function POST(req) {
-    const body = await req.json();
-    //check authentication
-    //validate data using middleware
-    let id = null
-    try {
-        const newSchool = await Schools.create({
-            title: body.title,
-            description: body.description,
-            gallery: body.gallery,
-            coverImage: body.coverImage,
-            location: body.location,
-            video: body.video,
-            category: body.category,
-            phoneNo: body.phoneNo,
-        })
-        id = newSchool._id;
-    } catch(err) {
-        console.log(`ERROR: in creating school:\n${err}`);
-        return NextResponse.json({
-            message: `DB error in performing the create school action. `,
-            err: err,
-        });
-    }
+  const body = await req.json();
+  console.log(body)
+  //check authentication
+  //validate data using middleware
+  let id = null;
+  try {
+    const newSchool = await Schools.create({
+      title: body.title,
+      description: body.description,
+      gallery: body.gallery,
+      coverImage: body.coverImage,
+      location: body.location,
+      video: body.video,
+      category: body.category,
+      phoneNo: body.phoneNo,
+    });
+    id = newSchool._id;
+  } catch (err) {
+    console.log(`ERROR: in creating school:\n${err}`);
     return NextResponse.json(
-        {
-            message: `Added ${body.title} to the database with id: ${id}. `,
-        },
-        { status: 201 }
+      {
+        message: `Error: ${err.message}. `,
+        err: err,
+      },
+      { status: 400 }
     );
+  }
+  return NextResponse.json(
+    {
+      message: `Added ${body.title} to the database with id: ${id}. `,
+    },
+    { status: 201 }
+  );
 }

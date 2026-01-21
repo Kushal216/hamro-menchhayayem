@@ -22,10 +22,17 @@ const schoolSchema = new mongoose.Schema(
     },
     location: {
       type: String,
-      required: true,
     },
     video: {
-      type: String,
+      id: {
+        type: String,
+      },
+      start: {
+        type: String,
+      },
+      end: {
+        type: String,
+      },
     },
     category: {
       type: String,

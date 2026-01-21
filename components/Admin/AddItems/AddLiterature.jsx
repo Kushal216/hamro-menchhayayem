@@ -16,7 +16,7 @@ export default function LiteratureForm(toggleAdd) {
   const [videoEnd, setVideoEnd] = useState('');
   const [category, setCategory] = useState('');
   const [author, setAuthor] = useState('');
-  const [authorImage, setAuthorImage] = useState('');
+  const [coverImage, setCoverImage] = useState('');
   const [uploading, setUploading] = useState(false);
 
   const options = useMemo(
@@ -31,10 +31,16 @@ export default function LiteratureForm(toggleAdd) {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    if (!coverImage) {
+      toast.error('Please upload cover image first');
+      return;
+    }
+
+
     const data = {
       title,
       description,
-      authorImage,
+      coverImage: coverImage,
       video: {
         id: videoId,
         start: videoStart,
@@ -46,28 +52,30 @@ export default function LiteratureForm(toggleAdd) {
     };
 
     try {
+      setUploading(true);
+
       const res = await fetch('/api/v1/literature', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(data),
       });
+      setUploading(false);
 
       if (!res.ok) {
-        const text = await res.text();
-        throw new Error(text);
+        const { message } = await res.json();
+        toast.error(message);
+        throw new Error(message);
       }
 
+      toast.success(`${title} added successfully.`);
       setTitle('');
       setDescription('');
-      setCoverImage('');
       setAuthor('');
       setVideoId('');
       setVideoStart('');
       setVideoEnd('');
-
-      toast.success(`${title} added successfully.`);
     } catch (err) {
-      alert(err.message);
+      toast.error(err.message);
     }
   };
 
@@ -79,6 +87,7 @@ export default function LiteratureForm(toggleAdd) {
 
       <form onSubmit={handleSubmit} className="space-y-5 p-4">
         <Input
+          required
           label={'Title'}
           placeholder="Enter title"
           value={title}
@@ -89,6 +98,7 @@ export default function LiteratureForm(toggleAdd) {
           placeholder="Author's name"
           value={author}
           setValue={setAuthor}
+          required
         />
 
         <label>Description:</label>
@@ -100,8 +110,8 @@ export default function LiteratureForm(toggleAdd) {
         <label>
           Author Image:
           <ImageInput
-            value={authorImage}
-            setValue={setAuthorImage}
+            value={coverImage}
+            setValue={setCoverImage}
             setUploading={setUploading}
           />
         </label>
