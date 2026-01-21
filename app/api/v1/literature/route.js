@@ -72,6 +72,7 @@ export async function POST(req) {
       video: body.video,
       coverImage: body.coverImage,
       category: body.category,
+      author: body.author,
     });
 
     id = newLiterature._id;

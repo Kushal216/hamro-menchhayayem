@@ -16,7 +16,7 @@ export default function LiteratureForm(toggleAdd) {
   const [videoEnd, setVideoEnd] = useState('');
   const [category, setCategory] = useState('');
   const [author, setAuthor] = useState('');
-  const [authorImage, setAuthorImage] = useState('');
+  const [coverImage, setCoverImage] = useState('');
   const [uploading, setUploading] = useState(false);
 
   const options = useMemo(
@@ -31,10 +31,16 @@ export default function LiteratureForm(toggleAdd) {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    if (!coverImage) {
+      toast.error('Please upload cover image first');
+      return;
+    }
+
+
     const data = {
       title,
       description,
-      authorImage,
+      coverImage: coverImage,
       video: {
         id: videoId,
         start: videoStart,
@@ -46,11 +52,14 @@ export default function LiteratureForm(toggleAdd) {
     };
 
     try {
+      setUploading(true);
+
       const res = await fetch('/api/v1/literature', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(data),
       });
+      setUploading(false);
 
       if (!res.ok) {
         const { message } = await res.json();
@@ -101,8 +110,8 @@ export default function LiteratureForm(toggleAdd) {
         <label>
           Author Image:
           <ImageInput
-            value={authorImage}
-            setValue={setAuthorImage}
+            value={coverImage}
+            setValue={setCoverImage}
             setUploading={setUploading}
           />
         </label>

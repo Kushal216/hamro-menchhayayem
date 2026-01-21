@@ -94,11 +94,12 @@ function POST(req) {
 
         case 2:
           body = _context2.sent;
-          //check authentication
+          console.log(body); //check authentication
           //validate data using middleware
+
           id = null;
-          _context2.prev = 4;
-          _context2.next = 7;
+          _context2.prev = 5;
+          _context2.next = 8;
           return regeneratorRuntime.awrap(_school["default"].create({
             title: body.title,
             description: body.description,
@@ -110,15 +111,15 @@ function POST(req) {
             phoneNo: body.phoneNo
           }));
 
-        case 7:
+        case 8:
           newSchool = _context2.sent;
           id = newSchool._id;
-          _context2.next = 15;
+          _context2.next = 16;
           break;
 
-        case 11:
-          _context2.prev = 11;
-          _context2.t0 = _context2["catch"](4);
+        case 12:
+          _context2.prev = 12;
+          _context2.t0 = _context2["catch"](5);
           console.log("ERROR: in creating school:\n".concat(_context2.t0));
           return _context2.abrupt("return", _server.NextResponse.json({
             message: "Error: ".concat(_context2.t0.message, ". "),
@@ -127,17 +128,17 @@ function POST(req) {
             status: 400
           }));
 
-        case 15:
+        case 16:
           return _context2.abrupt("return", _server.NextResponse.json({
             message: "Added ".concat(body.title, " to the database with id: ").concat(id, ". ")
           }, {
             status: 201
           }));
 
-        case 16:
+        case 17:
         case "end":
           return _context2.stop();
       }
     }
-  }, null, null, [[4, 11]]);
+  }, null, null, [[5, 12]]);
 }

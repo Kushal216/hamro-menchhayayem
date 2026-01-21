@@ -15,8 +15,9 @@ const literatureSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    authorImage: {
+    coverImage: {
       type: String,
+      required: true
     },
     video: {
       id: {

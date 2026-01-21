@@ -7,18 +7,14 @@ import { useContext, useState } from 'react';
 import { BsPlayBtnFill } from 'react-icons/bs';
 import YoutubeIframe from './YoutubeIframe';
 
-export default function CoverImage({
-  title,
-  route,
-  videoId,
-  videoStart,
-  videoEnd,
-}) {
+export default function CoverImage({ title, route, video }) {
   const [showVideo, setShowVideo] = useState(false);
   const paths = usePathname().replace(/\/$/, '').split('/');
   const path = paths[1];
 
-  videoId = 'PhOMPJWPDLU'; //testing
+  const {videoId, videoStart, videoEnd} = video;
+
+  // videoId = 'PhOMPJWPDLU'; //testing
 
   return (
     <div className="md:float-right md:aspect-video md:w-fit md:flex md:flex-col items-center">

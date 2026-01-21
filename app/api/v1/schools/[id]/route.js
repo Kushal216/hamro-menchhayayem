@@ -54,8 +54,8 @@ import School from '@/models/school.js';
  *       200:
  *         description: School deleted successfully
  */
-export async function GET(req, {params}) {
-  const { id } =await  params;
+export async function GET(req, { params }) {
+  const { id } = await params;
   try {
     const school = await School.findById(id);
 
@@ -63,20 +63,22 @@ export async function GET(req, {params}) {
       return NextResponse.json({ error: 'Not found' }, { status: 404 });
     }
 
-    return NextResponse.json({ data: school });
+    return NextResponse.json({
+      message: 'data sent successfully',
+      data: school,
+    });
   } catch (err) {
     return NextResponse.json({ error: err.message }, { status: 500 });
   }
 }
 
-
-export async function PUT(req, {params}) {
-  const { id } =await  params;
+export async function PUT(req, { params }) {
+  const { id } = await params;
   const body = await request.json();
   try {
     const school = await School.findById(id);
     if (!school) {
-      return NextResponse.json({ error: "Not Found" }, { status: 404 });
+      return NextResponse.json({ error: 'Not Found' }, { status: 404 });
     }
     const dbResponse = await School.replaceOne(
       { _id: id },
@@ -89,13 +91,14 @@ export async function PUT(req, {params}) {
         video: body.video,
         category: body.category,
         phoneNo: body.phoneNo,
-      })
+      }
+    );
     return NextResponse.json({
       message: `replaced school ${body.title} with ${body.title}`,
       id: id,
-      data: dbResponse
+      data: dbResponse,
     });
-  } catch(err) {
+  } catch (err) {
     return NextResponse.json({ error: err.message }, { status: 500 });
   }
 }
@@ -123,8 +126,8 @@ export async function PUT(req, {params}) {
  *                   name:
  *                     type: string
  */
-export async function PATCH(req, {params}) {
-  const { id } =await  params;
+export async function PATCH(req, { params }) {
+  const { id } = await params;
   const body = await req.json();
 
   try {
@@ -147,7 +150,7 @@ export async function PATCH(req, {params}) {
   }
 }
 
-export async function DELETE(req, {params}) {
+export async function DELETE(req, { params }) {
   //validate user
 
   const { id } = await params;
@@ -179,5 +182,3 @@ export async function DELETE(req, {params}) {
     );
   }
 }
-
-

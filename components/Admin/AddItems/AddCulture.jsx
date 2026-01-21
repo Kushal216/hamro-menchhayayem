@@ -6,6 +6,7 @@ import { uploadImage } from '@/utils/uploadImage';
 import MarkDownEditor from './MarkDownEditor';
 import ImageInput from '@/components/ImageInput';
 import Input from '../Input';
+import toast from 'react-hot-toast';
 
 export default function CultureForm({ toggleAdd }) {
   const [title, setTitle] = useState('');
@@ -36,11 +37,13 @@ export default function CultureForm({ toggleAdd }) {
     };
 
     try {
+      setUploading(true);
       const res = await fetch('/api/v1/cultures', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(data),
       });
+      setUploading(false);
 
       if (!res.ok) {
         const { message } = await res.json();
@@ -53,7 +56,7 @@ export default function CultureForm({ toggleAdd }) {
       setDescription('');
       setCoverImage('');
       setGallery([]);
-      setCategory('');
+      setCaste('');
       toast.success(`${title} added successfully`);
     } catch (err) {
       toast.error(err.message);

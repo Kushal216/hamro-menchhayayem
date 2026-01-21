@@ -104,7 +104,8 @@ function POST(req) {
             description: body.description,
             video: body.video,
             coverImage: body.coverImage,
-            category: body.category
+            category: body.category,
+            author: body.author
           }));
 
         case 7:

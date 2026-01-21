@@ -58,6 +58,7 @@ export async function GET(req) {
  */
 export async function POST(req) {
   const body = await req.json();
+  console.log(body)
   //check authentication
   //validate data using middleware
   let id = null;
