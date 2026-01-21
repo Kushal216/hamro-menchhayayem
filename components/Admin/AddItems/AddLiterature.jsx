@@ -9,6 +9,7 @@ import Input from '../Input';
 import toast from 'react-hot-toast';
 
 export default function LiteratureForm(toggleAdd) {
+  const [_id, setId] = useState('');
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [videoId, setVideoId] = useState('');
@@ -38,6 +39,7 @@ export default function LiteratureForm(toggleAdd) {
 
 
     const data = {
+      _id,
       title,
       description,
       coverImage: coverImage,
@@ -92,6 +94,13 @@ export default function LiteratureForm(toggleAdd) {
           placeholder="Enter title"
           value={title}
           setValue={setTitle}
+        />
+        <Input
+          label={'custom route'}
+          placeholder="route"
+          value={_id}
+          setValue={setId}
+          required
         />
         <Input
           label={"Author's name"}

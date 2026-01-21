@@ -67,6 +67,7 @@ export async function POST(req) {
   let id = null;
   try {
     const newCulture = await Culture.create({
+      _id: body._id,
       title: body.title,
       description: body.description,
       gallery: body.gallery,

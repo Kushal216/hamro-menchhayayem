@@ -1,8 +1,13 @@
 import mongoose from 'mongoose';
 import { connectMongoDB } from '@/lib/db.js';
-
+//dummy change
 const schoolSchema = new mongoose.Schema(
   {
+    _id: {
+      type: String,
+      unique: true,
+      default: () => new mongoose.Types.ObjectId().toString(),
+    },
     title: {
       type: String,
       required: true,

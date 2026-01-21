@@ -66,14 +66,15 @@ export async function POST(req) {
     let id = null;
     try {
         const newPlace = await Places.create({
-            title: body.title,
-            description: body.description,
-            gallery: body.gallery,
-            video: body.video,
-            coverImage: body.coverImage,
-            category: body.category,
-            subCategory: body.subCategory,
-            location: body.location,
+          _id: body._id,
+          title: body.title,
+          description: body.description,
+          gallery: body.gallery,
+          video: body.video,
+          coverImage: body.coverImage,
+          category: body.category,
+          subCategory: body.subCategory,
+          location: body.location,
         });
 
         id = newPlace._id;

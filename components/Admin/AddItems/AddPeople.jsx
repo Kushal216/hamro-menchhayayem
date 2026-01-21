@@ -8,6 +8,7 @@ import ImageInput from '@/components/ImageInput';
 export default function PeopleForm({ onSubmit }) {
   const [name, setName] = useState('');
   const [photo, setPhoto] = useState('');
+  const [_id, setId] = useState('');
   const [phone, setPhone] = useState('');
   const [website, setWebsite] = useState('');
   const [facebook, setFacebook] = useState('');

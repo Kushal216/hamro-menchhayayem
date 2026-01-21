@@ -3,6 +3,11 @@ import { connectMongoDB } from '@/lib/db.js';
 
 const placesSchema = new mongoose.Schema(
   {
+    _id: {
+      type: String,
+      unique: true,
+      default: () => new mongoose.Types.ObjectId().toString(),
+    },
     title: {
       type: String,
       required: true,

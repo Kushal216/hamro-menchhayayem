@@ -9,6 +9,7 @@ import ImageInput from '@/components/ImageInput';
 export default function PlaceForm() {
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
+  const [_id, setId] = useState('');
   const [gallery, setGallery] = useState([]);
   const [coverImage, setCoverImage] = useState('');
   const [location, setLocation] = useState('');
@@ -22,6 +23,7 @@ export default function PlaceForm() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const data = {
+      _id,
       title,
       description,
       gallery,
@@ -84,7 +86,13 @@ export default function PlaceForm() {
           value={title}
           setValue={setTitle}
         />
-
+        <Input
+          label={'custom route'}
+          placeholder="route"
+          value={_id}
+          setValue={setId}
+          required
+        />
         <label>Description:</label>
         <MarkDownEditor
           description={description}
