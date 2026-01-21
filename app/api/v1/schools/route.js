@@ -65,7 +65,7 @@ export async function POST(req) {
     try {
         const newSchool = await Schools.create({
             title: body.title,
-            description: body.title,
+            description: body.description,
             gallery: body.gallery,
             coverImage: body.coverImage,
             location: body.location,
