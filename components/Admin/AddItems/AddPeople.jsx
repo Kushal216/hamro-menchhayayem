@@ -48,6 +48,7 @@ export default function PeopleForm({ onSubmit }) {
       }
       const result = await res.json();
       console.log('Saved successfully:', result);
+      toast.success(`${title} added successfully.`);
 
       setName('');
       setPhoto('');
