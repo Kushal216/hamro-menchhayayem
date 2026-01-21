@@ -41,7 +41,7 @@ function Box({ value, setValue, placeholder, type }) {
         value={value}
         onChange={(e) => setValue(e.target.value)}
         placeholder={placeholder}
-        className="border w-full p-2 rounded"
+        className="bg-blue-500/10 w-full p-2 rounded"
       />
     </>
   );
