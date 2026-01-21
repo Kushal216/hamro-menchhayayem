@@ -7,7 +7,8 @@ import CoverImage from './CoverImage';
 export default async function ItemDetails({ route, id }) {
   let content = 'पर्खनुहोस ...';
   const res = await fetchItem(route, id);
-  const culture = res.data;
+  const culture = res;
+  console.log(culture)
   content = culture.description;
 
   return (

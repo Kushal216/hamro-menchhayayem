@@ -34,7 +34,7 @@ import People from '@/models/people';
  *         description: Person not found
  */
 export async function GET(req, { params }) {
-  const { id } = params;
+  const { id } =await  params;
 
   if (!mongoose.Types.ObjectId.isValid(id)) {
     return NextResponse.json({ error: 'Invalid person ID' }, { status: 400 });
@@ -91,7 +91,7 @@ export async function GET(req, { params }) {
  *         description: Person not found
  */
 export async function PUT(req, { params }) {
-  const { id } = params;
+  const { id } =await  params;
 
   if (!mongoose.Types.ObjectId.isValid(id)) {
     return NextResponse.json({ error: 'Invalid person ID' }, { status: 400 });
@@ -148,7 +148,7 @@ export async function PUT(req, { params }) {
  *         description: Person not found
  */
 export async function DELETE(req, { params }) {
-  const { id } = params;
+  const { id } =await  params;
 
   if (!mongoose.Types.ObjectId.isValid(id)) {
     return NextResponse.json({ error: 'Invalid person ID' }, { status: 400 });
@@ -218,7 +218,7 @@ export async function DELETE(req, { params }) {
  *         description: Person not found
  */
 export async function PATCH(req, { params }) {
-  const { id } = params;
+  const { id } =await  params;
 
   if (!id || !/^[0-9a-fA-F]{24}$/.test(id)) {
     return Response.json(
@@ -240,7 +240,7 @@ export async function PATCH(req, { params }) {
 
     const updatedPerson = await People.findByIdAndUpdate(
       id,
-      { $set: updates }, 
+      { $set: updates },
       { new: true, runValidators: true }
     );
 
