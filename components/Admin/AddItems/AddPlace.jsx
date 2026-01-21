@@ -1,11 +1,7 @@
 "use client";
 import { useState } from "react";
-import dynamic from "next/dynamic";
 import "simplemde/dist/simplemde.min.css";
-
-const SimpleMDE = dynamic(() => import("react-simplemde-editor"), {
-  ssr: false,
-});
+import MarkDownEditor from "./MarkDownEditor";
 
 export default function PlaceForm({ onSubmit }) {
   const [title, setTitle] = useState("");
@@ -62,7 +58,7 @@ export default function PlaceForm({ onSubmit }) {
   return (
     <>
       <div className="text-3xl font-bold text-blue-600 justify-center flex">
-        ADD Places{" "}
+        ADD Places{' '}
       </div>
       <form onSubmit={handleSubmit} className="space-y-4 p-4 ">
         <div>
@@ -79,14 +75,10 @@ export default function PlaceForm({ onSubmit }) {
 
         <div>
           <label>Description:</label>
-          <SimpleMDE
-            value={description}
-            // onChange={setDescription}
-            options={{
-              placeholder: "Write description...",
-              minHeight: "150px",
-              status: false,
-            }}
+
+          <MarkDownEditor
+            description={description}
+            setDescription={setDescription}
           />
         </div>
 
@@ -120,7 +112,7 @@ export default function PlaceForm({ onSubmit }) {
 
           <button
             type="button"
-            onClick={() => setGallery([...gallery, ""])}
+            onClick={() => setGallery([...gallery, ''])}
             className="bg-green-600 text-white px-3 py-1 rounded"
           >
             Add More
