@@ -35,7 +35,7 @@ const GalleryPage = async ({ route, id }) => {
           />
         </div>
 
-        {images.map((url) => (
+        {gallery.map((url) => (
           <div key={i} className="aspect-square w-40 relative">
             <Image
               key={i++}
