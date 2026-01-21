@@ -13,7 +13,7 @@ export default function PeopleForm({ onSubmit }) {
   const [email, setEmail] = useState("");
   const [position, setPosition] = useState("");
 
-  const handleSubmit = async(e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const data = {
       name,
@@ -47,7 +47,7 @@ export default function PeopleForm({ onSubmit }) {
 
       setName("");
       setPhoto("");
-      setEmail([]);
+      setEmail("");
       setFacebook("");
       setInstagram("");
       setLinkedin("");
