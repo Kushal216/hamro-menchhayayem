@@ -15,7 +15,7 @@ export default function ToggleForm({ title, route }) {
     setShowAdd((prev) => !prev);
   };
 
-  let form = <>hello</>;
+  let form = <>Form not fetched</>;
 
   switch (route) {
     case 'cultures':
@@ -66,8 +66,12 @@ export default function ToggleForm({ title, route }) {
         </button>
       )}
 
+      <div className='bg-white rounded-lg shadow-xl py-2'>
+
       {showAdd && form}
-      <div className="text-xl font-bold">Manage Data</div>
+      </div>
+
+      <div className="text-xl font-bold mt-5">Manage Data</div>
     </>
   );
 }
