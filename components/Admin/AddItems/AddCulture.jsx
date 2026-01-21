@@ -1,14 +1,10 @@
 'use client';
 import { useState } from 'react';
-import dynamic from 'next/dynamic';
 import Image from 'next/image';
 import 'simplemde/dist/simplemde.min.css';
-import { useMemo } from 'react';
 import { uploadImage } from '@/utils/uploadImage';
+import MarkDownEditor from './MarkDownEditor';
 
-const SimpleMDE = dynamic(() => import('react-simplemde-editor'), {
-  ssr: false,
-});
 
 export default function CultureForm({ toggleAdd }) {
   const [title, setTitle] = useState('');
@@ -19,15 +15,7 @@ export default function CultureForm({ toggleAdd }) {
   const [category, setCategory] = useState('');
   const [uploading, setUploading] = useState(false);
 
-  const options = useMemo(
-    () => ({
-      minHeight: '300px',
-      status: ['lines', 'words', 'cursor'],
-      placeholder: 'Write your content here...',
-      spellChecker: false,
-    }),
-    []
-  );
+
 
   /* ---------- handlers ---------- */
   const handleCoverUpload = async (file) => {
@@ -110,11 +98,9 @@ export default function CultureForm({ toggleAdd }) {
           required
         />
         {/* Description */}
-        <SimpleMDE
-          value={description}
-          onChange={setDescription}
-          options={options}
-        />
+
+        <MarkDownEditor description={description} setDescription={setDescription}/>
+        
         {/* Cover Image */}
         <div className="mb-6">
           <label className="font-semibold text-gray-700 block mb-2">
