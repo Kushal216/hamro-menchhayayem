@@ -4,6 +4,8 @@ import 'simplemde/dist/simplemde.min.css';
 import MarkDownEditor from './MarkDownEditor';
 import Input from '../Input';
 import toast from 'react-hot-toast';
+import ImageInput from '@/components/ImageInput';
+import Image from 'next/image';
 
 export default function PlaceForm() {
   const [title, setTitle] = useState('');
@@ -16,6 +18,7 @@ export default function PlaceForm() {
   const [videoEnd, setVideoEnd] = useState('');
   const [region, setRegion] = useState('menchhayayem');
   const [category, setCategory] = useState('');
+  const [uploading, setUploading] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -62,7 +65,7 @@ export default function PlaceForm() {
       setVideoStart('');
       setVideoEnd('');
     } catch (err) {
-      console.error(err)
+      console.error(err);
       toast.error(err);
     }
   };
@@ -86,49 +89,23 @@ export default function PlaceForm() {
           setDescription={setDescription}
         />
 
-        <div>
-          <label className="block mb-1 font-medium">Gallery:</label>
-          {gallery.map((url, index) => (
-            <div key={index} className="flex mb-2 gap-2">
-              <input
-                type="text"
-                value={url}
-                onChange={(e) => {
-                  const newGallery = [...gallery];
-                  newGallery[index] = e.target.value;
-                  setGallery(newGallery);
-                }}
-                placeholder={`Image URL ${index + 1}`}
-                className="border w-full p-2 rounded"
-              />
-              <button
-                type="button"
-                onClick={() => {
-                  const newGallery = gallery.filter((_, i) => i !== index);
-                  setGallery(newGallery);
-                }}
-                className="bg-red-500 text-white px-2 rounded"
-              >
-                Remove
-              </button>
-            </div>
-          ))}
-
-          <button
-            type="button"
-            onClick={() => setGallery([...gallery, ''])}
-            className="bg-green-600 text-white px-3 py-1 rounded"
-          >
-            Add More
-          </button>
-        </div>
-
-        <Input
-          label={'Cover Image'}
-          placeholder="Enter cover image URL"
-          value={coverImage}
-          setValue={setCoverImage}
-        />
+        <label className="block mb-1 font-medium">
+          Gallery:
+          <ImageInput
+            multiple
+            value={gallery}
+            setValue={setGallery}
+            setUploading={setUploading}
+          />
+        </label>
+        <label>
+          Cover Image:
+          <ImageInput
+            value={coverImage}
+            setValue={setCoverImage}
+            setUploading={setUploading}
+          />
+        </label>
 
         <Input
           label={'Location'}
@@ -190,9 +167,10 @@ export default function PlaceForm() {
 
         <button
           type="submit"
-          className="bg-blue-600 text-white px-4 py-2 rounded mt-2"
+          disabled={uploading}
+          className="cursor-pointer font-bold bg-blue-600 text-white px-5 py-2 rounded-xl"
         >
-          Add Place
+          {uploading ? 'Uploading...' : 'Add Culture'}
         </button>
       </form>
     </>
