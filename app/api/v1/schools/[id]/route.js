@@ -55,7 +55,7 @@ import School from '@/models/school.js';
  *         description: School deleted successfully
  */
 export async function GET(req, {params}) {
-  const { id } = params;
+  const { id } =await  params;
   try {
     const school = await School.findById(id);
 
@@ -71,7 +71,7 @@ export async function GET(req, {params}) {
 
 
 export async function PUT(req, {params}) {
-  const { id } = params;
+  const { id } =await  params;
   const body = await request.json();
   try {
     const school = await School.findById(id);
@@ -124,13 +124,13 @@ export async function PUT(req, {params}) {
  *                     type: string
  */
 export async function PATCH(req, {params}) {
-  const { id } = params;
+  const { id } =await  params;
   const body = await req.json();
 
   try {
     const updated = await School.findByIdAndUpdate(
       id,
-      { $set: body }, 
+      { $set: body },
       { new: true, runValidators: true }
     );
 
@@ -150,7 +150,7 @@ export async function PATCH(req, {params}) {
 export async function DELETE(req, {params}) {
   //validate user
 
-  const { id } = params;
+  const { id } = await params;
 
   try {
     const school = await School.findByIdAndDelete(id);
@@ -179,3 +179,5 @@ export async function DELETE(req, {params}) {
     );
   }
 }
+
+
