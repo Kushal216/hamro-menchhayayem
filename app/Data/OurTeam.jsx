@@ -11,7 +11,6 @@ const ourTeam = [
     email: "kushaldhakal216@gmail.com",
     linkedin: "https://www.linkedin.com/in/kushal-dhakal/",
     instagram: "https://www.instagram.com/kushaldhakal",
-    password: "kushal@123",
   },
   {
     image: sb,
@@ -22,7 +21,6 @@ const ourTeam = [
     email: "sunil9866325865@gmail.com",
     linkedin: "https://www.linkedin.com/in/sunil-bhattaraii/",
     instagram: "https://www.instagram.com/sunil._.bhattarai_",
-    password: "sunil@123",
   },
 ];
 

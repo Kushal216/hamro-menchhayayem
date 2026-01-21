@@ -1,14 +1,9 @@
 "use client";
 import { useState } from "react";
-import dynamic from "next/dynamic";
 import Image from "next/image";
 import "simplemde/dist/simplemde.min.css";
-import { useMemo } from "react";
 import { uploadImage } from "@/utils/uploadImage";
-
-const SimpleMDE = dynamic(() => import("react-simplemde-editor"), {
-  ssr: false,
-});
+import MarkDownEditor from "./MarkDownEditor";
 
 export default function SchoolForm({ toggleAdd }) {
   const [title, setTitle] = useState("");
@@ -19,17 +14,9 @@ export default function SchoolForm({ toggleAdd }) {
   const [video, setVideo] = useState("");
   const [category, setCategory] = useState("Uncategorized");
   const [phoneNo, setPhoneNo] = useState("");
-  const [uploading, setUploading] = useState(false); 
+  const [likesCount, setLikesCount] = useState(0);
+  const [uploading, setUploading] = useState(false);
 
-  const options = useMemo(
-    () => ({
-      minHeight: "300px",
-      status: ["lines", "words", "cursor"],
-      placeholder: "Write your content here...",
-      spellChecker: false,
-    }),
-    [],
-  );
   const handleCoverUpload = async (file) => {
     setUploading(true);
     const { url } = await uploadImage(file);
@@ -113,10 +100,9 @@ export default function SchoolForm({ toggleAdd }) {
 
         <div>
           <label>Description:</label>
-          <SimpleMDE
-            value={description}
-            onChange={setDescription}
-            options={options}
+          <MarkDownEditor
+            description={description}
+            setDescription={setDescription}
           />
         </div>
 
@@ -148,7 +134,7 @@ export default function SchoolForm({ toggleAdd }) {
           ))}
           <button
             type="button"
-            onClick={() => setGallery([...gallery, ""])}
+            onClick={() => setGallery([...gallery, ''])}
             className="bg-green-600 text-white px-3 py-1 rounded"
           >
             Add More
@@ -230,7 +216,7 @@ export default function SchoolForm({ toggleAdd }) {
             disabled={uploading}
             className="cursor-pointer font-bold bg-blue-600 text-white px-5 py-2 rounded-xl"
           >
-            {uploading ? "Uploading..." : "Add School"}
+            {uploading ? 'Uploading...' : 'Add School'}
           </button>
           <button
             onClick={toggleAdd}

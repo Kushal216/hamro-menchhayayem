@@ -1,33 +1,29 @@
-"use client";
+'use client';
 
-import { useState } from "react";
-import dynamic from "next/dynamic";
-import Image from "next/image";
-import "simplemde/dist/simplemde.min.css";
-import { useMemo } from "react";
-import { uploadImage } from "@/utils/uploadImage";
-
-const SimpleMDE = dynamic(() => import("react-simplemde-editor"), {
-  ssr: false,
-});
+import { useState } from 'react';
+import Image from 'next/image';
+import 'simplemde/dist/simplemde.min.css';
+import { useMemo } from 'react';
+import { uploadImage } from '@/utils/uploadImage';
+import MarkDownEditor from './MarkDownEditor';
 
 export default function LiteratureForm(toggleAdd) {
-  const [title, setTitle] = useState("");
-  const [description, setDescription] = useState("");
-  const [coverImage, setCoverImage] = useState("");
-  const [video, setVideo] = useState("");
-  const [category, setCategory] = useState("");
-  const [author, setAuthor] = useState("");
+  const [title, setTitle] = useState('');
+  const [description, setDescription] = useState('');
+  const [coverImage, setCoverImage] = useState('');
+  const [video, setVideo] = useState('');
+  const [category, setCategory] = useState('');
+  const [author, setAuthor] = useState('');
   const [uploading, setUploading] = useState(false);
 
   const options = useMemo(
     () => ({
-      minHeight: "300px",
-      status: ["lines", "words", "cursor"],
-      placeholder: "Write your content here...",
+      minHeight: '300px',
+      status: ['lines', 'words', 'cursor'],
+      placeholder: 'Write your content here...',
       spellChecker: false,
     }),
-    [],
+    []
   );
 
   const handleCoverUpload = async (file) => {
@@ -52,9 +48,9 @@ export default function LiteratureForm(toggleAdd) {
     };
 
     try {
-      const res = await fetch("/api/v1/literature", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
+      const res = await fetch('/api/v1/literature', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(data),
       });
 
@@ -63,14 +59,14 @@ export default function LiteratureForm(toggleAdd) {
         throw new Error(text);
       }
 
-      setTitle("");
-      setDescription("");
-      setCoverImage("");
-      setVideo("");
-      setAuthor("");
-      setCategory("");
+      setTitle('');
+      setDescription('');
+      setCoverImage('');
+      setVideo('');
+      setAuthor('');
+      setCategory('');
 
-      alert("Literature added successfully");
+      alert('Literature added successfully');
     } catch (err) {
       alert(err.message);
     }
@@ -101,10 +97,9 @@ export default function LiteratureForm(toggleAdd) {
           required
         />
 
-        <SimpleMDE
-          value={description}
-          onChange={setDescription}
-          options={options}
+        <MarkDownEditor
+          description={description}
+          setDescription={setDescription}
         />
 
         <div>
@@ -150,7 +145,7 @@ export default function LiteratureForm(toggleAdd) {
             disabled={uploading}
             className="cursor-pointer font-bold bg-blue-600 text-white px-5 py-2 rounded-xl"
           >
-            {uploading ? "Uploading..." : "Add Literature"}
+            {uploading ? 'Uploading...' : 'Add Literature'}
           </button>
           <button
             onClick={toggleAdd}
