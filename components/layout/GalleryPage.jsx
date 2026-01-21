@@ -1,25 +1,15 @@
-import HomeHeading from '@/components/homepage/HomeHeading';
-import Image from 'next/image';
-import React from 'react';
-import BackButton from './BackButton';
-import { fetchItem } from '@/lib/fetchItem';
+import HomeHeading from "@/components/homepage/HomeHeading";
+import Image from "next/image";
+import React from "react";
+import BackButton from "./BackButton";
+import { fetchItem } from "@/lib/fetchItem";
 
-let images = [
-  '/images/image.png',
-  '/images/image.png',
-  '/images/image.png',
-  '/images/image.png',
-  '/images/image.png',
-  '/images/image.png',
-  '/images/image.png',
-];
-
-let cover = '/images/image.png';
 let i = 0;
 const GalleryPage = async ({ route, id }) => {
   const res = await fetchItem(route, id);
   const culture = res.data;
   const gallery = culture.gallery;
+  const cover = culture.coverImage;
 
   return (
     <>

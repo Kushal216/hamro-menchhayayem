@@ -55,7 +55,7 @@ export async function GET(req) {
  */
 export async function POST(req) {
   const { name, email, password, role } = await req.json();
-  const saltValue = 10;
+  const saltValue = process.env.SALT_ROUNDS;
   try {
     const hashedPassword = await bcrypt.hash(password, saltValue);
     const user = await User.create({

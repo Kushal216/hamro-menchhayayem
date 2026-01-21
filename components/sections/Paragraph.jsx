@@ -2,14 +2,14 @@
 
 import { useState } from "react";
 
-export default function Paragraph({ text, limit = 200 }) {
+export default function Paragraph({ text, limit=300 }) {
   const [isAll, setIsAll] = useState(false);
 
   const isLong = text.length > limit;
-  const shorttext = text.slice(0, 300) + "  ";
+  const shorttext = text.slice(0, limit) + "  ";
 
   return (
-    <div className="py-1 pl-2 pb-3 md:text-xl">
+    <div className="py-1 pl-2 pb-3 m-3 md:text-xl text-justify">
       {isAll ? text : shorttext}
       <button
         onClick={() => setIsAll(!isAll)}

@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
 import User from '@/models/user';
-
+import bcrypt from 'bcryptjs';
 /**
  * @swagger
  * /api/v1/users/{id}:
@@ -34,13 +34,20 @@ export async function GET(req, { params }) {
  *       - users
  */
 export async function PATCH(req, { params }) {
-  const { id } = params;
+  const { id } = await params;
   const body = await req.json();
-
+  const saltValue = parseInt(process.env.SALT_ROUNDS);
   try {
+
+    let updatedbody = { ...body }
+    if (body.password) {
+      updatedbody.hashedPassword = await bcrypt.hash(body.password, saltValue);
+      delete updatedbody.password;
+    }
+
     const updated = await User.findByIdAndUpdate(
       id,
-      { $set: body },
+      { $set: updatedbody },
       { new: true, runValidators: true }
     );
 
@@ -64,13 +71,15 @@ export async function PATCH(req, { params }) {
  *     summary: Replace user by id
  *     tags:
  *       - users
- */
+*/
 export async function PUT(req, { params }) {
-  const { id } = params;
+  const { id } = await params;
   const body = await req.json();
+  const saltValue = parseInt(process.env.SALT_ROUNDS);
 
   try {
     const user = await User.findById(id);
+    const hashedPassword = await bcrypt.hash(body.password, saltValue);
 
     if (!user) {
       return NextResponse.json(
@@ -84,7 +93,7 @@ export async function PUT(req, { params }) {
       {
         name: body.name,
         email: body.email,
-        password: body.password,
+        hashedPassword: hashedPassword,
         role: body.role ?? 'contributer',
       }
     );
