@@ -14,6 +14,8 @@ export default function LiteratureForm(toggleAdd) {
   const [video, setVideo] = useState('');
   const [category, setCategory] = useState('');
   const [author, setAuthor] = useState('');
+  const [authorImage, setauthorImage] = useState('');
+
   const [uploading, setUploading] = useState(false);
 
   const options = useMemo(
@@ -26,11 +28,11 @@ export default function LiteratureForm(toggleAdd) {
     []
   );
 
-  const handleCoverUpload = async (file) => {
+  const handleAuthorUpload = async (file) => {
     if (!file) return;
     setUploading(true);
     const { url } = await uploadImage(file);
-    setCoverImage(url);
+    setauthorImage(url);
     setUploading(false);
   };
 
@@ -40,7 +42,7 @@ export default function LiteratureForm(toggleAdd) {
     const data = {
       title,
       description,
-      coverImage,
+      authorImage,
       video,
       category,
       author,
@@ -65,6 +67,8 @@ export default function LiteratureForm(toggleAdd) {
       setVideo('');
       setAuthor('');
       setCategory('');
+      setauthorImage('');
+
 
       alert('Literature added successfully');
     } catch (err) {
@@ -103,18 +107,18 @@ export default function LiteratureForm(toggleAdd) {
         />
 
         <div>
-          <label className="font-semibold block mb-2">Cover Image</label>
+          <label className="font-semibold block mb-2">Author Image</label>
           <input
             type="file"
             accept="image/*"
-            onChange={(e) => handleCoverUpload(e.target.files[0])}
+            onChange={(e) => handleAuthorUpload(e.target.files[0])}
             className="border w-full p-2 rounded cursor-pointer"
           />
 
-          {coverImage && (
+          {authorImage && (
             <div className="mt-4 w-48 h-48 relative rounded overflow-hidden border shadow">
               <Image
-                src={coverImage}
+                src={authorImage}
                 alt="Cover"
                 fill
                 className="object-cover"
