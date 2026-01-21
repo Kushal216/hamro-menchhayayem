@@ -17,13 +17,13 @@ export default function LoginPage() {
         body: JSON.stringify({ email, password }),
       });
 
-      router.push("/admin");
       const data = await res.json();
 
       if (!res.ok) {
         console.log("Error:", data.error);
       } else {
         console.log("Success:", data.message, data.user);
+        router.push("/admin");
       }
     } catch (err) {
       console.error("Fetch error:", err);
