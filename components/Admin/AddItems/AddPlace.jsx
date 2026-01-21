@@ -1,17 +1,21 @@
-"use client";
-import { useState } from "react";
-import "simplemde/dist/simplemde.min.css";
-import MarkDownEditor from "./MarkDownEditor";
+'use client';
+import { useState } from 'react';
+import 'simplemde/dist/simplemde.min.css';
+import MarkDownEditor from './MarkDownEditor';
+import Input from '../Input';
+import toast from 'react-hot-toast';
 
-export default function PlaceForm({ onSubmit }) {
-  const [title, setTitle] = useState("");
-  const [description, setDescription] = useState("");
+export default function PlaceForm() {
+  const [title, setTitle] = useState('');
+  const [description, setDescription] = useState('');
   const [gallery, setGallery] = useState([]);
-  const [coverImage, setCoverImage] = useState("");
-  const [location, setLocation] = useState("Menchhayayem rural municipality");
-  const [video, setVideo] = useState("");
-  const [category, setCategory] = useState("");
-  const [subCategory, setSubCategory] = useState("");
+  const [coverImage, setCoverImage] = useState('');
+  const [location, setLocation] = useState('');
+  const [videoId, setVideoId] = useState('');
+  const [videoStart, setVideoStart] = useState('');
+  const [videoEnd, setVideoEnd] = useState('');
+  const [region, setRegion] = useState('menchhayayem');
+  const [category, setCategory] = useState('');
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -21,37 +25,45 @@ export default function PlaceForm({ onSubmit }) {
       gallery,
       coverImage,
       location,
-      video,
+      video: {
+        id: videoId,
+        start: videoStart,
+        end: videoEnd,
+      },
       category,
-      subCategory,
+      region,
       likesCount: 0,
     };
 
     try {
-      const res = await fetch("/api/v1/places", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
+      const res = await fetch('/api/v1/places', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(data),
       });
       if (!res.ok) {
         const text = await res.text();
-        console.error("Server returned:", text);
+        console.error('Server returned:', text);
+        toast.error(text);
         throw new Error(`Request failed: ${res.status}`);
       }
       const result = await res.json();
-      console.log("Saved successfully:", result);
+      console.log('Saved successfully:', result);
+      toast.success(`${title} added successfully.`);
 
-      setTitle("");
-      setDescription("");
+      setTitle('');
+      setDescription('');
       setGallery([]);
-      setCoverImage("");
-      setLocation("Menchhayayem rural municipality");
-      setVideo("");
-      setCategory("");
-      setSubCategory("");
+      setCoverImage('');
+      setLocation('');
+      setCategory('');
+      setRegion('menchhayayem');
+      setVideoId('');
+      setVideoStart('');
+      setVideoEnd('');
     } catch (err) {
-      console.error(err);
-      alert(err.message);
+      console.error(err)
+      toast.error(err);
     }
   };
 
@@ -61,26 +73,18 @@ export default function PlaceForm({ onSubmit }) {
         ADD Places{' '}
       </div>
       <form onSubmit={handleSubmit} className="space-y-4 p-4 ">
-        <div>
-          <label>Title:</label>
-          <input
-            type="text"
-            value={title}
-            onChange={(e) => setTitle(e.target.value)}
-            placeholder="Enter title"
-            className="border w-full p-2 rounded"
-            required
-          />
-        </div>
+        <Input
+          label={'Title'}
+          placeholder="Enter title"
+          value={title}
+          setValue={setTitle}
+        />
 
-        <div>
-          <label>Description:</label>
-
-          <MarkDownEditor
-            description={description}
-            setDescription={setDescription}
-          />
-        </div>
+        <label>Description:</label>
+        <MarkDownEditor
+          description={description}
+          setDescription={setDescription}
+        />
 
         <div>
           <label className="block mb-1 font-medium">Gallery:</label>
@@ -119,66 +123,74 @@ export default function PlaceForm({ onSubmit }) {
           </button>
         </div>
 
-        <div>
-          <label>Cover Image URL:</label>
-          <input
-            type="text"
-            value={coverImage}
-            onChange={(e) => setCoverImage(e.target.value)}
-            placeholder="Enter cover image URL"
-            className="border w-full p-2 rounded"
-          />
-        </div>
+        <Input
+          label={'Cover Image'}
+          placeholder="Enter cover image URL"
+          value={coverImage}
+          setValue={setCoverImage}
+        />
 
-        <div>
-          <label>Location:</label>
-          <input
-            type="text"
-            value={location}
-            onChange={(e) => setLocation(e.target.value)}
-            placeholder="Enter location"
-            className="border w-full p-2 rounded"
-          />
-        </div>
+        <Input
+          label={'Location'}
+          placeholder="https://maps.app.goo.gl/..."
+          value={location}
+          setValue={setLocation}
+        />
 
         <div>
           <label>Video URL:</label>
-          <input
-            type="text"
-            value={video}
-            onChange={(e) => setVideo(e.target.value)}
-            placeholder="Enter video URL"
-            className="border w-full p-2 rounded"
-          />
+
+          <div className="flex">
+            <Input
+              placeholder="Video ID"
+              value={videoId}
+              setValue={setVideoId}
+            />
+            <Input
+              placeholder="0:00 (start time)"
+              value={videoStart}
+              setValue={setVideoStart}
+            />
+            <Input
+              placeholder="1:00 (end time)"
+              value={videoEnd}
+              setValue={setVideoEnd}
+            />
+          </div>
         </div>
 
-        <div>
-          <label>Category:</label>
-          <input
-            type="text"
+        <label>
+          Region:
+          <select
+            value={region}
+            onChange={(e) => setRegion(e.target.value)}
+            className="border w-full p-2 rounded"
+          >
+            <option value="menchhayayem">Menchhayayem</option>
+            <option value="morahang">Morahang</option>
+            <option value="shreejung">Shreejung</option>
+            <option value="paunthak">Paunthak</option>
+          </select>
+        </label>
+        <label>
+          Category:
+          <select
             value={category}
             onChange={(e) => setCategory(e.target.value)}
-            placeholder="Enter category"
             className="border w-full p-2 rounded"
-            required
-          />
-        </div>
-
-        <div>
-          <label>Subcategory:</label>
-          <input
-            type="text"
-            value={subCategory}
-            onChange={(e) => setSubCategory(e.target.value)}
-            placeholder="Enter subcategory"
-            className="border w-full p-2 rounded"
-            required
-          />
-        </div>
+          >
+            <option value="place">Select tourism type</option>
+            <option value="temple">Temple</option>
+            <option value="river">River</option>
+            <option value="lake">Lake</option>
+            <option value="park">Park</option>
+            <option value="heritage">Heritage Site</option>
+          </select>
+        </label>
 
         <button
           type="submit"
-          className="bg-blue-600 text-white px-4 py-2 rounded"
+          className="bg-blue-600 text-white px-4 py-2 rounded mt-2"
         >
           Add Place
         </button>

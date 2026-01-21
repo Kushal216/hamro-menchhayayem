@@ -24,23 +24,20 @@ const placesSchema = new mongoose.Schema(
     video: {
       id: {
         type: String,
-        required: true,
       },
       start: {
         type: String,
-        default: '0',
       },
       end: {
         type: String,
-        default: '0',
       },
     },
-    category: {
+    region: {
       type: String,
       default: 'menchhayayem',
       enum: ['menchhayayem', 'morahang', 'shreejung', 'paunthak'],
     },
-    type: {
+    category: {
       type: String,
       default: 'place',
     },
