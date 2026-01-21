@@ -16,6 +16,7 @@ export async function POST(req) {
         const uploadResult = await uploadToCloudinary(file);
 
         return NextResponse.json({
+            message: "Image Uploaded Successfully",
             url: uploadResult.secure_url,
             public_id: uploadResult.public_id,
         });
