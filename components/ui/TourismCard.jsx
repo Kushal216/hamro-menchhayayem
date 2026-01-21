@@ -42,6 +42,7 @@ export default function TourismCard({ image, title, description, id }) {
                 <a
                   href="https://maps.app.goo.gl/TWWj8hvyH3dsuDsm8"
                   target="_blank"
+                  rel="noopener noreferrer"
                 >
                   <FaMapMarkerAlt
                     size={33}
