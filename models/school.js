@@ -1,6 +1,6 @@
 import mongoose from 'mongoose';
 import { connectMongoDB } from '@/lib/db.js';
-
+//dummy change
 const schoolSchema = new mongoose.Schema(
   {
     _id: {
