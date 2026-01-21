@@ -4,43 +4,19 @@ import Image from 'next/image';
 import 'simplemde/dist/simplemde.min.css';
 import { uploadImage } from '@/utils/uploadImage';
 import MarkDownEditor from './MarkDownEditor';
-
+import ImageInput from '@/components/ImageInput';
+import Input from '../Input';
 
 export default function CultureForm({ toggleAdd }) {
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [coverImage, setCoverImage] = useState('');
   const [gallery, setGallery] = useState([]);
-  const [video, setVideo] = useState('');
-  const [category, setCategory] = useState('');
+  const [caste, setCaste] = useState('all');
   const [uploading, setUploading] = useState(false);
-
-
-
-  /* ---------- handlers ---------- */
-  const handleCoverUpload = async (file) => {
-    setUploading(true);
-    const { url } = await uploadImage(file);
-    setCoverImage(url);
-    setUploading(false);
-  };
-
-  const handleGalleryUpload = async (files) => {
-    setUploading(true);
-    const urls = [];
-
-    for (const file of files) {
-      const { url } = await uploadImage(file);
-      urls.push(url);
-    }
-
-    setGallery((prev) => [...prev, ...urls]);
-    setUploading(false);
-  };
-
-  const removeGalleryImage = (index) => {
-    setGallery(gallery.filter((_, i) => i !== index));
-  };
+  const [videoId, setVideoId] = useState('');
+  const [videoStart, setVideoStart] = useState('');
+  const [videoEnd, setVideoEnd] = useState('');
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -50,8 +26,12 @@ export default function CultureForm({ toggleAdd }) {
       description,
       coverImage,
       gallery,
-      video,
-      category,
+      video: {
+        id: videoId,
+        start: videoStart,
+        end: videoEnd,
+      },
+      caste,
       likesCount: 0,
     };
 
@@ -80,7 +60,6 @@ export default function CultureForm({ toggleAdd }) {
     }
   };
 
-  /* ---------- UI ---------- */
   return (
     <>
       <h1 className="text-2xl font-bold text-black text-center mb-4">
@@ -89,104 +68,81 @@ export default function CultureForm({ toggleAdd }) {
 
       <form onSubmit={handleSubmit} className="space-y-5 p-4">
         {/* Title */}
-        <input
-          type="text"
-          placeholder="Title"
+
+        <Input
+          label={'Title'}
+          placeholder="Enter title"
           value={title}
-          onChange={(e) => setTitle(e.target.value)}
-          className="border w-full p-2 rounded"
-          required
+          setValue={setTitle}
         />
         {/* Description */}
+        <label>Description:</label>
+        <MarkDownEditor
+          description={description}
+          setDescription={setDescription}
+        />
 
-        <MarkDownEditor description={description} setDescription={setDescription}/>
-
-        {/* Cover Image */}
-        <div className="mb-6">
-          <label className="font-semibold text-gray-700 block mb-2">
-            Cover Image
-          </label>
-
-          <input
-            type="file"
-            accept="image/*"
-            onChange={(e) => handleCoverUpload(e.target.files[0])}
-            className="border border-gray-300 rounded-md p-2 w-full text-gray-600 cursor-pointer focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-blue-400 transition"
+        <label>
+          Cover Image:
+          <ImageInput
+            value={coverImage}
+            setValue={setCoverImage}
+            setUploading={setUploading}
           />
-
-          {coverImage && (
-            <div className="mt-4 w-48 h-48 relative rounded-lg overflow-hidden shadow-md border border-gray-200 group">
-              <Image
-                src={coverImage}
-                alt="Cover"
-                fill
-                className="object-cover transition-transform duration-300 group-hover:scale-105"
-              />
-            </div>
-          )}
-        </div>
-        {/* Gallery */}
-        <div className="mb-6">
-          <label className="font-semibold text-gray-700 block mb-2">
-            Gallery Images
-          </label>
-
-          <input
-            type="file"
-            accept="image/*"
+        </label>
+        <label>
+          Gallery:
+          <ImageInput
             multiple
-            onChange={(e) => handleGalleryUpload(e.target.files)}
-            className="border border-gray-300 rounded-md p-2 w-full text-gray-600 cursor-pointer focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-blue-400 transition"
+            value={gallery}
+            setValue={setGallery}
+            setUploading={setUploading}
           />
+        </label>
 
-          <div className="flex gap-4 mt-4 flex-wrap">
-            {gallery.map((url, index) => (
-              <div
-                key={index}
-                className="relative w-28 h-28 group rounded-lg overflow-hidden shadow-md border border-gray-200"
-              >
-                <Image
-                  src={url}
-                  alt={`Gallery ${index}`}
-                  fill
-                  className="object-cover transition-transform duration-300 group-hover:scale-105"
-                />
-                <button
-                  type="button"
-                  onClick={() => removeGalleryImage(index)}
-                  className="absolute top-1 right-1 bg-red-600 hover:bg-red-700 text-white text-xs font-bold w-5 h-5 flex items-center justify-center rounded-full shadow-md transition"
-                >
-                  ✕
-                </button>
-              </div>
-            ))}
+        <div>
+          <label>Video URL:</label>
+
+          <div className="flex gap-2">
+            <Input
+              placeholder="Video ID"
+              value={videoId}
+              setValue={setVideoId}
+            />
+            <Input
+              placeholder="0:00 (start time)"
+              value={videoStart}
+              setValue={setVideoStart}
+            />
+            <Input
+              placeholder="1:00 (end time)"
+              value={videoEnd}
+              setValue={setVideoEnd}
+            />
           </div>
         </div>
-        {/* Video */}
-        <input
-          type="text"
-          placeholder="Video URL"
-          value={video}
-          onChange={(e) => setVideo(e.target.value)}
-          className="border w-full p-2 rounded"
-        />
-        {/* Category */}
-        <input
-          type="text"
-          placeholder="Category"
-          value={category}
-          onChange={(e) => setCategory(e.target.value)}
-          className="border w-full p-2 rounded"
-        />
+        <label>
+          Caste:
+          <select
+            value={caste}
+            onChange={(e) => setCaste(e.target.value)}
+            className="bg-blue-500/10 w-full p-2 rounded"
+          >
+            <option value="brahmin">Brahmin</option>
+            <option value="chhetri">Chhetri</option>
+            <option value="kirant">Kirant</option>
+            <option value="tamang">Tamang</option>
+          </select>
+        </label>
         {/* Submit */}
 
-          <button
-            type="submit"
-            disabled={uploading}
-            className="cursor-pointer font-bold bg-blue-600 text-white px-5 py-2 rounded-xl"
-          >
-            {uploading ? 'Uploading...' : 'Add Culture'}
-          </button>
+        <button
+          type="submit"
+          disabled={uploading}
+          className="cursor-pointer font-bold bg-blue-600 mt-4 text-white px-5 py-2 rounded-xl"
+        >
+          {uploading ? 'Uploading...' : 'Add Culture'}
+        </button>
       </form>
     </>
   );

@@ -5,7 +5,6 @@ import MarkDownEditor from './MarkDownEditor';
 import Input from '../Input';
 import toast from 'react-hot-toast';
 import ImageInput from '@/components/ImageInput';
-import Image from 'next/image';
 
 export default function PlaceForm() {
   const [title, setTitle] = useState('');
