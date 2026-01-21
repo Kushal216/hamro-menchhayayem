@@ -140,7 +140,7 @@ export default function PlaceForm() {
         <div>
           <label>Video URL:</label>
 
-          <div className="flex">
+          <div className="flex gap-2">
             <Input
               placeholder="Video ID"
               value={videoId}
@@ -164,7 +164,7 @@ export default function PlaceForm() {
           <select
             value={region}
             onChange={(e) => setRegion(e.target.value)}
-            className="border w-full p-2 rounded"
+            className="bg-blue-500/10 w-full p-2 rounded"
           >
             <option value="menchhayayem">Menchhayayem</option>
             <option value="morahang">Morahang</option>
@@ -177,7 +177,7 @@ export default function PlaceForm() {
           <select
             value={category}
             onChange={(e) => setCategory(e.target.value)}
-            className="border w-full p-2 rounded"
+            className="bg-blue-500/10 w-full p-2 rounded"
           >
             <option value="place">Select tourism type</option>
             <option value="temple">Temple</option>

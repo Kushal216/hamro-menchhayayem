@@ -8,15 +8,17 @@ const ManageData = async ({ route }) => {
   const { data } = res;
   // console.log(data);
   return (
-    <div>
+    <div className='bg-white p-2 shadow-lg px-4'>
       {data.map((item, index) => {
         return (
           <div
             key={index}
-            className="flex border p-2 rounded my-2 justify-center"
+            className="flex bg-blue-500/10 p-2 rounded my-2 justify-center"
           >
             <div>
-              {route == 'users' || route == 'people' ? `${item.name} - (${route == 'people'?`${item.position}`:`${item.role}`}) ` : item.title}
+              {route == 'users' || route == 'people'
+                ? `${item.name} - (${route == 'people' ? `${item.position}` : `${item.role}`}) `
+                : item.title}
             </div>
             <div className="ml-auto">
               <button
