@@ -28,7 +28,7 @@ export async function GET(req, res) {
       return NextResponse.json({ error: 'Not found' }, { status: 404 });
     }
     return NextResponse.json({ data: place });
-  } catch {
+  } catch(err) {
     return NextResponse.json({ error: err.message }, { status: 500 });
   }
 
@@ -54,7 +54,7 @@ export async function PATCH(req, res) {
       data: updated,
     });
 
-  } catch {
+  } catch(err) {
     return NextResponse.json({ error: err.message }, { status: 500 });
 
   }

@@ -96,7 +96,7 @@ export async function PUT(request, res) {
       id: id,
       data: dbResponse
     });
-  } catch {
+  } catch(err) {
     return NextResponse.json({ error: err.message }, { status: 500 });
   }
 }
