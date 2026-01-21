@@ -11,7 +11,7 @@ const cultureSchema = new mongoose.Schema(
     description: {
       type: String,
       trim: true,
-      default: "No description provided."
+      default: 'No description provided.',
     },
     gallery: {
       type: [String],
@@ -19,16 +19,23 @@ const cultureSchema = new mongoose.Schema(
     },
 
     video: {
-      type: String,
+      id: {
+        type: String,
+      },
+      start: {
+        type: String,
+      },
+      end: {
+        type: String,
+      },
     },
     coverImage: {
       type: String,
-
     },
-    category: {
+    caste: {
       type: String,
       trim: true,
-      default: "Uncategorized"
+      default: 'all',
     },
     likesCount: {
       type: Number,

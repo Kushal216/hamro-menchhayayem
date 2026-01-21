@@ -1,36 +1,40 @@
-"use client";
+'use client';
 
-import { useState } from "react";
+import { useState } from 'react';
+import toast from 'react-hot-toast';
+import Input from '../Input';
+import ImageInput from '@/components/ImageInput';
 
 export default function UserForm({ onSubmit }) {
-  const [name, setName] = useState("");
-  const [role, setRole] = useState("contributer");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [name, setName] = useState('');
+  const [role, setRole] = useState('contributer');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [uploading, setUploading] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     const data = { name, role, email, password };
-    console.log(data)
+    console.log(data);
 
     try {
-      const res = await fetch("/api/v1/users", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
+      const res = await fetch('/api/v1/users', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(data),
       });
       if (!res.ok) {
         const text = await res.text();
-        console.error("Server Returned:", text);
+        console.error('Server Returned:', text);
         throw new Error(`Request Failed: ${res.status}`);
       }
       const result = await res.json();
-      console.log("Saved successfully:", result);
-
-      setName("");
-      setEmail("");
-      setPassword("");
-      setRole("");
+      console.log('Saved successfully:', result);
+      toast.success(`${name} added successfully.`);
+      setName('');
+      setEmail('');
+      setPassword('');
+      setRole('');
     } catch (err) {
       console.error(err);
       alert(err.message);
@@ -43,59 +47,47 @@ export default function UserForm({ onSubmit }) {
         ADD User
       </div>
       <form onSubmit={handleSubmit} className="space-y-4 p-4">
-        <div>
-          <label>Name:</label>
-          <input
-            type="text"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-            placeholder="Enter name"
-            className="border w-full p-2 rounded"
-            required
-          />
-        </div>
+        <Input
+          label={'Name'}
+          placeholder="Ram Krishna Aryal"
+          value={name}
+          setValue={setName}
+        />
 
-        <div>
-          <label>Role:</label>
+        <label>
+          Role:
           <select
             value={role}
             onChange={(e) => setRole(e.target.value)}
-            className="border w-full p-2 rounded"
+            className="bg-blue-500/10 w-full p-2 rounded"
           >
-            <option value="contributer">Contributer</option>
-            <option value="admin">Admin</option>
+            <option value="contributer">Mantri</option>
+            <option value="admin">Raja</option>
           </select>
-        </div>
+        </label>
 
-        <div>
-          <label>Email:</label>
-          <input
-            type="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            placeholder="Enter email"
-            className="border w-full p-2 rounded"
-            required
-          />
-        </div>
+        <Input
+          type="email"
+          label={'Email'}
+          placeholder="pagal@baula.com"
+          value={email}
+          setValue={setEmail}
+        />
 
-        <div>
-          <label>Password:</label>
-          <input
-            type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            placeholder="Enter password"
-            className="border w-full p-2 rounded"
-            required
-          />
-        </div>
+        <Input
+          type="password"
+          label={'Password'}
+          placeholder="gopya sutra"
+          value={password}
+          setValue={setPassword}
+        />
 
         <button
           type="submit"
-          className="bg-blue-600 text-white px-4 py-2 rounded"
+          disabled={uploading}
+          className="cursor-pointer mt-2 font-bold bg-blue-600 text-white px-5 py-2 rounded-xl"
         >
-          Submit
+          {uploading ? 'Uploading...' : 'Add Item'}
         </button>
       </form>
     </>

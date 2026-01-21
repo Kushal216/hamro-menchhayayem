@@ -1,21 +1,22 @@
 'use client';
 
 import { useState } from 'react';
-import Image from 'next/image';
 import 'simplemde/dist/simplemde.min.css';
 import { useMemo } from 'react';
-import { uploadImage } from '@/utils/uploadImage';
 import MarkDownEditor from './MarkDownEditor';
+import ImageInput from '@/components/ImageInput';
+import Input from '../Input';
+import toast from 'react-hot-toast';
 
 export default function LiteratureForm(toggleAdd) {
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
-  const [coverImage, setCoverImage] = useState('');
-  const [video, setVideo] = useState('');
+  const [videoId, setVideoId] = useState('');
+  const [videoStart, setVideoStart] = useState('');
+  const [videoEnd, setVideoEnd] = useState('');
   const [category, setCategory] = useState('');
   const [author, setAuthor] = useState('');
-  const [authorImage, setauthorImage] = useState('');
-
+  const [authorImage, setAuthorImage] = useState('');
   const [uploading, setUploading] = useState(false);
 
   const options = useMemo(
@@ -27,15 +28,6 @@ export default function LiteratureForm(toggleAdd) {
     }),
     []
   );
-
-  const handleAuthorUpload = async (file) => {
-    if (!file) return;
-    setUploading(true);
-    const { url } = await uploadImage(file);
-    setauthorImage(url);
-    setUploading(false);
-  };
-
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -43,7 +35,11 @@ export default function LiteratureForm(toggleAdd) {
       title,
       description,
       authorImage,
-      video,
+      video: {
+        id: videoId,
+        start: videoStart,
+        end: videoEnd,
+      },
       category,
       author,
       likesCount: 0,
@@ -64,13 +60,12 @@ export default function LiteratureForm(toggleAdd) {
       setTitle('');
       setDescription('');
       setCoverImage('');
-      setVideo('');
       setAuthor('');
-      setCategory('');
-      setauthorImage('');
+      setVideoId('');
+      setVideoStart('');
+      setVideoEnd('');
 
-
-      alert('Literature added successfully');
+      toast.success(`${title} added successfully.`);
     } catch (err) {
       alert(err.message);
     }
@@ -83,81 +78,76 @@ export default function LiteratureForm(toggleAdd) {
       </h1>
 
       <form onSubmit={handleSubmit} className="space-y-5 p-4">
-        <input
-          type="text"
-          placeholder="Literature Title"
+        <Input
+          label={'Title'}
+          placeholder="Enter title"
           value={title}
-          onChange={(e) => setTitle(e.target.value)}
-          className="border w-full p-2 rounded"
-          required
+          setValue={setTitle}
         />
-
-        <input
-          type="text"
-          placeholder="Author name"
+        <Input
+          label={"Author's name"}
+          placeholder="Author's name"
           value={author}
-          onChange={(e) => setTitle(e.target.value)}
-          className="border w-full p-2 rounded"
-          required
+          setValue={setAuthor}
         />
 
+        <label>Description:</label>
         <MarkDownEditor
           description={description}
           setDescription={setDescription}
         />
 
-        <div>
-          <label className="font-semibold block mb-2">Author Image</label>
-          <input
-            type="file"
-            accept="image/*"
-            onChange={(e) => handleAuthorUpload(e.target.files[0])}
-            className="border w-full p-2 rounded cursor-pointer"
+        <label>
+          Author Image:
+          <ImageInput
+            value={authorImage}
+            setValue={setAuthorImage}
+            setUploading={setUploading}
           />
+        </label>
 
-          {authorImage && (
-            <div className="mt-4 w-48 h-48 relative rounded overflow-hidden border shadow">
-              <Image
-                src={authorImage}
-                alt="Cover"
-                fill
-                className="object-cover"
-              />
-            </div>
-          )}
+        <div>
+          <label>Video URL:</label>
+
+          <div className="flex gap-2">
+            <Input
+              placeholder="Video ID"
+              value={videoId}
+              setValue={setVideoId}
+            />
+            <Input
+              placeholder="0:00 (start time)"
+              value={videoStart}
+              setValue={setVideoStart}
+            />
+            <Input
+              placeholder="1:00 (end time)"
+              value={videoEnd}
+              setValue={setVideoEnd}
+            />
+          </div>
         </div>
 
-        <input
-          type="text"
-          placeholder="Video URL (optional)"
-          value={video}
-          onChange={(e) => setVideo(e.target.value)}
-          className="border w-full p-2 rounded"
-        />
-
-        <input
-          type="text"
-          placeholder="Category"
-          value={category}
-          onChange={(e) => setCategory(e.target.value)}
-          className="border w-full p-2 rounded"
-        />
-
-        <div className="flex gap-10 justify-center">
-          <button
-            type="submit"
-            disabled={uploading}
-            className="cursor-pointer font-bold bg-blue-600 text-white px-5 py-2 rounded-xl"
+        <label>
+          Category:
+          <select
+            value={category}
+            onChange={(e) => setCategory(e.target.value)}
+            className="bg-blue-500/10 w-full p-2 rounded"
           >
-            {uploading ? 'Uploading...' : 'Add Literature'}
-          </button>
-          <button
-            onClick={toggleAdd}
-            className="cursor-pointer font-bold bg-red-500 text-white px-5 py-2 rounded-xl"
-          >
-            Close Form
-          </button>
-        </div>
+            <option value="story">Story</option>
+            <option value="poem">Poem</option>
+            <option value="article">Article</option>
+          </select>
+        </label>
+
+        <button
+          type="submit"
+          disabled={uploading}
+          className="cursor-pointer font-bold bg-blue-600 mt-2 text-white px-5 py-2 rounded-xl"
+        >
+          {uploading ? 'Uploading...' : 'Add Culture'}
+        </button>
       </form>
     </>
   );

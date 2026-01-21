@@ -62,18 +62,18 @@ const ImageInput = ({ value, setValue, setUploading, multiple }) => {
           multiple
           accept="image/*"
           onChange={(e) => handleImagesUpload(e.target.files)}
-          className="border border-gray-300 rounded-md p-2 w-full text-gray-600 cursor-pointer focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-blue-400 transition"
+          className=" bg-blue-500/10   rounded-md p-2 w-full text-gray-600 cursor-pointer focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-blue-400 transition mb-2"
         />
       ) : (
         <input
           type="file"
           accept="image/*"
           onChange={(e) => handleImageUpload(e.target.files[0])}
-          className="border border-gray-300 rounded-md p-2 w-full text-gray-600 cursor-pointer focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-blue-400 transition"
+          className="bg-blue-500/10 rounded-md p-2 w-full text-gray-600 cursor-pointer focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-blue-400 transition  mb-2"
         />
       )}
       {value && !multiple && (
-        <div className="mt-4 w-48 h-48 relative rounded-lg overflow-hidden shadow-md border border-gray-200 group">
+        <div className="mt-4 w-48 h-48 relative rounded-lg overflow-hidden shadow-md bg-blue-500/10">
           <Image
             src={value}
             alt="Cover"
@@ -87,7 +87,7 @@ const ImageInput = ({ value, setValue, setUploading, multiple }) => {
           {value.map((photo, index) => (
             <div
               key={index}
-              className="mt-4 w-32 aspect-square relative rounded-lg overflow-hidden group"
+              className="mt-4 w-32 aspect-square relative rounded-lg overflow-hidden"
             >
               <Image
                 src={photo}

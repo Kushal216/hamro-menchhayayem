@@ -2,10 +2,9 @@
 import { useState } from 'react';
 import 'simplemde/dist/simplemde.min.css';
 import MarkDownEditor from './MarkDownEditor';
-import Input from '../Input';
 import toast from 'react-hot-toast';
+import Input from '../Input';
 import ImageInput from '@/components/ImageInput';
-import Image from 'next/image';
 
 export default function PlaceForm() {
   const [title, setTitle] = useState('');
@@ -88,21 +87,21 @@ export default function PlaceForm() {
           description={description}
           setDescription={setDescription}
         />
-
-        <label className="block mb-1 font-medium">
-          Gallery:
-          <ImageInput
-            multiple
-            value={gallery}
-            setValue={setGallery}
-            setUploading={setUploading}
-          />
-        </label>
         <label>
           Cover Image:
           <ImageInput
             value={coverImage}
             setValue={setCoverImage}
+            setUploading={setUploading}
+          />
+        </label>
+
+        <label>
+          Gallery:
+          <ImageInput
+            multiple
+            value={gallery}
+            setValue={setGallery}
             setUploading={setUploading}
           />
         </label>
@@ -168,9 +167,9 @@ export default function PlaceForm() {
         <button
           type="submit"
           disabled={uploading}
-          className="cursor-pointer font-bold bg-blue-600 text-white px-5 py-2 rounded-xl"
+          className="cursor-pointer mt-2 font-bold bg-blue-600 text-white px-5 py-2 rounded-xl"
         >
-          {uploading ? 'Uploading...' : 'Add Culture'}
+          {uploading ? 'Uploading...' : 'Add Item'}
         </button>
       </form>
     </>

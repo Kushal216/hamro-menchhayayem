@@ -1,17 +1,21 @@
-"use client";
+'use client';
 
-import { useState } from "react";
+import { useState } from 'react';
+import toast from 'react-hot-toast';
+import Input from '../Input';
+import ImageInput from '@/components/ImageInput';
 
 export default function PeopleForm({ onSubmit }) {
-  const [name, setName] = useState("");
-  const [photo, setPhoto] = useState("");
-  const [phone, setPhone] = useState("");
-  const [website, setWebsite] = useState("");
-  const [facebook, setFacebook] = useState("");
-  const [instagram, setInstagram] = useState("");
-  const [linkedin, setLinkedin] = useState("");
-  const [email, setEmail] = useState("");
-  const [position, setPosition] = useState("");
+  const [name, setName] = useState('');
+  const [photo, setPhoto] = useState('');
+  const [phone, setPhone] = useState('');
+  const [website, setWebsite] = useState('');
+  const [facebook, setFacebook] = useState('');
+  const [instagram, setInstagram] = useState('');
+  const [linkedin, setLinkedin] = useState('');
+  const [email, setEmail] = useState('');
+  const [position, setPosition] = useState('');
+  const [uploading, setUploading] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -32,28 +36,29 @@ export default function PeopleForm({ onSubmit }) {
     };
 
     try {
-      const res = await fetch("api/v1/people", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
+      const res = await fetch('api/v1/people', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(data),
       });
       if (!res.ok) {
         const text = await res.text();
-        console.error("Server Returned:", text);
+        console.error('Server Returned:', text);
         throw new Error(`Request Failed: ${res.status}`);
       }
       const result = await res.json();
-      console.log("Saved successfully:", result);
+      console.log('Saved successfully:', result);
+      toast.success(`${title} added successfully.`);
 
-      setName("");
-      setPhoto("");
-      setEmail("");
-      setFacebook("");
-      setInstagram("");
-      setLinkedin("");
-      setPhone("");
-      setWebsite("");
-      setPosition("");
+      setName('');
+      setPhoto('');
+      setEmail('');
+      setFacebook('');
+      setInstagram('');
+      setLinkedin('');
+      setPhone('');
+      setWebsite('');
+      setPosition('');
     } catch (err) {
       console.error(err);
       alert(err.message);
@@ -66,107 +71,76 @@ export default function PeopleForm({ onSubmit }) {
         ADD People
       </div>
       <form onSubmit={handleSubmit} className="space-y-4 p-4">
-        <div>
-          <label>Name:</label>
-          <input
-            type="text"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-            placeholder="Enter name"
-            className="border w-full p-2 rounded"
-            required
-          />
-        </div>
-
-        <div>
-          <label>Photo URL:</label>
-          <input
-            type="text"
+        <Input
+          label={'Name'}
+          placeholder="John Doe"
+          value={name}
+          setValue={setName}
+        />
+        <label>
+          Profile Picture:
+          <ImageInput
             value={photo}
-            onChange={(e) => setPhoto(e.target.value)}
-            placeholder="Enter photo URL"
-            className="border w-full p-2 rounded"
+            setValue={setPhoto}
+            setUploading={setUploading}
           />
-        </div>
+        </label>
+        <Input
+          label={'Phone'}
+          placeholder="John Doe"
+          value={phone}
+          setValue={setPhone}
+        />
 
-        <div>
-          <label>Phone:</label>
-          <input
-            type="text"
-            value={phone}
-            onChange={(e) => setPhone(e.target.value)}
-            placeholder="Enter phone number"
-            className="border w-full p-2 rounded"
-          />
-        </div>
-
-        <div>
-          <label>Website:</label>
-          <input
-            type="text"
-            value={website}
-            onChange={(e) => setWebsite(e.target.value)}
-            placeholder="Enter website URL"
-            className="border w-full p-2 rounded"
-          />
-        </div>
+        <Input
+          label={'Website'}
+          placeholder="John Doe"
+          value={website}
+          setValue={setWebsite}
+        />
 
         <div>
           <label>Social Links:</label>
           <div className="space-y-2">
-            <input
-              type="text"
-              value={facebook}
-              onChange={(e) => setFacebook(e.target.value)}
+            <Input
               placeholder="Facebook URL"
-              className="border w-full p-2 rounded"
+              value={facebook}
+              setValue={setFacebook}
             />
-            <input
-              type="text"
-              value={instagram}
-              onChange={(e) => setInstagram(e.target.value)}
+            <Input
               placeholder="Instagram URL"
-              className="border w-full p-2 rounded"
+              value={instagram}
+              setValue={setInstagram}
             />
-            <input
-              type="text"
-              value={linkedin}
-              onChange={(e) => setLinkedin(e.target.value)}
+            <Input
               placeholder="LinkedIn URL"
-              className="border w-full p-2 rounded"
+              value={linkedin}
+              setValue={setLinkedin}
             />
           </div>
         </div>
 
-        <div>
-          <label>Email:</label>
-          <input
-            type="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            placeholder="Enter email"
-            className="border w-full p-2 rounded"
-            required
-          />
-        </div>
+        <Input
+          type="email"
+          label={'Email'}
+          placeholder="baula@paagal.com"
+          value={email}
+          setValue={setEmail}
+        />
 
-        <div>
-          <label>Position:</label>
-          <input
-            type="text"
-            value={position}
-            onChange={(e) => setPosition(e.target.value)}
-            placeholder="Enter position"
-            className="border w-full p-2 rounded"
-            required
-          />
-        </div>
+        <Input
+          label={'Position'}
+          placeholder="baula@paagal.com"
+          value={position}
+          setValue={setPosition}
+        />
 
         <button
           type="submit"
-          className="bg-blue-600 text-white px-4 py-2 rounded"
+          disabled={uploading}
+          className="cursor-pointer mt-2 font-bold bg-blue-600 text-white px-5 py-2 rounded-xl"
         >
-          Submit
+          {uploading ? 'Uploading...' : 'Add Item'}
         </button>
       </form>
     </>
