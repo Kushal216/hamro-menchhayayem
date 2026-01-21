@@ -147,12 +147,12 @@ export async function DELETE(req, { params }) {
     const place = await Places.findByIdAndDelete(id);
 
     if (place) {
-      return Response.json({
+      return NextResponse.json({
         message: `deleted ${place.title}`,
         data: place,
       });
     } else {
-      return Response.json(
+      return NextResponse.json(
         {
           message: "The place with the given id doesn't exist.",
           id: id,
@@ -161,7 +161,7 @@ export async function DELETE(req, { params }) {
       );
     }
   } catch (err) {
-    return Response.json(
+    return NextResponse.json(
       {
         message: 'Some error occurred in the database',
         error: err,

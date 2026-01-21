@@ -109,7 +109,7 @@ export async function PATCH(req, {params}) {
  *                   name:
  *                     type: string
  */
-export async function PUT(req, {params}) {
+export async function PUT(req, { params }) {
     //check if authorized
     //validate data
 
@@ -170,7 +170,7 @@ export async function PUT(req, {params}) {
  *                   name:
  *                     type: string
  */
-export async function DELETE(req, {params}) {
+export async function DELETE(req, { params }) {
     //validate user
 
     const { id } =await  params;
@@ -179,12 +179,12 @@ export async function DELETE(req, {params}) {
         const literature = await Literature.findByIdAndDelete(id);
 
         if (literature) {
-            return Response.json({
+            return NextResponse.json({
                 message: `deleted ${literature.title}`,
                 data: literature,
             });
         } else {
-            return Response.json(
+            return NextResponse.json(
                 {
                     message: "The literature with the given id doesn't exist.",
                     id: id,
@@ -193,7 +193,7 @@ export async function DELETE(req, {params}) {
             );
         }
     } catch (err) {
-        return Response.json(
+        return NextResponse.json(
             {
                 message: 'Some error occurred in the database',
                 error: err,

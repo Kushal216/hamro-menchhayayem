@@ -232,7 +232,7 @@ export async function PATCH(req, { params }) {
 
     // Prevent empty body
     if (!updates || Object.keys(updates).length === 0) {
-      return Response.json(
+      return NextResponse.json(
         { error: 'No fields provided for update' },
         { status: 400 }
       );
@@ -245,13 +245,13 @@ export async function PATCH(req, { params }) {
     );
 
     if (!updatedPerson) {
-      return Response.json(
+      return NextResponse.json(
         { error: 'Person not found' },
         { status: 404 }
       );
     }
 
-    return Response.json(
+    return NextResponse.json(
       {
         message: 'Person partially updated successfully',
         person: updatedPerson,
@@ -259,7 +259,7 @@ export async function PATCH(req, { params }) {
       { status: 200 }
     );
   } catch (err) {
-    return Response.json(
+    return NextResponse.json(
       { error: 'Failed to update person', details: err.message },
       { status: 500 }
     );
