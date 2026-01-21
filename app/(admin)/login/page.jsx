@@ -5,19 +5,16 @@ import { redirect } from "next/navigation";
 
 export default async function Login() {
   const cookie = await cookies();
-  const token = cookie.get('token')?.value;
+  const token = cookie.get("token")?.value;
 
-  if(!token){
-    const tokenPayload = validateJWT(token);
+  if (!token) {
+    return <Login />;
+  }
 
-  return (<>
-     <div>
-      <LoginPage/>
-    </div>
-  </>
-  );
-}
-else {
-  redirect('/admin?login=success');
-}
+  const tokenPayload = validateJWT(token);
+
+  if (!tokenPayload) {
+    return <LoginPage />;
+  }
+  redirect("/admin?login=success");
 }
