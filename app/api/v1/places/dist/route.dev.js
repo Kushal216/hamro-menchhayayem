@@ -100,6 +100,7 @@ function POST(req) {
           _context2.prev = 4;
           _context2.next = 7;
           return regeneratorRuntime.awrap(_places["default"].create({
+            _id: body._id,
             title: body.title,
             description: body.description,
             gallery: body.gallery,

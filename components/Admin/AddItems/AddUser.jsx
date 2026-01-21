@@ -8,6 +8,7 @@ import ImageInput from '@/components/ImageInput';
 export default function UserForm({ onSubmit }) {
   const [name, setName] = useState('');
   const [role, setRole] = useState('contributer');
+  const [_id, setId] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [uploading, setUploading] = useState(false);

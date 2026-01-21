@@ -101,6 +101,7 @@ function POST(req) {
           _context2.prev = 5;
           _context2.next = 8;
           return regeneratorRuntime.awrap(_school["default"].create({
+            _id: body._id,
             title: body.title,
             description: body.description,
             gallery: body.gallery,

@@ -12,6 +12,7 @@ export default function SchoolForm({ toggleAdd }) {
   const [gallery, setGallery] = useState([]);
   const [coverImage, setCoverImage] = useState('');
   const [location, setLocation] = useState('');
+  const [_id, setId] = useState('');
   const [video, setVideo] = useState('');
   const [category, setCategory] = useState('Uncategorized');
   const [phoneNo, setPhoneNo] = useState('');
@@ -24,6 +25,7 @@ export default function SchoolForm({ toggleAdd }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const data = {
+      _id,
       title,
       description: description,
       gallery,
@@ -84,6 +86,13 @@ export default function SchoolForm({ toggleAdd }) {
           placeholder="Enter title"
           value={title}
           setValue={setTitle}
+        />
+        <Input
+          label={'custom route'}
+          placeholder="route"
+          value={_id}
+          setValue={setId}
+          required
         />
 
         <div>

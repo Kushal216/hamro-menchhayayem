@@ -10,6 +10,7 @@ import toast from 'react-hot-toast';
 
 export default function CultureForm({ toggleAdd }) {
   const [title, setTitle] = useState('');
+  const [_id, setId] = useState('');
   const [description, setDescription] = useState('');
   const [coverImage, setCoverImage] = useState('');
   const [gallery, setGallery] = useState([]);
@@ -23,6 +24,7 @@ export default function CultureForm({ toggleAdd }) {
     e.preventDefault();
 
     const data = {
+      _id,
       title,
       description,
       coverImage,
@@ -77,6 +79,13 @@ export default function CultureForm({ toggleAdd }) {
           placeholder="Enter title"
           value={title}
           setValue={setTitle}
+          required
+        />
+        <Input
+          label={'custom route'}
+          placeholder="route"
+          value={_id}
+          setValue={setId}
           required
         />
         {/* Description */}

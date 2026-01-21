@@ -64,6 +64,7 @@ export async function POST(req) {
   let id = null;
   try {
     const newSchool = await Schools.create({
+      _id: body._id,
       title: body.title,
       description: body.description,
       gallery: body.gallery,
