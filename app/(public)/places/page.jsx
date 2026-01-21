@@ -17,6 +17,7 @@ async function TourismPage() {
             id={item._id}
             title={item.title}
             description={item.description}
+            likes={item.likesCount}
           />
         ))}
       </div>

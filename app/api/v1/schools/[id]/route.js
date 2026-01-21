@@ -1,6 +1,5 @@
 import { NextResponse } from 'next/server';
 import School from '@/models/school.js';
-import culture from '@/models/culture';
 
 /**
  * @swagger
@@ -55,8 +54,8 @@ import culture from '@/models/culture';
  *       200:
  *         description: School deleted successfully
  */
-export async function GET(request, res) {
-  const { id } = await res.params;
+export async function GET(req, {params}) {
+  const { id } = params;
   try {
     const school = await School.findById(id);
 
@@ -71,12 +70,12 @@ export async function GET(request, res) {
 }
 
 
-export async function PUT(request, res) {
-  const { id } = res.params;
+export async function PUT(req, {params}) {
+  const { id } = params;
   const body = await request.json();
   try {
     const school = await School.findById(id);
-    if (!culture) {
+    if (!school) {
       return NextResponse.json({ error: "Not Found" }, { status: 404 });
     }
     const dbResponse = await School.replaceOne(
@@ -96,7 +95,7 @@ export async function PUT(request, res) {
       id: id,
       data: dbResponse
     });
-  } catch {
+  } catch(err) {
     return NextResponse.json({ error: err.message }, { status: 500 });
   }
 }
@@ -124,14 +123,14 @@ export async function PUT(request, res) {
  *                   name:
  *                     type: string
  */
-export async function PATCH(req, res) {
-  const { id } = await res.params;
+export async function PATCH(req, {params}) {
+  const { id } = params;
   const body = await req.json();
 
   try {
     const updated = await School.findByIdAndUpdate(
       id,
-      { $set: body }, // only update provided fields
+      { $set: body }, 
       { new: true, runValidators: true }
     );
 
@@ -148,10 +147,10 @@ export async function PATCH(req, res) {
   }
 }
 
-export async function DELETE(req, res) {
+export async function DELETE(req, {params}) {
   //validate user
 
-  const { id } = await res.params;
+  const { id } = params;
 
   try {
     const school = await School.findByIdAndDelete(id);

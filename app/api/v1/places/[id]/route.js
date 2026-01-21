@@ -19,8 +19,8 @@ import Places from "@/models/places";
  *         description: Success - returns place data
  */
 
-export async function GET(req, res) {
-  const { id } = await res.params;
+export async function GET(req, { params }) {
+  const { id } = params;
   try {
     const place = await Places.findById(id);
 
@@ -28,15 +28,15 @@ export async function GET(req, res) {
       return NextResponse.json({ error: 'Not found' }, { status: 404 });
     }
     return NextResponse.json({ data: place });
-  } catch {
+  } catch (err) {
     return NextResponse.json({ error: err.message }, { status: 500 });
   }
 
 }
 
 
-export async function PATCH(req, res) {
-  const { id } = await res.params;
+export async function PATCH(req, { params }) {
+  const { id } = params;
   const body = await req.json();
   try {
     const updated = await Places.findByIdAndUpdate(
@@ -54,19 +54,19 @@ export async function PATCH(req, res) {
       data: updated,
     });
 
-  } catch {
+  } catch (err) {
     return NextResponse.json({ error: err.message }, { status: 500 });
 
   }
 }
 
 
-export async function PUT(req, res) {
+export async function PUT(req, { params }) {
   //check if authorized
   //validate data
 
   const body = await req.json()
-  const { id } = await res.params;
+  const { id } = params;
 
   try {
     const place = await Places.findById(id);
@@ -144,10 +144,10 @@ export async function PUT(req, res) {
 *       200:
 *         description: Place deleted successfully
 */
-export async function DELETE(req, res) {
+export async function DELETE(req, { params }) {
   //validate user
 
-  const { id } = await res.params;
+  const { id } = params;
 
   try {
     const place = await Places.findByIdAndDelete(id);

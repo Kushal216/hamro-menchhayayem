@@ -65,7 +65,7 @@ export async function POST(req) {
     try {
         const newSchool = await Schools.create({
             title: body.title,
-            description: body.title,
+            description: body.description,
             gallery: body.gallery,
             coverImage: body.coverImage,
             location: body.location,
@@ -74,7 +74,7 @@ export async function POST(req) {
             phoneNo: body.phoneNo,
         })
         id = newSchool._id;
-    } catch {
+    } catch(err) {
         console.log(`ERROR: in creating school:\n${err}`);
         return NextResponse.json({
             message: `DB error in performing the create school action. `,

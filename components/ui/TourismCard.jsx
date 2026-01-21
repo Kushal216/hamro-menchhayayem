@@ -6,7 +6,7 @@ import { BiSolidCommentDots } from 'react-icons/bi';
 import ShortText from '../sections/ShortText';
 import Link from 'next/link';
 
-export default function TourismCard({ image, title, description, id }) {
+export default function TourismCard({ image, title, description, id, likes }) {
   return (
     <div className="w-full mx-auto p-4">
       <div className="bg-white rounded-2xl shadow-[0_4px_6px_-2px_rgba(0,0,0,0.3)] overflow-hidden">
@@ -53,7 +53,7 @@ export default function TourismCard({ image, title, description, id }) {
                   size={33}
                   className="text-[#00AAFF] text-lg cursor-pointer hover:scale-110 transition"
                 />
-                <Like totalLikes={10} />
+                <Like totalLikes={likes} />
               </div>
             </div>
           </div>
