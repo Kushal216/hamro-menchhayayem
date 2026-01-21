@@ -100,7 +100,7 @@ export default function CultureForm({ toggleAdd }) {
         {/* Description */}
 
         <MarkDownEditor description={description} setDescription={setDescription}/>
-        
+
         {/* Cover Image */}
         <div className="mb-6">
           <label className="font-semibold text-gray-700 block mb-2">
@@ -180,7 +180,6 @@ export default function CultureForm({ toggleAdd }) {
         />
         {/* Submit */}
 
-        <div className="flex gap-10 justify-center">
           <button
             type="submit"
             disabled={uploading}
@@ -188,13 +187,6 @@ export default function CultureForm({ toggleAdd }) {
           >
             {uploading ? 'Uploading...' : 'Add Culture'}
           </button>
-          <button
-            onClick={toggleAdd}
-            className="cursor-pointer font-bold bg-red-500 text-white px-5 py-2 rounded-xl"
-          >
-            Close Form
-          </button>
-        </div>
       </form>
     </>
   );
