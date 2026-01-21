@@ -24,8 +24,8 @@ import Culture from '@/models/culture';
  *                   name:
  *                     type: string
  */
-export async function GET(request, res) {
-  const { id } = await res.params;
+export async function GET(req, {params}) {
+  const { id } = params;
   try {
     const culture = await Culture.findById(id);
 
@@ -62,8 +62,8 @@ export async function GET(request, res) {
  *                   name:
  *                     type: string
  */
-export async function PATCH(req, res) {
-  const { id } = await res.params;
+export async function PATCH(req, {params}) {
+  const { id } = params;
   const body = await req.json();
 
   try {
@@ -109,12 +109,12 @@ export async function PATCH(req, res) {
  *                   name:
  *                     type: string
  */
-export async function PUT(req, res) {
+export async function PUT(req, {params}) {
   //check if authorized
   //validate data
 
   const body = await req.json()
-  const { id } = await res.params;
+  const { id } = params;
 
   try {
     const culture = await Culture.findById(id);
@@ -171,10 +171,10 @@ export async function PUT(req, res) {
  *                   name:
  *                     type: string
  */
-export async function DELETE(req, res) {
+export async function DELETE(req, {params}) {
   //validate user
 
-  const { id } = await res.params;
+  const { id } = params;
 
   try {
     const culture = await Culture.findByIdAndDelete(id);

@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
 import mongoose from 'mongoose';
-import People from '@/models/People';
+import People from '@/models/people';
 
 /**
  * @swagger

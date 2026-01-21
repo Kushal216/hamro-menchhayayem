@@ -9,8 +9,8 @@ import User from '@/models/user';
  *     tags:
  *       - users
  */
-export async function GET(req, res) {
-  const { id } = await res.params;
+export async function GET(req, { params }) {
+  const { id } = params;
 
   try {
     const user = await User.findById(id);
@@ -33,8 +33,8 @@ export async function GET(req, res) {
  *     tags:
  *       - users
  */
-export async function PATCH(req, res) {
-  const { id } = await res.params;
+export async function PATCH(req, { params }) {
+  const { id } = params;
   const body = await req.json();
 
   try {
@@ -65,8 +65,8 @@ export async function PATCH(req, res) {
  *     tags:
  *       - users
  */
-export async function PUT(req, res) {
-  const { id } = await res.params;
+export async function PUT(req, { params }) {
+  const { id } = params;
   const body = await req.json();
 
   try {
@@ -107,8 +107,8 @@ export async function PUT(req, res) {
  *     tags:
  *       - users
  */
-export async function DELETE(req, res) {
-  const { id } = await res.params;
+export async function DELETE(req, { params }) {
+  const { id } = params;
 
   try {
     const user = await User.findByIdAndDelete(id);
