@@ -24,8 +24,8 @@ import Literature from '@/models/literature';
  *                   name:
  *                     type: string
  */
-export async function GET(req, { params }) {
-    const { id } = params;
+export async function GET(req, {params}) {
+    const { id } =await  params;
     try {
         const literature = await Literature.findById(id);
 
@@ -62,8 +62,8 @@ export async function GET(req, { params }) {
  *                   name:
  *                     type: string
  */
-export async function PATCH(req, { params }) {
-    const { id } = params;
+export async function PATCH(req, {params}) {
+    const { id } =await  params;
     const body = await req.json();
 
     try {
@@ -114,7 +114,7 @@ export async function PUT(req, { params }) {
     //validate data
 
     const body = await req.json()
-    const { id } = params;
+    const { id } =await  params;
 
     try {
         const literature = await Literature.findById(id);
@@ -173,7 +173,7 @@ export async function PUT(req, { params }) {
 export async function DELETE(req, { params }) {
     //validate user
 
-    const { id } = params;
+    const { id } =await  params;
 
     try {
         const literature = await Literature.findByIdAndDelete(id);

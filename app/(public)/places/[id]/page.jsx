@@ -1,8 +1,7 @@
-import React from "react";
-import ItemDetails from "@/components/layout/ItemDetails";
+import React from 'react';
+import ItemDetails from '@/components/layout/ItemDetails';
 
-export default function Page({ params }) {
-  const { id } = params.id;
-
+export default async function Page({ params }) {
+  const { id } = await params;
   return <ItemDetails route="places" id={id} />;
 }

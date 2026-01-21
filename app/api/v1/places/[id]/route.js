@@ -1,5 +1,5 @@
-import { NextResponse } from "next/server";
-import Places from "@/models/places";
+import { NextResponse } from 'next/server';
+import Places from '@/models/places';
 /**
  * @swagger
  * /api/places/{id}:
@@ -20,7 +20,7 @@ import Places from "@/models/places";
  */
 
 export async function GET(req, { params }) {
-  const { id } = params;
+  const { id } = await params;
   try {
     const place = await Places.findById(id);
 
@@ -31,12 +31,10 @@ export async function GET(req, { params }) {
   } catch (err) {
     return NextResponse.json({ error: err.message }, { status: 500 });
   }
-
 }
 
-
 export async function PATCH(req, { params }) {
-  const { id } = params;
+  const { id } = await params;
   const body = await req.json();
   try {
     const updated = await Places.findByIdAndUpdate(
@@ -47,26 +45,22 @@ export async function PATCH(req, { params }) {
 
     if (!updated) {
       return NextResponse.json({ error: 'Not found' }, { status: 404 });
-
     }
     return NextResponse.json({
       message: `Updated Places ${updated.title}`,
       data: updated,
     });
-
   } catch (err) {
     return NextResponse.json({ error: err.message }, { status: 500 });
-
   }
 }
-
 
 export async function PUT(req, { params }) {
   //check if authorized
   //validate data
 
-  const body = await req.json()
-  const { id } = params;
+  const body = await req.json();
+  const { id } =await  params;
 
   try {
     const place = await Places.findById(id);
@@ -93,7 +87,7 @@ export async function PUT(req, { params }) {
     return NextResponse.json({
       message: `replaced places ${body.title} with ${body.title}`,
       id: id,
-      data: dbResponse
+      data: dbResponse,
     });
   } catch (err) {
     return NextResponse.json({ error: err.message }, { status: 500 });
@@ -127,27 +121,27 @@ export async function PUT(req, { params }) {
  */
 
 /**
-* @swagger
-* /api/places/{id}:
-*   delete:
-*     summary: Delete place by ID
-*     tags:
-*       - places
-*     parameters:
-*       - in: path
-*         name: id
-*         required: true
-*         schema:
-*           type: string
-*         description: Place ID
-*     responses:
-*       200:
-*         description: Place deleted successfully
-*/
+ * @swagger
+ * /api/places/{id}:
+ *   delete:
+ *     summary: Delete place by ID
+ *     tags:
+ *       - places
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: string
+ *         description: Place ID
+ *     responses:
+ *       200:
+ *         description: Place deleted successfully
+ */
 export async function DELETE(req, { params }) {
   //validate user
 
-  const { id } = params;
+  const { id } =await  params;
 
   try {
     const place = await Places.findByIdAndDelete(id);
