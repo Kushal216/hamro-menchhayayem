@@ -36,19 +36,23 @@ export default function PeopleForm({ onSubmit }) {
     };
 
     try {
-      const res = await fetch('api/v1/people', {
+      setUploading(true);
+
+      const res = await fetch('/api/v1/people', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(data),
       });
+      setUploading(false);
+
       if (!res.ok) {
-        const text = await res.text();
-        console.error('Server Returned:', text);
-        throw new Error(`Request Failed: ${res.status}`);
+        const { message } = await res.json();
+        toast.error(message);
+        throw new Error(message);
       }
       const result = await res.json();
       console.log('Saved successfully:', result);
-      toast.success(`${title} added successfully.`);
+      toast.success(result.message);
 
       setName('');
       setPhoto('');
@@ -130,7 +134,7 @@ export default function PeopleForm({ onSubmit }) {
 
         <Input
           label={'Position'}
-          placeholder="baula@paagal.com"
+          placeholder="rastrapati"
           value={position}
           setValue={setPosition}
         />

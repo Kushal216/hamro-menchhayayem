@@ -7,7 +7,7 @@ import CoverImage from './CoverImage';
 export default async function ItemDetails({ route, id }) {
   let content = 'पर्खनुहोस ...';
   const res = await fetchItem(route, id);
-  const culture = res;
+  const culture = res.data;
   console.log(culture)
   content = culture.description;
 
@@ -16,7 +16,7 @@ export default async function ItemDetails({ route, id }) {
       <div className="w-full px-2 relative mt-2 select-none">
         <BackButton />
         <div className="">
-          <CoverImage title={culture.title} id={id} route={`/${route}/${id}`} />
+          <CoverImage title={culture.title} id={id} route={`/${route}/${id}`} video={culture.video} />
 
           <div className="mt-2">
             <div className="font-bold text-xl  lg:text-3xl text-black border-b-2 lg:border-b-4 border-red-500 w-fill inline-block px-2 mb-2">

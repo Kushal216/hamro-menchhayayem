@@ -18,19 +18,24 @@ export default function UserForm({ onSubmit }) {
     console.log(data);
 
     try {
+      setUploading(true);
+
       const res = await fetch('/api/v1/users', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(data),
       });
+      setUploading(false);
+
       if (!res.ok) {
-        const text = await res.text();
-        console.error('Server Returned:', text);
-        throw new Error(`Request Failed: ${res.status}`);
+        const { message } = await res.json();
+        toast.error(message);
+        throw new Error(message);
       }
       const result = await res.json();
       console.log('Saved successfully:', result);
-      toast.success(`${name} added successfully.`);
+      toast.success(result.message);
+
       setName('');
       setEmail('');
       setPassword('');
