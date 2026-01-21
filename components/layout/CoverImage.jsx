@@ -1,4 +1,4 @@
-"use client"
+'use client';
 import HomeHeading from '@/components/homepage/HomeHeading';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -7,27 +7,36 @@ import { useContext, useState } from 'react';
 import { BsPlayBtnFill } from 'react-icons/bs';
 import YoutubeIframe from './YoutubeIframe';
 
-export default function CoverImage({ title, route }) {
-    const paths = usePathname().replace(/\/$/, '').split('/');
-    const path = paths[1];
+export default function CoverImage({
+  title,
+  route,
+  videoId,
+  videoStart,
+  videoEnd,
+}) {
+  const [showVideo, setShowVideo] = useState(false);
+  const paths = usePathname().replace(/\/$/, '').split('/');
+  const path = paths[1];
 
-    const [showVideo, setShowVideo] = useState(false)
+  videoId = 'PhOMPJWPDLU'; //testing
 
   return (
     <div className="md:float-right md:aspect-video md:w-fit md:flex md:flex-col items-center">
-      <div className="aspect-video w-full md:w-[55vw] md:float-right  relative mr-2">
+      <div className="aspect-32/15 w-full md:w-[55vw] md:float-right  relative mr-2">
         {!showVideo ? (
           <>
             <div className="absolute z-2 top-0 left-0 ">
               <HomeHeading title={title} color={'white'} fixed />
             </div>
 
-            <BsPlayBtnFill
-              onClick={() => {
-                setShowVideo(true);
-              }}
-              className="absolute z-2 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-white text-2xl opacity-95"
-            />
+            {videoId && (
+              <BsPlayBtnFill
+                onClick={() => {
+                  setShowVideo(true);
+                }}
+                className="absolute z-2 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-white text-2xl md:text-3xl xl:text-5xl  opacity-95"
+              />
+            )}
 
             <Image
               src={'/images/image.png'}
@@ -38,7 +47,12 @@ export default function CoverImage({ title, route }) {
             />
           </>
         ) : (
-          <YoutubeIframe id="53gNFOqDFcE" start="1:20" end="2:30" autoplay />
+          <YoutubeIframe
+            id={videoId}
+            start={videoStart}
+            end={videoEnd}
+            autoplay
+          />
         )}
       </div>
       {path != 'literature' && (

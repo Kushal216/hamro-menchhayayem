@@ -18,7 +18,7 @@ export default async function ItemDetails({ route, id }) {
           <CoverImage title={culture.title} id={id} route={`/${route}/${id}`} />
 
           <div className="mt-2">
-            <div className="font-bold text-2xl  lg:text-3xl text-black border-b-2 lg:border-b-4 border-red-500 w-fill inline-block px-2 mb-2">
+            <div className="font-bold text-xl  lg:text-3xl text-black border-b-2 lg:border-b-4 border-red-500 w-fill inline-block px-2 mb-2">
               परिचय
             </div>
             <MarkdownViewer content={content} />
