@@ -26,14 +26,14 @@ import Literature from '@/models/literature';
  */
 
 export async function GET(req) {
-    //check if request is coming from samesite
+  //check if request is coming from samesite
 
-    const literatures = await Literature.find({});
+  const literatures = await Literature.find({});
 
-    return NextResponse.json({
-        message: 'GET list of literature',
-        data: literatures,
-    });
+  return NextResponse.json({
+    message: 'GET list of literature',
+    data: literatures,
+  });
 }
 
 /**
@@ -60,33 +60,36 @@ export async function GET(req) {
  *                     type: string
  */
 export async function POST(req) {
-    const body = await req.json();
+  const body = await req.json();
 
-    //check authentication
-    //validate data using middleware
-    let id = null;
-    try {
-        const newLiterature = await Literature.create({
-            title: body.title,
-            description: body.description,
-            video: body.video,
-            coverImage: body.coverImage,
-            category: body.category,
-        });
+  //check authentication
+  //validate data using middleware
+  let id = null;
+  try {
+    const newLiterature = await Literature.create({
+      title: body.title,
+      description: body.description,
+      video: body.video,
+      coverImage: body.coverImage,
+      category: body.category,
+    });
 
-        id = newLiterature._id;
-    } catch (err) {
-        console.log(`ERROR: in creating Literature:\n${err}`);
-        return NextResponse.json({
-            message: `DB error in performing the create Literature action. `,
-            err: err,
-        });
-    }
-
+    id = newLiterature._id;
+  } catch (err) {
+    console.log(`ERROR: in creating Literature:\n${err}`);
     return NextResponse.json(
-        {
-            message: `Added ${body.title} to the database with id: ${id}. `,
-        },
-        { status: 201 }
+      {
+        message: `Error: ${err.message}. `,
+        err: err,
+      },
+      { status: 400 }
     );
+  }
+
+  return NextResponse.json(
+    {
+      message: `Added ${body.title} to the database with id: ${id}. `,
+    },
+    { status: 201 }
+  );
 }

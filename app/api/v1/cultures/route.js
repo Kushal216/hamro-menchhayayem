@@ -78,10 +78,13 @@ export async function POST(req) {
     id = newCulture._id;
   } catch (err) {
     console.log(`ERROR: in creating culture:\n${err}`);
-    return NextResponse.json({
-      message: `DB error in performing the create culture action. `,
-      err: err,
-    });
+    return NextResponse.json(
+      {
+        message: `DB error ${err.message}. `,
+        err: err,
+      },
+      { status: 400 }
+    );
   }
 
   return NextResponse.json(

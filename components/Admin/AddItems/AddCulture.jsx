@@ -43,8 +43,9 @@ export default function CultureForm({ toggleAdd }) {
       });
 
       if (!res.ok) {
-        const text = await res.text();
-        throw new Error(text);
+        const { message } = await res.json();
+        toast.error(message);
+        throw new Error(message);
       }
 
       // reset form
@@ -52,11 +53,10 @@ export default function CultureForm({ toggleAdd }) {
       setDescription('');
       setCoverImage('');
       setGallery([]);
-      setVideo('');
       setCategory('');
-      alert('Culture added successfully');
+      toast.success(`${title} added successfully`);
     } catch (err) {
-      alert(err.message);
+      toast.error(err.message);
     }
   };
 
@@ -74,6 +74,7 @@ export default function CultureForm({ toggleAdd }) {
           placeholder="Enter title"
           value={title}
           setValue={setTitle}
+          required
         />
         {/* Description */}
         <label>Description:</label>
@@ -88,6 +89,7 @@ export default function CultureForm({ toggleAdd }) {
             value={coverImage}
             setValue={setCoverImage}
             setUploading={setUploading}
+            required
           />
         </label>
         <label>

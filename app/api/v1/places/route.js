@@ -79,10 +79,13 @@ export async function POST(req) {
         id = newPlace._id;
     } catch (err) {
         console.log(`ERROR: in creating places:\n${err}`);
-        return NextResponse.json({
-            message: `DB error in performing the create places action. `,
-            err: err,
-        });
+         return NextResponse.json(
+           {
+             message: `Error: ${err.message}. `,
+             err: err,
+           },
+           { status: 400 }
+         );
     }
 
     return NextResponse.json(
