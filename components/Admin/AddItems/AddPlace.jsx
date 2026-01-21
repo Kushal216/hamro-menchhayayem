@@ -167,7 +167,7 @@ export default function PlaceForm() {
         <button
           type="submit"
           disabled={uploading}
-          className="cursor-pointer font-bold bg-blue-600 text-white px-5 py-2 rounded-xl"
+          className="cursor-pointer mt-2 font-bold bg-blue-600 text-white px-5 py-2 rounded-xl"
         >
           {uploading ? 'Uploading...' : 'Add Culture'}
         </button>
