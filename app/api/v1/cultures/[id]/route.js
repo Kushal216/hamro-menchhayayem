@@ -180,12 +180,12 @@ export async function DELETE(req, {params}) {
     const culture = await Culture.findByIdAndDelete(id);
 
     if (culture) {
-      return Response.json({
+      return NextResponse.json({
         message: `deleted ${culture.title}`,
         data: culture,
       });
     } else {
-      return Response.json(
+      return NextResponse.json(
         {
           message: "The culture with the given id doesn't exist.",
           id: id,
@@ -194,7 +194,7 @@ export async function DELETE(req, {params}) {
       );
     }
   } catch (err) {
-    return Response.json(
+    return NextResponse.json(
       {
         message: 'Some error occurred in the database',
         error: err,

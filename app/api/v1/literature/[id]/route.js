@@ -24,7 +24,7 @@ import Literature from '@/models/literature';
  *                   name:
  *                     type: string
  */
-export async function GET(req, {params}) {
+export async function GET(req, { params }) {
     const { id } = params;
     try {
         const literature = await Literature.findById(id);
@@ -62,7 +62,7 @@ export async function GET(req, {params}) {
  *                   name:
  *                     type: string
  */
-export async function PATCH(req, {params}) {
+export async function PATCH(req, { params }) {
     const { id } = params;
     const body = await req.json();
 
@@ -109,7 +109,7 @@ export async function PATCH(req, {params}) {
  *                   name:
  *                     type: string
  */
-export async function PUT(req, {params}) {
+export async function PUT(req, { params }) {
     //check if authorized
     //validate data
 
@@ -170,7 +170,7 @@ export async function PUT(req, {params}) {
  *                   name:
  *                     type: string
  */
-export async function DELETE(req, {params}) {
+export async function DELETE(req, { params }) {
     //validate user
 
     const { id } = params;
@@ -179,12 +179,12 @@ export async function DELETE(req, {params}) {
         const literature = await Literature.findByIdAndDelete(id);
 
         if (literature) {
-            return Response.json({
+            return NextResponse.json({
                 message: `deleted ${literature.title}`,
                 data: literature,
             });
         } else {
-            return Response.json(
+            return NextResponse.json(
                 {
                     message: "The literature with the given id doesn't exist.",
                     id: id,
@@ -193,7 +193,7 @@ export async function DELETE(req, {params}) {
             );
         }
     } catch (err) {
-        return Response.json(
+        return NextResponse.json(
             {
                 message: 'Some error occurred in the database',
                 error: err,
