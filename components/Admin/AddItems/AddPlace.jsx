@@ -89,44 +89,15 @@ export default function PlaceForm() {
           setDescription={setDescription}
         />
 
-        <div>
-          <label className="block mb-1 font-medium">Gallery:</label>
-          {gallery.map((url, index) => (
-            <div key={index} className="flex mb-2 gap-2">
-              <input
-                type="text"
-                value={url}
-                onChange={(e) => {
-                  const newGallery = [...gallery];
-                  newGallery[index] = e.target.value;
-                  setGallery(newGallery);
-                }}
-                placeholder={`Image URL ${index + 1}`}
-                className="border w-full p-2 rounded"
-              />
-
-              <button
-                type="button"
-                onClick={() => {
-                  const newGallery = gallery.filter((_, i) => i !== index);
-                  setGallery(newGallery);
-                }}
-                className="bg-red-500 text-white px-2 rounded"
-              >
-                Remove
-              </button>
-            </div>
-          ))}
-
-          <button
-            type="button"
-            onClick={() => setGallery([...gallery, ''])}
-            className="bg-green-600 text-white px-3 py-1 rounded"
-          >
-            Add More
-          </button>
-        </div>
-
+        <label className="block mb-1 font-medium">
+          Gallery:
+          <ImageInput
+            multiple
+            value={gallery}
+            setValue={setGallery}
+            setUploading={setUploading}
+          />
+        </label>
         <label>
           Cover Image:
           <ImageInput
