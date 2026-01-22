@@ -13,14 +13,14 @@ const HeroImage = () => {
 
   const [heroIndex, setHeroIndex] = useState(0);
 
-  useEffect(() => {
-    const interval = setInterval(() => {
-      showNextImage();
-    }, 3000);
+useEffect(() => {
+  const interval = setInterval(() => {
+    setHeroIndex((prev) => (prev + 1) % heroPhotos.length);
+  }, 3000);
 
-    return () => clearInterval(interval);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  return () => clearInterval(interval);
+}, [heroPhotos.length]);
+
 
   const photo = heroPhotos[heroIndex];
   return (
