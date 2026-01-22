@@ -9,21 +9,7 @@ import bcrypt from 'bcryptjs';
  *     summary: validate authentication
  *     tags:
  *       - places
- *     description: Returns a list of places
- *     responses:
- *       200:
- *         description: Success
- *         content:
- *           application/json:
- *             schema:
- *               type: array
- *               items:
- *                 type: object
- *                 properties:
- *                   id:
- *                     type: number
- *                   name:
- *                     type: string
+ *     description: Returns a list of all users
  */
 export async function GET(req) {
   const users = await User.find({});
@@ -37,23 +23,16 @@ export async function GET(req) {
  *     summary: add user to the database
  *     tags:
  *       - places
- *     description: adds user in body to the db
- *     responses:
- *       200:
- *         description: Success
- *         content:
- *           application/json:
- *             schema:
- *               type: array
- *               items:
- *                 type: object
- *                 properties:
- *                   id:
- *                     type: number
- *                   name:
- *                     type: string
+ *     description: creates a user
  */
 export async function POST(req) {
+  if (!isAdmin(req)) {
+    return NextResponse.json(
+      { message: 'Permission Error: Only admins can delete items.' },
+      { status: 401 }
+    );
+  }
+
   const { name, email, password, role } = await req.json();
   const saltValue = process.env.SALT_ROUNDS;
   try {

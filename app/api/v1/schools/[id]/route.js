@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
 import School from '@/models/school.js';
-import isLoggedIn from '@/lib/middlewares/validateAuth';
+import isLoggedIn, { isAdmin } from '@/lib/middlewares/validateAuth';
 
 /**
  * @swagger
@@ -119,13 +119,12 @@ export async function PATCH(req, { params }) {
 }
 
 export async function DELETE(req, { params }) {
-  if (!isLoggedIn(req)) {
+  if (!isAdmin(req)) {
     return NextResponse.json(
-      { message: 'you need to be logged in to perform this request.' },
+      { message: 'Permission Error: Only admins can delete items.' },
       { status: 401 }
     );
   }
-
   const { id } = await params;
 
   try {

@@ -1,6 +1,8 @@
 import { NextResponse } from 'next/server';
 import User from '@/models/user';
 import bcrypt from 'bcryptjs';
+import isLoggedIn, { isAdmin } from '@/lib/middlewares/validateAuth';
+
 /**
  * @swagger
  * /api/v1/users/{id}:
@@ -34,6 +36,13 @@ export async function GET(req, { params }) {
  *       - users
  */
 export async function PATCH(req, { params }) {
+  if (!isAdmin(req)) {
+    return NextResponse.json(
+      { message: 'Permission Error: Only admins can delete items.' },
+      { status: 401 }
+    );
+  }
+
   const { id } = await params;
   const body = await req.json();
   const saltValue = parseInt(process.env.SALT_ROUNDS);
@@ -73,6 +82,13 @@ export async function PATCH(req, { params }) {
  *       - users
 */
 export async function PUT(req, { params }) {
+  if (!isAdmin(req)) {
+    return NextResponse.json(
+      { message: 'Permission Error: Only admins can delete items.' },
+      { status: 401 }
+    );
+  }
+
   const { id } = await params;
   const body = await req.json();
   const saltValue = parseInt(process.env.SALT_ROUNDS);
@@ -117,6 +133,13 @@ export async function PUT(req, { params }) {
  *       - users
  */
 export async function DELETE(req, { params }) {
+  if (!isAdmin(req)) {
+    return NextResponse.json(
+      { message: 'Permission Error: Only admins can delete items.' },
+      { status: 401 }
+    );
+  }
+
   const { id } = params;
 
   try {
