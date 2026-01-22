@@ -3,31 +3,23 @@ import { NextResponse } from 'next/server';
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import { cookies } from 'next/headers';
+import isLoggedIn from '@/lib/middlewares/validateAuth';
 
 /**
  * @swagger
  * /api/v1/auth:
  *   post:
- *     summary: validate authentication
- *     tags:
- *       - places
- *     description: Returns a list of places
- *     responses:
- *       200:
- *         description: Success
- *         content:
- *           application/json:
- *             schema:
- *               type: array
- *               items:
- *                 type: object
- *                 properties:
- *                   id:
- *                     type: number
- *                   name:
- *                     type: string
+ *     summary: validate login credientials and return jwt in cookie
  */
 export async function POST(req) {
+  if (isLoggedIn(req)) {
+    return NextResponse.json(
+      {
+        message: 'you are already logged in, Log out first and try again',
+      },
+      { status: 400 }
+    );
+  }
   const { email, password } = await req.json();
 
   try {
@@ -48,7 +40,7 @@ export async function POST(req) {
           name: user.name,
           userId: user._id,
           email: user.email,
-          role:user.role,
+          role: user.role,
         },
         process.env.JWT_SECRET,
         {

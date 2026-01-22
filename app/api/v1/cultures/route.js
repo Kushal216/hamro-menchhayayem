@@ -1,33 +1,14 @@
 import { NextResponse } from 'next/server';
 import Culture from '@/models/culture';
+import isLoggedIn, { isAdmin } from '@/lib/middlewares/validateAuth';
 
 /**
  * @swagger
  * /api/v1/cultures:
  *   get:
- *     summary: Get all cultures
- *     tags:
- *       - cultures
- *     description: Returns a list of cultures
- *     responses:
- *       200:
- *         description: Success
- *         content:
- *           application/json:
- *             schema:
- *               type: array
- *               items:
- *                 type: object
- *                 properties:
- *                   id:
- *                     type: number
- *                   name:
- *                     type: string
+ *     summary: Returns all cultures
  */
-
 export async function GET(req) {
-  //check if request is coming from samesite
-
   const cultures = await Culture.find({});
 
   return NextResponse.json({
@@ -38,26 +19,9 @@ export async function GET(req) {
 
 /**
  * @swagger
- * /api/cultures:
+ * /api/v1/cultures:
  *   post:
- *     summary: add a culture item
- *     tags:
- *       - cultures
- *     description: Returns a list of cultures
- *     responses:
- *       200:
- *         description: Success
- *         content:
- *           application/json:
- *             schema:
- *               type: array
- *               items:
- *                 type: object
- *                 properties:
- *                   id:
- *                     type: number
- *                   name:
- *                     type: string
+ *     summary: Add a culture
  */
 export async function POST(req) {
   const body = await req.json();

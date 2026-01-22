@@ -15,30 +15,15 @@ var _jsonwebtoken = _interopRequireDefault(require("jsonwebtoken"));
 
 var _headers = require("next/headers");
 
+var _validateAuth = _interopRequireDefault(require("@/lib/middlewares/validateAuth"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
 /**
  * @swagger
  * /api/v1/auth:
  *   post:
- *     summary: validate authentication
- *     tags:
- *       - places
- *     description: Returns a list of places
- *     responses:
- *       200:
- *         description: Success
- *         content:
- *           application/json:
- *             schema:
- *               type: array
- *               items:
- *                 type: object
- *                 properties:
- *                   id:
- *                     type: number
- *                   name:
- *                     type: string
+ *     summary: validate login credientials and return jwt in cookie
  */
 function POST(req) {
   var _ref, email, password, user, matches, token, cookie;
@@ -47,24 +32,36 @@ function POST(req) {
     while (1) {
       switch (_context.prev = _context.next) {
         case 0:
-          _context.next = 2;
-          return regeneratorRuntime.awrap(req.json());
+          if (!(0, _validateAuth["default"])(req)) {
+            _context.next = 2;
+            break;
+          }
+
+          return _context.abrupt("return", _server.NextResponse.json({
+            message: 'you are already logged in, Log out first and try again'
+          }, {
+            status: 400
+          }));
 
         case 2:
+          _context.next = 4;
+          return regeneratorRuntime.awrap(req.json());
+
+        case 4:
           _ref = _context.sent;
           email = _ref.email;
           password = _ref.password;
-          _context.prev = 5;
-          _context.next = 8;
+          _context.prev = 7;
+          _context.next = 10;
           return regeneratorRuntime.awrap(_user["default"].findOne({
             email: email
           }).select('+password'));
 
-        case 8:
+        case 10:
           user = _context.sent;
 
           if (user) {
-            _context.next = 11;
+            _context.next = 13;
             break;
           }
 
@@ -74,15 +71,15 @@ function POST(req) {
             status: 401
           }));
 
-        case 11:
-          _context.next = 13;
+        case 13:
+          _context.next = 15;
           return regeneratorRuntime.awrap(_bcryptjs["default"].compare(password, user.password));
 
-        case 13:
+        case 15:
           matches = _context.sent;
 
           if (!matches) {
-            _context.next = 22;
+            _context.next = 24;
             break;
           }
 
@@ -90,14 +87,15 @@ function POST(req) {
           token = _jsonwebtoken["default"].sign({
             name: user.name,
             userId: user._id,
-            email: user.email
+            email: user.email,
+            role: user.role
           }, process.env.JWT_SECRET, {
             expiresIn: '7d'
           });
-          _context.next = 19;
+          _context.next = 21;
           return regeneratorRuntime.awrap((0, _headers.cookies)());
 
-        case 19:
+        case 21:
           cookie = _context.sent;
           cookie.set('token', token, {
             httpOnly: true,
@@ -110,16 +108,16 @@ function POST(req) {
             data: user.name
           }));
 
-        case 22:
+        case 24:
           return _context.abrupt("return", _server.NextResponse.json({
             message: 'Invalid Credentials'
           }, {
             status: 401
           }));
 
-        case 25:
-          _context.prev = 25;
-          _context.t0 = _context["catch"](5);
+        case 27:
+          _context.prev = 27;
+          _context.t0 = _context["catch"](7);
           console.log("ERROR: in authenticating user:\n".concat(_context.t0));
           return _context.abrupt("return", _server.NextResponse.json({
             message: "DB error in performing the action. ",
@@ -128,10 +126,10 @@ function POST(req) {
             status: 500
           }));
 
-        case 29:
+        case 31:
         case "end":
           return _context.stop();
       }
     }
-  }, null, null, [[5, 25]]);
+  }, null, null, [[7, 27]]);
 }
