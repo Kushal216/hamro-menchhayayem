@@ -11,7 +11,7 @@ const HeroImage = () => {
     { src: '/images/hero-images/hero2.png', title: 'ऐतिहासिक गुम्बा' },
     { src: '/images/hero-images/hero4.jpg', title: 'पालिका सदस्यहरु' },
     { src: '/images/hero-images/hero5.png', title: 'धान नाच' },
-    { src: '/images/hero-images/mistri.jpg', title: 'मिस्त्री' },
+    { src: '/images/hero-images/mistri.jpeg', title: 'मिस्त्री' },
   ];
 
   const [heroIndex, setHeroIndex] = useState(0);
