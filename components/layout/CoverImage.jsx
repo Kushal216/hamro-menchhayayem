@@ -7,7 +7,7 @@ import { useContext, useState } from 'react';
 import { BsPlayBtnFill } from 'react-icons/bs';
 import YoutubeIframe from './YoutubeIframe';
 
-export default function CoverImage({ title, route, video }) {
+export default function CoverImage({ title,coverImage, route, video }) {
   const [showVideo, setShowVideo] = useState(false);
   const paths = usePathname().replace(/\/$/, '').split('/');
   const path = paths[1];
@@ -35,7 +35,7 @@ export default function CoverImage({ title, route, video }) {
             )}
 
             <Image
-              src={'/images/image.png'}
+              src={coverImage}
               fill
               sizes="(max-width: 768px) 100vw, 50vw"
               alt="image of something"
