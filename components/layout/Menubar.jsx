@@ -25,7 +25,8 @@ const Menubar = ({ closeMenu }) => {
             const isActive = pathname === link.href;
 
             return (
-              <li
+              <Link
+                href={link.href}
                 key={link.href}
                 className={
                   'whitespace-nowrap inline-block w-full hover:bg-[#dadada] active:font-bold active:box-border active:border-l-5 active:pl-2 active:border-[#FF3B00] ' +
@@ -34,17 +35,16 @@ const Menubar = ({ closeMenu }) => {
                 }
                 onClick={closeMenu}
               >
-                <Link
-                  href={link.href}
+                <li
                   className={
                     isActive
-                      ? 'inline-block font-bold box-border border-l-5 pl-2 border-[#FF3B00]'
+                      ? 'font-bold box-border border-l-5 pl-2 border-[#FF3B00]'
                       : 'inline-block pl-3'
                   }
                 >
                   {link.label}
-                </Link>
-              </li>
+                </li>
+              </Link>
             );
           })}
         </ul>
