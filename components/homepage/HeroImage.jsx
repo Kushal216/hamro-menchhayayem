@@ -5,28 +5,29 @@ import { RiArrowLeftWideFill, RiArrowRightWideFill } from 'react-icons/ri';
 
 const HeroImage = () => {
   const heroPhotos = [
-    { src: '/images/image.png', title: 'हाम्रो मेन्छ्यायेम बजार' },
-    { src: '/images/logo.png', title: 'हाम्रो मेन्छ्यायेम बजार' },
-    { src: '/images/sb-pp.jpeg', title: 'सुनिल भट्टराई' },
-    { src: '/images/kd-pp.jpeg', title: 'कुशल ढकाल' },
+    { src: '/images/hero-images/hero0.png', title: 'हाम्रो मेन्छ्यायेम बजार' },
+    { src: '/images/hero-images/hero1.png', title: 'पालिका कार्यलय' },
+    { src: '/images/hero-images/hero3.png', title: 'गौखुरिधाम' },
+    { src: '/images/hero-images/hero2.png', title: 'ऐतिहासिक गुम्बा' },
+    { src: '/images/hero-images/hero4.jpg', title: 'पालिका सदस्यहरु' },
+    { src: '/images/hero-images/hero5.png', title: 'धान नाच' },
   ];
 
   const [heroIndex, setHeroIndex] = useState(0);
 
-useEffect(() => {
-  const interval = setInterval(() => {
-    setHeroIndex((prev) => (prev + 1) % heroPhotos.length);
-  }, 3000);
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setHeroIndex((prev) => (prev + 1) % heroPhotos.length);
+    }, 3000);
 
-  return () => clearInterval(interval);
-}, [heroPhotos.length]);
-
+    return () => clearInterval(interval);
+  }, [heroPhotos.length]);
 
   const photo = heroPhotos[heroIndex];
   return (
     <div className="relative w-full aspect-video xl:aspect-5/2 select-none">
-
       <Image
+        sizes="(max-width: 768px) 100vw, 50vw"
         src={photo.src}
         alt="hamro  menchhayayem"
         fill
