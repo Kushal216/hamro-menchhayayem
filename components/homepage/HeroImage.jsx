@@ -8,6 +8,7 @@ const HeroImage = () => {
     { src: '/images/hero-images/hero0.png', title: 'हाम्रो मेन्छ्यायेम बजार' },
     { src: '/images/hero-images/hero1.png', title: 'पालिका कार्यलय' },
     { src: '/images/hero-images/hero2.png', title: 'ऐतिहासिक गुम्बा' },
+    { src: '/images/hero-images/hero3.png', title: 'गौखुरिधाम' },
     { src: '/images/hero-images/hero4.jpg', title: 'पालिका सदस्यहरु' },
     { src: '/images/hero-images/hero5.png', title: 'धान नाच' },
   ];
