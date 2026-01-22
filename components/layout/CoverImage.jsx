@@ -17,7 +17,7 @@ export default function CoverImage({ title,coverImage, route, video }) {
   // videoId = 'PhOMPJWPDLU'; //testing
 
   return (
-    <div className="md:float-right md:aspect-video md:w-fit md:flex md:flex-col items-center">
+    <div className="md:float-right md:aspect-video md:w-fit md:flex md:flex-col items-center md:ml-4">
       <div className="aspect-32/15 w-full md:w-[55vw] md:float-right  relative mr-2">
         {!showVideo ? (
           <>

@@ -25,7 +25,7 @@ export default async function ItemDetails({ route, id }) {
           />
 
           <div className="mt-2">
-            <div className="font-bold text-xl  lg:text-3xl text-black border-b-2 lg:border-b-4 border-red-500 w-fill inline-block px-2 mb-2">
+            <div className="font-bold text-xl lg:text-3xl text-black border-b-2 lg:border-b-4 border-red-500 w-fill inline-block px-2 mb-2">
               परिचय
             </div>
             <MarkdownViewer content={content} />
@@ -38,7 +38,7 @@ export default async function ItemDetails({ route, id }) {
 
 export function MarkdownViewer({ content }) {
   return (
-    <div className="prose prose-neutral max-w-none px-2">
+    <div className="prose prose-neutral max-w-none px-2 lg:text-lg xl:text-2xl text-gray-900">
       <ReactMarkdown
         components={{
           h1: ({ children }) => (
