@@ -7,7 +7,6 @@ import { MarkdownViewer } from "@/components/layout/ItemDetails";
 export default async function HomePage() {
   const res = await fetchData("people");
   const data = res.data;
-  console.log(data);
 
   const introduction = `
 
@@ -69,21 +68,42 @@ export default async function HomePage() {
       </div>
 
       <Titlebar title="REPRESENTATIVES" />
-      {data.map((item, index) => (
-        <OurCard
-          key={index}
-          image={item.photo}
-          name={item.name}
-          position={item.position}
-          email={item.email}
-          phone={item.phone}
-          facebook={item.facebook}
-          imgHeight={item.position === "mayor" ? 200 : 150}
-          imgWidth={item.position === "mayor" ? 200 : 150}
-          height={370}
-          width={350}
-        />
-      ))}
+
+      {data
+        .filter((item) => item.position === "अध्यक्ष")
+        .map((item, index) => (
+          <OurCard
+            key={`adhakshya-${index}`}
+            image={item.photo}
+            name={item.name}
+            position={item.position}
+            email={item.email}
+            phone={item.phone}
+            facebook={item.facebook}
+            imgHeight={250}
+            imgWidth={250}
+            height={350}
+            width={350}
+          />
+        ))}
+
+      {data
+        .filter((item) => item.position !== "अध्यक्ष")
+        .map((item, index) => (
+          <OurCard
+            key={`other-${index}`}
+            image={item.photo}
+            name={item.name}
+            position={item.position}
+            email={item.email}
+            phone={item.phone}
+            facebook={item.facebook}
+            imgHeight={150}
+            imgWidth={150}
+            height={250}
+            width={500}
+          />
+        ))}
     </>
   );
 }

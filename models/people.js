@@ -11,10 +11,10 @@ const peopleSchema = new mongoose.Schema(
     photo: {
       type: String,
     },
+    phone: {
+      type: String,
+    },
     contact: {
-       phone: {
-        type: String,
-      },
       website: {
         type: String,
       },
