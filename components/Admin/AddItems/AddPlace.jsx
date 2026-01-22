@@ -60,14 +60,17 @@ export default function PlaceForm() {
 
       setTitle('');
       setDescription('');
+      setId('');
       setGallery([]);
       setCoverImage('');
       setLocation('');
-      setCategory('');
-      setRegion('menchhayayem');
       setVideoId('');
       setVideoStart('');
       setVideoEnd('');
+      setRegion('menchhayayem');
+      setCategory('');
+      setUploading(false);
+      
     } catch (err) {
       console.error(err);
       toast.error(err);

@@ -37,9 +37,11 @@ export default function UserForm({ onSubmit }) {
       toast.success(result.message);
 
       setName('');
+      setRole('contributer');
+      setId('');
       setEmail('');
       setPassword('');
-      setRole('');
+      setUploading(false);
     } catch (err) {
       console.error(err);
       alert(err.message);

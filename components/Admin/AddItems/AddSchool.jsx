@@ -63,9 +63,13 @@ export default function SchoolForm({ toggleAdd }) {
       setDescription('');
       setGallery([]);
       setCoverImage('');
+      setLocation('');
+      setId('');
       setVideo('');
-      setCategory('');
+      setCategory('Uncategorized');
       setPhoneNo('');
+      setLikesCount(0);
+      setUploading(false);
       setVideoId('');
       setVideoStart('');
       setVideoEnd('');

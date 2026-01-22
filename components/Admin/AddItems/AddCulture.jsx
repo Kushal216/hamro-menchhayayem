@@ -55,10 +55,16 @@ export default function CultureForm({ toggleAdd }) {
 
       // reset form
       setTitle('');
+      setId('');
       setDescription('');
       setCoverImage('');
       setGallery([]);
-      setCaste('');
+      setCaste('all');
+      setUploading(false);
+      setVideoId('');
+      setVideoStart('');
+      setVideoEnd('');
+
       toast.success(`${title} added successfully`);
     } catch (err) {
       toast.error(err.message);

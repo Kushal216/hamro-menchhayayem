@@ -57,13 +57,15 @@ export default function PeopleForm({ onSubmit }) {
 
       setName('');
       setPhoto('');
-      setEmail('');
+      setId('');
+      setPhone('');
+      setWebsite('');
       setFacebook('');
       setInstagram('');
       setLinkedin('');
-      setPhone('');
-      setWebsite('');
+      setEmail('');
       setPosition('');
+      setUploading(false);
     } catch (err) {
       console.error(err);
       alert(err.message);

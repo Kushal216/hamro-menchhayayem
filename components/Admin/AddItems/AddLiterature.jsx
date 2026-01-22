@@ -37,7 +37,6 @@ export default function LiteratureForm(toggleAdd) {
       return;
     }
 
-
     const data = {
       _id,
       title,
@@ -70,12 +69,16 @@ export default function LiteratureForm(toggleAdd) {
       }
 
       toast.success(`${title} added successfully.`);
+      setId('');
       setTitle('');
       setDescription('');
-      setAuthor('');
       setVideoId('');
       setVideoStart('');
       setVideoEnd('');
+      setCategory('');
+      setAuthor('');
+      setCoverImage('');
+      setUploading(false);
     } catch (err) {
       toast.error(err.message);
     }
