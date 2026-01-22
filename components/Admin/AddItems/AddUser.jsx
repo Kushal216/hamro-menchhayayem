@@ -16,7 +16,6 @@ export default function UserForm({ onSubmit }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const data = { name, role, email, password };
-    console.log(data);
 
     try {
       setUploading(true);

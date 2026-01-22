@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
 import User from '@/models/user';
 import bcrypt from 'bcryptjs';
+import { isAdmin } from '@/lib/middlewares/validateAuth';
 
 /**
  * @swagger
@@ -34,7 +35,7 @@ export async function POST(req) {
   }
 
   const { name, email, password, role } = await req.json();
-  const saltValue = process.env.SALT_ROUNDS;
+  const saltValue = 10;
   try {
     const hashedPassword = await bcrypt.hash(password, saltValue);
     const user = await User.create({
@@ -55,7 +56,7 @@ export async function POST(req) {
     );
   } catch (err) {
     return NextResponse.json(
-      { ERROR: 'failed to create the user', details: err },
+      { error: err.message, message: `error: ${err.message}`, data: err },
       { status: 500 }
     );
   }

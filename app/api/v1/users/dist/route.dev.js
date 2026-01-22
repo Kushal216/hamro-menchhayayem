@@ -12,6 +12,8 @@ var _user = _interopRequireDefault(require("@/models/user"));
 
 var _bcryptjs = _interopRequireDefault(require("bcryptjs"));
 
+var _validateAuth = require("@/lib/middlewares/validateAuth");
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
 /**
@@ -64,7 +66,7 @@ function POST(req) {
     while (1) {
       switch (_context2.prev = _context2.next) {
         case 0:
-          if (isAdmin(req)) {
+          if ((0, _validateAuth.isAdmin)(req)) {
             _context2.next = 2;
             break;
           }
@@ -85,7 +87,7 @@ function POST(req) {
           email = _ref.email;
           password = _ref.password;
           role = _ref.role;
-          saltValue = process.env.SALT_ROUNDS;
+          saltValue = 10;
           _context2.prev = 10;
           _context2.next = 13;
           return regeneratorRuntime.awrap(_bcryptjs["default"].hash(password, saltValue));
@@ -113,8 +115,9 @@ function POST(req) {
           _context2.prev = 20;
           _context2.t0 = _context2["catch"](10);
           return _context2.abrupt("return", _server.NextResponse.json({
-            ERROR: 'failed to create the user',
-            details: _context2.t0
+            error: _context2.t0.message,
+            message: "error: ".concat(_context2.t0.message),
+            data: _context2.t0
           }, {
             status: 500
           }));

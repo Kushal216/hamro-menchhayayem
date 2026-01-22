@@ -12,7 +12,7 @@ import isLoggedIn, { isAdmin } from '@/lib/middlewares/validateAuth';
  *       - users
  */
 export async function GET(req, { params }) {
-  const { id } = params;
+  const { id } = await params;
 
   try {
     const user = await User.findById(id);
@@ -47,8 +47,7 @@ export async function PATCH(req, { params }) {
   const body = await req.json();
   const saltValue = parseInt(process.env.SALT_ROUNDS);
   try {
-
-    let updatedbody = { ...body }
+    let updatedbody = { ...body };
     if (body.password) {
       updatedbody.hashedPassword = await bcrypt.hash(body.password, saltValue);
       delete updatedbody.password;
@@ -80,7 +79,7 @@ export async function PATCH(req, { params }) {
  *     summary: Replace user by id
  *     tags:
  *       - users
-*/
+ */
 export async function PUT(req, { params }) {
   if (!isAdmin(req)) {
     return NextResponse.json(
@@ -140,7 +139,7 @@ export async function DELETE(req, { params }) {
     );
   }
 
-  const { id } = params;
+  const { id } = await params;
 
   try {
     const user = await User.findByIdAndDelete(id);
