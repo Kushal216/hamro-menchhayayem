@@ -10,30 +10,21 @@ var _server = require("next/server");
 
 var _places = _interopRequireDefault(require("@/models/places.js"));
 
+var _validateAuth = _interopRequireDefault(require("@/lib/middlewares/validateAuth"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
 /**
  * @swagger
  * /api/v1/places:
  *   get:
- *     summary: Get all Places
+ *     summary: get a list of all places
  *     tags:
  *       - places
- *     description: Returns a list of places
- *     responses:
- *       200:
- *         description: Success
- *         content:
- *           application/json:
- *             schema:
- *               type: array
- *               items:
- *                 type: object
- *                 properties:
- *                   id:
- *                     type: number
- *                   name:
- *                     type: string
+ *   post:
+ *     summary: add a place
+ *     tags:
+ *       - places
  */
 function GET(req) {
   var places;
@@ -58,30 +49,6 @@ function GET(req) {
     }
   });
 }
-/**
- * @swagger
- * /api/places:
- *   post:
- *     summary: add a culture item
- *     tags:
- *       - places
- *     description: Returns a list of places
- *     responses:
- *       200:
- *         description: Success
- *         content:
- *           application/json:
- *             schema:
- *               type: array
- *               items:
- *                 type: object
- *                 properties:
- *                   id:
- *                     type: number
- *                   name:
- *                     type: string
- */
-
 
 function POST(req) {
   var body, id, newPlace;
@@ -94,11 +61,22 @@ function POST(req) {
 
         case 2:
           body = _context2.sent;
-          //check authentication
-          //validate data using middleware
+
+          if ((0, _validateAuth["default"])(req)) {
+            _context2.next = 5;
+            break;
+          }
+
+          return _context2.abrupt("return", _server.NextResponse.json({
+            message: 'you need to be logged in to perform this request.'
+          }, {
+            status: 401
+          }));
+
+        case 5:
           id = null;
-          _context2.prev = 4;
-          _context2.next = 7;
+          _context2.prev = 6;
+          _context2.next = 9;
           return regeneratorRuntime.awrap(_places["default"].create({
             _id: body._id,
             title: body.title,
@@ -111,34 +89,35 @@ function POST(req) {
             location: body.location
           }));
 
-        case 7:
+        case 9:
           newPlace = _context2.sent;
           id = newPlace._id;
-          _context2.next = 15;
+          _context2.next = 17;
           break;
 
-        case 11:
-          _context2.prev = 11;
-          _context2.t0 = _context2["catch"](4);
+        case 13:
+          _context2.prev = 13;
+          _context2.t0 = _context2["catch"](6);
           console.log("ERROR: in creating places:\n".concat(_context2.t0));
           return _context2.abrupt("return", _server.NextResponse.json({
+            error: _context2.t0.message,
             message: "Error: ".concat(_context2.t0.message, ". "),
-            err: _context2.t0
+            data: _context2.t0
           }, {
             status: 400
           }));
 
-        case 15:
+        case 17:
           return _context2.abrupt("return", _server.NextResponse.json({
             message: "Added ".concat(body.title, " to the database with id: ").concat(id, ". ")
           }, {
             status: 201
           }));
 
-        case 16:
+        case 18:
         case "end":
           return _context2.stop();
       }
     }
-  }, null, null, [[4, 11]]);
+  }, null, null, [[6, 13]]);
 }

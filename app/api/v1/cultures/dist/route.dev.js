@@ -25,6 +25,12 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "d
  * /api/v1/cultures:
  *   get:
  *     summary: Returns all cultures
+ *     tags:
+ *       - cultures
+ *   post:
+ *     summary: Add a culture
+ *     tags:
+ *       - cultures
  */
 function GET(req) {
   var cultures;
@@ -49,13 +55,6 @@ function GET(req) {
     }
   });
 }
-/**
- * @swagger
- * /api/v1/cultures:
- *   post:
- *     summary: Add a culture
- */
-
 
 function POST(req) {
   var body, id, newCulture;
@@ -68,11 +67,22 @@ function POST(req) {
 
         case 2:
           body = _context2.sent;
-          //check authentication
-          //validate data using middleware
+
+          if ((0, _validateAuth["default"])(req)) {
+            _context2.next = 5;
+            break;
+          }
+
+          return _context2.abrupt("return", _server.NextResponse.json({
+            message: 'you need to be logged in to perform this request.'
+          }, {
+            status: 401
+          }));
+
+        case 5:
           id = null;
-          _context2.prev = 4;
-          _context2.next = 7;
+          _context2.prev = 6;
+          _context2.next = 9;
           return regeneratorRuntime.awrap(_culture["default"].create({
             _id: body._id,
             title: body.title,
@@ -83,34 +93,32 @@ function POST(req) {
             category: body.category
           }));
 
-        case 7:
+        case 9:
           newCulture = _context2.sent;
           id = newCulture._id;
-          _context2.next = 15;
+          _context2.next = 16;
           break;
 
-        case 11:
-          _context2.prev = 11;
-          _context2.t0 = _context2["catch"](4);
-          console.log("ERROR: in creating culture:\n".concat(_context2.t0));
+        case 13:
+          _context2.prev = 13;
+          _context2.t0 = _context2["catch"](6);
           return _context2.abrupt("return", _server.NextResponse.json({
-            message: "DB error ".concat(_context2.t0.message, ". "),
+            error: _context2.t0.message,
+            message: "DB error in performing the create culture action. ",
             err: _context2.t0
-          }, {
-            status: 400
           }));
 
-        case 15:
+        case 16:
           return _context2.abrupt("return", _server.NextResponse.json({
             message: "Added ".concat(body.title, " to the database with id: ").concat(id, ". ")
           }, {
             status: 201
           }));
 
-        case 16:
+        case 17:
         case "end":
           return _context2.stop();
       }
     }
-  }, null, null, [[4, 11]]);
+  }, null, null, [[6, 13]]);
 }

@@ -10,30 +10,21 @@ var _server = require("next/server");
 
 var _school = _interopRequireDefault(require("@/models/school.js"));
 
+var _validateAuth = _interopRequireDefault(require("@/lib/middlewares/validateAuth"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
 /**
  * @swagger
  * /api/v1/schools:
  *   get:
- *     summary: Get all schools
+ *     summary: returns all schools
  *     tags:
- *       - cultures
- *     description: Returns a list of schools
- *     responses:
- *       200:
- *         description: Success
- *         content:
- *           application/json:
- *             schema:
- *               type: array
- *               items:
- *                 type: object
- *                 properties:
- *                   id:
- *                     type: number
- *                   name:
- *                     type: string
+ *       - schools
+ *   post:
+ *     summary: add a school
+ *     tags:
+ *       - schools
  */
 function GET(req) {
   var schools;
@@ -58,30 +49,6 @@ function GET(req) {
     }
   });
 }
-/**
- * @swagger
- * /api/cultures:
- *   post:
- *     summary: add a school item
- *     tags:
- *       - cultures
- *     description: Returns a list of school
- *     responses:
- *       200:
- *         description: Success
- *         content:
- *           application/json:
- *             schema:
- *               type: array
- *               items:
- *                 type: object
- *                 properties:
- *                   id:
- *                     type: number
- *                   name:
- *                     type: string
- */
-
 
 function POST(req) {
   var body, id, newSchool;
@@ -89,17 +56,26 @@ function POST(req) {
     while (1) {
       switch (_context2.prev = _context2.next) {
         case 0:
-          _context2.next = 2;
-          return regeneratorRuntime.awrap(req.json());
+          if ((0, _validateAuth["default"])(req)) {
+            _context2.next = 2;
+            break;
+          }
+
+          return _context2.abrupt("return", _server.NextResponse.json({
+            message: 'you need to be logged in to perform this request.'
+          }, {
+            status: 401
+          }));
 
         case 2:
-          body = _context2.sent;
-          console.log(body); //check authentication
-          //validate data using middleware
+          _context2.next = 4;
+          return regeneratorRuntime.awrap(req.json());
 
+        case 4:
+          body = _context2.sent;
           id = null;
-          _context2.prev = 5;
-          _context2.next = 8;
+          _context2.prev = 6;
+          _context2.next = 9;
           return regeneratorRuntime.awrap(_school["default"].create({
             _id: body._id,
             title: body.title,
@@ -112,21 +88,19 @@ function POST(req) {
             phoneNo: body.phoneNo
           }));
 
-        case 8:
+        case 9:
           newSchool = _context2.sent;
           id = newSchool._id;
           _context2.next = 16;
           break;
 
-        case 12:
-          _context2.prev = 12;
-          _context2.t0 = _context2["catch"](5);
-          console.log("ERROR: in creating school:\n".concat(_context2.t0));
+        case 13:
+          _context2.prev = 13;
+          _context2.t0 = _context2["catch"](6);
           return _context2.abrupt("return", _server.NextResponse.json({
-            message: "Error: ".concat(_context2.t0.message, ". "),
+            error: _context2.t0.message,
+            message: "DB error in performing the create culture action. ",
             err: _context2.t0
-          }, {
-            status: 400
           }));
 
         case 16:
@@ -141,5 +115,5 @@ function POST(req) {
           return _context2.stop();
       }
     }
-  }, null, null, [[5, 12]]);
+  }, null, null, [[6, 13]]);
 }

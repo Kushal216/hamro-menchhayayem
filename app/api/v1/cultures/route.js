@@ -7,6 +7,12 @@ import isLoggedIn, { isAdmin } from '@/lib/middlewares/validateAuth';
  * /api/v1/cultures:
  *   get:
  *     summary: Returns all cultures
+ *     tags:
+ *       - cultures
+ *   post:
+ *     summary: Add a culture
+ *     tags:
+ *       - cultures
  */
 export async function GET(req) {
   const cultures = await Culture.find({});
@@ -17,17 +23,14 @@ export async function GET(req) {
   });
 }
 
-/**
- * @swagger
- * /api/v1/cultures:
- *   post:
- *     summary: Add a culture
- */
 export async function POST(req) {
   const body = await req.json();
-
-  //check authentication
-  //validate data using middleware
+  if (!isLoggedIn(req)) {
+    return NextResponse.json(
+      { message: 'you need to be logged in to perform this request.' },
+      { status: 401 }
+    );
+  }
   let id = null;
   try {
     const newCulture = await Culture.create({
@@ -42,14 +45,11 @@ export async function POST(req) {
 
     id = newCulture._id;
   } catch (err) {
-    console.log(`ERROR: in creating culture:\n${err}`);
-    return NextResponse.json(
-      {
-        message: `DB error ${err.message}. `,
-        err: err,
-      },
-      { status: 400 }
-    );
+    return NextResponse.json({
+      error: err.message,
+      message: `DB error in performing the create culture action. `,
+      err: err,
+    });
   }
 
   return NextResponse.json(

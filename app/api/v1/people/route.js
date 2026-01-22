@@ -1,78 +1,57 @@
-import People from "@/models/people";
-import { NextResponse } from "next/server";
+import People from '@/models/people';
+import { NextResponse } from 'next/server';
+import isLoggedIn from '@/lib/middlewares/validateAuth';
+
 /**
  * @swagger
- * /api/v1/Peoples:
+ * /api/v1/people:
  *   get:
- *     summary: get People from the database
+ *     summary: get a list of all people
  *     tags:
- *       - places
- *     description: adds People in body to the db
- *     responses:
- *       200:
- *         description: Success
- *         content:
- *           application/json:
- *             schema:
- *               type: array
- *               items:
- *                 type: object
- *                 properties:
- *                   id:
- *                     type: number
- *                   name:
- *                     type: string
+ *       - people
+ *   post:
+ *     summary: add a person
+ *     tags:
+ *       - people
  */
 
-export async function GET(req){
-  try{
-  const people= await People.find({});
+export async function GET(req) {
+  try {
+    const people = await People.find({});
 
-  return NextResponse.json({message:"Peoples fetched successfully",data:people})
-
-  } catch(err){
-      return NextResponse.json({
+    return NextResponse.json({
+      message: 'Peoples fetched successfully',
+      data: people,
+    });
+  } catch (err) {
+    return NextResponse.json({
+      error: err.message,
       message: `DB error in performing the create culture action. `,
       err: err,
     });
   }
 }
 
-/**
- * @swagger
- * /api/v1/Peoples:
- *   post:
- *     summary: add People to the database
- *     tags:
- *       - places
- *     description: adds People in body to the db
- *     responses:
- *       200:
- *         description: Success
- *         content:
- *           application/json:
- *             schema:
- *               type: array
- *               items:
- *                 type: object
- *                 properties:
- *                   id:
- *                     type: number
- *                   name:
- *                     type: string
- */
 export async function POST(req) {
-  const { name, contact,photo, position } = await req.json();
+  if (!isLoggedIn(req)) {
+    return NextResponse.json(
+      { message: 'you need to be logged in to perform this request.' },
+      { status: 401 }
+    );
+  }
+  const { name, contact, photo, position } = await req.json();
   try {
     const person = await People.create({
       name,
-      photo,contact, position
+      photo,
+      contact,
+      position,
     });
 
     return NextResponse.json(
       {
         message: `created People ${person.name}.`,
-        person:person,
+        person: person,
       },
       {
         status: 201,
@@ -81,11 +60,11 @@ export async function POST(req) {
   } catch (err) {
     return NextResponse.json(
       {
+        error: err.message,
         message: `Error: ${err.message}. `,
-        err: err,
+        data: err,
       },
       { status: 400 }
     );
   }
 }
-

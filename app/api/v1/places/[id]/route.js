@@ -1,22 +1,26 @@
 import { NextResponse } from 'next/server';
+import isLoggedIn from '@/lib/middlewares/validateAuth';
 import Places from '@/models/places';
+
 /**
  * @swagger
- * /api/places/{id}:
+ * /api/v1/places/{id}:
  *   get:
- *     summary: Get place by ID
+ *     summary: get a item of given id
  *     tags:
  *       - places
- *     parameters:
- *       - in: path
- *         name: id
- *         required: true
- *         schema:
- *           type: string
- *         description: Place ID
- *     responses:
- *       200:
- *         description: Success - returns place data
+ *   put:
+ *     summary: Replace the data associated to the item with given id
+ *     tags:
+ *       - places
+ *   delete:
+ *     summary: delete item of given id
+ *     tags:
+ *       - places
+ *   patch:
+ *     summary: updates specified properties in the req.body corresponding to the given id
+ *     tags:
+ *       - places
  */
 
 export async function GET(req, { params }) {
@@ -25,15 +29,28 @@ export async function GET(req, { params }) {
     const place = await Places.findById(id);
 
     if (!place) {
-      return NextResponse.json({ error: 'Not found' }, { status: 404 });
+      return NextResponse.json({ message: 'Not found' }, { status: 404 });
     }
-    return NextResponse.json({ data: place });
+    return NextResponse.json({
+      message: 'place fetched successfully',
+      data: place,
+    });
   } catch (err) {
-    return NextResponse.json({ error: err.message }, { status: 500 });
+    return NextResponse.json(
+      { error: err.message, message: `error: ${err.message}`, data: err },
+      { status: 500 }
+    );
   }
 }
 
 export async function PATCH(req, { params }) {
+  if (!isLoggedIn(req)) {
+    return NextResponse.json(
+      { message: 'you need to be logged in to perform this request.' },
+      { status: 401 }
+    );
+  }
+
   const { id } = await params;
   const body = await req.json();
   try {
@@ -44,30 +61,37 @@ export async function PATCH(req, { params }) {
     );
 
     if (!updated) {
-      return NextResponse.json({ error: 'Not found' }, { status: 404 });
+      return NextResponse.json({ message: 'Not found' }, { status: 404 });
     }
     return NextResponse.json({
       message: `Updated Places ${updated.title}`,
       data: updated,
     });
   } catch (err) {
-    return NextResponse.json({ error: err.message }, { status: 500 });
+    return NextResponse.json(
+      { error: err.message, message: `error: ${err.message}`, data: err },
+      { status: 500 }
+    );
   }
 }
 
 export async function PUT(req, { params }) {
-  //check if authorized
-  //validate data
+  if (!isLoggedIn(req)) {
+    return NextResponse.json(
+      { message: 'you need to be logged in to perform this request.' },
+      { status: 401 }
+    );
+  }
 
   const body = await req.json();
-  const { id } =await  params;
+  const { id } = await params;
 
   try {
     const place = await Places.findById(id);
 
     if (!place) {
       return NextResponse.json(
-        { error: "The places id doesn't exist." },
+        { message: "The places id doesn't exist." },
         { status: 404 }
       );
     }
@@ -90,58 +114,22 @@ export async function PUT(req, { params }) {
       data: dbResponse,
     });
   } catch (err) {
-    return NextResponse.json({ error: err.message }, { status: 500 });
+    return NextResponse.json(
+      { error: err.message, message: `error: ${err.message}`, data: err },
+      { status: 500 }
+    );
   }
 }
 
-/**
- * @swagger
- * /api/places/{id}:
- *   put:
- *     summary: Update place by ID
- *     tags:
- *       - places
- *     parameters:
- *       - in: path
- *         name: id
- *         required: true
- *         schema:
- *           type: string
- *         description: Place ID
- *     requestBody:
- *       description: Place data to update
- *       required: false
- *       content:
- *         application/json:
- *           schema:
- *             type: object
- *     responses:
- *       200:
- *         description: Place updated successfully
- */
-
-/**
- * @swagger
- * /api/places/{id}:
- *   delete:
- *     summary: Delete place by ID
- *     tags:
- *       - places
- *     parameters:
- *       - in: path
- *         name: id
- *         required: true
- *         schema:
- *           type: string
- *         description: Place ID
- *     responses:
- *       200:
- *         description: Place deleted successfully
- */
 export async function DELETE(req, { params }) {
-  //validate user
+  if (!isLoggedIn(req)) {
+    return NextResponse.json(
+      { message: 'you need to be logged in to perform this request.' },
+      { status: 401 }
+    );
+  }
 
-  const { id } =await  params;
+  const { id } = await params;
 
   try {
     const place = await Places.findByIdAndDelete(id);
@@ -162,10 +150,7 @@ export async function DELETE(req, { params }) {
     }
   } catch (err) {
     return NextResponse.json(
-      {
-        message: 'Some error occurred in the database',
-        error: err,
-      },
+      { error: err.message, message: `error: ${err.message}`, data: err },
       { status: 500 }
     );
   }

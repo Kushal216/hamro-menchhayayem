@@ -1,33 +1,21 @@
 import { NextResponse } from 'next/server';
 import Literature from '@/models/literature';
+import isLoggedIn from '@/lib/middlewares/validateAuth';
 
 /**
  * @swagger
  * /api/v1/literature:
  *   get:
- *     summary: Get all literature
+ *     summary: get a list of all literature items
  *     tags:
  *       - literature
- *     description: Returns a list of literature
- *     responses:
- *       200:
- *         description: Success
- *         content:
- *           application/json:
- *             schema:
- *               type: array
- *               items:
- *                 type: object
- *                 properties:
- *                   id:
- *                     type: number
- *                   name:
- *                     type: string
+ *   post:
+ *     summary: add a literature item
+ *     tags:
+ *       - literature
  */
 
 export async function GET(req) {
-  //check if request is coming from samesite
-
   const literatures = await Literature.find({});
 
   return NextResponse.json({
@@ -36,38 +24,18 @@ export async function GET(req) {
   });
 }
 
-/**
- * @swagger
- * /api/literature:
- *   post:
- *     summary: add a literature item
- *     tags:
- *       - cultures
- *     description: Returns a list of literature
- *     responses:
- *       200:
- *         description: Success
- *         content:
- *           application/json:
- *             schema:
- *               type: array
- *               items:
- *                 type: object
- *                 properties:
- *                   id:
- *                     type: number
- *                   name:
- *                     type: string
- */
 export async function POST(req) {
+  if (!isLoggedIn(req)) {
+    return NextResponse.json(
+      { message: 'you need to be logged in to perform this request.' },
+      { status: 401 }
+    );
+  }
   const body = await req.json();
-
-  //check authentication
-  //validate data using middleware
   let id = null;
   try {
     const newLiterature = await Literature.create({
-      _id:body._id,
+      _id: body._id,
       title: body.title,
       description: body.description,
       video: body.video,
@@ -78,14 +46,11 @@ export async function POST(req) {
 
     id = newLiterature._id;
   } catch (err) {
-    console.log(`ERROR: in creating Literature:\n${err}`);
-    return NextResponse.json(
-      {
-        message: `Error: ${err.message}. `,
-        err: err,
-      },
-      { status: 400 }
-    );
+    return NextResponse.json({
+      error: err.message,
+      message: `DB error in performing the create culture action. `,
+      err: err,
+    });
   }
 
   return NextResponse.json(

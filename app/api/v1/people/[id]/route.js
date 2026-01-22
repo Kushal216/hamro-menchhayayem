@@ -1,101 +1,65 @@
 import { NextResponse } from 'next/server';
-import mongoose from 'mongoose';
 import People from '@/models/people';
+import isLoggedIn from '@/lib/middlewares/validateAuth';
 
 /**
  * @swagger
  * /api/v1/people/{id}:
  *   get:
- *     summary: Get person by ID
+ *     summary: get a item of given id
  *     tags:
- *       - People
- *     parameters:
- *       - in: path
- *         name: id
- *         required: true
- *         schema:
- *           type: string
- *         description: MongoDB ObjectId of the person
- *     responses:
- *       200:
- *         description: Person fetched successfully
- *         content:
- *           application/json:
- *             schema:
- *               type: object
- *               properties:
- *                 message:
- *                   type: string
- *                 person:
- *                   $ref: '#/components/schemas/People'
- *       400:
- *         description: Invalid ID
- *       404:
- *         description: Person not found
+ *       - people
+ *   put:
+ *     summary: Replace the data associated to the item with given id
+ *     tags:
+ *       - people
+ *   delete:
+ *     summary: delete item of given id
+ *     tags:
+ *       - people
+ *   patch:
+ *     summary: updates specified properties in the req.body corresponding to the given id
+ *     tags:
+ *       - people
  */
-export async function GET(req, { params }) {
-  const { id } =await  params;
 
-  if (!mongoose.Types.ObjectId.isValid(id)) {
-    return NextResponse.json({ error: 'Invalid person ID' }, { status: 400 });
-  }
+export async function GET(req, { params }) {
+  const { id } = await params;
 
   try {
     const person = await People.findById(id);
 
     if (!person) {
-      return NextResponse.json({ error: 'Person not found' }, { status: 404 });
+      return NextResponse.json(
+        { message: 'Person not found' },
+        { status: 404 }
+      );
     }
 
     return NextResponse.json(
       {
         message: 'Person fetched successfully',
-        person,
+        data: person,
       },
       { status: 200 }
     );
   } catch (err) {
     return NextResponse.json(
-      { error: 'Failed to fetch person', details: err.message },
+      { error: err.message, message: `error: ${err.message}`, data: err },
       { status: 500 }
     );
   }
 }
 
-/**
- * @swagger
- * /api/v1/people/{id}:
- *   put:
- *     summary: Update person by ID
- *     tags:
- *       - People
- *     parameters:
- *       - in: path
- *         name: id
- *         required: true
- *         schema:
- *           type: string
- *         description: MongoDB ObjectId of the person
- *     requestBody:
- *       required: false
- *       content:
- *         application/json:
- *           schema:
- *             $ref: '#/components/schemas/People'
- *     responses:
- *       200:
- *         description: Person updated successfully
- *       400:
- *         description: Invalid ID
- *       404:
- *         description: Person not found
- */
-export async function PUT(req, { params }) {
-  const { id } =await  params;
 
-  if (!mongoose.Types.ObjectId.isValid(id)) {
-    return NextResponse.json({ error: 'Invalid person ID' }, { status: 400 });
+export async function PUT(req, { params }) {
+  if (!isLoggedIn(req)) {
+    return NextResponse.json(
+      { message: 'you need to be logged in to perform this request.' },
+      { status: 401 }
+    );
   }
+  const { id } = await params;
 
   try {
     const body = await req.json();
@@ -107,58 +71,42 @@ export async function PUT(req, { params }) {
     );
 
     if (!updatedPerson) {
-      return NextResponse.json({ error: 'Person not found' }, { status: 404 });
+      return NextResponse.json(
+        { message: 'Person not found' },
+        { status: 404 }
+      );
     }
 
     return NextResponse.json(
       {
         message: 'Person updated successfully',
-        person: updatedPerson,
+        data: updatedPerson,
       },
       { status: 200 }
     );
   } catch (err) {
     return NextResponse.json(
-      { error: 'Failed to update person', details: err.message },
+      { error: err.message, message: `error: ${err.message}`, data: err },
       { status: 500 }
     );
   }
 }
 
-/**
- * @swagger
- * /api/v1/people/{id}:
- *   delete:
- *     summary: Delete person by ID
- *     tags:
- *       - People
- *     parameters:
- *       - in: path
- *         name: id
- *         required: true
- *         schema:
- *           type: string
- *         description: MongoDB ObjectId of the person
- *     responses:
- *       200:
- *         description: Person deleted successfully
- *       400:
- *         description: Invalid ID
- *       404:
- *         description: Person not found
- */
 export async function DELETE(req, { params }) {
-  const { id } =await  params;
-
-  if (!mongoose.Types.ObjectId.isValid(id)) {
-    return NextResponse.json({ error: 'Invalid person ID' }, { status: 400 });
+  if (!isLoggedIn(req)) {
+    return NextResponse.json(
+      { message: 'you need to be logged in to perform this request.' },
+      { status: 401 }
+    );
   }
+
+  const { id } = await params;
 
   try {
     const deletedPerson = await People.findByIdAndDelete(id);
 
     if (!deletedPerson) {
-      return NextResponse.json({ error: 'Person not found' }, { status: 404 });
+      return NextResponse.json({ data: 'Person not found' }, { status: 404 });
     }
 
     return NextResponse.json(
@@ -170,70 +118,28 @@ export async function DELETE(req, { params }) {
     );
   } catch (err) {
     return NextResponse.json(
-      { error: 'Failed to delete person', details: err.message },
+      { error: err.message, message: `error: ${err.message}`, data: err },
       { status: 500 }
     );
   }
 }
 
-/**
- * @swagger
- * /api/v1/people/{id}:
- *   patch:
- *     summary: Partially update person by ID
- *     tags:
- *       - People
- *     parameters:
- *       - in: path
- *         name: id
- *         required: true
- *         schema:
- *           type: string
- *         description: MongoDB ObjectId of the person
- *     requestBody:
- *       required: true
- *       content:
- *         application/json:
- *           schema:
- *             type: object
- *             example:
- *               position: "Senior Developer"
- *               contact:
- *                 phone: "9800000000"
- *     responses:
- *       200:
- *         description: Person updated successfully
- *         content:
- *           application/json:
- *             schema:
- *               type: object
- *               properties:
- *                 message:
- *                   type: string
- *                 person:
- *                   $ref: '#/components/schemas/People'
- *       400:
- *         description: Invalid ID
- *       404:
- *         description: Person not found
- */
 export async function PATCH(req, { params }) {
-  const { id } =await  params;
-
-  if (!id || !/^[0-9a-fA-F]{24}$/.test(id)) {
-    return Response.json(
-      { error: 'Invalid person ID' },
-      { status: 400 }
+  if (!isLoggedIn(req)) {
+    return NextResponse.json(
+      { message: 'you need to be logged in to perform this request.' },
+      { status: 401 }
     );
   }
+
+  const { id } = await params;
 
   try {
     const updates = await req.json();
 
-    // Prevent empty body
     if (!updates || Object.keys(updates).length === 0) {
       return NextResponse.json(
-        { error: 'No fields provided for update' },
+        { message: 'No fields provided for update' },
         { status: 400 }
       );
     }
@@ -246,7 +152,7 @@ export async function PATCH(req, { params }) {
 
     if (!updatedPerson) {
       return NextResponse.json(
-        { error: 'Person not found' },
+        { message: 'Person not found' },
         { status: 404 }
       );
     }
@@ -254,15 +160,14 @@ export async function PATCH(req, { params }) {
     return NextResponse.json(
       {
         message: 'Person partially updated successfully',
-        person: updatedPerson,
+        data: updatedPerson,
       },
       { status: 200 }
     );
   } catch (err) {
     return NextResponse.json(
-      { error: 'Failed to update person', details: err.message },
+      { error: err.message, message: `error: ${err.message}`, data: err },
       { status: 500 }
     );
   }
 }
-

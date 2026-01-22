@@ -1,29 +1,20 @@
 import { NextResponse } from 'next/server';
 import Schools from '@/models/school.js';
+import isLoggedIn from '@/lib/middlewares/validateAuth';
 
 /**
  * @swagger
  * /api/v1/schools:
  *   get:
- *     summary: Get all schools
+ *     summary: returns all schools
  *     tags:
- *       - cultures
- *     description: Returns a list of schools
- *     responses:
- *       200:
- *         description: Success
- *         content:
- *           application/json:
- *             schema:
- *               type: array
- *               items:
- *                 type: object
- *                 properties:
- *                   id:
- *                     type: number
- *                   name:
- *                     type: string
+ *       - schools
+ *   post:
+ *     summary: add a school
+ *     tags:
+ *       - schools
  */
+
 export async function GET(req) {
   const schools = await Schools.find({});
 
@@ -33,34 +24,16 @@ export async function GET(req) {
   });
 }
 
-/**
- * @swagger
- * /api/cultures:
- *   post:
- *     summary: add a school item
- *     tags:
- *       - cultures
- *     description: Returns a list of school
- *     responses:
- *       200:
- *         description: Success
- *         content:
- *           application/json:
- *             schema:
- *               type: array
- *               items:
- *                 type: object
- *                 properties:
- *                   id:
- *                     type: number
- *                   name:
- *                     type: string
- */
 export async function POST(req) {
+  if (!isLoggedIn(req)) {
+    return NextResponse.json(
+      { message: 'you need to be logged in to perform this request.' },
+      { status: 401 }
+    );
+  }
+
   const body = await req.json();
-  console.log(body)
-  //check authentication
-  //validate data using middleware
+
   let id = null;
   try {
     const newSchool = await Schools.create({
@@ -76,14 +49,11 @@ export async function POST(req) {
     });
     id = newSchool._id;
   } catch (err) {
-    console.log(`ERROR: in creating school:\n${err}`);
-    return NextResponse.json(
-      {
-        message: `Error: ${err.message}. `,
-        err: err,
-      },
-      { status: 400 }
-    );
+    return NextResponse.json({
+      error: err.message,
+      message: `DB error in performing the create culture action. `,
+      err: err,
+    });
   }
   return NextResponse.json(
     {

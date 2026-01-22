@@ -1,69 +1,59 @@
 import { NextResponse } from 'next/server';
 import Culture from '@/models/culture';
+import isLoggedIn from '@/lib/middlewares/validateAuth';
 
 /**
  * @swagger
- * /api/cultures/{id}:
+ * /api/v1/cultures/{id}:
  *   get:
- *     summary: Get culture item with :id
+ *     summary: get a item of given id
  *     tags:
  *       - cultures
- *     description: Returns a list of cultures
- *     responses:
- *       200:
- *         description: Success
- *         content:
- *           application/json:
- *             schema:
- *               type: array
- *               items:
- *                 type: object
- *                 properties:
- *                   id:
- *                     type: number
- *                   name:
- *                     type: string
+ *   put:
+ *     summary: Replace the data associated to the item with given id
+ *     tags:
+ *       - cultures
+ *   delete:
+ *     summary: delete item of given id
+ *     tags:
+ *       - cultures
+ *   patch:
+ *     summary: updates specified properties in the req.body corresponding to the given id
+ *     tags:
+ *       - cultures
  */
-export async function GET(req, {params}) {
-  const { id } =await  params;
+
+export async function GET(req, { params }) {
+  const { id } = await params;
   try {
     const culture = await Culture.findById(id);
 
     if (!culture) {
-      return NextResponse.json({ error: 'Not found' }, { status: 404 });
+      return NextResponse.json({ message: 'item Not found' }, { status: 404 });
     }
 
-    return NextResponse.json({ data: culture });
+    return NextResponse.json({
+      message: 'item found and returned',
+      data: culture,
+    });
   } catch (err) {
-    return NextResponse.json({ error: err.message }, { status: 500 });
+    return NextResponse.json({
+      error: err.message,
+      message: `DB error in performing the create culture action. `,
+      err: err,
+    });
   }
 }
 
-/**
- * @swagger
- * /api/cultures/{id}:
- *   put:
- *     summary: Update item with :id
- *     tags:
- *       - cultures
- *     description: Returns a list of cultures
- *     responses:
- *       200:
- *         description: Success
- *         content:
- *           application/json:
- *             schema:
- *               type: array
- *               items:
- *                 type: object
- *                 properties:
- *                   id:
- *                     type: number
- *                   name:
- *                     type: string
- */
-export async function PATCH(req, {params}) {
-  const { id } =await  params;
+export async function PATCH(req, { params }) {
+  if (!isLoggedIn(req)) {
+    return NextResponse.json(
+      { message: 'you need to be logged in to perform this request.' },
+      { status: 401 }
+    );
+  }
+
+  const { id } = await params;
   const body = await req.json();
 
   try {
@@ -82,46 +72,32 @@ export async function PATCH(req, {params}) {
       data: updated,
     });
   } catch (err) {
-    return NextResponse.json({ error: err.message }, { status: 500 });
+    return NextResponse.json({
+      error: err.message,
+      message: `DB error in performing the create culture action. `,
+      err: err,
+    });
   }
 }
 
-/**
- * @swagger
- * /api/cultures/{id}:
- *   put:
- *     summary: replace item with given id
- *     tags:
- *       - cultures
- *     description: Returns a list of cultures
- *     responses:
- *       200:
- *         description: Success
- *         content:
- *           application/json:
- *             schema:
- *               type: array
- *               items:
- *                 type: object
- *                 properties:
- *                   id:
- *                     type: number
- *                   name:
- *                     type: string
- */
-export async function PUT(req, {params}) {
-  //check if authorized
-  //validate data
 
-  const body = await req.json()
-  const { id } =await  params;
+export async function PUT(req, { params }) {
+  if (!isLoggedIn(req)) {
+    return NextResponse.json(
+      { message: 'you need to be logged in to perform this request.' },
+      { status: 401 }
+    );
+  }
+
+  const body = await req.json();
+  const { id } = await params;
 
   try {
     const culture = await Culture.findById(id);
 
     if (!culture) {
       return NextResponse.json(
-        { error: "The culture id doesn't exist." },
+        { message: "The culture id doesn't exist." },
         { status: 404 }
       );
     }
@@ -141,40 +117,26 @@ export async function PUT(req, {params}) {
     return NextResponse.json({
       message: `replaced culture ${body.title} with ${body.title}`,
       id: id,
-      data: dbResponse
+      data: dbResponse,
     });
   } catch (err) {
-    return NextResponse.json({ error: err.message }, { status: 500 });
-  }
+      return NextResponse.json({
+        error: err.message,
+        message: `DB error in performing the create culture action. `,
+        err: err,
+      });
+    }
 }
 
-/**
- * @swagger
- * /api/cultures/{id}:
- *   delete:
- *     summary: delete culture item with :id
- *     tags:
- *       - cultures
- *     description: Returns a list of cultures
- *     responses:
- *       200:
- *         description: Success
- *         content:
- *           application/json:
- *             schema:
- *               type: array
- *               items:
- *                 type: object
- *                 properties:
- *                   id:
- *                     type: number
- *                   name:
- *                     type: string
- */
-export async function DELETE(req, {params}) {
-  //validate user
+export async function DELETE(req, { params }) {
+  if (!isLoggedIn(req)) {
+    return NextResponse.json(
+      { message: 'you need to be logged in to perform this request.' },
+      { status: 401 }
+    );
+  }
 
-  const { id } =await  params;
+  const { id } = await params;
 
   try {
     const culture = await Culture.findByIdAndDelete(id);
@@ -194,12 +156,10 @@ export async function DELETE(req, {params}) {
       );
     }
   } catch (err) {
-    return NextResponse.json(
-      {
-        message: 'Some error occurred in the database',
-        error: err,
-      },
-      { status: 500 }
-    );
+    return NextResponse.json({
+      error: err.message,
+      message: `DB error in performing the create culture action. `,
+      err: err,
+    });
   }
 }

@@ -1,59 +1,28 @@
 import { NextResponse } from 'next/server';
 import School from '@/models/school.js';
+import isLoggedIn from '@/lib/middlewares/validateAuth';
 
 /**
  * @swagger
- * /api/schools/{id}:
+ * /api/v1/schools/{id}:
  *   get:
- *     summary: Get school by ID
+ *     summary: get a item of given id
  *     tags:
  *       - schools
- *     parameters:
- *       - in: path
- *         name: id
- *         required: true
- *         schema:
- *           type: string
- *         description: School ID
- *     responses:
- *       200:
- *         description: Success - returns school data
  *   put:
- *     summary: Update school by ID
+ *     summary: Replace the data associated to the item with given id
  *     tags:
  *       - schools
- *     parameters:
- *       - in: path
- *         name: id
- *         required: true
- *         schema:
- *           type: string
- *         description: School ID
- *     requestBody:
- *       description: School data to update
- *       required: false
- *       content:
- *         application/json:
- *           schema:
- *             type: object
- *     responses:
- *       200:
- *         description: School updated successfully
  *   delete:
- *     summary: Delete school by ID
+ *     summary: delete item of given id
  *     tags:
  *       - schools
- *     parameters:
- *       - in: path
- *         name: id
- *         required: true
- *         schema:
- *           type: string
- *         description: School ID
- *     responses:
- *       200:
- *         description: School deleted successfully
+ *   patch:
+ *     summary: updates specified properties in the req.body corresponding to the given id
+ *     tags:
+ *       - schools
  */
+
 export async function GET(req, { params }) {
   const { id } = await params;
   try {
@@ -68,11 +37,21 @@ export async function GET(req, { params }) {
       data: school,
     });
   } catch (err) {
-    return NextResponse.json({ error: err.message }, { status: 500 });
+    return NextResponse.json(
+      { error: err.message, message: `error: ${err.message}`, data: err },
+      { status: 500 }
+    );
   }
 }
 
 export async function PUT(req, { params }) {
+  if (!isLoggedIn(req)) {
+    return NextResponse.json(
+      { message: 'you need to be logged in to perform this request.' },
+      { status: 401 }
+    );
+  }
+
   const { id } = await params;
   const body = await request.json();
   try {
@@ -99,34 +78,20 @@ export async function PUT(req, { params }) {
       data: dbResponse,
     });
   } catch (err) {
-    return NextResponse.json({ error: err.message }, { status: 500 });
+    return NextResponse.json(
+      { error: err.message, message: `error: ${err.message}`, data: err },
+      { status: 500 }
+    );
   }
 }
 
-/**
- * @swagger
- * /api/schools/{id}:
- *   put:
- *     summary: Update item with :id
- *     tags:
- *       - school
- *     description: Returns a list of school
- *     responses:
- *       200:
- *         description: Success
- *         content:
- *           application/json:
- *             schema:
- *               type: array
- *               items:
- *                 type: object
- *                 properties:
- *                   id:
- *                     type: number
- *                   name:
- *                     type: string
- */
 export async function PATCH(req, { params }) {
+  if (!isLoggedIn(req)) {
+    return NextResponse.json(
+      { message: 'you need to be logged in to perform this request.' },
+      { status: 401 }
+    );
+  }
   const { id } = await params;
   const body = await req.json();
 
@@ -146,12 +111,20 @@ export async function PATCH(req, { params }) {
       data: updated,
     });
   } catch (err) {
-    return NextResponse.json({ error: err.message }, { status: 500 });
+    return NextResponse.json(
+      { error: err.message, message: `error: ${err.message}`, data: err },
+      { status: 500 }
+    );
   }
 }
 
 export async function DELETE(req, { params }) {
-  //validate user
+  if (!isLoggedIn(req)) {
+    return NextResponse.json(
+      { message: 'you need to be logged in to perform this request.' },
+      { status: 401 }
+    );
+  }
 
   const { id } = await params;
 
@@ -174,10 +147,7 @@ export async function DELETE(req, { params }) {
     }
   } catch (err) {
     return NextResponse.json(
-      {
-        message: 'Some error occurred in the database',
-        error: err,
-      },
+      { error: err.message, message: `error: ${err.message}`, data: err },
       { status: 500 }
     );
   }
