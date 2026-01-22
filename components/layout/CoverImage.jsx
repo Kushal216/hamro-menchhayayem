@@ -7,7 +7,7 @@ import { useContext, useState } from 'react';
 import { BsPlayBtnFill } from 'react-icons/bs';
 import YoutubeIframe from './YoutubeIframe';
 
-export default function CoverImage({ title, route, video }) {
+export default function CoverImage({ title,coverImage, route, video }) {
   const [showVideo, setShowVideo] = useState(false);
   const paths = usePathname().replace(/\/$/, '').split('/');
   const path = paths[1];
@@ -17,7 +17,7 @@ export default function CoverImage({ title, route, video }) {
   // videoId = 'PhOMPJWPDLU'; //testing
 
   return (
-    <div className="md:float-right md:aspect-video md:w-fit md:flex md:flex-col items-center">
+    <div className="md:float-right md:aspect-video md:w-fit md:flex md:flex-col items-center md:ml-4">
       <div className="aspect-32/15 w-full md:w-[55vw] md:float-right  relative mr-2">
         {!showVideo ? (
           <>
@@ -35,7 +35,7 @@ export default function CoverImage({ title, route, video }) {
             )}
 
             <Image
-              src={'/images/image.png'}
+              src={coverImage}
               fill
               sizes="(max-width: 768px) 100vw, 50vw"
               alt="image of something"
