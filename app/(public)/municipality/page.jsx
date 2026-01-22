@@ -87,23 +87,25 @@ export default async function HomePage() {
           />
         ))}
 
-      {data
-        .filter((item) => item.position !== "अध्यक्ष")
-        .map((item, index) => (
-          <OurCard
-            key={`other-${index}`}
-            image={item.photo}
-            name={item.name}
-            position={item.position}
-            email={item.email}
-            phone={item.phone}
-            facebook={item.facebook}
-            imgHeight={150}
-            imgWidth={150}
-            height={250}
-            width={500}
-          />
-        ))}
+      <div className="flex justify-center mb-5 mt-5 gap-10">
+        {data
+          .filter((item) => item.position !== "अध्यक्ष")
+          .map((item, index) => (
+            <OurCard
+              key={`other-${index}`}
+              image={item.photo}
+              name={item.name}
+              position={item.position}
+              email={item.email}
+              phone={item.phone}
+              facebook={item.facebook}
+              imgHeight={250}
+              imgWidth={250}
+              height={350}
+              width={500}
+            />
+          ))}
+      </div>
     </>
   );
 }
