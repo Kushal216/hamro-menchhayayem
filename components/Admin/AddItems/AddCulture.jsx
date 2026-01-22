@@ -1,8 +1,5 @@
 'use client';
-import { useState } from 'react';
-import Image from 'next/image';
-import 'simplemde/dist/simplemde.min.css';
-import { uploadImage } from '@/utils/uploadImage';
+import { useState } from 'react';import 'simplemde/dist/simplemde.min.css';
 import MarkDownEditor from './MarkDownEditor';
 import ImageInput from '@/components/ImageInput';
 import Input from '../Input';
