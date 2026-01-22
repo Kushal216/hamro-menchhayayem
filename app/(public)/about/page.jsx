@@ -1,29 +1,25 @@
-"use client";
-
 import Titlebar from "@/components/ui/Titlebar";
 import OurCard from "@/components/ui/OurCard";
 import data from "@/app/Data/OurTeam";
-import { useState } from "react";
+import { MarkdownViewer } from "@/components/layout/ItemDetails";
 
 export default function HomePage() {
-  const [isAll, setIsAll] = useState(false);
-  const fullText =
-    "Lorem ipsum dolor sit amet consectetur adipisicing elit. In ipsum reiciendis nisi cupiditate   voluptas corporis, praesentium suscipit iste. Facilis optio illum doloremque aperiam autem debitis quaerat, enim numquam earum recusandae!Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ducimus quam, neque cum quaerat laboriosam in omnis doloribus, quidem illum laborum placeat dolor non recusandae, cupiditate aperiam quasi. Sit, maxime nisi! Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dolor eligendi nostrum, excepturi at dignissimos repudiandae aliquam veritatis non molestiae dolorem totam! Obcaecati saepe eligendi beatae aut. Doloribus minima doloremque dolore. Lorem ipsum, dolor sit amet consectetur adipisicing elit. Fuga, totam magni asperiores error ipsa iste. Doloribus est commodi non, quod temporibus illum in quae ullam cum. Quaerat accusamus beatae aspernatur.Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias ex delectus incidunt quibusdam tenetur! Quidem quisquam doloribus doloremque corrupti, quod suscipit! Dignissimos obcaecati veritatis rerum eligendi beatae nostrum harum fuga. Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatum minima id quis hic quaerat! Pariatur laborum iure, molestiae ducimus nam, reprehenderit debitis quasi inventore porro, culpa dignissimos tempore quaerat recusandae.";
-
-  const shortText = fullText.slice(0, 500) + "...";
-
+  const content = `डिजिटल प्रविधिले संसारलाई नजिक ल्याइरहेको वर्तमान समयमा, स्थानीय तहको पहिचान, सम्भावना र वास्तविक कथालाई विश्वसमक्ष प्रस्तुत गर्नु समयको आवश्यकता बनेको छ। यही आवश्यकतालाई आत्मसात गर्दै, हामी दुई जना स्नातक तहमा अध्ययनरत विद्यार्थीको संयुक्त पहलमा **मेन्छ्यायेम गाउँपालिका**लाई डिजिटल माध्यममार्फत चिनाउने उद्देश्यसहित यो वेबसाइट निर्माण गरिएको हो।
+#
+यस पहलको सुरुवात कुनै औपचारिक योजनाबाट होइन, एउटा सानो अनुभवबाट भयो। विदेशमा रहेका साथीलाई आफ्नो गाउँको सौन्दर्य देखाउन फोटो र जानकारी खोज्दा, मेन्छ्यायेम गाउँपालिकासम्बन्धी व्यवस्थित, विश्वसनीय र एकीकृत जानकारी एकै स्थानमा उपलब्ध नभएको महसुस गरियो। यही अभावले हामीलाई सोच्न प्रेरित गर्‍यो किन आफ्नै जन्मभूमिको कथा हामीले नै डिजिटल रूपमा नलेख्ने?
+#
+यस वेबसाइटको प्रमुख उद्देश्य **मेन्छ्यायेम गाउँपालिकाको पर्यटन क्षेत्र, साहित्यिक तथा सांस्कृतिक सम्पदा, शैक्षिक संस्था, भौगोलिक परिचय तथा अन्य आवश्यक तथ्याङ्कहरूलाई एउटै डिजिटल प्लेटफर्ममा समेट्नु** हो। यसमार्फत स्थानीय सूचना व्यवस्थापनलाई सहज बनाउनुका साथै, गाउँपालिकाको पहिचानलाई राष्ट्रिय र अन्तर्राष्ट्रिय स्तरमा प्रवर्द्धन गर्ने लक्ष्य लिइएको छ।
+#
+सीमित स्रोत, समय र विद्यार्थी जीवनकै बीचमा भए पनि, आफ्नो जन्मभूमिप्रति उत्तरदायित्व वहन गर्दै केही योगदान दिन पाउनु हाम्रो लागि गर्वको विषय हो। हामी विश्वास गर्छौँ जब कुनै स्थानलाई त्यसका आफ्नै युवाले चिनाउँछन्, तब मात्र त्यसको वास्तविक आत्मा संसारसम्म पुग्छ।
+#
+मेन्छ्यायेम गाउँपालिकालाई विश्व नक्सामा अझ स्पष्ट रूपमा उजागर गर्ने यो सानो तर इमानदार प्रयासमार्फत, हामी आफ्नो ठाउँको कथा विश्वसँग जोड्ने यात्रामा अघि बढिरहेका छौँ।
+`;
   return (
     <>
-      <div className="flex-4/5 p-4">
+      <div className="flex-4/5 p-2">
         <Titlebar title="परीचय" />
-        <div className="py-1 pl-2 pb-3 text-xl">
-          {isAll ? fullText : shortText}
-          <button
-            onClick={() => setIsAll(!isAll)}
-            className="text-[#2eade7] underline pl-2"
-          >
-            {isAll ? "See Less" : "See More"}
-          </button>
+        <div className="py-1 pl-2 pb-3 md:text-xl text-sm text-justify md:px-8">
+          <MarkdownViewer content={content} />
         </div>
         <Titlebar title="निर्माता" />
 

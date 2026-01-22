@@ -30,7 +30,7 @@ export default async function ItemDetails({ route, id }) {
   );
 }
 
-function MarkdownViewer({ content }) {
+export function MarkdownViewer({ content }) {
   return (
     <div className="prose prose-neutral max-w-none px-2">
       <ReactMarkdown
