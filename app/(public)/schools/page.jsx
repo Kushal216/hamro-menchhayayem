@@ -12,7 +12,7 @@ export default async function SchoolPage() {
         {data.map((item, index) => (
           <SchoolCard
             key={index}
-            image={item.coverImage}
+            image={item.coverImage || '/images/fallback-image.jpg'}
             title={item.title}
             id={item._id}
             description={item.description}

@@ -15,7 +15,7 @@ export default async function CulturesPage() {
           <CultureCard
             key={item._id}
             id={item._id}
-            image={item.coverImage}
+            image={item.coverImage || '/images/fallback-image.jpg'}
             title={item.title}
             description={item.description}
             likes={item.likesCount}

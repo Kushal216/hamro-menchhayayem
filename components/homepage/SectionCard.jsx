@@ -31,6 +31,7 @@ const SectionCard = ({ item }) => {
         <div className="flex md:flex-col h-full gap-4 md:gap-1 items-center justify-center px-2">
           <div className="w-10 md:w-12 lg:w-17 xl:w-20 aspect-square relative mb-2 xl:mb-8 ml-2 md:ml-0">
             <Image
+              sizes="(max-width: 768px) 100vw, 50vw"
               src={item.iconUrl}
               alt={`${item.title} icon`}
               fill
@@ -48,6 +49,7 @@ const SectionCard = ({ item }) => {
         </div>
       </div>
       <Image
+        sizes="(max-width: 768px) 100vw, 50vw"
         src={item.imageUrl}
         alt="item.title"
         className={`object-cover`}

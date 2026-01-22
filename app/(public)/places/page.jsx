@@ -13,7 +13,7 @@ async function TourismPage() {
         {data.map((item, index) => (
           <TourismCard
             key={index}
-            image={item.coverImage}
+            image={item.coverImage || '/images/fallback-image.jpg'}
             id={item._id}
             title={item.title}
             description={item.description}

@@ -15,20 +15,19 @@ const HeroImage = () => {
 
   const [heroIndex, setHeroIndex] = useState(0);
 
-useEffect(() => {
-  const interval = setInterval(() => {
-    setHeroIndex((prev) => (prev + 1) % heroPhotos.length);
-  }, 3000);
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setHeroIndex((prev) => (prev + 1) % heroPhotos.length);
+    }, 3000);
 
-  return () => clearInterval(interval);
-}, [heroPhotos.length]);
-
+    return () => clearInterval(interval);
+  }, [heroPhotos.length]);
 
   const photo = heroPhotos[heroIndex];
   return (
     <div className="relative w-full aspect-video xl:aspect-5/2 select-none">
-
       <Image
+        sizes="(max-width: 768px) 100vw, 50vw"
         src={photo.src}
         alt="hamro  menchhayayem"
         fill
