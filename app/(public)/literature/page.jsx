@@ -9,7 +9,7 @@ export default async function LiteraturePage() {
   return (
     <>
       <RouteTitle title={'साहित्यीक सृजनाहरु'} />
-      <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4">
+      <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-4">
         {data.map((item, index) => (
           <LiteratureCard
             key={item._id}
