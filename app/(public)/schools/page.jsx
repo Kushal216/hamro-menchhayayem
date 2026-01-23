@@ -8,7 +8,7 @@ export default async function SchoolPage() {
   return (
     <>
       <RouteTitle title={'हाम्रा शिक्षण संस्थाहरु'} />
-      <div className="md:grid md:grid-cols-2 flex flex-wrap ">
+      <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4">
         {data.map((item, index) => (
           <SchoolCard
             key={index}
