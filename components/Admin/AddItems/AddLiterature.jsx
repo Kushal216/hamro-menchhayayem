@@ -1,14 +1,16 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import 'simplemde/dist/simplemde.min.css';
 import { useMemo } from 'react';
 import MarkDownEditor from './MarkDownEditor';
 import ImageInput from '@/components/ImageInput';
 import Input from '../Input';
 import toast from 'react-hot-toast';
+import { useRouter } from 'next/navigation';
 
-export default function LiteratureForm(toggleAdd) {
+export default function LiteratureForm({ patch = false, item }) {
+  const router = useRouter();
   const [_id, setId] = useState('');
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
@@ -20,15 +22,20 @@ export default function LiteratureForm(toggleAdd) {
   const [coverImage, setCoverImage] = useState('');
   const [uploading, setUploading] = useState(false);
 
-  const options = useMemo(
-    () => ({
-      minHeight: '300px',
-      status: ['lines', 'words', 'cursor'],
-      placeholder: 'Write your content here...',
-      spellChecker: false,
-    }),
-    []
-  );
+  useEffect(() => {
+    if (patch && item) {
+      setTitle(item.title);
+      setId(item._id);
+      setDescription(item.description);
+      setCoverImage(item.coverImage);
+      setVideoId(item.video.id);
+      setVideoStart(item.video.start);
+      setVideoEnd(item.video.end);
+      setCategory(item.category);
+      setAuthor(item.author);
+    }
+  }, [patch, item]);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -55,11 +62,22 @@ export default function LiteratureForm(toggleAdd) {
     try {
       setUploading(true);
 
-      const res = await fetch('/api/v1/literature', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(data),
-      });
+      let res = null;
+
+      if (!patch) {
+        res = await fetch('/api/v1/literature', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(data),
+        });
+      } else {
+        res = await fetch(`/api/v1/literature/${item._id}`, {
+          method: 'PATCH',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(data),
+        });
+      }
+
       setUploading(false);
 
       if (!res.ok) {
@@ -82,6 +100,7 @@ export default function LiteratureForm(toggleAdd) {
     } catch (err) {
       toast.error(err.message);
     }
+    router.refresh();
   };
 
   return (
@@ -103,6 +122,7 @@ export default function LiteratureForm(toggleAdd) {
           placeholder="route"
           value={_id}
           setValue={setId}
+          disabled={patch}
           required
         />
         <Input
@@ -166,9 +186,9 @@ export default function LiteratureForm(toggleAdd) {
         <button
           type="submit"
           disabled={uploading}
-          className="cursor-pointer font-bold bg-blue-600 mt-2 text-white px-5 py-2 rounded-xl"
+          className="cursor-pointer font-bold bg-blue-600 mt-4 text-white px-5 py-2 rounded-xl"
         >
-          {uploading ? 'Uploading...' : 'Add Culture'}
+          {uploading ? 'Uploading...' : `${patch ? 'Update' : 'Add'} Item`}
         </button>
       </form>
     </>

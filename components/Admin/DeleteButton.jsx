@@ -8,7 +8,7 @@ const DeleteButton = ({route, id}) => {
       onClick={() => {
         handleDelete(route, id);
       }}
-      className=" cursor-pointer px-3 py-1.5 text-sm bg-red-500 text-white rounded-xl ml-3"
+      className="w-20 cursor-pointer px-3 py-1.5 text-sm bg-red-500 text-white rounded-xl ml-3"
     >
       Delete
     </button>

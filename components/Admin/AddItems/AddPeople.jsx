@@ -1,12 +1,15 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
 import Input from '../Input';
 import ImageInput from '@/components/ImageInput';
+import { useRouter } from 'next/navigation';
 
-export default function PeopleForm({ onSubmit }) {
+export default function PeopleForm({ patch = false, item }) {
   const [name, setName] = useState('');
+  const router = useRouter();
+
   const [photo, setPhoto] = useState('');
   const [_id, setId] = useState('');
   const [phone, setPhone] = useState('');
@@ -17,6 +20,16 @@ export default function PeopleForm({ onSubmit }) {
   const [email, setEmail] = useState('');
   const [position, setPosition] = useState('');
   const [uploading, setUploading] = useState(false);
+
+  useEffect(() => {
+    if (patch && item) {
+      setName(item.name);
+      setPhoto(item.photo);
+      setId(item._id);
+      setPhone(item.phone);
+      setPosition(item.position);
+    }
+  }, [patch, item]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -38,12 +51,21 @@ export default function PeopleForm({ onSubmit }) {
 
     try {
       setUploading(true);
+      let res = null;
 
-      const res = await fetch('/api/v1/people', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(data),
-      });
+      if (!patch) {
+        res = await fetch('/api/v1/people', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(data),
+        });
+      } else {
+        res = await fetch(`/api/v1/people/${item._id}`, {
+          method: 'PATCH',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(data),
+        });
+      }
       setUploading(false);
 
       if (!res.ok) {
@@ -70,6 +92,7 @@ export default function PeopleForm({ onSubmit }) {
       console.error(err);
       alert(err.message);
     }
+    router.refresh();
   };
 
   return (
@@ -103,6 +126,7 @@ export default function PeopleForm({ onSubmit }) {
           label={'Website'}
           placeholder="John Doe"
           value={website}
+          disabled={patch}
           setValue={setWebsite}
         />
 
@@ -112,16 +136,19 @@ export default function PeopleForm({ onSubmit }) {
             <Input
               placeholder="Facebook URL"
               value={facebook}
+              disabled={patch}
               setValue={setFacebook}
             />
             <Input
               placeholder="Instagram URL"
               value={instagram}
+              disabled={patch}
               setValue={setInstagram}
             />
             <Input
               placeholder="LinkedIn URL"
               value={linkedin}
+              disabled={patch}
               setValue={setLinkedin}
             />
           </div>
@@ -132,6 +159,7 @@ export default function PeopleForm({ onSubmit }) {
           label={'Email'}
           placeholder="baula@paagal.com"
           value={email}
+          disabled={patch}
           setValue={setEmail}
         />
 
@@ -145,9 +173,9 @@ export default function PeopleForm({ onSubmit }) {
         <button
           type="submit"
           disabled={uploading}
-          className="cursor-pointer mt-2 font-bold bg-blue-600 text-white px-5 py-2 rounded-xl"
+          className="cursor-pointer font-bold bg-blue-600 mt-4 text-white px-5 py-2 rounded-xl"
         >
-          {uploading ? 'Uploading...' : 'Add Item'}
+          {uploading ? 'Uploading...' : `${patch ? 'Update' : 'Add'} Item`}
         </button>
       </form>
     </>

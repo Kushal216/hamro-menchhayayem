@@ -1,13 +1,15 @@
 'use client';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import 'simplemde/dist/simplemde.min.css';
 import MarkDownEditor from './MarkDownEditor';
 import toast from 'react-hot-toast';
 import Input from '../Input';
 import ImageInput from '@/components/ImageInput';
+import { useRouter } from 'next/navigation';
 
-export default function SchoolForm({ toggleAdd }) {
+export default function SchoolForm({ patch = false, item }) {
   const [title, setTitle] = useState('');
+  const router = useRouter();
   const [description, setDescription] = useState('');
   const [gallery, setGallery] = useState([]);
   const [coverImage, setCoverImage] = useState('');
@@ -21,6 +23,26 @@ export default function SchoolForm({ toggleAdd }) {
   const [videoId, setVideoId] = useState('');
   const [videoStart, setVideoStart] = useState('');
   const [videoEnd, setVideoEnd] = useState('');
+
+  useEffect(() => {
+    if (patch && item) {
+      setTitle(item.title);
+      setId(item._id);
+      setDescription(item.description);
+      setCoverImage(item.coverImage);
+      setGallery(item.gallery);
+      setCaste(item.caste);
+      setVideoId(item.video.id);
+      setVideoStart(item.video.start);
+      setVideoEnd(item.video.end);
+      setLocation(item.location);
+      setCategory(item.category);
+      setPhoneNo(item.phoneNo);
+      setVideoId(item.video.id);
+      setVideoStart(item.video.start);
+      setVideoEnd(item.video.end);
+    }
+  }, [patch, item]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -42,12 +64,21 @@ export default function SchoolForm({ toggleAdd }) {
     };
     try {
       setUploading(true);
+      let res = null;
+      if (!patch) {
+        res = await fetch('/api/v1/schools', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(data),
+        });
+      } else {
+        res = await fetch(`/api/v1/schools/${item._id}`, {
+          method: 'PATCH',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(data),
+        });
+      }
 
-      const res = await fetch('/api/v1/schools', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(data),
-      });
       setUploading(false);
 
       if (!res.ok) {
@@ -77,6 +108,7 @@ export default function SchoolForm({ toggleAdd }) {
       console.error(err);
       alert(err.message);
     }
+    router.refresh();
   };
 
   return (
@@ -95,6 +127,7 @@ export default function SchoolForm({ toggleAdd }) {
           label={'custom route'}
           placeholder="route"
           value={_id}
+          disabled={patch}
           setValue={setId}
           required
         />
@@ -180,9 +213,9 @@ export default function SchoolForm({ toggleAdd }) {
         <button
           type="submit"
           disabled={uploading}
-          className="cursor-pointer mt-2 font-bold bg-blue-600 text-white px-5 py-2 rounded-xl"
+          className="cursor-pointer font-bold bg-blue-600 mt-4 text-white px-5 py-2 rounded-xl"
         >
-          {uploading ? 'Uploading...' : 'Add Item'}
+          {uploading ? 'Uploading...' : `${patch ? 'Update' : 'Add'} Item`}
         </button>
       </form>
     </>

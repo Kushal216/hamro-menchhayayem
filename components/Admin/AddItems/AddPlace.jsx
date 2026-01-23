@@ -1,12 +1,14 @@
 'use client';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import 'simplemde/dist/simplemde.min.css';
 import MarkDownEditor from './MarkDownEditor';
 import toast from 'react-hot-toast';
 import Input from '../Input';
 import ImageInput from '@/components/ImageInput';
+import { useRouter } from 'next/navigation';
 
-export default function PlaceForm() {
+export default function PlaceForm({ patch = false, item }) {
+  const router = useRouter();
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [_id, setId] = useState('');
@@ -19,6 +21,23 @@ export default function PlaceForm() {
   const [region, setRegion] = useState('menchhayayem');
   const [category, setCategory] = useState('');
   const [uploading, setUploading] = useState(false);
+
+  useEffect(() => {
+    if (patch && item) {
+      setTitle(item.title);
+      setId(item._id);
+      setDescription(item.description);
+      setCoverImage(item.coverImage);
+      setGallery(item.gallery);
+      setCaste(item.caste);
+      setVideoId(item.video.id);
+      setVideoStart(item.video.start);
+      setVideoEnd(item.video.end);
+      setLocation(item.location);
+      setRegion(item.region);
+      setCategory(item.category);
+    }
+  }, [patch, item]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -41,12 +60,22 @@ export default function PlaceForm() {
 
     try {
       setUploading(true);
+      let res = null;
 
-      const res = await fetch('/api/v1/places', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(data),
-      });
+      if (!patch) {
+        res = await fetch('/api/v1/places', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(data),
+        });
+      } else {
+        res = await fetch(`/api/v1/places/${item._id}`, {
+          method: 'PATCH',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(data),
+        });
+      }
+
       setUploading(false);
 
       if (!res.ok) {
@@ -70,11 +99,12 @@ export default function PlaceForm() {
       setRegion('menchhayayem');
       setCategory('');
       setUploading(false);
-      
     } catch (err) {
       console.error(err);
       toast.error(err);
     }
+    router.refresh();
+
   };
 
   return (
@@ -93,6 +123,7 @@ export default function PlaceForm() {
           label={'custom route'}
           placeholder="route"
           value={_id}
+          disabled={patch}
           setValue={setId}
           required
         />
@@ -181,9 +212,9 @@ export default function PlaceForm() {
         <button
           type="submit"
           disabled={uploading}
-          className="cursor-pointer mt-2 font-bold bg-blue-600 text-white px-5 py-2 rounded-xl"
+          className="cursor-pointer font-bold bg-blue-600 mt-4 text-white px-5 py-2 rounded-xl"
         >
-          {uploading ? 'Uploading...' : 'Add Item'}
+          {uploading ? 'Uploading...' : `${patch ? 'Update' : 'Add'} Item`}
         </button>
       </form>
     </>

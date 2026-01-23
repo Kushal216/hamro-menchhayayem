@@ -1,4 +1,4 @@
-'use client'
+'use client';
 import React from 'react';
 
 const Input = ({
@@ -8,6 +8,7 @@ const Input = ({
   placeholder = 'Enter the value',
   type = 'text',
   required,
+  disabled = false,
 }) => {
   return (
     <>
@@ -19,6 +20,7 @@ const Input = ({
             setValue={setValue}
             placeholder={placeholder}
             type={type}
+            disabled={disabled}
           />
         </label>
       ) : (
@@ -27,6 +29,7 @@ const Input = ({
           setValue={setValue}
           placeholder={placeholder}
           type={type}
+          disabled={disabled}
           required={required}
         />
       )}
@@ -36,7 +39,7 @@ const Input = ({
 
 export default Input;
 
-function Box({ value, setValue, placeholder, type, required }) {
+function Box({ value, setValue, placeholder, type, required, disabled }) {
   return (
     <>
       <input
@@ -44,8 +47,11 @@ function Box({ value, setValue, placeholder, type, required }) {
         type={type}
         value={value}
         onChange={(e) => setValue(e.target.value)}
+        disabled={disabled}
         placeholder={placeholder}
-        className="bg-blue-500/10 w-full p-2 rounded mb-2"
+        className={`bg-blue-500/10 w-full p-2 rounded mb-2  ${disabled
+        ? "bg-gray-400 cursor-not-allowed text-gray-700"
+        : " "}`}
       />
     </>
   );

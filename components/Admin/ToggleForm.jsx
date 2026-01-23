@@ -1,5 +1,5 @@
 'use client';
-import { useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import CultureForm from './AddItems/AddCulture';
 import LiteratureForm from './AddItems/AddLiterature';
 import UserForm from './AddItems/AddUser';
@@ -8,9 +8,8 @@ import PlaceForm from './AddItems/AddPlace';
 import PeopleForm from './AddItems/AddPeople';
 import toast from 'react-hot-toast';
 
-export default function ToggleForm({ title, route }) {
-  const [showAdd, setShowAdd] = useState(false);
-
+export default function ToggleForm({ title, route, update, item = null }) {
+const [showAdd, setShowAdd] = useState(Boolean(update));
   const toggleAdd = ({ title }) => {
     setShowAdd((prev) => !prev);
   };
@@ -19,22 +18,22 @@ export default function ToggleForm({ title, route }) {
 
   switch (route) {
     case 'cultures':
-      form = <CultureForm />;
+      form = <CultureForm patch={Boolean(update)} item={item} />;
       break;
     case 'literature':
-      form = <LiteratureForm />;
+      form = <LiteratureForm patch={Boolean(update)} item={item} />;
       break;
     case 'places':
-      form = <PlaceForm />;
+      form = <PlaceForm patch={Boolean(update)} item={item} />;
       break;
     case 'schools':
-      form = <SchoolForm />;
+      form = <SchoolForm patch={Boolean(update)} item={item} />;
       break;
     case 'people':
-      form = <PeopleForm />;
+      form = <PeopleForm patch={Boolean(update)} item={item} />;
       break;
     case 'users':
-      form = <UserForm />;
+      form = <UserForm patch={Boolean(update)} item={item} />;
       break;
 
     default:
@@ -47,31 +46,32 @@ export default function ToggleForm({ title, route }) {
     <>
       {!showAdd ? (
         <>
-          <div
-            onClick={toggleAdd}
-            className="cursor-pointer font-bold flex border p-2 rounded my-2 justify-center "
-          >
-            <div className="flex items-center gap-5">
-              <div>{title}</div>
-              <div className="text-3xl">+</div>
+          {!update && (
+            <div
+              onClick={toggleAdd}
+              className="cursor-pointer font-bold flex border p-2 rounded my-2 justify-center "
+            >
+              <div className="flex items-center gap-5">
+                <div>{title}</div>
+                <div className="text-3xl">+</div>
+              </div>
             </div>
-          </div>
+          )}
         </>
-      ) : (
-        <button
+      ) : (<>
+        {!update&& <button
           onClick={toggleAdd}
           className="cursor-pointer font-bold bg-red-500 text-white px-5 py-2 rounded-xl float-right m-2"
         >
           X
-        </button>
+        </button>}</>
       )}
 
-      <div className='bg-white rounded-lg shadow-xl py-2'>
-
-      {showAdd && form}
+      <div className="bg-white rounded-lg shadow-xl py-2">
+        {showAdd && form}
       </div>
 
-      <div className="text-xl font-bold mt-5">Manage Data</div>
+      {!update && <div className="text-xl font-bold mt-5">Manage Data</div>}
     </>
   );
 }
