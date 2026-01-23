@@ -95,8 +95,8 @@ export default function CultureForm({ patch, item }) {
 
   return (
     <>
-      <h1 className="text-2xl font-bold text-black text-center mb-4">
-        Add Details
+       <h1 className="text-2xl font-bold text-black text-center mb-4">
+        {patch?'Update':'Add'} Details
       </h1>
 
       <form onSubmit={handleSubmit} className="space-y-5 p-4">
