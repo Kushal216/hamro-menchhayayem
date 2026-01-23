@@ -1,18 +1,17 @@
-import CultureCard from '@/components/ui/LiteratureCard';
 import fetchData from '@/lib/fetchItem';
 import RouteTitle from '@/components/layout/RouteTitle';
+import LiteratureCard from '@/components/ui/LiteratureCard';
 
 export default async function LiteraturePage() {
   const res = await fetchData('literature');
   const { message, data } = res;
-  console.log(message);
 
   return (
     <>
       <RouteTitle title={'साहित्यीक सृजनाहरु'} />
-      <div className="flex flex-wrap">
+      <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4">
         {data.map((item, index) => (
-          <CultureCard
+          <LiteratureCard
             key={item._id}
             id={item._id}
             title={item.title}
@@ -21,7 +20,6 @@ export default async function LiteraturePage() {
             author={item.author}
           />
         ))}
-        ;
       </div>
     </>
   );
