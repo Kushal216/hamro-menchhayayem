@@ -1,6 +1,5 @@
-"use client";
-import Image from "next/image";
-
+'use client';
+import Image from 'next/image';
 import {
   FaPhoneAlt,
   FaEnvelope,
@@ -8,101 +7,73 @@ import {
   FaInstagram,
   FaFacebook,
   FaLink,
-} from "react-icons/fa";
+} from 'react-icons/fa';
+
 function OurCard({
   image,
   name,
   position,
-  website = false,
+  website,
   phone,
   email,
-  linkedin = false,
-  instagram = false,
-  facebook = false,
+  linkedin,
+  instagram,
+  facebook,
   imgHeight = 200,
-  imgWidth=200,
-  height = 100,
-  width = 100,
-})
-
-{
+  imgWidth = 200,
+}) {
   return (
     <div className="flex justify-center">
-      <div className=" mt-3 p-2  rounded-2xl shadow-lg "
-      style={{ height: `${height}px`, width:`${width}`}}
-      >
-        <div className="flex justify-center">
-
-        <Image
-          src={image}
-          alt="Photo"
-          className="rounded-3xl pt-2 p-1"
-          height={imgHeight}
-          width={imgWidth}
-          priority
+      <div className="mt-3 p-3 rounded-2xl shadow-lg">
+        {/* Image wrapper reserves space */}
+        <div className="flex justify-center" style={{ height: imgHeight }}>
+          <Image
+            src={image || '/images/fallback-image.jpg'}
+            alt={name}
+            width={imgWidth}
+            height={imgHeight}
+            className="rounded-3xl object-cover"
           />
-          </div>
+        </div>
 
-        <div className="flex text-2xl font-bold justify-center ">
+        <div className="flex text-2xl font-bold justify-center items-center mt-2">
           {name}
-          {website ? (
+          {website && (
             <a href={website} target="_blank" rel="noopener noreferrer">
-              <FaLink size={30} className="pl-2" />
+              <FaLink size={26} className="pl-2" />
             </a>
-          ) : (
-            ""
           )}
         </div>
-        {position ? (
-          <div
-            className="text-[#303030]  flex justify-center pr-9"
-            target="_blank"
-          >
-            {position}
-          </div>
-        ) : (
-          ""
+
+        {position && (
+          <div className="text-[#303030] flex justify-center">{position}</div>
         )}
-        <div className="flex mt-2 gap-4 justify-center ">
-          {phone ? (
-            <a href={`tel:${phone}`} rel="noopener noreferrer">
+
+        <div className="flex mt-3 gap-4 justify-center">
+          {phone && (
+            <a href={`tel:${phone}`}>
               <FaPhoneAlt size={20} className="text-[#018378]" />
             </a>
-          ) : (
-            ""
           )}
-
-          {email ? (
-            <a href={`mailto:${email}`} rel="noopener noreferrer">
-              <FaEnvelope
-                size={20}
-                className="text-[#018378]"
-                target="_blank"
-              />
+          {email && (
+            <a href={`mailto:${email}`}>
+              <FaEnvelope size={20} className="text-[#018378]" />
             </a>
-          ) : (
-            ""
           )}
-          {linkedin ? (
+          {linkedin && (
             <a href={linkedin} target="_blank" rel="noopener noreferrer">
               <FaLinkedinIn size={20} className="text-[#018378]" />
             </a>
-          ) : (
-            ""
           )}
-          {instagram ? (
+          {instagram && (
             <a href={instagram} target="_blank" rel="noopener noreferrer">
               <FaInstagram size={20} className="text-[#018378]" />
             </a>
-          ) : (
-            ""
           )}
-          {facebook ? (
-            <a href={facebook} target="_blank " rel="noopener noreferrer">
+          {facebook && (
+            <a href={facebook} target="_blank" rel="noopener noreferrer">
               <FaFacebook size={20} className="text-[#018378]" />
             </a>
-          ) : (
-            ""
           )}
         </div>
       </div>

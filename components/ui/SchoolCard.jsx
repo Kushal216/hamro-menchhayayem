@@ -22,7 +22,7 @@ export default function SchoolCard({
           {title}
         </div>
 
-        <div className="relative w-full aspect-5/2 mb-3">
+        <div className="relative w-full aspect-video mb-3">
           <Image
             src={image}
             alt={title}
