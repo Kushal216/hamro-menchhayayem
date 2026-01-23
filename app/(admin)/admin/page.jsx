@@ -90,4 +90,3 @@ export default async function AdminPage() {
     );
   }
 }
-export const dynamic = 'force-dynamic';
