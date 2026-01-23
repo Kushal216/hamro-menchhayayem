@@ -24,3 +24,4 @@ export default async function SchoolPage() {
     </>
   );
 }
+export const dynamic = 'force-dynamic';

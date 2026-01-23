@@ -26,3 +26,4 @@ export default async function LiteraturePage() {
     </>
   );
 }
+export const dynamic = 'force-dynamic';

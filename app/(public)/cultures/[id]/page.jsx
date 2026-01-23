@@ -6,3 +6,4 @@ export default function Page({ params }) {
 
   return <ItemDetails route="cultures" id={id} />;
 }
+
