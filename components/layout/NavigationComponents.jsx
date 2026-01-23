@@ -9,11 +9,7 @@ const NavigationComponents = ({ children }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const paths = usePathname().replace(/\/$/, '').split('/');
   const route = paths[1];
-  const menuNeeded = !(
-    route == 'admin' ||
-    route == 'login' ||
-    paths.length > 2
-  );
+  const menuNeeded = !(route == 'admin' || route == 'login' || route == 'docs');
 
   return (
     <>
@@ -32,7 +28,7 @@ const NavigationComponents = ({ children }) => {
             onClick={closeMenu}
             className={
               (isMenuOpen ? '' : 'hidden ') +
-              'w-screen md:w-fit xl:w-100 z-3 lg:block  fixed right-0 lg:static lg:pt-0 h-screen bg-[#00000060]'
+              'w-screen lg:w-fit xl:w-100 z-3 lg:block  fixed right-0 lg:static lg:pt-0 h-screen bg-[#00000060]'
             }
           >
             <Menubar closeMenu={closeMenu} />
