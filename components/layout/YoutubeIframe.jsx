@@ -1,4 +1,4 @@
-function YoutubeIframe({ id, autoplay = false, start = '1:01', end = '0', mute }) {
+function YoutubeIframe({ id, autoplay = false, start = '0', end = '0', mute }) {
   const startTime = timeToSeconds(start);
   const endTime = timeToSeconds(end);
 
@@ -7,7 +7,7 @@ function YoutubeIframe({ id, autoplay = false, start = '1:01', end = '0', mute }
       <iframe
         width="100%"
         height="100%"
-        src={`https://www.youtube.com/embed/${id}?start=${startTime}&end=${endTime}&modestbranding=1&rel=0${autoplay ? '&autoplay=1' : ''}${mute ? '&mute=1' : ''}`}
+        src={`https://www.youtube.com/embed/${id}?start=${startTime}&end=${endTime}&modestbranding=1&rel=0${autoplay ? '&autoplay=1' : ''}${mute ? '&mute=1' : '&mute=0'}`}
         title="YouTube video"
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
         allowFullScreen
