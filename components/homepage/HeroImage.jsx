@@ -31,6 +31,7 @@ const HeroImage = () => {
         src={photo.src}
         alt="hamro  menchhayayem"
         fill
+        priority
         className="object-cover"
       />
 
