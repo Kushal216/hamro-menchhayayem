@@ -52,15 +52,16 @@ export default function CultureForm({ patch = false, item }) {
 
     try {
       setUploading(true);
+      let res = null;
 
       if (!patch) {
-        const res = await fetch('/api/v1/cultures', {
+        res = await fetch('/api/v1/cultures', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(data),
         });
       } else {
-        const res = await fetch(`/api/v1/cultures/${item._id}`, {
+        res = await fetch(`/api/v1/cultures/${item._id}`, {
           method: 'PATCH',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(data),
@@ -95,8 +96,8 @@ export default function CultureForm({ patch = false, item }) {
 
   return (
     <>
-       <h1 className="text-2xl font-bold text-black text-center mb-4">
-        {patch?'Update':'Add'} Details
+      <h1 className="text-2xl font-bold text-black text-center mb-4">
+        {patch ? 'Update' : 'Add'} Details
       </h1>
 
       <form onSubmit={handleSubmit} className="space-y-5 p-4">

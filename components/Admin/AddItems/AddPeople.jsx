@@ -48,15 +48,16 @@ export default function PeopleForm({ patch = false, item }) {
 
     try {
       setUploading(true);
+      let res = null;
 
       if (!patch) {
-        const res = await fetch('/api/v1/people', {
+        res = await fetch('/api/v1/people', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(data),
         });
       } else {
-        const res = await fetch(`/api/v1/people/${item._id}`, {
+        res = await fetch(`/api/v1/people/${item._id}`, {
           method: 'PATCH',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(data),
@@ -168,9 +169,9 @@ export default function PeopleForm({ patch = false, item }) {
         <button
           type="submit"
           disabled={uploading}
-          className="cursor-pointer mt-2 font-bold bg-blue-600 text-white px-5 py-2 rounded-xl"
+          className="cursor-pointer font-bold bg-blue-600 mt-4 text-white px-5 py-2 rounded-xl"
         >
-          {uploading ? 'Uploading...' : 'Add Item'}
+          {uploading ? 'Uploading...' : `${patch ? 'Update' : 'Add'} Item`}
         </button>
       </form>
     </>
