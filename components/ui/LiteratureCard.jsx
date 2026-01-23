@@ -58,7 +58,7 @@ export default function LiteratureCard({
         {/* Actions */}
         <div className="flex sm:flex-row items-center justify-between gap-4 mt-5">
           <Link href={`/literature/${id}`} className="w-full">
-            <button className="w-full bg-purple-800 text-white font-bold rounded-2xl px-5 py-2 hover:bg-purple-700 transition cursor-pointer flex items-center justify-center gap-2">
+            <button className="w-full text-lg bg-purple-800 text-white font-bold rounded-2xl px-5 py-2 hover:bg-purple-700 transition cursor-pointer flex items-center justify-center gap-2">
               <BiBookOpen size={18} />
               Read Literature
             </button>
