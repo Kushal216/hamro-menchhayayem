@@ -26,12 +26,11 @@ function OurCard({
     <div className="flex justify-center">
       <div className="mt-3 p-3 rounded-2xl shadow-lg">
         {/* Image wrapper reserves space */}
-        <div className="flex justify-center" style={{ height: imgHeight }}>
+        <div className="flex justify-center relative" style={{ height: imgHeight, width:imgWidth }}>
           <Image
             src={image || '/images/fallback-image.jpg'}
             alt={name}
-            width={imgWidth}
-            height={imgHeight}
+            fill
             className="rounded-3xl object-cover"
           />
         </div>
