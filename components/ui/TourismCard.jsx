@@ -11,13 +11,12 @@ export default function TourismCard({ image, title, description, id, likes }) {
     <div className="w-full mx-auto p-4">
       <div className="bg-white rounded-2xl shadow-[0_4px_6px_-2px_rgba(0,0,0,0.3)] overflow-hidden">
         <div className="flex flex-col md:flex-row gap-4 p-4">
-          <div className="w-full md:w-2/5">
+          <div className="w-full md:w-2/5 h-fit relative aspect-6/3">
             <Image
               src={image}
               alt={title}
-              width={200}
-              height={150}
-              className="w-full h-full rounded-xl object-cover aspect-6/3"
+              fill
+              className="rounded-xl object-cover"
               priority
             />
           </div>

@@ -1,64 +1,179 @@
-import Titlebar from '@/components/ui/Titlebar';
-import TableLayout from '@/components/ui/TableLayout';
-import RouteTitle from '@/components/layout/RouteTitle';
+'use client';
+import React from 'react';
 
 export default function ContactsPage() {
-  const contacts = [
+  const hospital = [
     {
-      institute: 'Menchhayayem Hospital',
-      contact_person: 'Kushal',
-      contact_no: '9812345678',
-      email: 'abc@gmail.com',
+      institute: 'मेन्छयायेम अस्पताल',
+      contact_person: 'हस्पिटल रिसेप्सनिस्ट',
+      contact_no: '9800000000',
     },
     {
-      institute: 'Myanglung Hospital',
-      contact_person: 'sunil',
-      contact_no: '9812345678',
-      email: 'abc@gmail.com',
+      institute: 'बिपी कोइराला स्वास्थ्य विज्ञान प्रतिष्ठान(घोपा)',
+      contact_person: 'ग्राहक प्रतिनिधी',
+      contact_no: '025-525555',
     },
     {
-      institute: 'Shreejung Hospital',
-      contact_person: 'Chitra Kumar Wiba',
-      contact_no: '9812345678',
-      email: 'abc@gmail.com',
+      institute: 'तेह्रथुम जिल्ला अस्पताल',
+      contact_person: 'ग्राहक प्रतिनिधी',
+      contact_no: '026-460188',
     },
   ];
 
+  const palika = [
+    {
+      institute: 'अध्यक्ष',
+      contact_person: 'यादव बहादुर खापुङ्ग',
+      contact_no: '9812345678',
+    },
+    {
+      institute: 'उपाध्यक्ष',
+      contact_person: 'गीतादेवि तिम्सिना गाैतम',
+      contact_no: '9852083777',
+    },
+    {
+      institute: ' ६ न. वडाध्यक्ष/प्रवक्ता',
+      contact_person: 'प्रदिप कुमार बुढाथोकी',
+      contact_no: '9842220782',
+    },
+    {
+      institute: 'प्रमूख प्रशासकीय अधिकृत',
+      contact_person: 'दिलकुमार अधिकारी',
+      contact_no: '9852082777',
+    },
+    {
+      institute: 'सूचना प्रविधि अधिकृत (सूचना अधिकारी)',
+      contact_person: 'इश्वर भट्टराई',
+      contact_no: '9843335861',
+    },
+    {
+      institute: '१ न. वडाध्यक्ष',
+      contact_person: 'डम्बरबहादुर लिम्बू',
+      contact_no: '9842478587',
+    },
+    {
+      institute: ' १ न. वडा सचिव',
+      contact_person: 'नेत्र राई',
+      contact_no: '9842254788',
+    },
+    {
+      institute: '२ न. वडाध्यक्ष',
+      contact_person: 'रामबहादुर लिम्बू',
+      contact_no: '9861630096',
+    },
+    {
+      institute: ' २ न. वडा सचिव',
+      contact_person: 'नेत्र राई',
+      contact_no: '9842254788',
+    },
+    {
+      institute: '३ न. वडाध्यक्ष',
+      contact_person: 'बिनयकुमार सुब्बा',
+      contact_no: '9847808391',
+    },
+    {
+      institute: ' ३ न. वडा सचिव',
+      contact_person: 'बलराम कामत',
+      contact_no: '9842400725',
+    },
+    {
+      institute: '४ न. वडाध्यक्ष',
+      contact_person: 'कविन्द्र कुमार लिम्बू',
+      contact_no: '9842181569',
+    },
+    {
+      institute: ' ४ न. वडा सचिव',
+      contact_person: 'बलराम कामत',
+      contact_no: '9842400725',
+    },
+    {
+      institute: '५ न. वडाध्यक्ष',
+      contact_person: 'दोजराज गौतम',
+      contact_no: '9866257833',
+    },
+    {
+      institute: ' ५ न. वडा सचिव',
+      contact_person: 'तारादेवि सम्बहाङ्फे',
+      contact_no: '9848567848',
+    },
+    {
+      institute: '६ न. वडाध्यक्ष',
+      contact_person: 'प्रदिपकुमार बुढाथोकी',
+      contact_no: '9842220782',
+    },
+    {
+      institute: '६ न. वडा सचिव',
+      contact_person: 'अनिता जिरेल',
+      contact_no: '9869122010',
+    },
+  ];
+
+  const schools = [
+    {
+      institute: 'श्री गौखुरी उच्च मा. वि.',
+      contact_person: 'प्रधानाध्यापक',
+      contact_no: '9800000000',
+    },
+    {
+      institute: 'श्री प्रतिभा इङ्गलिस बोर्डिङ्ग स्कुल',
+      contact_person: 'प्रधानाध्यापक',
+      contact_no: '9800000000',
+    },
+    {
+      institute: 'श्री जांते आधारभुत विद्यालय',
+      contact_person: 'प्रधानाध्यापक',
+      contact_no: '9800000000',
+    },
+    {
+      institute: 'श्री पंचकन्या आधारभुत विद्यालय',
+      contact_person: 'प्रधानाध्यापक',
+      contact_no: '9800000000',
+    },
+  ];
+
+  const renderTable = (title, data) => (
+    <div className="mb-8 ">
+      <h2 className="text-xl font-bold mb-3">{title}</h2>
+      <table className="min-w-full bg-white shadow-sm rounded-lg overflow-hidden">
+        <thead className="bg-gray-100">
+          <tr>
+            <th className="px-4 py-3 text-left">नाम</th>
+            <th className="px-4 py-3 text-left">सम्पर्क व्यक्ति</th>
+            <th className="px-4 py-3 text-left">सम्पर्क नम्बर</th>
+          </tr>
+        </thead>
+        <tbody>
+          {data.map((item, index) => (
+            <tr
+              key={index}
+              className="bg-white hover:bg-gray-100 transition-colors"
+            >
+              <td className="px-4 py-3 border-b border-gray-200">
+                {item.institute}
+              </td>
+              <td className="px-4 py-3 border-b border-gray-200">
+                {item.contact_person}
+              </td>
+              <td className="px-4 py-3 border-b border-gray-200">
+                <a
+                  href={`tel:+977-${item.contact_no}`}
+                  className="text-purple-600 hover:underline"
+                >
+                  {item.contact_no}
+                </a>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  );
+
   return (
-    <>
-    <RouteTitle title={'हाम्रो सम्पर्क विवरण'} />
-      <div className="flex-4/5 p-4">
-        <Titlebar title="अस्पताल" />
-        <div className="pt-2">
-          <TableLayout
-            headers={[
-              'Institute Name',
-              'Contact Person',
-              'Phone Number',
-              'Email',
-            ]}
-          >
-            {contacts.map((contact, index) => (
-              <tr key={index} className="hover:bg-gray-200">
-                <td className="px-4 py-3 border-b border-gray-100">
-                  {contact.institute}
-                </td>
-                <td className="px-4 py-3 border-b border-gray-100">
-                  {contact.contact_person}
-                </td>
-                <td className="px-4 py-3 border-b border-gray-100">
-                  <a href={`tel:${contact.contact_no}`}>{contact.contact_no}</a>
-                </td>
-                <td className="px-4 py-3 border-b border-gray-100">
-                  <a href={`mailto:${contact.email}`}>{contact.email}</a>
-                </td>
-              </tr>
-            ))}
-          </TableLayout>
-        </div>
-        <Titlebar title="पालिका" />
-        <Titlebar title="विद्यालय" />
-      </div>
-    </>
+    <div className="p-4 max-w-4xl mx-auto">
+      {renderTable('अस्पताल', hospital)}
+      {renderTable('पालिका', palika)}
+      {renderTable('विद्यालय', schools)}
+    </div>
   );
 }
