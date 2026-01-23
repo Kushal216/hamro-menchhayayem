@@ -5,8 +5,10 @@ import MarkDownEditor from './MarkDownEditor';
 import ImageInput from '@/components/ImageInput';
 import Input from '../Input';
 import toast from 'react-hot-toast';
+import { useRouter } from 'next/navigation';
 
 export default function CultureForm({ patch = false, item }) {
+  const router = useRouter();
   const [title, setTitle] = useState('');
   const [_id, setId] = useState('');
   const [description, setDescription] = useState('');
@@ -92,6 +94,7 @@ export default function CultureForm({ patch = false, item }) {
     } catch (err) {
       toast.error(err.message);
     }
+    router.refresh();
   };
 
   return (

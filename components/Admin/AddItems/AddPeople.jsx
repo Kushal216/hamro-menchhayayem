@@ -4,9 +4,12 @@ import { useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
 import Input from '../Input';
 import ImageInput from '@/components/ImageInput';
+import { useRouter } from 'next/navigation';
 
 export default function PeopleForm({ patch = false, item }) {
   const [name, setName] = useState('');
+  const router = useRouter();
+
   const [photo, setPhoto] = useState('');
   const [_id, setId] = useState('');
   const [phone, setPhone] = useState('');
@@ -89,6 +92,7 @@ export default function PeopleForm({ patch = false, item }) {
       console.error(err);
       alert(err.message);
     }
+    router.refresh();
   };
 
   return (

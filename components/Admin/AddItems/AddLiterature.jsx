@@ -7,8 +7,10 @@ import MarkDownEditor from './MarkDownEditor';
 import ImageInput from '@/components/ImageInput';
 import Input from '../Input';
 import toast from 'react-hot-toast';
+import { useRouter } from 'next/navigation';
 
 export default function LiteratureForm({ patch = false, item }) {
+  const router = useRouter();
   const [_id, setId] = useState('');
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
@@ -98,6 +100,7 @@ export default function LiteratureForm({ patch = false, item }) {
     } catch (err) {
       toast.error(err.message);
     }
+    router.refresh();
   };
 
   return (

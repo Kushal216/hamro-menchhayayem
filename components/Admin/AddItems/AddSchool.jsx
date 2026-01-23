@@ -5,9 +5,11 @@ import MarkDownEditor from './MarkDownEditor';
 import toast from 'react-hot-toast';
 import Input from '../Input';
 import ImageInput from '@/components/ImageInput';
+import { useRouter } from 'next/navigation';
 
 export default function SchoolForm({ patch = false, item }) {
   const [title, setTitle] = useState('');
+  const router = useRouter();
   const [description, setDescription] = useState('');
   const [gallery, setGallery] = useState([]);
   const [coverImage, setCoverImage] = useState('');
@@ -106,6 +108,7 @@ export default function SchoolForm({ patch = false, item }) {
       console.error(err);
       alert(err.message);
     }
+    router.refresh();
   };
 
   return (

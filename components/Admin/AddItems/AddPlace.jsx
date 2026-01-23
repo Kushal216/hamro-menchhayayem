@@ -5,8 +5,10 @@ import MarkDownEditor from './MarkDownEditor';
 import toast from 'react-hot-toast';
 import Input from '../Input';
 import ImageInput from '@/components/ImageInput';
+import { useRouter } from 'next/navigation';
 
 export default function PlaceForm({ patch = false, item }) {
+  const router = useRouter();
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [_id, setId] = useState('');
@@ -101,6 +103,8 @@ export default function PlaceForm({ patch = false, item }) {
       console.error(err);
       toast.error(err);
     }
+    router.refresh();
+
   };
 
   return (
