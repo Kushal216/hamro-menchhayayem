@@ -1,11 +1,12 @@
 'use client';
-import { useState } from 'react';import 'simplemde/dist/simplemde.min.css';
+import { useEffect, useState } from 'react';
+import 'simplemde/dist/simplemde.min.css';
 import MarkDownEditor from './MarkDownEditor';
 import ImageInput from '@/components/ImageInput';
 import Input from '../Input';
 import toast from 'react-hot-toast';
 
-export default function CultureForm({ toggleAdd }) {
+export default function CultureForm({ patch, item }) {
   const [title, setTitle] = useState('');
   const [_id, setId] = useState('');
   const [description, setDescription] = useState('');
@@ -16,6 +17,20 @@ export default function CultureForm({ toggleAdd }) {
   const [videoId, setVideoId] = useState('');
   const [videoStart, setVideoStart] = useState('');
   const [videoEnd, setVideoEnd] = useState('');
+
+  useEffect(() => {
+    if (patch && item) {
+      setTitle(item.title);
+      setId(item._id);
+      setDescription(item.description);
+      setCoverImage(item.coverImage);
+      setGallery(item.gallery);
+      setCaste(item.caste);
+      setVideoId(item.video.id);
+      setVideoStart(item.video.start);
+      setVideoEnd(item.video.end);
+    }
+  }, [patch, item]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -37,11 +52,21 @@ export default function CultureForm({ toggleAdd }) {
 
     try {
       setUploading(true);
-      const res = await fetch('/api/v1/cultures', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(data),
-      });
+
+      if (!patch) {
+        const res = await fetch('/api/v1/cultures', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(data),
+        });
+      } else {
+        const res = await fetch('/api/v1/cultures', {
+          method: 'PATCH',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(data),
+        });
+      }
+
       setUploading(false);
 
       if (!res.ok) {
@@ -90,6 +115,7 @@ export default function CultureForm({ toggleAdd }) {
           value={_id}
           setValue={setId}
           required
+          disabled={patch ? true : false}
         />
         {/* Description */}
         <label>Description:</label>
@@ -158,7 +184,7 @@ export default function CultureForm({ toggleAdd }) {
           disabled={uploading}
           className="cursor-pointer font-bold bg-blue-600 mt-4 text-white px-5 py-2 rounded-xl"
         >
-          {uploading ? 'Uploading...' : 'Add Culture'}
+          {uploading ? 'Uploading...' : `${patch ? 'Update' : 'Add'} Item`}
         </button>
       </form>
     </>

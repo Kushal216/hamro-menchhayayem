@@ -19,7 +19,31 @@ export default function ToggleForm({ title, route }) {
 
   switch (route) {
     case 'cultures':
-      form = <CultureForm />;
+      form = (
+        <CultureForm
+          patch={true}
+          item={{
+            video: {
+              id: 'PhOMPJWPDLU',
+              start: '0:09',
+              end: '9:00',
+            },
+            _id: 'cideo',
+            title: 'place with video',
+            description: 'hehe',
+            gallery: [],
+            coverImage:
+              'https://res.cloudinary.com/dggnne5ja/image/upload/v1769159345/hamro-menchhayayem/v1bisrsvmb2koydxxyee.png',
+            location: '',
+            region: 'menchhayayem',
+            category: '',
+            likesCount: 0,
+            createdAt: '2026-01-23T09:09:29.517Z',
+            updatedAt: '2026-01-23T09:09:29.517Z',
+            __v: 0,
+          }}
+        />
+      );
       break;
     case 'literature':
       form = <LiteratureForm />;
@@ -66,9 +90,8 @@ export default function ToggleForm({ title, route }) {
         </button>
       )}
 
-      <div className='bg-white rounded-lg shadow-xl py-2'>
-
-      {showAdd && form}
+      <div className="bg-white rounded-lg shadow-xl py-2">
+        {showAdd && form}
       </div>
 
       <div className="text-xl font-bold mt-5">Manage Data</div>

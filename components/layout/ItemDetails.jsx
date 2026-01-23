@@ -8,7 +8,6 @@ export default async function ItemDetails({ route, id }) {
   let content = 'पर्खनुहोस ...';
   const res = await fetchItem(route, id);
   const culture = res.data;
-  console.log(culture);
   content = culture.description;
 
   return (
