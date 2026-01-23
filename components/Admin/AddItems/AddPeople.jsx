@@ -1,11 +1,11 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
 import Input from '../Input';
 import ImageInput from '@/components/ImageInput';
 
-export default function PeopleForm({ onSubmit }) {
+export default function PeopleForm({ patch = false, item }) {
   const [name, setName] = useState('');
   const [photo, setPhoto] = useState('');
   const [_id, setId] = useState('');
@@ -17,6 +17,16 @@ export default function PeopleForm({ onSubmit }) {
   const [email, setEmail] = useState('');
   const [position, setPosition] = useState('');
   const [uploading, setUploading] = useState(false);
+
+  useEffect(() => {
+    if (patch && item) {
+      setName(item.name);
+      setPhoto(item.photo);
+      setId(item._id);
+      setPhone(item.phone);
+      setPosition(item.position);
+    }
+  }, [patch, item]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -39,11 +49,19 @@ export default function PeopleForm({ onSubmit }) {
     try {
       setUploading(true);
 
-      const res = await fetch('/api/v1/people', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(data),
-      });
+      if (!patch) {
+        const res = await fetch('/api/v1/people', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(data),
+        });
+      } else {
+        const res = await fetch(`/api/v1/people/${item._id}`, {
+          method: 'PATCH',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(data),
+        });
+      }
       setUploading(false);
 
       if (!res.ok) {
@@ -103,6 +121,7 @@ export default function PeopleForm({ onSubmit }) {
           label={'Website'}
           placeholder="John Doe"
           value={website}
+          disabled={patch}
           setValue={setWebsite}
         />
 
@@ -112,16 +131,19 @@ export default function PeopleForm({ onSubmit }) {
             <Input
               placeholder="Facebook URL"
               value={facebook}
+              disabled={patch}
               setValue={setFacebook}
             />
             <Input
               placeholder="Instagram URL"
               value={instagram}
+              disabled={patch}
               setValue={setInstagram}
             />
             <Input
               placeholder="LinkedIn URL"
               value={linkedin}
+              disabled={patch}
               setValue={setLinkedin}
             />
           </div>
@@ -132,6 +154,7 @@ export default function PeopleForm({ onSubmit }) {
           label={'Email'}
           placeholder="baula@paagal.com"
           value={email}
+          disabled={patch}
           setValue={setEmail}
         />
 

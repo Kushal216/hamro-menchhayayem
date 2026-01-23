@@ -6,7 +6,7 @@ import ImageInput from '@/components/ImageInput';
 import Input from '../Input';
 import toast from 'react-hot-toast';
 
-export default function CultureForm({ patch, item }) {
+export default function CultureForm({ patch = false, item }) {
   const [title, setTitle] = useState('');
   const [_id, setId] = useState('');
   const [description, setDescription] = useState('');
@@ -60,7 +60,7 @@ export default function CultureForm({ patch, item }) {
           body: JSON.stringify(data),
         });
       } else {
-        const res = await fetch('/api/v1/cultures', {
+        const res = await fetch(`/api/v1/cultures/${item._id}`, {
           method: 'PATCH',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(data),
@@ -115,7 +115,7 @@ export default function CultureForm({ patch, item }) {
           value={_id}
           setValue={setId}
           required
-          disabled={patch ? true : false}
+          disabled={patch}
         />
         {/* Description */}
         <label>Description:</label>

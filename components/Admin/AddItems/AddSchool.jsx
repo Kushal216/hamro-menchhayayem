@@ -1,12 +1,12 @@
 'use client';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import 'simplemde/dist/simplemde.min.css';
 import MarkDownEditor from './MarkDownEditor';
 import toast from 'react-hot-toast';
 import Input from '../Input';
 import ImageInput from '@/components/ImageInput';
 
-export default function SchoolForm({ toggleAdd }) {
+export default function SchoolForm({ patch = false, item }) {
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [gallery, setGallery] = useState([]);
@@ -21,6 +21,26 @@ export default function SchoolForm({ toggleAdd }) {
   const [videoId, setVideoId] = useState('');
   const [videoStart, setVideoStart] = useState('');
   const [videoEnd, setVideoEnd] = useState('');
+
+  useEffect(() => {
+    if (patch && item) {
+      setTitle(item.title);
+      setId(item._id);
+      setDescription(item.description);
+      setCoverImage(item.coverImage);
+      setGallery(item.gallery);
+      setCaste(item.caste);
+      setVideoId(item.video.id);
+      setVideoStart(item.video.start);
+      setVideoEnd(item.video.end);
+      setLocation(item.location);
+      setCategory(item.category);
+      setPhoneNo(item.phoneNo);
+      setVideoId(item.video.id);
+      setVideoStart(item.video.start);
+      setVideoEnd(item.video.end);
+    }
+  }, [patch, item]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -48,6 +68,21 @@ export default function SchoolForm({ toggleAdd }) {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(data),
       });
+
+      if (!patch) {
+        const res = await fetch('/api/v1/schools', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(data),
+        });
+      } else {
+        const res = await fetch(`/api/v1/schools/${item._id}`, {
+          method: 'PATCH',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(data),
+        });
+      }
+
       setUploading(false);
 
       if (!res.ok) {
@@ -95,6 +130,7 @@ export default function SchoolForm({ toggleAdd }) {
           label={'custom route'}
           placeholder="route"
           value={_id}
+          disabled={patch}
           setValue={setId}
           required
         />
