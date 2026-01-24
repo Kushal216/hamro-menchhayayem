@@ -5,12 +5,12 @@ import { RiArrowLeftWideFill, RiArrowRightWideFill } from 'react-icons/ri';
 
 const HeroImage = () => {
   const heroPhotos = [
-    { src: '/images/hero-images/hero0.png', title: 'हाम्रो मोराहाङ्ग बजार' },
-    { src: '/images/hero-images/hero1.png', title: 'पालिका कार्यलय' },
-    { src: '/images/hero-images/hero3.png', title: 'गौखुरिधाम' },
-    { src: '/images/hero-images/hero2.png', title: 'ऐतिहासिक गुम्बा' },
-    { src: '/images/hero-images/hero4.jpg', title: 'पालिका सदस्यहरु' },
-    { src: '/images/hero-images/hero5.png', title: 'धान नाच' },
+    { src: '/images/hero-images/hero0.webp', title: 'हाम्रो मोराहाङ्ग बजार' },
+    { src: '/images/hero-images/hero1.webp', title: 'पालिका कार्यलय' },
+    { src: '/images/hero-images/hero3.webp', title: 'गौखुरिधाम' },
+    { src: '/images/hero-images/hero2.webp', title: 'ऐतिहासिक गुम्बा' },
+    { src: '/images/hero-images/hero4.webp', title: 'पालिका सदस्यहरु' },
+    { src: '/images/hero-images/hero5.webp', title: 'धान नाच' },
   ];
 
   const [heroIndex, setHeroIndex] = useState(0);
