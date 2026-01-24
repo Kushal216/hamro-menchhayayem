@@ -1,4 +1,4 @@
-const kd = "/images/kd-pp.web";
+const kd = "/images/kd-pp.webp";
 const sb = "/images/sb-pp.webp";
 
 const ourTeam = [
