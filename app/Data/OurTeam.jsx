@@ -1,5 +1,5 @@
-const kd = "/images/kd-pp.jpeg";
-const sb = "/images/sb-pp.jpeg";
+const kd = "/images/kd-pp.web";
+const sb = "/images/sb-pp.webp";
 
 const ourTeam = [
   {
@@ -25,3 +25,4 @@ const ourTeam = [
 ];
 
 export default ourTeam;
+
