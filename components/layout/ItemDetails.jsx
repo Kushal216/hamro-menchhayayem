@@ -23,6 +23,7 @@ export default async function ItemDetails({ route, id }) {
             id={id}
             route={`/${route}/${id}`}
             video={culture.video}
+            location={culture.location}
           />
 
           <div className="mt-2">
