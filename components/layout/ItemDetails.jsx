@@ -14,7 +14,7 @@ export default async function ItemDetails({ route, id }) {
 
   return (
     <>
-      <div className="w-full px-2 relative mt-2 select-none">
+      <div className="w-full px-2 relative mt-2 select-none pb-10">
         <BackButton />
         <div className="">
           <CoverImage
@@ -57,6 +57,9 @@ export function MarkdownViewer({ content }) {
           ),
           p: ({ children }) => (
             <p className="whitespace-pre-line">{children}</p>
+          ),
+          hr: () => (
+            <hr className="my-6 h-0.5 border-0 bg-linear-to-r from-purple-500 via-pink-500 to-red-500" />
           ),
         }}
       >
