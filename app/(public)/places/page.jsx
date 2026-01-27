@@ -16,6 +16,7 @@ async function TourismPage() {
             image={item.coverImage || '/images/fallback-image.jpg'}
             id={item._id}
             title={item.title}
+            location={item.location}
             description={item.description}
             likes={item.likesCount}
           />

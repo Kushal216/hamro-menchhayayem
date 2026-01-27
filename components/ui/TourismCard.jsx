@@ -1,12 +1,19 @@
-'use client';
-import Image from 'next/image';
-import { FaMapMarkerAlt } from 'react-icons/fa';
-import Like from '@/components/sections/Like';
-import { BiSolidCommentDots } from 'react-icons/bi';
-import ShortText from '../sections/ShortText';
-import Link from 'next/link';
+"use client";
+import Image from "next/image";
+import { FaMapMarkerAlt } from "react-icons/fa";
+import Like from "@/components/sections/Like";
+import { BiSolidCommentDots } from "react-icons/bi";
+import ShortText from "../sections/ShortText";
+import Link from "next/link";
 
-export default function TourismCard({ image, title, description, id, likes }) {
+export default function TourismCard({
+  image,
+  title,
+  description,
+  id,
+  likes,
+  location,
+}) {
   return (
     <div className="w-full mx-auto p-4">
       <div className="bg-white rounded-2xl shadow-[0_4px_6px_-2px_rgba(0,0,0,0.3)] overflow-hidden">
@@ -38,11 +45,7 @@ export default function TourismCard({ image, title, description, id, likes }) {
               </Link>
 
               <div className="flex items-center gap-5">
-                <a
-                  href="https://maps.app.goo.gl/TWWj8hvyH3dsuDsm8"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
+                <a href={location} target="_blank" rel="noopener noreferrer">
                   <FaMapMarkerAlt
                     size={33}
                     className="text-black text-lg cursor-pointer hover:scale-110 transition"
