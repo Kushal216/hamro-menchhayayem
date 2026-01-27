@@ -19,7 +19,7 @@ const places = [
   {
     title: 'लेखहरु',
     subtitle: 'हाम्रो मेन्छ्यायेमका लेखकहरुले लेख्नु भएका लेखहरु पढ्नुहोस ।',
-    imageUrl: '/section-icons/literature-bg.png',
+    imageUrl: '/section-icons/literature-bg.webp',
     route: '/literature',
     iconUrl: '/section-icons/schools.png',
   },

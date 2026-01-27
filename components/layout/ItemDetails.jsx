@@ -3,6 +3,8 @@ import ReactMarkdown from 'react-markdown';
 import BackButton from './BackButton';
 import { fetchItem } from '@/lib/fetchItem';
 import CoverImage from './CoverImage';
+import remarkGfm from 'remark-gfm';
+import remarkBreaks from 'remark-breaks';
 
 export default async function ItemDetails({ route, id }) {
   let content = 'पर्खनुहोस ...';
@@ -39,6 +41,7 @@ export function MarkdownViewer({ content }) {
   return (
     <div className="prose prose-neutral max-w-none px-2 lg:text-lg xl:text-2xl text-gray-900">
       <ReactMarkdown
+        remarkPlugins={[remarkGfm, remarkBreaks]}
         components={{
           h1: ({ children }) => (
             <h1 className="text-3xl font-bold mt-4 mb-2">{children}</h1>
@@ -51,6 +54,9 @@ export function MarkdownViewer({ content }) {
           ),
           ul: ({ children }) => (
             <ul className="list-disc ml-6 space-y-1">{children}</ul>
+          ),
+          p: ({ children }) => (
+            <p className="whitespace-pre-line">{children}</p>
           ),
         }}
       >

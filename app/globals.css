@@ -2,3 +2,13 @@
 body {    background-color:#FAFAFF ;}
 .scrollbar-hidden::-webkit-scrollbar { width: 0; height: 0; }
 .scrollbar-hidden { -ms-overflow-style: none; scrollbar-width: none; }
+
+
+.prose table {
+  @apply border-collapse border border-gray-300;
+}
+
+.prose th,
+.prose td {
+  @apply border border-gray-300 px-3 py-2;
+}

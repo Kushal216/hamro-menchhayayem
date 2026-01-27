@@ -31,7 +31,6 @@ export default function SchoolForm({ patch = false, item }) {
       setDescription(item.description);
       setCoverImage(item.coverImage);
       setGallery(item.gallery);
-      setCaste(item.caste);
       setVideoId(item.video.id);
       setVideoStart(item.video.start);
       setVideoEnd(item.video.end);
