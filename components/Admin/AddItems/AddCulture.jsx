@@ -6,6 +6,7 @@ import ImageInput from '@/components/ImageInput';
 import Input from '../Input';
 import toast from 'react-hot-toast';
 import { useRouter } from 'next/navigation';
+import { createLog } from '@/app/(admin)/admin/logs/page';
 
 export default function CultureForm({ patch = false, item }) {
   const router = useRouter();
@@ -62,12 +63,14 @@ export default function CultureForm({ patch = false, item }) {
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(data),
         });
+        createLog('create', data._id);
       } else {
         res = await fetch(`/api/v1/cultures/${item._id}`, {
           method: 'PATCH',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(data),
         });
+        createLog('update', data._id);
       }
 
       setUploading(false);
