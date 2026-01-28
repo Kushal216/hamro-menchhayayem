@@ -5,6 +5,7 @@ import toast from 'react-hot-toast';
 import Input from '../Input';
 import ImageInput from '@/components/ImageInput';
 import { useRouter } from 'next/navigation';
+import { createLog } from '@/app/(admin)/admin/logs/page';
 
 export default function PeopleForm({ patch = false, item }) {
   const [name, setName] = useState('');
@@ -74,9 +75,11 @@ export default function PeopleForm({ patch = false, item }) {
         throw new Error(message);
       }
       const result = await res.json();
-      console.log('Saved successfully:', result);
-      toast.success(result.message);
+      // console.log('Saved successfully:', result);
 
+      toast.success(result.message);
+      if (patch) createLog('update','person', data._id);
+      else createLog('create','person', data._id);
       setName('');
       setPhoto('');
       setId('');

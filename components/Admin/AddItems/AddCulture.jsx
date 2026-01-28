@@ -63,14 +63,12 @@ export default function CultureForm({ patch = false, item }) {
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(data),
         });
-        createLog('create', data._id);
       } else {
         res = await fetch(`/api/v1/cultures/${item._id}`, {
           method: 'PATCH',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(data),
         });
-        createLog('update', data._id);
       }
 
       setUploading(false);
@@ -80,7 +78,8 @@ export default function CultureForm({ patch = false, item }) {
         toast.error(message);
         throw new Error(message);
       }
-
+      if (patch) createLog('update','culture', data._id);
+      else createLog('create','culture', data._id);
       // reset form
       setTitle('');
       setId('');

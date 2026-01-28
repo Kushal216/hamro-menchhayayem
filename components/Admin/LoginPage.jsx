@@ -1,35 +1,37 @@
-"use client";
-import { useRouter } from "next/navigation";
-import React, { useState } from "react";
-import toast from "react-hot-toast";
-import PasswordInput from "./PasswordInput";
+'use client';
+import { useRouter } from 'next/navigation';
+import React, { useState } from 'react';
+import toast from 'react-hot-toast';
+import PasswordInput from './PasswordInput';
+import { createLog } from '@/app/(admin)/admin/logs/page';
 
 export default function LoginPage() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [message, setMessage] = useState("");
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [message, setMessage] = useState('');
   const router = useRouter();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await fetch("/api/v1/auth", {
-        method: "POST",
-        headers: { "content-Type": "application/json" },
+      const res = await fetch('/api/v1/auth', {
+        method: 'POST',
+        headers: { 'content-Type': 'application/json' },
         body: JSON.stringify({ email, password }),
       });
 
       const data = await res.json();
 
       if (!res.ok) {
-        console.log("Error:", data.message);
+        console.log('Error:', data.message);
       } else {
-        toast.success("Success:", data.message, data.user);
-        router.push("/admin");
+        toast.success('Success:', data.message, data.user);
+        router.push('/admin');
+        createLog('login');
       }
     } catch (err) {
-      toast.error(err.message)
-      console.error("Fetch error:", err);
+      toast.error(err.message);
+      console.error('Fetch error:', err);
     }
   };
 
@@ -57,9 +59,8 @@ export default function LoginPage() {
 
         <div className="mb-4">
           <label className="block mb-1 font-medium">Password</label>
-        <PasswordInput password={password} setPassword={setPassword}/>
+          <PasswordInput password={password} setPassword={setPassword} />
         </div>
-
 
         <button
           type="submit"

@@ -8,6 +8,7 @@ import ImageInput from '@/components/ImageInput';
 import Input from '../Input';
 import toast from 'react-hot-toast';
 import { useRouter } from 'next/navigation';
+import { createLog } from '@/app/(admin)/admin/logs/page';
 
 export default function LiteratureForm({ patch = false, item }) {
   const router = useRouter();
@@ -85,8 +86,9 @@ export default function LiteratureForm({ patch = false, item }) {
         toast.error(message);
         throw new Error(message);
       }
-
       toast.success(`${title} added successfully.`);
+      if (patch) createLog('update','literature', data._id);
+      else createLog('create','literature', data._id);
       setId('');
       setTitle('');
       setDescription('');

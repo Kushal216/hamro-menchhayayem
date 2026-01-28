@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import toast from 'react-hot-toast';
 import Input from '../Input';
-import ImageInput from '@/components/ImageInput';
+import { createLog } from '@/app/(admin)/admin/logs/page';
 
 export default function UserForm({ onSubmit }) {
   const [name, setName] = useState('');
@@ -33,8 +33,10 @@ export default function UserForm({ onSubmit }) {
         throw new Error(message);
       }
       const result = await res.json();
-      console.log('Saved successfully:', result);
+      // console.log('Saved successfully:', result);
       toast.success(result.message);
+
+       createLog('create','user', data._id);
 
       setName('');
       setRole('contributer');

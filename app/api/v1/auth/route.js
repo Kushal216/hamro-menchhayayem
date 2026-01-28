@@ -78,3 +78,22 @@ export async function POST(req) {
     );
   }
 }
+
+
+export async function DELETE(req){
+    if (!isLoggedIn(req)) {
+      return NextResponse.json(
+        {
+          message: 'You are already logged out',
+        },
+        { status: 400 }
+      );
+    }
+
+    const cookie = await cookies();
+    cookie.delete('token');
+
+    return NextResponse.json({
+      message: 'Logged out successfully',
+    });
+}

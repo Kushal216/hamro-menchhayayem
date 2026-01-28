@@ -27,8 +27,18 @@ export async function POST(req) {
   const body = await req.json();
 
   const token = req.cookies.get('token')?.value;
-  const user = jwt.verify(token, process.env.JWT_SECRET);
+  let user;
+  try {
+    const token = req.cookies.get('token')?.value;
+    if (!token) throw new Error('No token');
 
+    user = jwt.verify(token, process.env.JWT_SECRET);
+  } catch (err) {
+    return NextResponse.json(
+      { message: 'Unauthorized', error: err.message },
+      { status: 401 }
+    );
+  }
   // const user = isLoggedIn(req);
   // console.log(user);
   if (!user) {

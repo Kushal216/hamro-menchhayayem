@@ -1,3 +1,4 @@
+import LogsDeleteButton from '@/components/LogsDeleteButton';
 import fetchData from '@/lib/fetchItem';
 import React from 'react';
 import toast from 'react-hot-toast';
@@ -10,6 +11,14 @@ const bgColors = {
   logout: 'bg-purple-200',
 };
 
+const verbs = {
+  create: 'Created',
+  update: 'Updated',
+  delete: 'Deleted',
+  login: 'Logged in.',
+  logout: 'Logged out.',
+};
+
 const page = async () => {
   const res = await fetchData('logs'); // assume logs is an array
   const logs = res.data;
@@ -19,38 +28,39 @@ const page = async () => {
       <h1 className="text-3xl font-bold mb-6 text-gray-800">Logs Monitoring</h1>
 
       <div className="space-y-4">
-        {logs.map((log) => (
+        {[...logs].reverse().map((log) => (
           <div
             key={log._id}
-            className={`p-5 rounded-xl shadow-md hover:shadow-xl transition-all duration-300 ${bgColors[log.activity]} flex flex-col space-y-2`}
+            className={`p-5 rounded-xl shadow-md hover:shadow-xl transition-all duration-300 ${bgColors[log.activity]} flex flex-col space-y-2 relative`}
           >
+            {/* <LogsDeleteButton /> */}
             {/* Top row: user name + activity */}
             <div className="">
-              <span className="font-semibold text-gray-800 text-lg">
+              <span className="font-bold text-black text-xl">
                 {log.user.name}
               </span>{' '}
               {/* Timestamp */}
-              <span className="text-gray-700 text-xs ml-2">
+              <span className="text-gray-700 float-right">
                 {new Date(log.createdAt).toLocaleString()}
-              </span>
-              <span className="text-sm text-gray-700 font-medium float-right">
-                {log.activity.toUpperCase()}
               </span>
             </div>
 
-            {/* Item info */}
-            {log.item && (
-              <div className="text-gray-800 text-sm">
-                <span className="font-medium">
-                  {log.item.type ? <>{log.item.type} </> : 'Item'}
-                </span>
-                {': '}
-                {log.item.id}{' '}
-              </div>
-            )}
+            <div>
+              <span className="text-gray-700 font-bold ">
+                {verbs[log.activity]}{' '}
+              </span>
 
-            {/* Email */}
-            <div className="text-gray-800 text-sm">{log.user.email}</div>
+              {/* Item info */}
+              {log.item && (
+                <span className="text-gray-800 font-medium ">
+                  {log.item.type ? <>{log.item.type} </> : 'Item '} -{' '}
+                  <span className='bg-white/60 p-1 rounded'>{log.item.id}</span>
+                </span>
+              )}
+            </div>
+
+            {/* Email
+            <div className="text-gray-800 text-sm">{log.user.email}</div> */}
           </div>
         ))}
       </div>
@@ -60,8 +70,9 @@ const page = async () => {
 
 export default page;
 
-export async function createLog(activity, item) {
-  console.log(activity, item);
+export async function createLog(activity, itemType, itemId) {
+  console.log(activity);
+
   try {
     const res = await fetch('/api/v1/logs', {
       method: 'POST',
@@ -69,16 +80,21 @@ export async function createLog(activity, item) {
 
       body: JSON.stringify({
         activity,
-        itemId: item._id,
+        item: {
+          id: itemId,
+          type: itemType,
+        },
       }),
     });
 
     console.log(res.message);
 
     if (!res.ok) {
-      toast.error('Something went wrong in logging res not ok.');
+      toast.error(res.error);
     } else toast.success('activity logged successfully');
   } catch (err) {
-    toast.error('some error occurred in logging thrown');
+    // toast.error(err.message);
+    console.log(err)
   }
+  
 }

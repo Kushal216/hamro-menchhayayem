@@ -1,3 +1,4 @@
+import LogoutButton from '@/components/Admin/LogoutButton';
 import { logout } from '@/lib/logout';
 import validateJWT from '@/lib/middlewares/validataJWT';
 import { cookies } from 'next/headers';
@@ -39,14 +40,21 @@ export default async function AdminPage() {
     console.log(tokenPayload);
 
     if (sections.length == 5 && tokenPayload.role == 'admin')
-      sections.push({
-        title: 'Manage Users',
-        addLabel: 'Add users',
-        route: 'users',
-      });
+      sections.push(
+        {
+          title: 'Manage Users',
+          addLabel: 'Add users',
+          route: 'users',
+        },
+        {
+          title: 'View Logs',
+          addLabel: 'View Admin Logs',
+          route: 'logs',
+        }
+      );
 
     return (
-      <div className=''>
+      <div className="">
         {tokenPayload && (
           <div className="mt-4">
             {/* <Adminpage username={tokenPayload.name}  role={tokenPayload.role} /> */}
@@ -65,12 +73,7 @@ export default async function AdminPage() {
                 </Link>
               ))}
             </div>
-            <button
-              onClick={logout}
-              className="bg-red-600 text-white text-xl font-bold p-2 px-8 m-2 rounded-xl cursor-pointer"
-            >
-              Logout
-            </button>
+            <LogoutButton />
           </div>
         )}
       </div>

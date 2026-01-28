@@ -6,6 +6,7 @@ import toast from 'react-hot-toast';
 import Input from '../Input';
 import ImageInput from '@/components/ImageInput';
 import { useRouter } from 'next/navigation';
+import { createLog } from '@/app/(admin)/admin/logs/page';
 
 export default function PlaceForm({ patch = false, item }) {
   const router = useRouter();
@@ -82,6 +83,8 @@ export default function PlaceForm({ patch = false, item }) {
         toast.error(message);
         throw new Error(message);
       }
+      if (patch) createLog('update','place', data._id);
+      else createLog('create','place', data._id);
       const result = await res.json();
       console.log('Saved successfully:', result);
       toast.success(result.message);
@@ -103,7 +106,6 @@ export default function PlaceForm({ patch = false, item }) {
       toast.error(err);
     }
     router.refresh();
-
   };
 
   return (
@@ -219,4 +221,3 @@ export default function PlaceForm({ patch = false, item }) {
     </>
   );
 }
-
