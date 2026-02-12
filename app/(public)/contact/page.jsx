@@ -110,25 +110,120 @@ export default function ContactsPage() {
 
   const schools = [
     {
-      institute: 'श्री गौखुरी उच्च मा. वि.',
-      contact_person: 'प्रधानाध्यापक',
-      contact_no: '9800000000',
-    },
-    {
       institute: 'श्री प्रतिभा इङ्गलिस बोर्डिङ्ग स्कुल',
-      contact_person: 'प्रधानाध्यापक',
-      contact_no: '9800000000',
+      contact_person: 'घनश्याम गौतम',
+      contact_no: '',
     },
-    {
-      institute: 'श्री जांते आधारभुत विद्यालय',
-      contact_person: 'प्रधानाध्यापक',
-      contact_no: '9800000000',
-    },
-    {
-      institute: 'श्री पंचकन्या आधारभुत विद्यालय',
-      contact_person: 'प्रधानाध्यापक',
-      contact_no: '9800000000',
-    },
+   {
+    institute: 'श्री जनकल्याण आधारभूत विद्यालय',
+    contact_person: 'निरकुमार लिम्बु',
+    contact_no: '9860700671',
+  },
+  {
+    institute: 'श्री सिद्धदेवी आधारभूत विद्यालय',
+    contact_person: 'नवराज भट्टराई',
+    contact_no: '9746880000',
+  },
+  {
+    institute: 'श्री शारदा आधारभूत विद्यालय',
+    contact_person: 'चन्द्रसिंह पंगाक',
+    contact_no: '9811020825',
+  },
+  {
+    institute: 'श्री जनप्रिय मा.वि. पोक्चाक',
+    contact_person: 'डेनु प्रसाद गौतम',
+    contact_no: '9842192913',
+  },
+  {
+    institute: 'श्री जलकन्या आधारभूत विद्यालय',
+    contact_person: 'टीका देवी दकाल',
+    contact_no: '9842344653',
+  },
+  {
+    institute: 'श्री सुवा आधारभूत विद्यालय',
+    contact_person: 'मुना संयोज लिम्बु',
+    contact_no: '',
+  },
+  {
+    institute: 'श्री कालिका आधारभूत विद्यालय',
+    contact_person: 'सन्तवीर लिम्बु',
+    contact_no: '9860781767',
+  },
+  {
+    institute: 'श्री युवा वर्ष आधारभूत विद्यालय',
+    contact_person: 'मदन तिवारी',
+    contact_no: '9842128120',
+  },
+  {
+    institute: 'श्री श्रीजंग माध्यमिक विद्यालय',
+    contact_person: 'रामऔतार मण्डल',
+    contact_no: '9742295600',
+  },
+  {
+    institute: 'श्री अशिने आधारभूत विद्यालय',
+    contact_person: 'डिल्ली राम खनाल',
+    contact_no: '9866222739',
+  },
+  {
+    institute: 'श्री सिद्धदेवी आधारभूत विद्यालय',
+    contact_person: 'सोमनाथ भट्टराई',
+    contact_no: '9842114721',
+  },
+  {
+    institute: 'श्री जाते आधारभूत विद्यालय',
+    contact_person: 'गंगा दाहाल',
+    contact_no: '9864551700',
+  },
+  {
+    institute: 'श्री बशिष्ट आधारभूत विद्यालय',
+    contact_person: 'दिपक कुमार भट्टराई',
+    contact_no: '9862296675',
+  },
+  {
+    institute: 'श्री गौखुरी मा.वि. मोराहा',
+    contact_person: 'सूर्य प्रसाद गौतम',
+    contact_no: '9842426055',
+  },
+  {
+    institute: 'श्री हर्क आधारभूत विद्यालय',
+    contact_person: 'दीना गुरुङ',
+    contact_no: '9862205383',
+  },
+  {
+    institute: 'श्री रत्न आधारभूत विद्यालय',
+    contact_person: 'गोमा देवी गुरागाईं',
+    contact_no: '9842210320',
+  },
+  {
+    institute: 'श्री सिद्धेश्वर माध्यमिक विद्यालय',
+    contact_person: 'नारायण कुमार राई',
+    contact_no: '9862048708',
+  },
+  {
+    institute: 'श्री ललित चन्द्रा आधारभूत विद्यालय',
+    contact_person: 'तारा देवी लिम्बु',
+    contact_no: '9844358299',
+  },
+  {
+    institute: 'श्री पञ्चकन्या आधारभूत विद्यालय',
+    contact_person: 'सुशिला आङवुहाङ',
+    contact_no: '9842209671',
+  },
+  {
+    institute: 'श्री लक्ष्मी आधारभूत विद्यालय',
+    contact_person: 'भीममाया तामाङ खापुङ',
+    contact_no: '9861769220',
+  },
+  {
+    institute: 'श्री पहल गंगा बालविकास केन्द्र',
+    contact_person: 'चन्द्रकला थापा',
+    contact_no: '9862068145',
+  },
+  {
+    institute: 'श्री नवज्योति बालविकास केन्द्र',
+    contact_person: 'खिनमाया तामाङ',
+    contact_no: '9762720887',
+  },,
   ];
 
   const renderTable = (title, data) => (
@@ -177,3 +272,4 @@ export default function ContactsPage() {
     </div>
   );
 }
+
