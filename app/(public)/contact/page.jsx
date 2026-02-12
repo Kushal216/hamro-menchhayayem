@@ -120,7 +120,7 @@ export default function ContactsPage() {
     contact_no: '9860700671',
   },
   {
-    institute: 'श्री सिद्धदेवी आधारभूत विद्यालय',
+    institute: 'श्री सिंहदेवी आधारभूत विद्यालय',
     contact_person: 'नवराज भट्टराई',
     contact_no: '9746880000',
   },
@@ -140,7 +140,7 @@ export default function ContactsPage() {
     contact_no: '9842344653',
   },
   {
-    institute: 'श्री सुवा आधारभूत विद्यालय',
+    institute: 'श्री सदुवा आधारभूत विद्यालय',
     contact_person: 'मुना संयोज लिम्बु',
     contact_no: '',
   },
@@ -155,7 +155,7 @@ export default function ContactsPage() {
     contact_no: '9842128120',
   },
   {
-    institute: 'श्री श्रीजंग माध्यमिक विद्यालय',
+    institute: 'श्री श्रीजुगं माध्यमिक विद्यालय',
     contact_person: 'रामऔतार मण्डल',
     contact_no: '9742295600',
   },
@@ -272,5 +272,6 @@ export default function ContactsPage() {
     </div>
   );
 }
+
 
 
