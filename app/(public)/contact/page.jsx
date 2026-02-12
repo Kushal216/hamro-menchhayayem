@@ -6,7 +6,7 @@ export default function ContactsPage() {
     {
       institute: 'मेन्छयायेम अस्पताल',
       contact_person: 'हस्पिटल रिसेप्सनिस्ट',
-      contact_no: '9800000000',
+      contact_no: '',
     },
     {
       institute: 'बिपी कोइराला स्वास्थ्य विज्ञान प्रतिष्ठान(घोपा)',
@@ -272,4 +272,5 @@ export default function ContactsPage() {
     </div>
   );
 }
+
 
