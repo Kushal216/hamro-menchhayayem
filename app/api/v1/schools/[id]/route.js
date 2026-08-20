@@ -53,7 +53,7 @@ export async function PUT(req, { params }) {
   }
 
   const { id } = await params;
-  const body = await request.json();
+  const body = await req.json();
   try {
     const school = await School.findById(id);
     if (!school) {
@@ -63,7 +63,7 @@ export async function PUT(req, { params }) {
       { _id: id },
       {
         title: body.title,
-        description: body.title,
+        description: body.description,
         gallery: body.gallery,
         coverImage: body.coverImage,
         location: body.location,
