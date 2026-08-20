@@ -1,11 +1,10 @@
 'use client';
 import Link from 'next/link';
-import { usePathname, useRouter } from 'next/navigation';
+import { usePathname } from 'next/navigation';
 import React, { useState, useEffect } from 'react';
 
 const Menubar = ({ closeMenu }) => {
   const pathname = usePathname();
-  const router = useRouter();
 
   const links = [
     { href: '/', label: 'गृहपृष्ठ' },
@@ -18,17 +17,15 @@ const Menubar = ({ closeMenu }) => {
     { href: '/contact', label: 'सम्पर्क' },
   ];
 
-  // Track the active link in state
   const [activeLink, setActiveLink] = useState(pathname);
 
-  // Update active link if user navigates programmatically (e.g., browser back/forward)
   useEffect(() => {
     setActiveLink(pathname);
   }, [pathname]);
 
   return (
-    <nav className="border border-[#00000000] box-border min-w-fit text-xl shadow-xl bg-white lg:bg-[#cacaca]  rounded-b-xl lg:w-fit xl:w-full fixed lg:static lg:h-full right-0">
-      <ul className="flex flex-col">
+    <nav className="text-xl h-full">
+      <ul className="flex flex-col p-4 gap-1">
         {links.map((link) => {
           const isActive = activeLink === link.href;
 
@@ -37,14 +34,13 @@ const Menubar = ({ closeMenu }) => {
               <Link
                 href={link.href}
                 className={
-                  'whitespace-nowrap inline-block w-full hover:bg-[#dadada] flex-1 px-3 my-2 py-1 ' +
+                  'whitespace-nowrap inline-block w-full flex-1 px-3 py-2.5 rounded-lg transition-colors ' +
                   (isActive
-                    ? 'bg-[#eaeaea] md:bg-[#b3b3b3] font-bold box-border border-l-5 pl-2 border-[#FF3B00]'
-                    : '')
+                    ? 'bg-[#eaeaea] lg:bg-[#b3b3b3] font-bold border-l-4 pl-3 border-[#FF3B00]'
+                    : 'hover:bg-gray-100')
                 }
                 onClick={() => {
-                  setActiveLink(link.href); // instantly mark active
-
+                  setActiveLink(link.href);
                   if (closeMenu) closeMenu();
                 }}
               >

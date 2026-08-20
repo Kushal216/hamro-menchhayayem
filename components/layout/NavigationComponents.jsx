@@ -1,5 +1,5 @@
 'use client';
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import Navbar from './Navbar';
 import Menubar from './Menubar';
 import { useState } from 'react';
@@ -10,6 +10,7 @@ const NavigationComponents = ({ children }) => {
   const paths = usePathname().replace(/\/$/, '').split('/');
   const route = paths[1];
   const menuNeeded = !(route == 'admin' || route == 'login' || route == 'docs');
+  const menuRef = useRef(null);
 
   useEffect(() => {
     if (!isMenuOpen) return;
@@ -18,6 +19,21 @@ const NavigationComponents = ({ children }) => {
     };
     document.addEventListener('keydown', handleEscape);
     return () => document.removeEventListener('keydown', handleEscape);
+  }, [isMenuOpen]);
+
+  useEffect(() => {
+    if (isMenuOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+    return () => { document.body.style.overflow = ''; };
+  }, [isMenuOpen]);
+
+  useEffect(() => {
+    if (!isMenuOpen || !menuRef.current) return;
+    const focusable = menuRef.current.querySelectorAll('a, button, [tabindex]:not([tabindex="-1"])');
+    if (focusable.length) focusable[0].focus();
   }, [isMenuOpen]);
 
   return (
@@ -29,7 +45,7 @@ const NavigationComponents = ({ children }) => {
         Skip to content
       </a>
 
-      <header className="col-span-5 sticky top-0 z-100">
+      <header className="sticky top-0 z-100">
         <Navbar
           isMenuOpen={isMenuOpen}
           toggleMenu={toggleMenu}
@@ -38,21 +54,43 @@ const NavigationComponents = ({ children }) => {
         />
       </header>
 
-      <div className=" col-span-5 flex">
+      <div className="flex">
         {menuNeeded && (
-          <aside
-            onClick={closeMenu}
-            className={
-              (isMenuOpen ? '' : 'hidden ') +
-              'w-screen fixed lg:w-fit xl:w-100 z-3 lg:block   right-0 lg:static lg:pt-0 min-h-screen bg-[#00000060]'
-            }
-          >
-            <Menubar closeMenu={closeMenu} />
+          <>
+            <div
+              className={
+                `fixed inset-0 z-40 bg-black/40 transition-opacity duration-300 lg:hidden ${
+                  isMenuOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
+                }`
+              }
+              onClick={closeMenu}
+              aria-hidden="true"
+            />
+            <aside
+              ref={menuRef}
+              className={
+                `fixed top-17 right-0 z-50 h-[calc(100vh-4.25rem)] w-72 bg-white shadow-xl transition-transform duration-300 ease-in-out lg:hidden ${
+                  isMenuOpen ? 'translate-x-0' : 'translate-x-full'
+                }`
+              }
+              role="dialog"
+              aria-modal="true"
+              aria-label="Navigation menu"
+            >
+              <Menubar closeMenu={closeMenu} />
+            </aside>
+          </>
+        )}
+
+        {menuNeeded && (
+          <aside className="hidden lg:block lg:w-fit xl:w-50 bg-[#cacaca] min-h-screen pt-0 static">
+            <Menubar />
           </aside>
         )}
+
         <main
           id="main-content"
-          className={`w-full min-h-screen overflow-auto scrollbar-hidden ${!menuNeeded ? '' : 'lg:col-span-4'}`}
+          className={`w-full min-h-screen overflow-auto scrollbar-hidden ${!menuNeeded ? '' : 'lg:flex-1'}`}
         >
           {children}
         </main>
