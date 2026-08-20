@@ -26,7 +26,7 @@ import isLoggedIn, { isAdmin } from '@/lib/middlewares/validateAuth';
 export async function GET(req, { params }) {
   const { id } = await params;
   try {
-    const culture = await Culture.findById(id);
+    const culture = await Culture.findById(id).select('-__v');
 
     if (!culture) {
       return NextResponse.json({ message: 'item Not found' }, { status: 404 });

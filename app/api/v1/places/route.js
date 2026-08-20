@@ -17,7 +17,7 @@ import isLoggedIn from '@/lib/middlewares/validateAuth';
 
 export async function GET(req) {
   try {
-    const places = await Places.find({});
+    const places = await Places.find({}).select('title description coverImage likesCount location _id');
 
     return NextResponse.json({
       message: 'GET list of places',

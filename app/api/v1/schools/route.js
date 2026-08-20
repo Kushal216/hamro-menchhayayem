@@ -17,7 +17,7 @@ import isLoggedIn from '@/lib/middlewares/validateAuth';
 
 export async function GET(req) {
   try {
-    const schools = await Schools.find({});
+    const schools = await Schools.find({}).select('title description coverImage likesCount location phoneNo _id');
 
     return NextResponse.json({
       message: 'GET all lists school',

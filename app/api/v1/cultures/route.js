@@ -16,7 +16,7 @@ import isLoggedIn, { isAdmin } from '@/lib/middlewares/validateAuth';
  */
 export async function GET(req) {
   try {
-    const cultures = await Culture.find({});
+    const cultures = await Culture.find({}).select('title description coverImage likesCount _id');
 
     return NextResponse.json({
       message: 'GET list of cultures',
