@@ -18,6 +18,7 @@ export default async function SchoolPage() {
             description={item.description}
             phone={item.phone}
             location={item.location}
+            likes={item.likes || 0}
           />
         ))}
       </div>

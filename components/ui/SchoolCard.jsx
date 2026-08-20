@@ -14,6 +14,7 @@ export default function SchoolCard({
   phone,
   location,
   id,
+  likes = 0,
 }) {
   return (
     <div className="flex flex-col justify-center p-4 mx-4 m-2 mb-3 shadow-lg rounded-2xl w-full max-w-md sm:max-w-lg md:max-w-xl">
@@ -59,7 +60,7 @@ export default function SchoolCard({
               <IoCall size={30} color="#018378" />
             </a>
             <BiSolidCommentDots size={35} color="#00AAFF" />
-            <Like totalLikes={10} />
+            <Like totalLikes={likes} />
           </div>
         </div>
       </div>

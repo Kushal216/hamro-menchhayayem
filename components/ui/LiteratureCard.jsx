@@ -19,6 +19,7 @@ export default function LiteratureCard({
   author,
   category = 'article',
   id,
+  likes = 0,
 }) {
   return (
     <div className="p-5 py-3 mx-2 flex flex-col justify-between h-full w-full bg-white rounded-2xl shadow-lg">
@@ -66,7 +67,7 @@ export default function LiteratureCard({
 
           <div className="flex gap-5 items-center">
             <BiSolidCommentDots size={26} className="text-purple-500" />
-            <Like totalLikes={10} />
+            <Like totalLikes={likes} />
           </div>
         </div>
       </div>
