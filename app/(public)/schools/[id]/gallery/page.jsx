@@ -1,8 +1,7 @@
-import React from 'react';
 import GalleryPage from '@/components/layout/GalleryPage';
 
-export default function Gallery({ params }) {
-  const { id } = React.use(params);
+export default async function Gallery({ params }) {
+  const { id } = await params;
 
   return <GalleryPage id={id} route="schools" />;
 }
