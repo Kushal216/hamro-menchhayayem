@@ -1,7 +1,7 @@
 import toast from "react-hot-toast";
 
-export default async function postItem(data){
-  const res = await fetch('/api/v1/cultures', {
+export default async function postItem(route, data){
+  const res = await fetch(`/api/v1/${route}`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(data),
