@@ -1,14 +1,6 @@
 import AdminBackButton from '@/components/Admin/AdminBackButton';
-import HomeHeading from '@/components/homepage/HomeHeading';
-import { Geist, Geist_Mono } from 'next/font/google';
-
-const geistSans = Geist({
-  variable: '--font-geist-sans',
-  subsets: ['latin'],
-});
-
+import ToasterContainer from '@/components/ToasterContainer';
 import { Noto_Sans_Devanagari } from 'next/font/google';
-import Link from 'next/link';
 
 const notoDevanagari = Noto_Sans_Devanagari({
   subsets: ['devanagari', 'latin'],
@@ -29,6 +21,7 @@ export default function RootLayout({ children }) {
     <div className="md:w-[50%] mx-auto">
       <AdminBackButton />
       {children}
+      <ToasterContainer />
     </div>
   );
 }
