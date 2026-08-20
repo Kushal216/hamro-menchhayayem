@@ -1,5 +1,5 @@
 import LoginPage from '@/components/Admin/LoginPage';
-import validateJWT from '@/lib/middlewares/validataJWT';
+import validateJWT from '@/lib/middlewares/validateJWT';
 import { cookies } from 'next/headers';
 import { redirect } from 'next/navigation';
 
