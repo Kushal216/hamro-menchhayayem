@@ -1,10 +1,11 @@
 'use client';
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import React, { useState, useEffect } from 'react';
 
 const Menubar = ({ closeMenu }) => {
   const pathname = usePathname();
+  const router = useRouter();
 
   const links = [
     { href: '/', label: 'गृहपृष्ठ' },
@@ -24,8 +25,8 @@ const Menubar = ({ closeMenu }) => {
   }, [pathname]);
 
   return (
-    <nav className="text-xl h-full">
-      <ul className="flex flex-col p-4 gap-1">
+    <nav className="border border-[#00000000] box-border min-w-fit text-xl shadow-xl bg-white lg:bg-[#cacaca] rounded-b-xl lg:rounded-none lg:w-fit xl:w-full lg:static lg:h-full">
+      <ul className="flex flex-col">
         {links.map((link) => {
           const isActive = activeLink === link.href;
 
@@ -34,10 +35,10 @@ const Menubar = ({ closeMenu }) => {
               <Link
                 href={link.href}
                 className={
-                  'whitespace-nowrap inline-block w-full flex-1 px-3 py-2.5 rounded-lg transition-colors ' +
+                  'whitespace-nowrap inline-block w-full hover:bg-[#dadada] flex-1 px-3 my-2 py-1 ' +
                   (isActive
-                    ? 'bg-[#eaeaea] lg:bg-[#b3b3b3] font-bold border-l-4 pl-3 border-[#FF3B00]'
-                    : 'hover:bg-gray-100')
+                    ? 'bg-[#eaeaea] md:bg-[#b3b3b3] font-bold box-border border-l-5 pl-2 border-[#FF3B00]'
+                    : '')
                 }
                 onClick={() => {
                   setActiveLink(link.href);
