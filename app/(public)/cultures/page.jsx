@@ -32,4 +32,4 @@ export default async function CulturesPage() {
     </>
   );
 }
-export const dynamic = 'force-dynamic';
+export const revalidate = 3600;

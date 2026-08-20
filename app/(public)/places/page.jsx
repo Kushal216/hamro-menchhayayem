@@ -33,4 +33,4 @@ async function TourismPage() {
   );
 }
 export default TourismPage;
-export const dynamic = 'force-dynamic';
+export const revalidate = 3600;
