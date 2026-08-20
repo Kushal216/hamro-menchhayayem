@@ -18,6 +18,7 @@ export default async function LiteraturePage() {
             description={item.description}
             image={item.coverImage || '/images/fallback-image.jpg'}
             author={item.author}
+            likes={item.likes || 0}
           />
         ))}
       </div>
