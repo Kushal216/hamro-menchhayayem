@@ -4,6 +4,14 @@ import fetchData from "@/lib/fetchItem";
 
 export default async function SchoolPage() {
     const res = await fetchData('schools');
+    if (!res) {
+      return (
+        <>
+          <RouteTitle title={'हाम्रा शिक्षण संस्थाहरु'} />
+          <div className="text-center py-10">Failed to load schools.</div>
+        </>
+      );
+    }
     const { data } = res;
   return (
     <>

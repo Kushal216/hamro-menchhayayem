@@ -4,7 +4,15 @@ import LiteratureCard from '@/components/ui/LiteratureCard';
 
 export default async function LiteraturePage() {
   const res = await fetchData('literature');
-  const { message, data } = res;
+  if (!res) {
+    return (
+      <>
+        <RouteTitle title={'साहित्यीक सृजनाहरु'} />
+        <div className="text-center py-10">Failed to load literature.</div>
+      </>
+    );
+  }
+  const { data } = res;
 
   return (
     <>

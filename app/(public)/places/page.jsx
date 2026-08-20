@@ -4,8 +4,15 @@ import fetchData from '@/lib/fetchItem';
 
 async function TourismPage() {
   const res = await fetchData("places");
-  const { message, data } = res;
-  console.log(message);
+  if (!res) {
+    return (
+      <>
+        <RouteTitle title={'हाम्रा पर्यटकिय स्थलहरु'} />
+        <div className="text-center py-10">Failed to load places.</div>
+      </>
+    );
+  }
+  const { data } = res;
   return (
     <>
       <RouteTitle title={'हाम्रा पर्यटकिय स्थलहरु'} />
