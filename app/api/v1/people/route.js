@@ -24,11 +24,10 @@ export async function GET(req) {
       data: people,
     });
   } catch (err) {
-    return NextResponse.json({
-      error: err.message,
-      message: `DB error in performing the create culture action. `,
-      err: err,
-    });
+    return NextResponse.json(
+      { error: 'Failed to fetch people' },
+      { status: 500 }
+    );
   }
 }
 
@@ -59,11 +58,7 @@ export async function POST(req) {
     );
   } catch (err) {
     return NextResponse.json(
-      {
-        error: err.message,
-        message: `Error: ${err.message}. `,
-        data: err,
-      },
+      { error: 'Failed to create person' },
       { status: 400 }
     );
   }

@@ -16,12 +16,19 @@ import isLoggedIn from '@/lib/middlewares/validateAuth';
  */
 
 export async function GET(req) {
-  const literatures = await Literature.find({});
+  try {
+    const literatures = await Literature.find({});
 
-  return NextResponse.json({
-    message: 'GET list of literature',
-    data: literatures,
-  });
+    return NextResponse.json({
+      message: 'GET list of literature',
+      data: literatures,
+    });
+  } catch (err) {
+    return NextResponse.json(
+      { error: 'Failed to fetch literature' },
+      { status: 500 }
+    );
+  }
 }
 
 export async function POST(req) {
@@ -46,11 +53,10 @@ export async function POST(req) {
 
     id = newLiterature._id;
   } catch (err) {
-    return NextResponse.json({
-      error: err.message,
-      message: `DB error in performing the create culture action. `,
-      err: err,
-    });
+    return NextResponse.json(
+      { error: 'Failed to create literature' },
+      { status: 400 }
+    );
   }
 
   return NextResponse.json(

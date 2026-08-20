@@ -16,12 +16,19 @@ import isLoggedIn from '@/lib/middlewares/validateAuth';
  */
 
 export async function GET(req) {
-  const places = await Places.find({});
+  try {
+    const places = await Places.find({});
 
-  return NextResponse.json({
-    message: 'GET list of places',
-    data: places,
-  });
+    return NextResponse.json({
+      message: 'GET list of places',
+      data: places,
+    });
+  } catch (err) {
+    return NextResponse.json(
+      { error: 'Failed to fetch places' },
+      { status: 500 }
+    );
+  }
 }
 
 export async function POST(req) {
@@ -50,9 +57,9 @@ export async function POST(req) {
 
     id = newPlace._id;
   } catch (err) {
-    console.log(`ERROR: in creating places:\n${err}`);
+    console.error(`ERROR: in creating places:\n${err}`);
     return NextResponse.json(
-      { error: err.message, message: `Error: ${err.message}. `, data: err },
+      { error: 'Failed to create place' },
       { status: 400 }
     );
   }
