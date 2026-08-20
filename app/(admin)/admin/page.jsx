@@ -1,5 +1,4 @@
 import LogoutButton from '@/components/Admin/LogoutButton';
-import { logout } from '@/lib/logout';
 import validateJWT from '@/lib/middlewares/validataJWT';
 import { cookies } from 'next/headers';
 import Link from 'next/link';
