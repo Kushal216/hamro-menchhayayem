@@ -27,7 +27,7 @@ export async function GET(req, { params }) {
   const { id } = await params;
 
   try {
-    const person = await People.findById(id);
+    const person = await People.findById(id).lean();
 
     if (!person) {
       return NextResponse.json(

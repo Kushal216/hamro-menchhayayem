@@ -17,7 +17,7 @@ import isLoggedIn from '@/lib/middlewares/validateAuth';
 
 export async function GET(req) {
   try {
-    const literatures = await Literature.find({}).select('title description coverImage likesCount author category _id');
+    const literatures = await Literature.find({}).select('title description coverImage likesCount author category _id').lean();
 
     return NextResponse.json({
       message: 'GET list of literature',

@@ -26,7 +26,7 @@ import isLoggedIn, { isAdmin } from '@/lib/middlewares/validateAuth';
 export async function GET(req, { params }) {
   const { id } = await params;
   try {
-    const culture = await Culture.findById(id).select('-__v');
+    const culture = await Culture.findById(id).select('-__v').lean();
 
     if (!culture) {
       return NextResponse.json({ message: 'item Not found' }, { status: 404 });
@@ -93,7 +93,7 @@ export async function PUT(req, { params }) {
   const { id } = await params;
 
   try {
-    const culture = await Culture.findById(id);
+    const culture = await Culture.findById(id).lean();
 
     if (!culture) {
       return NextResponse.json(

@@ -23,7 +23,7 @@ export async function POST(req) {
   const { email, password } = await req.json();
 
   try {
-    const user = await User.findOne({ email: email }).select('+password');
+    const user = await User.findOne({ email: email }).select('+password').lean();
     if (!user) {
       return NextResponse.json(
         { message: 'Invalid Credentials' },

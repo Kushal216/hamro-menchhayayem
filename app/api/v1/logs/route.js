@@ -16,7 +16,7 @@ import jwt from 'jsonwebtoken';
  */
 export async function GET(req) {
   try {
-    const logs = await Logs.find({});
+    const logs = await Logs.find({}).lean();
 
     return NextResponse.json({
       message: 'GET list of logs',

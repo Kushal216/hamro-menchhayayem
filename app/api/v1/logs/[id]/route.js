@@ -26,7 +26,7 @@ import isLoggedIn, { isAdmin } from '@/lib/middlewares/validateAuth';
 export async function GET(req, { params }) {
   const { id } = await params;
   try {
-    const log = await Logs.findById(id);
+    const log = await Logs.findById(id).lean();
 
     if (!log) {
       return NextResponse.json({ message: 'item Not found' }, { status: 404 });
@@ -93,7 +93,7 @@ export async function PUT(req, { params }) {
   const { id } = await params;
 
   try {
-    const log = await Logs.findById(id);
+    const log = await Logs.findById(id).lean();
 
     if (!log) {
       return NextResponse.json(
