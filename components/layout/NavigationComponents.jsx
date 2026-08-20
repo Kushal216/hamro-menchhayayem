@@ -1,5 +1,5 @@
 'use client';
-import React from 'react';
+import React, { useEffect } from 'react';
 import Navbar from './Navbar';
 import Menubar from './Menubar';
 import { useState } from 'react';
@@ -11,8 +11,24 @@ const NavigationComponents = ({ children }) => {
   const route = paths[1];
   const menuNeeded = !(route == 'admin' || route == 'login' || route == 'docs');
 
+  useEffect(() => {
+    if (!isMenuOpen) return;
+    const handleEscape = (e) => {
+      if (e.key === 'Escape') setIsMenuOpen(false);
+    };
+    document.addEventListener('keydown', handleEscape);
+    return () => document.removeEventListener('keydown', handleEscape);
+  }, [isMenuOpen]);
+
   return (
     <>
+      <a
+        href="#main-content"
+        className="sr-only focus:not-sr-only focus:absolute focus:top-2 focus:left-2 focus:z-50 focus:bg-white focus:px-4 focus:py-2 focus:rounded focus:shadow-lg focus:text-black"
+      >
+        Skip to content
+      </a>
+
       <header className="col-span-5 sticky top-0 z-100">
         <Navbar
           isMenuOpen={isMenuOpen}
@@ -35,6 +51,7 @@ const NavigationComponents = ({ children }) => {
           </aside>
         )}
         <main
+          id="main-content"
           className={`w-full min-h-screen overflow-auto scrollbar-hidden ${!menuNeeded ? '' : 'lg:col-span-4'}`}
         >
           {children}
