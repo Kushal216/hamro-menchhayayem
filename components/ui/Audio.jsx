@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 
 function Audio() {
-  const [anthem, setAnthem] = useState("false");
+  const [anthem, setAnthem] = useState(false);
   const song = `श्रीझुङ, पौठाक, मोराहाङ धर्ती गौरवशाली
 गाउँपालिका मेन्छयायेमबासी हामी हौं नेपाली
 बहुजाती, भाषा, धर्म संस्कृती हाम्रो पहिचान
