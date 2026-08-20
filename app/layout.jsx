@@ -21,11 +21,11 @@ export default function RootLayout({ children }) {
   return (
     <html lang="ne" className="scrollbar-hidden">
       <body
-        className={`${notoDevanagari.variable} font-devanagari antialiased`}
+        className={`${notoDevanagari.variable} font-devanagari antialiased flex flex-col min-h-screen`}
       >
         <RootLayoutBody>{children}</RootLayoutBody>
         <Analytics />
-        <footer className="w-full">
+        <footer className="w-full mt-auto">
           <Footer />
         </footer>
       </body>
