@@ -32,8 +32,9 @@ yarn-debug.log*
 yarn-error.log*
 .pnpm-debug.log*
 
-# env files (can opt-in for committing if needed)
+# env files
 .env
+.env.local
 
 # vercel
 .vercel
@@ -44,3 +45,7 @@ next-env.d.ts
 
 #scripts
 ./lib/scripts/
+
+
+#issues file
+issues/
