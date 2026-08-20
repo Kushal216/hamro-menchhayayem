@@ -3,9 +3,15 @@ import { useEffect } from 'react';
 import toast from 'react-hot-toast';
 import { redirect } from 'next/navigation';
 
-export default function ToastTrigger({ message, type, redirectRoute }) {
+export default function ToastTrigger({ message, type, redirectRoute, sessionKey }) {
   useEffect(() => {
     if (!message) return;
+
+    if (sessionKey) {
+      const shown = sessionStorage.getItem(sessionKey);
+      if (shown) return;
+      sessionStorage.setItem(sessionKey, '1');
+    }
 
     switch (type) {
       case 'success':
@@ -32,7 +38,7 @@ export default function ToastTrigger({ message, type, redirectRoute }) {
       default:
         toast(message);
     }
-  }, [message, type]);
+  }, [message, type, sessionKey]);
 
   if (redirectRoute) {
     redirect(redirectRoute);

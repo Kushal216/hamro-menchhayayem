@@ -12,6 +12,7 @@ export default function HomePage() {
       <ToastTrigger
         message={'Welcome to Hamro Menchhayayem'}
         type={'success'}
+        sessionKey="welcome-toast"
       />
     </div>
   );
