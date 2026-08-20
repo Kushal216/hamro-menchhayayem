@@ -24,6 +24,7 @@ const HeroImage = () => {
   }, [heroPhotos.length]);
 
   const photo = heroPhotos[heroIndex];
+  const nextPhoto = heroPhotos[(heroIndex + 1) % heroPhotos.length];
   return (
     <div className="relative w-full aspect-video xl:aspect-5/2 select-none">
       <Image
@@ -33,6 +34,13 @@ const HeroImage = () => {
         fill
         priority
         className="object-cover"
+      />
+      <Image
+        src={nextPhoto.src}
+        alt=""
+        fill
+        className="object-cover absolute opacity-0"
+        priority={false}
       />
 
       <div className="arrows absolute text-white flex justify-between w-full font-bold top-[35%]">
