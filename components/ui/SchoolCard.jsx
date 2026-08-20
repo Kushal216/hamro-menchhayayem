@@ -1,3 +1,4 @@
+'use client';
 import Image from 'next/image';
 import Like from '@/components/sections/Like';
 import { FaLocationDot } from 'react-icons/fa6';
