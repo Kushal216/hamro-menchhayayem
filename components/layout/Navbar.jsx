@@ -12,32 +12,24 @@ function Navbar({ isMenuOpen, showMenu, closeMenu, toggleMenu }) {
   return (
     <div className="">
       <div className=" bg-[#018378] p-5 flex items-center justify-between h-17">
-        <div className="flex items-center gap-2">
-          <Link
-            href="/"
-            className="relative flex justify-between items-center gap-2"
-          >
-            <div className="relative w-fit h-fit aspect-square">
-              <Image
-                src={logo}
-                alt="Menchhayayem Logo"
-                width={44}
-                className="rounded-full object-contain"
-                sizes="64px"
-                priority
-              />
-            </div>
-          </Link>
-
-          <Link
-            href="/"
-            className="relative flex justify-between items-center gap-2"
-          >
-            <div className="text-xl md:text-3xl font-bold text-white">
-              हाम्रो मेन्छ्यायेम
-            </div>
-          </Link>
-        </div>
+        <Link
+          href="/"
+          className="flex items-center gap-2"
+        >
+          <div className="relative w-fit h-fit aspect-square">
+            <Image
+              src={logo}
+              alt="Menchhayayem Logo"
+              width={44}
+              className="rounded-full object-contain"
+              sizes="64px"
+              priority
+            />
+          </div>
+          <div className="text-xl md:text-3xl font-bold text-white">
+            हाम्रो मेन्छ्यायेम
+          </div>
+        </Link>
 
         <div className="flex gap-5 items-center justify-between">
           <div className="text-white text-sm md:text-xl text-right">
