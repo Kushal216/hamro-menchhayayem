@@ -19,7 +19,7 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en" className="scrollbar-hidden">
+    <html lang="ne" className="scrollbar-hidden">
       <body
         className={`${notoDevanagari.variable} font-devanagari antialiased`}
       >

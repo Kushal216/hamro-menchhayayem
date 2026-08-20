@@ -108,7 +108,7 @@ export default function LiteratureForm({ patch = false, item }) {
   return (
     <>
       <h1 className="text-3xl font-bold text-blue-600 text-center mb-4">
-        Add Literature
+        {patch ? 'Update' : 'Add'} Literature
       </h1>
 
       <form onSubmit={handleSubmit} className="space-y-5 p-4">

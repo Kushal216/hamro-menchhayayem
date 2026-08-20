@@ -23,10 +23,10 @@ export async function generateMetadata({ params }) {
     openGraph: {
       title: 'हाम्रो मेन्छयायेम',
       type: 'article',
-      url: `https://hamromenchhayayem.vercel.app`,
+      url: process.env.NEXT_PUBLIC_SITE_URL || 'https://hamromenchhayayem.vercel.app',
       images: [
         {
-          url: 'https://hamromenchhayayem.vercel.app/images/og-image.webp',
+          url: `${process.env.NEXT_PUBLIC_SITE_URL || 'https://hamromenchhayayem.vercel.app'}/images/og-image.webp`,
           width: 1200,
           height: 630,
           alt: 'हाम्रो मेन्छयायेम',

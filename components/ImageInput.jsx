@@ -33,6 +33,11 @@ const ImageInput = ({ value, setValue, setUploading, multiple }) => {
     const urls = [];
 
     for (const file of files) {
+      if (file.size > MAX_SIZE_MB * 1024 * 1024) {
+        toast.error(`File "${file.name}" is too large. Max size is ${MAX_SIZE_MB} MB.`);
+        continue;
+      }
+
       const formData = new FormData();
       formData.append('image', file);
 

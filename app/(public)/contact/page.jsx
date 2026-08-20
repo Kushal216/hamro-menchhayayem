@@ -1,4 +1,3 @@
-'use client';
 import React from 'react';
 
 export default function ContactsPage() {
@@ -223,7 +222,7 @@ export default function ContactsPage() {
     institute: 'श्री नवज्योति बालविकास केन्द्र',
     contact_person: 'खिनमाया तामाङ',
     contact_no: '9762720887',
-  },,
+  },
   ];
 
   const renderTable = (title, data) => (
@@ -251,7 +250,7 @@ export default function ContactsPage() {
               </td>
               <td className="px-4 py-3 border-b border-gray-200">
                 <a
-                  href={`tel:+977-${item.contact_no}`}
+                  href={`tel:+977${item.contact_no.replace(/-/g, '')}`}
                   className="text-purple-600 hover:underline"
                 >
                   {item.contact_no}

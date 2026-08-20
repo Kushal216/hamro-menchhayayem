@@ -12,7 +12,7 @@ export const metadata = {
   title: 'Admin - हाम्रो मेन्छ्यायेम',
   description: 'This is the Admin of Hamro Menchhayayem Website.',
   icons: {
-    icon: '/images/logo.png',
+    icon: '/images/logo.webp',
   },
 };
 

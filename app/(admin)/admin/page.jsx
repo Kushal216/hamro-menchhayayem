@@ -63,9 +63,7 @@ export default async function AdminPage() {
                 <Link
                   href={`admin/${item.route}`}
                   key={index}
-                  className={`cursor-pointer p-6 rounded-xl shadow transition ${
-                    false ? 'bg-blue-100 shadow-lg' : 'bg-white hover:shadow-lg'
-                  }`}
+                  className={`cursor-pointer p-6 rounded-xl shadow transition bg-white hover:shadow-lg`}
                 >
                   <h2 className="text-xl font-semibold">{item.title}</h2>
                   <p className="text-gray-500">Manage {item.title}</p>

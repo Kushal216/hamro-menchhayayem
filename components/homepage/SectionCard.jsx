@@ -51,7 +51,7 @@ const SectionCard = ({ item }) => {
       <Image
         sizes="(max-width: 768px) 100vw, 50vw"
         src={item.imageUrl}
-        alt="item.title"
+        alt={item.title}
         className={`object-cover`}
         fill
       />

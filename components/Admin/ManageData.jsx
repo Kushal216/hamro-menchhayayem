@@ -15,4 +15,3 @@ const ManageData = async ({ route }) => {
 };
 
 export default ManageData;
-export const dynamic = 'force-dynamic';

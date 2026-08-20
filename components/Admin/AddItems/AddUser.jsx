@@ -5,7 +5,7 @@ import toast from 'react-hot-toast';
 import Input from '../Input';
 import createLog from '@/lib/createLog';
 
-export default function UserForm({ onSubmit }) {
+export default function UserForm() {
   const [name, setName] = useState('');
   const [role, setRole] = useState('contributor');
   const [_id, setId] = useState('');

@@ -177,6 +177,7 @@ export default function CultureForm({ patch = false, item }) {
             onChange={(e) => setCaste(e.target.value)}
             className="bg-blue-500/10 w-full p-2 rounded"
           >
+            <option value="all">All</option>
             <option value="brahmin">Brahmin</option>
             <option value="chhetri">Chhetri</option>
             <option value="kirant">Kirant</option>

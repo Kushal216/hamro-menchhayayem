@@ -1,9 +1,9 @@
 'use client';
 import React, { useState } from 'react';
 import { FaRegHeart, FaHeart } from 'react-icons/fa';
-function Like(LikeCount) {
+function Like({ totalLikes }) {
   const [like, setLike] = useState(false);
-  const [count, setCount] = useState(LikeCount.totalLikes);
+  const [count, setCount] = useState(totalLikes);
   function handleLike() {
     setLike(!like);
     setCount(count + 1);
