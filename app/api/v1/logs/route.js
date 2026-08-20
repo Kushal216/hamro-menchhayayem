@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
 import Logs from '@/models/logs';
 import jwt from 'jsonwebtoken';
+import isLoggedIn from '@/lib/middlewares/validateAuth';
 
 /**
  * @swagger
@@ -15,6 +16,13 @@ import jwt from 'jsonwebtoken';
  *       - logs
  */
 export async function GET(req) {
+  if (!isLoggedIn(req)) {
+    return NextResponse.json(
+      { message: 'Unauthorized: you need to be logged in.' },
+      { status: 401 }
+    );
+  }
+
   try {
     const logs = await Logs.find({}).lean();
 

@@ -6,7 +6,7 @@ import ImageInput from '@/components/ImageInput';
 import Input from '../Input';
 import toast from 'react-hot-toast';
 import { useRouter } from 'next/navigation';
-import { createLog } from '@/app/(admin)/admin/logs/page';
+import createLog from '@/lib/createLog';
 
 export default function CultureForm({ patch = false, item }) {
   const router = useRouter();

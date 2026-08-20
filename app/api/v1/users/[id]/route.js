@@ -39,19 +39,18 @@ export async function GET(req, { params }) {
 export async function PATCH(req, { params }) {
   if (!isAdmin(req)) {
     return NextResponse.json(
-      { message: 'Permission Error: Only admins can delete items.' },
+      { message: 'Permission Error: Only admins can update users.' },
       { status: 401 }
     );
   }
 
   const { id } = await params;
   const body = await req.json();
-  const saltValue = parseInt(process.env.SALT_ROUNDS);
+  const saltValue = parseInt(process.env.SALT_ROUNDS) || 10;
   try {
     let updatedbody = { ...body };
     if (body.password) {
       updatedbody.password = await bcrypt.hash(body.password, saltValue);
-      delete updatedbody.password;
     }
 
     const updated = await User.findByIdAndUpdate(
@@ -84,14 +83,14 @@ export async function PATCH(req, { params }) {
 export async function PUT(req, { params }) {
   if (!isAdmin(req)) {
     return NextResponse.json(
-      { message: 'Permission Error: Only admins can delete items.' },
+      { message: 'Permission Error: Only admins can replace users.' },
       { status: 401 }
     );
   }
 
   const { id } = await params;
   const body = await req.json();
-  const saltValue = parseInt(process.env.SALT_ROUNDS);
+  const saltValue = parseInt(process.env.SALT_ROUNDS) || 10;
 
   try {
     const user = await User.findById(id).lean();

@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import toast from 'react-hot-toast';
 import Input from '../Input';
-import { createLog } from '@/app/(admin)/admin/logs/page';
+import createLog from '@/lib/createLog';
 
 export default function UserForm({ onSubmit }) {
   const [name, setName] = useState('');

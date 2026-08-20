@@ -5,7 +5,7 @@ import toast from 'react-hot-toast';
 import Input from '../Input';
 import ImageInput from '@/components/ImageInput';
 import { useRouter } from 'next/navigation';
-import { createLog } from '@/app/(admin)/admin/logs/page';
+import createLog from '@/lib/createLog';
 
 export default function PeopleForm({ patch = false, item }) {
   const [name, setName] = useState('');
