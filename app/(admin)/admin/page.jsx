@@ -3,43 +3,43 @@ import { logout } from '@/lib/logout';
 import validateJWT from '@/lib/middlewares/validataJWT';
 import { cookies } from 'next/headers';
 import Link from 'next/link';
-const sections = [
-  {
-    title: 'Manage Places',
-    addLabel: 'Add Place',
-    route: 'places',
-  },
-  {
-    title: 'Manage Cultures',
-    addLabel: 'Add Culture',
-    route: 'cultures',
-  },
-  {
-    title: 'Manage Schools',
-    addLabel: 'Add School',
-    route: 'schools',
-  },
-  {
-    title: 'Manage People',
-    addLabel: 'Add Person',
-    route: 'people',
-  },
-  {
-    title: 'Manage Literature',
-    addLabel: 'Add Literature',
-    route: 'literature',
-  },
-];
+
 export default async function AdminPage() {
   const cookie = await cookies();
   const token = cookie.get('token')?.value;
 
-  if (token) {
-    console.log('token exists and now can be validated');
-    const tokenPayload = validateJWT(token);
-    console.log(tokenPayload);
+  const sections = [
+    {
+      title: 'Manage Places',
+      addLabel: 'Add Place',
+      route: 'places',
+    },
+    {
+      title: 'Manage Cultures',
+      addLabel: 'Add Culture',
+      route: 'cultures',
+    },
+    {
+      title: 'Manage Schools',
+      addLabel: 'Add School',
+      route: 'schools',
+    },
+    {
+      title: 'Manage People',
+      addLabel: 'Add Person',
+      route: 'people',
+    },
+    {
+      title: 'Manage Literature',
+      addLabel: 'Add Literature',
+      route: 'literature',
+    },
+  ];
 
-    if (sections.length == 5 && tokenPayload.role == 'admin')
+  if (token) {
+    const tokenPayload = validateJWT(token);
+
+    if (tokenPayload.role == 'admin')
       sections.push(
         {
           title: 'Manage Users',
