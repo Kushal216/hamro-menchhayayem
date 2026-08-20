@@ -3,8 +3,9 @@ import HomeHeading from '@/components/homepage/HomeHeading';
 import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { useContext, useState } from 'react';
+import { useState } from 'react';
 import { BsPlayBtnFill } from 'react-icons/bs';
+import { HiArrowRight } from 'react-icons/hi';
 import YoutubeIframe from './YoutubeIframe';
 
 export default function CoverImage({ title, coverImage, route, video }) {
@@ -50,7 +51,9 @@ export default function CoverImage({ title, coverImage, route, video }) {
         <div
           className="text-blue-800 hover:underline active:text-red-500 text-right text-sm lg:text-lg xl:text-xl  md:w-full md:mr-4 pl-2 block pt-1"
         >
-          <Link href={`${route}/gallery`}>अन्य तस्बिरहरु &gt;&gt;</Link>
+          <Link href={`${route}/gallery`} className="inline-flex items-center gap-1">
+            अन्य तस्बिरहरु <HiArrowRight className="inline" />
+          </Link>
         </div>
       )}
     </div>
