@@ -4,8 +4,15 @@ import fetchData from '@/lib/fetchItem';
 
 export default async function CulturesPage() {
   const res = await fetchData('cultures');
-  const { message, data } = res;
-  console.log(message);
+  if (!res) {
+    return (
+      <>
+        <RouteTitle title={'हाम्रा संस्कृितीक पहिचानहरु'} />
+        <div className="text-center py-10">Failed to load cultures.</div>
+      </>
+    );
+  }
+  const { data } = res;
 
   return (
     <>
