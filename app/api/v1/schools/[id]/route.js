@@ -26,7 +26,7 @@ import isLoggedIn, { isAdmin } from '@/lib/middlewares/validateAuth';
 export async function GET(req, { params }) {
   const { id } = await params;
   try {
-    const school = await School.findById(id).select('-__v');
+    const school = await School.findById(id).select('-__v').lean();
 
     if (!school) {
       return NextResponse.json({ error: 'Not found' }, { status: 404 });
@@ -55,7 +55,7 @@ export async function PUT(req, { params }) {
   const { id } = await params;
   const body = await req.json();
   try {
-    const school = await School.findById(id);
+    const school = await School.findById(id).lean();
     if (!school) {
       return NextResponse.json({ error: 'Not Found' }, { status: 404 });
     }

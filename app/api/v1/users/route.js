@@ -13,7 +13,7 @@ import { isAdmin } from '@/lib/middlewares/validateAuth';
  *     description: Returns a list of all users
  */
 export async function GET(req) {
-  const users = await User.find({});
+  const users = await User.find({}).lean();
   return NextResponse.json({ message: 'users fetched', data: users });
 }
 

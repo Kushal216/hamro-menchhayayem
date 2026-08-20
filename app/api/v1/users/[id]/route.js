@@ -15,12 +15,13 @@ export async function GET(req, { params }) {
   const { id } = await params;
 
   try {
-    const user = await User.findById(id);
+    const user = await User.findById(id).lean();
 
     if (!user) {
       return NextResponse.json({ error: 'Not found' }, { status: 404 });
     }
 
+    delete user.password;
     return NextResponse.json({ data: user });
   } catch (err) {
     return NextResponse.json({ error: err.message }, { status: 500 });
@@ -93,7 +94,7 @@ export async function PUT(req, { params }) {
   const saltValue = parseInt(process.env.SALT_ROUNDS);
 
   try {
-    const user = await User.findById(id);
+    const user = await User.findById(id).lean();
     const hashedPassword = await bcrypt.hash(body.password, saltValue);
 
     if (!user) {

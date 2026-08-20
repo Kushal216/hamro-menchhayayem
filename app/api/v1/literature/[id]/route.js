@@ -26,7 +26,7 @@ import isLoggedIn, { isAdmin } from '@/lib/middlewares/validateAuth';
 export async function GET(req, { params }) {
   const { id } = await params;
   try {
-    const literature = await Literature.findById(id).select('-__v');
+    const literature = await Literature.findById(id).select('-__v').lean();
 
     if (!literature) {
       return NextResponse.json({ error: 'Not found' }, { status: 404 });
@@ -86,7 +86,7 @@ export async function PUT(req, { params }) {
   const { id } = await params;
 
   try {
-    const literature = await Literature.findById(id);
+    const literature = await Literature.findById(id).lean();
 
     if (!literature) {
       return NextResponse.json(

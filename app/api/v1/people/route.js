@@ -17,7 +17,7 @@ import isLoggedIn from '@/lib/middlewares/validateAuth';
 
 export async function GET(req) {
   try {
-    const people = await People.find({}).select('name photo phone position contact email _id');
+    const people = await People.find({}).select('name photo phone position contact email _id').lean();
 
     return NextResponse.json({
       message: 'Peoples fetched successfully',
