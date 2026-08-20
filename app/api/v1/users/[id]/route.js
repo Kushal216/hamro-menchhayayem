@@ -49,7 +49,7 @@ export async function PATCH(req, { params }) {
   try {
     let updatedbody = { ...body };
     if (body.password) {
-      updatedbody.hashedPassword = await bcrypt.hash(body.password, saltValue);
+      updatedbody.password = await bcrypt.hash(body.password, saltValue);
       delete updatedbody.password;
     }
 
@@ -108,7 +108,7 @@ export async function PUT(req, { params }) {
       {
         name: body.name,
         email: body.email,
-        hashedPassword: hashedPassword,
+        password: hashedPassword,
         role: body.role ?? 'contributer',
       }
     );
