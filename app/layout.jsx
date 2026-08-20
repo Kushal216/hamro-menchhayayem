@@ -2,7 +2,6 @@ import "./globals.css";
 import RootLayoutBody from "@/components/layout/RootLayoutBody";
 import Footer from "@/components/layout/Footer";
 import { Noto_Sans_Devanagari } from "next/font/google";
-import ToasterContainer from "@/components/ToasterContainer";
 import { Analytics } from "@vercel/analytics/next";
 const notoDevanagari = Noto_Sans_Devanagari({
   subsets: ["devanagari", "latin"],
@@ -26,7 +25,6 @@ export default function RootLayout({ children }) {
       >
         <RootLayoutBody>{children}</RootLayoutBody>
         <Analytics />
-        <ToasterContainer />
         <footer className="w-full">
           <Footer />
         </footer>
