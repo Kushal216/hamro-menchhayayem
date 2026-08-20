@@ -1,45 +1,45 @@
 import { NextResponse } from 'next/server';
-import Culture from '@/models/culture';
+import Logs from '@/models/logs';
 import isLoggedIn, { isAdmin } from '@/lib/middlewares/validateAuth';
 
 /**
  * @swagger
- * /api/v1/cultures/{id}:
+ * /api/v1/logs/{id}:
  *   get:
- *     summary: get a item of given id
+ *     summary: get a log entry of given id
  *     tags:
- *       - cultures
+ *       - logs
  *   put:
- *     summary: Replace the data associated to the item with given id
+ *     summary: Replace the data associated to the log with given id
  *     tags:
- *       - cultures
+ *       - logs
  *   delete:
- *     summary: delete item of given id
+ *     summary: delete log of given id
  *     tags:
- *       - cultures
+ *       - logs
  *   patch:
- *     summary: updates specified properties in the req.body corresponding to the given id
+ *     summary: updates specified properties in the req.body corresponding to the given log id
  *     tags:
- *       - cultures
+ *       - logs
  */
 
 export async function GET(req, { params }) {
   const { id } = await params;
   try {
-    const culture = await Culture.findById(id);
+    const log = await Logs.findById(id);
 
-    if (!culture) {
+    if (!log) {
       return NextResponse.json({ message: 'item Not found' }, { status: 404 });
     }
 
     return NextResponse.json({
       message: 'item found and returned',
-      data: culture,
+      data: log,
     });
   } catch (err) {
     return NextResponse.json({
       error: err.message,
-      message: `DB error in performing the create culture action. `,
+      message: `DB error in performing the create log action. `,
       err: err,
     });
   }
@@ -57,7 +57,7 @@ export async function PATCH(req, { params }) {
   const body = await req.json();
 
   try {
-    const updated = await Culture.findByIdAndUpdate(
+    const updated = await Logs.findByIdAndUpdate(
       id,
       { $set: body }, // only update provided fields
       { new: true, runValidators: true }
@@ -68,13 +68,13 @@ export async function PATCH(req, { params }) {
     }
 
     return NextResponse.json({
-      message: `Updated culture ${updated.title}`,
+      message: `Updated log ${updated._id}`,
       data: updated,
     });
   } catch (err) {
     return NextResponse.json({
       error: err.message,
-      message: `DB error in performing the create culture action. `,
+      message: `DB error in performing the create log action. `,
       err: err,
     });
   }
@@ -93,36 +93,34 @@ export async function PUT(req, { params }) {
   const { id } = await params;
 
   try {
-    const culture = await Culture.findById(id);
+    const log = await Logs.findById(id);
 
-    if (!culture) {
+    if (!log) {
       return NextResponse.json(
-        { message: "The culture id doesn't exist." },
+        { message: "The log id doesn't exist." },
         { status: 404 }
       );
     }
 
-    const dbResponse = await Culture.replaceOne(
+    const dbResponse = await Logs.replaceOne(
       { _id: id },
       {
-        title: body.title,
-        description: body.description,
-        gallery: body.gallery,
-        video: body.video,
-        coverImage: body.coverImage,
-        category: body.category,
+        user: body.user,
+        activity: body.activity,
+        item: body.item,
+        remarks: body.remarks,
       }
     );
 
     return NextResponse.json({
-      message: `replaced culture ${body.title} with ${body.title}`,
+      message: `replaced log`,
       id: id,
       data: dbResponse,
     });
   } catch (err) {
       return NextResponse.json({
         error: err.message,
-        message: `DB error in performing the create culture action. `,
+        message: `DB error in performing the create log action. `,
         err: err,
       });
     }
@@ -139,17 +137,17 @@ export async function DELETE(req, { params }) {
   const { id } = await params;
 
   try {
-    const culture = await Culture.findByIdAndDelete(id);
+    const log = await Logs.findByIdAndDelete(id);
 
-    if (culture) {
+    if (log) {
       return NextResponse.json({
-        message: `deleted ${culture.title}`,
-        data: culture,
+        message: `deleted log ${log._id}`,
+        data: log,
       });
     } else {
       return NextResponse.json(
         {
-          message: "The culture with the given id doesn't exist.",
+          message: "The log with the given id doesn't exist.",
           id: id,
         },
         { status: 404 }
@@ -158,7 +156,7 @@ export async function DELETE(req, { params }) {
   } catch (err) {
     return NextResponse.json({
       error: err.message,
-      message: `DB error in performing the create culture action. `,
+      message: `DB error in performing the create log action. `,
       err: err,
     });
   }
