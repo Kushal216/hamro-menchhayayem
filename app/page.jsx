@@ -5,7 +5,7 @@ import ToastTrigger from '@/components/ToastTrigger';
 
 export default function HomePage() {
   return (
-    <div className="flex flex-col min-h-full pt-1">
+    <div className="flex flex-col min-h-full pt-4">
       <HeroImage />
       <HomeHeading title={'हाम्रो विशेषता'} color={'red'} />
       <ImportantPlacesSection />
