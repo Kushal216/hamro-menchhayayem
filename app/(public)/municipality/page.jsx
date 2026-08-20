@@ -6,7 +6,7 @@ import fetchData from '@/lib/fetchItem';
 import MarkdownViewer from '@/components/layout/MarkdownViewer';
 export default async function HomePage() {
   const res = await fetchData('people');
-  const data = res.data;
+  const data = res?.data || [];
 
   const introduction = `
 
