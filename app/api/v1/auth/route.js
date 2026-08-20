@@ -34,7 +34,6 @@ export async function POST(req) {
     const matches = await bcrypt.compare(password, user.password);
 
     if (matches) {
-      console.log('user ', user);
       const token = jwt.sign(
         {
           name: user.name,
@@ -68,12 +67,9 @@ export async function POST(req) {
       { status: 401 }
     );
   } catch (err) {
-    console.log(`ERROR: in authenticating user:\n${err}`);
+    console.error(`ERROR: in authenticating user:\n${err}`);
     return NextResponse.json(
-      {
-        message: `DB error in performing the action. `,
-        err: err,
-      },
+      { message: 'Authentication failed' },
       { status: 500 }
     );
   }
