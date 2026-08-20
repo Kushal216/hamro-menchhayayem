@@ -14,10 +14,19 @@ export default async function CulturesPage() {
   }
   const { data } = res;
 
+  if (!data || data.length === 0) {
+    return (
+      <>
+        <RouteTitle title={'हाम्रा संस्कृितीक पहिचानहरु'} />
+        <div className="text-center py-10 text-gray-500">अहिले कुनै संस्कृति डेटा छैन।</div>
+      </>
+    );
+  }
+
   return (
     <>
       <RouteTitle title={'हाम्रा संस्कृितीक पहिचानहरु'} />
-      <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4">
+      <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-4">
         {data.map((item, index) => (
           <CultureCard
             key={item._id}
