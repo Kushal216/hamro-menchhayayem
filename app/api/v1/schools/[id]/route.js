@@ -26,7 +26,7 @@ import isLoggedIn, { isAdmin } from '@/lib/middlewares/validateAuth';
 export async function GET(req, { params }) {
   const { id } = await params;
   try {
-    const school = await School.findById(id);
+    const school = await School.findById(id).select('-__v');
 
     if (!school) {
       return NextResponse.json({ error: 'Not found' }, { status: 404 });

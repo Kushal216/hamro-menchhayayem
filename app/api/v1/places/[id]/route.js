@@ -26,7 +26,7 @@ import Places from '@/models/places';
 export async function GET(req, { params }) {
   const { id } = await params;
   try {
-    const place = await Places.findById(id);
+    const place = await Places.findById(id).select('-__v');
 
     if (!place) {
       return NextResponse.json({ message: 'Not found' }, { status: 404 });
