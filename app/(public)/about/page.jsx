@@ -1,7 +1,9 @@
 import Titlebar from "@/components/ui/Titlebar";
 import OurCard from "@/components/ui/OurCard";
 import data from "@/app/Data/OurTeam";
-import { MarkdownViewer } from "@/components/layout/ItemDetails";
+import dynamic from 'next/dynamic';
+
+const MarkdownViewer = dynamic(() => import('@/components/layout/MarkdownViewer'), { ssr: false });
 
 export default function HomePage() {
   const content = `डिजिटल प्रविधिले संसारलाई नजिक ल्याइरहेको वर्तमान समयमा, स्थानीय तहको पहिचान, सम्भावना र वास्तविक कथालाई विश्वसमक्ष प्रस्तुत गर्नु समयको आवश्यकता बनेको छ। यही आवश्यकतालाई आत्मसात गर्दै, हामी दुई जना स्नातक तहमा अध्ययनरत विद्यार्थीको संयुक्त पहलमा **मेन्छ्यायेम गाउँपालिका**लाई डिजिटल माध्यममार्फत चिनाउने उद्देश्यसहित यो वेबसाइट निर्माण गरिएको हो।
