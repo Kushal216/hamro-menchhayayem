@@ -15,13 +15,13 @@ const GalleryPage = async ({ route, id }) => {
     <>
       <BackButton gallery />
 
-      <div className="flex flex-wrap m-2 gap-2">
+      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-2 p-2">
         <Link
           href={cover}
           target="_blank"
           rel="noopener noreferrer"
           key="cover"
-          className="hover:shadow-lg hover:scale-105 hover:-translate-y-1 aspect-square w-40 relative col-span-1"
+          className="hover:shadow-lg hover:scale-105 hover:-translate-y-1 aspect-square relative"
         >
           <Image
             src={cover}
@@ -37,7 +37,7 @@ const GalleryPage = async ({ route, id }) => {
             target="_blank"
             rel="noopener noreferrer"
             key={index}
-            className="hover:shadow-lg hover:scale-105 hover:-translate-y-1 aspect-square w-40 relative"
+            className="hover:shadow-lg hover:scale-105 hover:-translate-y-1 aspect-square relative"
           >
             <Image
               src={url || '/images/fallback-image.jpg'}
@@ -48,6 +48,10 @@ const GalleryPage = async ({ route, id }) => {
           </Link>
         ))}
       </div>
+
+      {(!gallery || gallery.length === 0) && (
+        <div className="text-center py-10 text-gray-500">अहिले ग्यालरीमा कुनै तस्बिर छैन।</div>
+      )}
     </>
   );
 };
