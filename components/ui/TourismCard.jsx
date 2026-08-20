@@ -1,4 +1,3 @@
-"use client";
 import Image from "next/image";
 import { FaMapMarkerAlt } from "react-icons/fa";
 import Like from "@/components/sections/Like";
