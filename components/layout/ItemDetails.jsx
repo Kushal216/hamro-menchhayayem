@@ -1,9 +1,7 @@
 import BackButton from './BackButton';
 import { fetchItem } from '@/lib/fetchItem';
 import CoverImage from './CoverImage';
-import dynamic from 'next/dynamic';
-
-const MarkdownViewer = dynamic(() => import('./MarkdownViewer'), { ssr: false });
+import MarkdownViewer from './MarkdownViewer';
 
 export default async function ItemDetails({ route, id }) {
   let content = 'पर्खनुहोस ...';

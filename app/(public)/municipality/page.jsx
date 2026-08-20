@@ -3,9 +3,7 @@ import RouteTitle from '@/components/layout/RouteTitle';
 import Audio from '@/components/ui/Audio';
 import OurCard from '@/components/ui/OurCard';
 import fetchData from '@/lib/fetchItem';
-import dynamic from 'next/dynamic';
-
-const MarkdownViewer = dynamic(() => import('@/components/layout/MarkdownViewer'), { ssr: false });
+import MarkdownViewer from '@/components/layout/MarkdownViewer';
 export default async function HomePage() {
   const res = await fetchData('people');
   const data = res.data;
