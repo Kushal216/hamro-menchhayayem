@@ -45,9 +45,6 @@ function Navbar({ isMenuOpen, showMenu, closeMenu, toggleMenu }) {
             <div>{weekday}</div>
           </div>
 
-          <div className="bg-white text-sm shadow my-auto rounded-md font-bold w-fit h-fit p-1 hidden lg:block">
-            en
-          </div>
           <MobileMenuButton
             isOpen={isMenuOpen}
             showMenu={showMenu}
