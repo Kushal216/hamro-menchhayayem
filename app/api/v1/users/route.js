@@ -47,7 +47,7 @@ export async function POST(req) {
 
     return NextResponse.json(
       {
-        message: `created User ${user.main}.`,
+        message: `created User ${user.name}.`,
         user: user,
       },
       {
