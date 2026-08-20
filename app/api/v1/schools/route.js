@@ -16,12 +16,19 @@ import isLoggedIn from '@/lib/middlewares/validateAuth';
  */
 
 export async function GET(req) {
-  const schools = await Schools.find({});
+  try {
+    const schools = await Schools.find({});
 
-  return Response.json({
-    message: 'GET all lists school',
-    data: schools,
-  });
+    return NextResponse.json({
+      message: 'GET all lists school',
+      data: schools,
+    });
+  } catch (err) {
+    return NextResponse.json(
+      { error: 'Failed to fetch schools' },
+      { status: 500 }
+    );
+  }
 }
 
 export async function POST(req) {
@@ -49,11 +56,10 @@ export async function POST(req) {
     });
     id = newSchool._id;
   } catch (err) {
-    return NextResponse.json({
-      error: err.message,
-      message: `DB error in performing the create culture action. `,
-      err: err,
-    });
+    return NextResponse.json(
+      { error: 'Failed to create school' },
+      { status: 400 }
+    );
   }
   return NextResponse.json(
     {

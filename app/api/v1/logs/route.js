@@ -4,29 +4,35 @@ import jwt from 'jsonwebtoken';
 
 /**
  * @swagger
- * /api/v1/cultures:
+ * /api/v1/logs:
  *   get:
- *     summary: Returns all cultures
+ *     summary: Returns all logs
  *     tags:
- *       - cultures
+ *       - logs
  *   post:
- *     summary: Add a culture
+ *     summary: Add a log entry
  *     tags:
- *       - cultures
+ *       - logs
  */
 export async function GET(req) {
-  const cultures = await Logs.find({});
+  try {
+    const logs = await Logs.find({});
 
-  return NextResponse.json({
-    message: 'GET list of logs',
-    data: cultures,
-  });
+    return NextResponse.json({
+      message: 'GET list of logs',
+      data: logs,
+    });
+  } catch (err) {
+    return NextResponse.json(
+      { error: 'Failed to fetch logs' },
+      { status: 500 }
+    );
+  }
 }
 
 export async function POST(req) {
   const body = await req.json();
 
-  const token = req.cookies.get('token')?.value;
   let user;
   try {
     const token = req.cookies.get('token')?.value;
@@ -39,8 +45,6 @@ export async function POST(req) {
       { status: 401 }
     );
   }
-  // const user = isLoggedIn(req);
-  // console.log(user);
   if (!user) {
     return NextResponse.json(
       { message: 'you need to be logged in to perform this request.' },
@@ -54,7 +58,6 @@ export async function POST(req) {
     name: user.name,
     email: user.email,
   };
-  // console.log(body);
 
   try {
     const log = await Logs.create(body);
@@ -67,13 +70,9 @@ export async function POST(req) {
       { status: 201 }
     );
   } catch (err) {
-    console.log("ERROR:",err)
+    console.error("ERROR:", err)
     return NextResponse.json(
-      {
-        error: err.message,
-        message: `DB error in performing the create culture action. `,
-        err: err,
-      },
+      { error: 'Failed to create log entry' },
       { status: 400 }
     );
   }

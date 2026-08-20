@@ -15,12 +15,19 @@ import isLoggedIn, { isAdmin } from '@/lib/middlewares/validateAuth';
  *       - cultures
  */
 export async function GET(req) {
-  const cultures = await Culture.find({});
+  try {
+    const cultures = await Culture.find({});
 
-  return NextResponse.json({
-    message: 'GET list of cultures',
-    data: cultures,
-  });
+    return NextResponse.json({
+      message: 'GET list of cultures',
+      data: cultures,
+    });
+  } catch (err) {
+    return NextResponse.json(
+      { error: 'Failed to fetch cultures' },
+      { status: 500 }
+    );
+  }
 }
 
 export async function POST(req) {
@@ -45,11 +52,10 @@ export async function POST(req) {
 
     id = newCulture._id;
   } catch (err) {
-    return NextResponse.json({
-      error: err.message,
-      message: `DB error in performing the create culture action. `,
-      err: err,
-    });
+    return NextResponse.json(
+      { error: 'Failed to create culture' },
+      { status: 400 }
+    );
   }
 
   return NextResponse.json(
