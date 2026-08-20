@@ -24,7 +24,7 @@ export default function TourismCard({
               alt={title}
               fill
               className="rounded-xl object-cover"
-              priority
+              sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
             />
           </div>
 
