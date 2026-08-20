@@ -1,5 +1,3 @@
-'use client';
-import React from 'react';
 import Image from 'next/image';
 import { BiSolidCommentDots } from 'react-icons/bi';
 import Like from '@/components/sections/Like';
