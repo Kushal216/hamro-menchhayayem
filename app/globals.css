@@ -1,5 +1,17 @@
 @import "tailwindcss";
-body {    background-color:#FAFAFF ;}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: #FAFAFF;
+}
+
+:focus-visible {
+  outline: 2px solid #FF3B00;
+  outline-offset: 2px;
+}
 .scrollbar-hidden::-webkit-scrollbar { width: 0; height: 0; }
 .scrollbar-hidden { -ms-overflow-style: none; scrollbar-width: none; }
 
