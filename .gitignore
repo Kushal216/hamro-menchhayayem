@@ -44,8 +44,10 @@ yarn-error.log*
 next-env.d.ts
 
 #scripts
-./lib/scripts/
+lib/scripts/
 
+# build artifacts
+**/dist/
 
 #issues file
 issues/
