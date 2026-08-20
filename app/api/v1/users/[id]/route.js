@@ -109,7 +109,7 @@ export async function PUT(req, { params }) {
         name: body.name,
         email: body.email,
         password: hashedPassword,
-        role: body.role ?? 'contributer',
+        role: body.role ?? 'contributor',
       }
     );
 

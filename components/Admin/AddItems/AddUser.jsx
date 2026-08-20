@@ -7,7 +7,7 @@ import { createLog } from '@/app/(admin)/admin/logs/page';
 
 export default function UserForm({ onSubmit }) {
   const [name, setName] = useState('');
-  const [role, setRole] = useState('contributer');
+  const [role, setRole] = useState('contributor');
   const [_id, setId] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -39,7 +39,7 @@ export default function UserForm({ onSubmit }) {
        createLog('create','user', data._id);
 
       setName('');
-      setRole('contributer');
+      setRole('contributor');
       setId('');
       setEmail('');
       setPassword('');
@@ -70,7 +70,7 @@ export default function UserForm({ onSubmit }) {
             onChange={(e) => setRole(e.target.value)}
             className="bg-blue-500/10 w-full p-2 rounded"
           >
-            <option value="contributer">Mantri</option>
+            <option value="contributor">Mantri</option>
             <option value="admin">Raja</option>
           </select>
         </label>
