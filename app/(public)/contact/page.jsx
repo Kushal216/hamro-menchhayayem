@@ -228,38 +228,44 @@ export default function ContactsPage() {
   const renderTable = (title, data) => (
     <div className="mb-8 ">
       <h2 className="text-xl font-bold mb-3">{title}</h2>
-      <table className="min-w-full bg-white shadow-sm rounded-lg overflow-hidden">
-        <thead className="bg-gray-100">
-          <tr>
-            <th className="px-4 py-3 text-left">नाम</th>
-            <th className="px-4 py-3 text-left">सम्पर्क व्यक्ति</th>
-            <th className="px-4 py-3 text-left">सम्पर्क नम्बर</th>
-          </tr>
-        </thead>
-        <tbody>
-          {data.map((item, index) => (
-            <tr
-              key={index}
-              className="bg-white hover:bg-gray-100 transition-colors"
-            >
-              <td className="px-4 py-3 border-b border-gray-200">
-                {item.institute}
-              </td>
-              <td className="px-4 py-3 border-b border-gray-200">
-                {item.contact_person}
-              </td>
-              <td className="px-4 py-3 border-b border-gray-200">
-                <a
-                  href={`tel:+977${item.contact_no.replace(/-/g, '')}`}
-                  className="text-purple-600 hover:underline"
-                >
-                  {item.contact_no}
-                </a>
-              </td>
+      <div className="overflow-x-auto">
+        <table className="min-w-full bg-white shadow-sm rounded-lg overflow-hidden">
+          <thead className="bg-gray-100">
+            <tr>
+              <th className="px-4 py-3 text-left">नाम</th>
+              <th className="px-4 py-3 text-left">सम्पर्क व्यक्ति</th>
+              <th className="px-4 py-3 text-left">सम्पर्क नम्बर</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {data.map((item, index) => (
+              <tr
+                key={index}
+                className="bg-white hover:bg-gray-100 transition-colors"
+              >
+                <td className="px-4 py-3 border-b border-gray-200">
+                  {item.institute}
+                </td>
+                <td className="px-4 py-3 border-b border-gray-200">
+                  {item.contact_person}
+                </td>
+                <td className="px-4 py-3 border-b border-gray-200">
+                  {item.contact_no ? (
+                    <a
+                      href={`tel:+977${item.contact_no.replace(/-/g, '').replace(/^0/, '')}`}
+                      className="text-purple-600 hover:underline"
+                    >
+                      {item.contact_no}
+                    </a>
+                  ) : (
+                    <span className="text-gray-400">उपलब्ध छैन</span>
+                  )}
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
     </div>
   );
 
