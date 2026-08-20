@@ -11,7 +11,7 @@ const notoDevanagari = Noto_Sans_Devanagari({
 
 export const metadata = {
   title: "गृहपृष्ठ - हाम्रो मेन्छ्यायेम",
-  description: "This is the homepage of Hamro Menchhayayem Website.",
+  description: "हाम्रो मेन्छ्यायेम — कला, साहित्य, इतिहास, पर्यटकिय स्थलहरु र सम्पुर्ण जानकारी एकै ठाउँमा।",
   icons: {
     icon: "/images/logo.webp",
   },
