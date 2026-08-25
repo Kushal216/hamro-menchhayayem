@@ -3,7 +3,7 @@ import { useRouter } from 'next/navigation';
 import React, { useState } from 'react';
 import toast from 'react-hot-toast';
 import PasswordInput from './PasswordInput';
-import { createLog } from '@/app/(admin)/admin/logs/page';
+import createLog from '@/lib/createLog';
 
 export default function LoginPage() {
   const [email, setEmail] = useState('');

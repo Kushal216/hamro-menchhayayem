@@ -13,10 +13,20 @@ async function TourismPage() {
     );
   }
   const { data } = res;
+
+  if (!data || data.length === 0) {
+    return (
+      <>
+        <RouteTitle title={'हाम्रा पर्यटकिय स्थलहरु'} />
+        <div className="text-center py-10 text-gray-500">अहिले कुनै पर्यटकिय स्थल छैन।</div>
+      </>
+    );
+  }
+
   return (
     <>
       <RouteTitle title={'हाम्रा पर्यटकिय स्थलहरु'} />
-      <div className="flex flex-wrap">
+      <div className="flex flex-wrap gap-2">
         {data.map((item, index) => (
           <TourismCard
             key={index}

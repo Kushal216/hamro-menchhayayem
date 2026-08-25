@@ -1,5 +1,5 @@
 "use client"
-import { createLog } from '@/app/(admin)/admin/logs/page';
+import createLog from '@/lib/createLog';
 import { useRouter } from 'next/navigation';
 import React from 'react';
 

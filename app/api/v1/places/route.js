@@ -51,7 +51,6 @@ export async function POST(req) {
       video: body.video,
       coverImage: body.coverImage,
       category: body.category,
-      subCategory: body.subCategory,
       location: body.location,
     });
 

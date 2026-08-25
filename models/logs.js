@@ -1,7 +1,7 @@
 import mongoose from 'mongoose';
 import { connectMongoDB } from '@/lib/db.js';
 
-const cultureSchema = new mongoose.Schema(
+const logSchema = new mongoose.Schema(
   {
     user: {
       name: { type: String, required: true },
@@ -30,4 +30,4 @@ const cultureSchema = new mongoose.Schema(
 );
 
 export default mongoose.models.Logs ||
-  (await connectMongoDB(), mongoose.model('Logs', cultureSchema));
+  (await connectMongoDB(), mongoose.model('Logs', logSchema));

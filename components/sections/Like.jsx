@@ -1,35 +1,36 @@
 'use client';
 import React, { useState } from 'react';
 import { FaRegHeart, FaHeart } from 'react-icons/fa';
-function Like(LikeCount) {
+
+function Like({ totalLikes }) {
   const [like, setLike] = useState(false);
-  const [count, setCount] = useState(LikeCount.totalLikes);
+  const [count, setCount] = useState(totalLikes);
+
   function handleLike() {
-    setLike(!like);
-    setCount(count + 1);
+    setLike(true);
+    setCount((c) => c + 1);
   }
+
   function handleUnlike() {
-    setLike(!like);
-    setCount(count - 1);
+    setLike(false);
+    setCount((c) => Math.max(0, c - 1));
   }
+
   return (
-    <div className="flex gap-1 cursor-pointer">
+    <button
+      type="button"
+      onClick={like ? handleUnlike : handleLike}
+      aria-label={like ? 'Unlike' : 'Like'}
+      aria-pressed={like}
+      className="flex gap-1 cursor-pointer p-1 min-w-[44px] min-h-[44px] items-center justify-center"
+    >
       {like ? (
-        <FaHeart
-          size={25}
-          onClick={handleUnlike}
-          color="red"
-          className="hover:scale-110 transition z-2"
-        />
+        <FaHeart size={25} color="red" className="hover:scale-110 transition z-2" />
       ) : (
-        <FaRegHeart
-          size={25}
-          onClick={handleLike}
-          className="hover:scale-110 transition z-2"
-        />
+        <FaRegHeart size={25} className="hover:scale-110 transition z-2" />
       )}
       <div className="text-xl">{count}</div>
-    </div>
+    </button>
   );
 }
 

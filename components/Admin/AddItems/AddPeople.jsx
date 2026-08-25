@@ -5,7 +5,7 @@ import toast from 'react-hot-toast';
 import Input from '../Input';
 import ImageInput from '@/components/ImageInput';
 import { useRouter } from 'next/navigation';
-import { createLog } from '@/app/(admin)/admin/logs/page';
+import createLog from '@/lib/createLog';
 
 export default function PeopleForm({ patch = false, item }) {
   const [name, setName] = useState('');
@@ -120,15 +120,14 @@ export default function PeopleForm({ patch = false, item }) {
         </label>
         <Input
           label={'Phone'}
-          placeholder="John Doe"
+          placeholder="98XXXXXXXX"
           value={phone}
           setValue={setPhone}
         />
 
         <Input
           label={'Website'}
-          placeholder="John Doe"
-          value={website}
+          placeholder="https://example.com"
           disabled={patch}
           setValue={setWebsite}
         />
@@ -160,7 +159,7 @@ export default function PeopleForm({ patch = false, item }) {
         <Input
           type="email"
           label={'Email'}
-          placeholder="baula@paagal.com"
+          placeholder="user@example.com"
           value={email}
           disabled={patch}
           setValue={setEmail}
@@ -168,7 +167,7 @@ export default function PeopleForm({ patch = false, item }) {
 
         <Input
           label={'Position'}
-          placeholder="rastrapati"
+          placeholder="e.g. Ward Chairperson"
           value={position}
           setValue={setPosition}
         />

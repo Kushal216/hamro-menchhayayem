@@ -6,7 +6,7 @@ import ImageInput from '@/components/ImageInput';
 import Input from '../Input';
 import toast from 'react-hot-toast';
 import { useRouter } from 'next/navigation';
-import { createLog } from '@/app/(admin)/admin/logs/page';
+import createLog from '@/lib/createLog';
 
 export default function CultureForm({ patch = false, item }) {
   const router = useRouter();
@@ -177,6 +177,7 @@ export default function CultureForm({ patch = false, item }) {
             onChange={(e) => setCaste(e.target.value)}
             className="bg-blue-500/10 w-full p-2 rounded"
           >
+            <option value="all">All</option>
             <option value="brahmin">Brahmin</option>
             <option value="chhetri">Chhetri</option>
             <option value="kirant">Kirant</option>

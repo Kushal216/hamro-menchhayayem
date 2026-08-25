@@ -14,6 +14,15 @@ export default async function LiteraturePage() {
   }
   const { data } = res;
 
+  if (!data || data.length === 0) {
+    return (
+      <>
+        <RouteTitle title={'साहित्यीक सृजनाहरु'} />
+        <div className="text-center py-10 text-gray-500">अहिले कुनै साहित्य छैन।</div>
+      </>
+    );
+  }
+
   return (
     <>
       <RouteTitle title={'साहित्यीक सृजनाहरु'} />

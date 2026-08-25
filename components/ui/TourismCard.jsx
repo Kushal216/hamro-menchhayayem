@@ -1,9 +1,9 @@
+'use client';
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 import { FaMapMarkerAlt } from "react-icons/fa";
 import Like from "@/components/sections/Like";
-import { BiSolidCommentDots } from "react-icons/bi";
 import ShortText from "../sections/ShortText";
-import Link from "next/link";
 
 export default function TourismCard({
   image,
@@ -13,9 +13,16 @@ export default function TourismCard({
   likes,
   location,
 }) {
+  const router = useRouter();
+
+  function handleCardClick(e) {
+    if (e.target.closest('a') || e.target.closest('button')) return;
+    router.push(`/places/${id}`);
+  }
+
   return (
-    <div className="w-full mx-auto p-4">
-      <div className="bg-white rounded-2xl shadow-[0_4px_6px_-2px_rgba(0,0,0,0.3)] overflow-hidden">
+    <div className="w-full mx-auto p-4" onClick={handleCardClick} role="link" tabIndex={0} onKeyDown={(e) => { if (e.key === 'Enter') router.push(`/places/${id}`); }}>
+      <div className="bg-white rounded-2xl shadow-[0_4px_6px_-2px_rgba(0,0,0,0.3)] overflow-hidden hover:shadow-lg hover:-translate-y-0.5 transition-all cursor-pointer">
         <div className="flex flex-col md:flex-row gap-4 p-4">
           <div className="w-full md:w-2/5 h-fit relative aspect-6/3">
             <Image
@@ -37,23 +44,19 @@ export default function TourismCard({
             </p>
 
             <div className="mt-auto pt-3 flex items-center justify-between font-bold">
-              <Link href={`/places/${id}`} className=" w-full">
-                <button className=" px-4 py-2 cursor-pointer rounded-xl bg-black text-white text-sm sm:text-base hover:bg-gray-800 transition">
-                  Read More
-                </button>
-              </Link>
+              <span className="px-4 py-2 rounded-xl bg-black text-white text-sm sm:text-base">
+                थप पढ्नुहोस्
+              </span>
 
               <div className="flex items-center gap-5">
-                <a href={location} target="_blank" rel="noopener noreferrer">
-                  <FaMapMarkerAlt
-                    size={33}
-                    className="text-black text-lg cursor-pointer hover:scale-110 transition"
-                  />
-                </a>
-                <BiSolidCommentDots
-                  size={33}
-                  className="text-[#00AAFF] text-lg cursor-pointer hover:scale-110 transition"
-                />
+                {location && (
+                  <a href={location} target="_blank" rel="noopener noreferrer" onClick={(e) => e.stopPropagation()}>
+                    <FaMapMarkerAlt
+                      size={33}
+                      className="text-black text-lg cursor-pointer hover:scale-110 transition"
+                    />
+                  </a>
+                )}
                 <Like totalLikes={likes} />
               </div>
             </div>
